@@ -1,0 +1,2024 @@
+ cube
+
+ Timestamp is 517f8fdb (Tue Apr 30 11:33:15 2013)
+
+ Preferred load address is 00400000
+
+ Start         Length     Name                   Class
+ 0001:00000000 000212f0H .text                   CODE
+ 0001:000212f0 00002b0cH .text$yc                CODE
+ 0001:00023e00 0000070fH .text$yd                CODE
+ 0002:00000000 000003d4H .idata$5                DATA
+ 0002:000003d4 00000004H .CRT$XCA                DATA
+ 0002:000003d8 00000004H .CRT$XCAA               DATA
+ 0002:000003dc 00000284H .CRT$XCU                DATA
+ 0002:00000660 00000004H .CRT$XCZ                DATA
+ 0002:00000664 00000004H .CRT$XIA                DATA
+ 0002:00000668 00000004H .CRT$XIAA               DATA
+ 0002:0000066c 00000004H .CRT$XIC                DATA
+ 0002:00000670 00000004H .CRT$XIY                DATA
+ 0002:00000674 00000004H .CRT$XIZ                DATA
+ 0002:00000680 00002560H .rdata                  DATA
+ 0002:00002be0 00000038H .rdata$debug            DATA
+ 0002:00002c18 00000004H .rtc$IAA                DATA
+ 0002:00002c1c 00000004H .rtc$IZZ                DATA
+ 0002:00002c20 00000004H .rtc$TAA                DATA
+ 0002:00002c24 00000004H .rtc$TZZ                DATA
+ 0002:00002c28 0000005cH .xdata$x                DATA
+ 0002:00002c84 000000dcH .idata$2                DATA
+ 0002:00002d60 00000014H .idata$3                DATA
+ 0002:00002d74 000003d4H .idata$4                DATA
+ 0002:00003148 00000cd8H .idata$6                DATA
+ 0002:00003e20 00000000H .edata                  DATA
+ 0003:00000000 00000790H .data                   DATA
+ 0003:00000790 000d1838H .bss                    DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___safe_se_handler_table   00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_count   00000000     <absolute>
+ 0000:00000000       __except_list              00000000     <absolute>
+ 0000:00009876       __ldused                   00009876     <absolute>
+ 0000:00009876       __fltused                  00009876     <absolute>
+ 0000:00000000       ___ImageBase               00400000     <linker-defined>
+ 0001:00000000       ?vertw@@YAXHMHPAUsqr@@MMM@Z 00401000 f i rendercubes.obj
+ 0001:000000b0       ?strcpy_s@@YAXPADPBD@Z     004010b0 f i renderextras.obj
+ 0001:000000d0       ??Rsprintf_s_f@@QAAXPBDZZ  004010d0 f i renderextras.obj
+ 0001:00000100       ??0?$vector@Ustrip@@@@QAE@XZ 00401100 f i rendergl.obj
+ 0001:00000180       ?add@?$vector@Ustrip@@@@QAEAAUstrip@@XZ 00401180 f i rendergl.obj
+ 0001:000001e0       ??0?$vector@PAUmd2@@@@QAE@XZ 004011e0 f i rendermd2.obj
+ 0001:00000260       ?add@?$vector@PAUmd2@@@@QAEAAPAUmd2@@ABQAU2@@Z 00401260 f i rendermd2.obj
+ 0001:000002d0       ??0?$hashtable@PAUmd2@@@@QAE@XZ 004012d0 f i rendermd2.obj
+ 0001:00000380       ?access@?$hashtable@PAUmd2@@@@QAEPAPAUmd2@@PADPAPAU2@@Z 00401380 f i rendermd2.obj
+ 0001:00000480       ?newstring@@YAPADPAD@Z     00401480 f i rendermd2.obj
+ 0001:000004b0       ??0?$vector@U?$vector@H@@@@QAE@XZ 004014b0 f i client.obj
+ 0001:00000530       ?add@?$vector@U?$vector@H@@@@QAEAAU?$vector@H@@XZ 00401530 f i client.obj
+ 0001:000005a0       ?setsize@?$vector@U?$vector@H@@@@QAEXH@Z 004015a0 f i client.obj
+ 0001:00000610       ?add@?$vector@PAUblock@@@@QAEAAPAUblock@@ABQAU2@@Z 00401610 f i editing.obj
+ 0001:00000610       ?add@?$vector@H@@QAEAAHABH@Z 00401610 f i client.obj
+ 0001:00000610       ?add@?$vector@PAD@@QAEAAPADABQAD@Z 00401610 f i serverbrowser.obj
+ 0001:00000660       ??0?$vector@H@@QAE@XZ      00401660 f i client.obj
+ 0001:00000660       ??0?$vector@PAUblock@@@@QAE@XZ 00401660 f i editing.obj
+ 0001:00000660       ??0?$vector@PAUdynent@@@@QAE@XZ 00401660 f i clientgame.obj
+ 0001:00000660       ??0?$vector@PAD@@QAE@XZ    00401660 f i serverbrowser.obj
+ 0001:000006d0       ?add@?$vector@Usline@@@@QAEAAUsline@@XZ 004016d0 f i clientextras.obj
+ 0001:00000730       ?strcat_s@@YAXPADPBD@Z     00401730 f i clientextras.obj
+ 0001:00000770       ?add@?$vector@Uentity@@@@QAEAAUentity@@XZ 00401770 f i clients2c.obj
+ 0001:000007e0       ??0?$vector@Userver_entity@@@@QAE@XZ 004017e0 f i server.obj
+ 0001:00000860       ??0?$vector@Uresolverthread@@@@QAE@XZ 00401860 f i serverbrowser.obj
+ 0001:000008e0       ??0?$vector@Uresolverresult@@@@QAE@XZ 004018e0 f i serverbrowser.obj
+ 0001:00000960       ?add@?$vector@Uentity@@@@QAEAAUentity@@ABU2@@Z 00401960 f i world.obj
+ 0001:00000a00       ?ca@@YAMMM@Z               00401a00 f i worldocull.obj
+ 0001:00000a30       ?ma@@YAMMM@Z               00401a30 f i worldocull.obj
+ 0001:00000a60       ??0?$vector@Uentity@@@@QAE@XZ 00401a60 f i entities.obj
+ 0001:00000ae0       ??1?$vector@Uentity@@@@QAE@XZ 00401ae0 f i entities.obj
+ 0001:00000b40       ?remove@?$vector@PAUdynent@@@@QAEPAUdynent@@H@Z 00401b40 f i savegamedemo.obj
+ 0001:00000b80       ??0?$hashtable@Uident@@@@QAE@XZ 00401b80 f i command.obj
+ 0001:00000c30       ?access@?$hashtable@Uident@@@@QAEPAUident@@PADPAU2@@Z 00401c30 f i command.obj
+ 0001:00000d40       ??0?$vector@Ucline@@@@QAE@XZ 00401d40 f i console.obj
+ 0001:00000dc0       ?insert@?$vector@Ucline@@@@QAEAAUcline@@HABU2@@Z 00401dc0 f i console.obj
+ 0001:00000e20       ?add@?$vector@Ucline@@@@QAEAAUcline@@ABU2@@Z 00401e20 f i console.obj
+ 0001:00000e90       ??0?$vector@Ugmenu@@@@QAE@XZ 00401e90 f i menus.obj
+ 0001:00000f10       ?add@?$vector@Ugmenu@@@@QAEAAUgmenu@@XZ 00401f10 f i menus.obj
+ 0001:00000fb0       ??0?$vector@Umitem@@@@QAE@XZ 00401fb0 f i menus.obj
+ 0001:00001020       ?setsize@?$vector@Ugmenu@@@@QAEXH@Z 00402020 f i menus.obj
+ 0001:000010a0       ??0?$vector@PAUMix_Chunk@@@@QAE@XZ 004020a0 f i sound.obj
+ 0001:00001112       _gzopen@8                  00402112 f   zlib:zlib.dll
+ 0001:00001118       _gzwrite@12                00402118 f   zlib:zlib.dll
+ 0001:0000111e       _gzputc@8                  0040211e f   zlib:zlib.dll
+ 0001:00001124       _gzclose@4                 00402124 f   zlib:zlib.dll
+ 0001:0000112a       _gzread@12                 0040212a f   zlib:zlib.dll
+ 0001:00001130       _gzgetc@4                  00402130 f   zlib:zlib.dll
+ 0001:00001136       _gzeof@4                   00402136 f   zlib:zlib.dll
+ 0001:0000113c       _free                      0040213c f   msvcrt:MSVCR100.dll
+ 0001:00001142       __onexit                   00402142 f   msvcrt:atonexit.obj
+ 0001:000011e3       _atexit                    004021e3 f   msvcrt:atonexit.obj
+ 0001:000011fa       _rand                      004021fa f   msvcrt:MSVCR100.dll
+ 0001:00001200       _malloc                    00402200 f   msvcrt:MSVCR100.dll
+ 0001:00001494       _mainCRTStartup            00402494 f   msvcrt:crtexe.obj
+ 0001:0000149e       __unlock                   0040249e f   msvcrt:MSVCR100.dll
+ 0001:000014a4       ___dllonexit               004024a4 f   msvcrt:MSVCR100.dll
+ 0001:000014aa       __lock                     004024aa f   msvcrt:MSVCR100.dll
+ 0001:000014b0       __SEH_prolog4              004024b0 f   msvcrt:sehprolg4.obj
+ 0001:000014f5       __SEH_epilog4              004024f5 f   msvcrt:sehprolg4.obj
+ 0001:00001509       __except_handler4          00402509 f   msvcrt:chandler4gs.obj
+ 0001:0000152e       ?__CxxUnhandledExceptionFilter@@YGJPAU_EXCEPTION_POINTERS@@@Z 0040252e f   msvcrt:unhandld.obj
+ 0001:00001570       ___CxxSetUnhandledExceptionFilter 00402570 f   msvcrt:unhandld.obj
+ 0001:0000157e       __amsg_exit                0040257e f   msvcrt:MSVCR100.dll
+ 0001:00001584       __RTC_Initialize           00402584 f   msvcrt:_initsect_.obj
+ 0001:000015aa       __RTC_Terminate            004025aa f   msvcrt:_initsect_.obj
+ 0001:000015d0       __XcptFilter               004025d0 f   msvcrt:MSVCR100.dll
+ 0001:000015e0       __ValidateImageBase        004025e0 f   msvcrt:pesect.obj
+ 0001:00001620       __FindPESection            00402620 f   msvcrt:pesect.obj
+ 0001:00001670       __IsNonwritableInCurrentImage 00402670 f   msvcrt:pesect.obj
+ 0001:0000172c       __initterm                 0040272c f   msvcrt:MSVCR100.dll
+ 0001:00001732       __initterm_e               00402732 f   msvcrt:MSVCR100.dll
+ 0001:00001738       __setdefaultprecision      00402738 f   msvcrt:fp8.obj
+ 0001:00001760       __setargv                  00402760 f   msvcrt:dllargv.obj
+ 0001:00001760       __matherr                  00402760 f   msvcrt:merr.obj
+ 0001:00001763       ___security_init_cookie    00402763 f   msvcrt:gs_support.obj
+ 0001:000017fe       @__security_check_cookie@4 004027fe f   msvcrt:secchk.obj
+ 0001:0000180e       __except_handler4_common   0040280e f   msvcrt:MSVCR100.dll
+ 0001:00001814       ?terminate@@YAXXZ          00402814 f   msvcrt:MSVCR100.dll
+ 0001:0000181a       __invoke_watson            0040281a f   msvcrt:MSVCR100.dll
+ 0001:00001820       __controlfp_s              00402820 f   msvcrt:MSVCR100.dll
+ 0001:00001826       ___report_gsfailure        00402826 f   msvcrt:gs_report.obj
+ 0001:0000192c       __crt_debugger_hook        0040292c f   msvcrt:MSVCR100.dll
+ 0001:00001940       _main                      00402940 f   SDLmain:SDL_win32_main.obj
+ 0001:00001b40       _SDL_GetError              00402b40 f   SDL:SDL.dll
+ 0001:00001b46       _SDL_Quit                  00402b46 f   SDL:SDL.dll
+ 0001:00001b4c       _SDL_Init                  00402b4c f   SDL:SDL.dll
+ 0001:00001b52       _SDL_SetModuleHandle       00402b52 f   SDL:SDL.dll
+ 0001:00001b58       _IMG_Load                  00402b58 f   SDL_image:SDL_image.dll
+ 0001:00001b60       __chkstk                   00402b60 f   msvcrt:chkstk.obj
+ 0001:00001b60       __alloca_probe             00402b60     msvcrt:chkstk.obj
+ 0001:00001b90       ?endianswap@@YAXPAXHH@Z    00402b90 f   tools.obj
+ 0001:00001be0       ?loadfile@@YAPADPADPAH@Z   00402be0 f   tools.obj
+ 0001:00001c60       ?allocnext@pool@@QAEXI@Z   00402c60 f   tools.obj
+ 0001:00001c90       ??0pool@@QAE@XZ            00402c90 f   tools.obj
+ 0001:00001cd0       ?path@@YAPADPAD@Z          00402cd0 f   tools.obj
+ 0001:00001d00       ?gp@@YAPAUpool@@XZ         00402d00 f   tools.obj
+ 0001:00001d70       ?dealloc@pool@@QAEXPAXI@Z  00402d70 f   tools.obj
+ 0001:00001d90       ?alloc@pool@@QAEPAXI@Z     00402d90 f   tools.obj
+ 0001:00001de0       ?string@pool@@QAEPADPADI@Z 00402de0 f   tools.obj
+ 0001:00001e60       ?realloc@pool@@QAEPAXPAXII@Z 00402e60 f   tools.obj
+ 0001:00001f30       ?newsoundloc@@YAXHPAUvec@@@Z 00402f30 f   sound.obj
+ 0001:00001f60       ?stopsound@@YAXXZ          00402f60 f   sound.obj
+ 0001:00001fb0       ?cleansound@@YAXXZ         00402fb0 f   sound.obj
+ 0001:00002000       ?updatechanvol@@YAXHPAUvec@@@Z 00403000 f   sound.obj
+ 0001:00002160       ?music@@YAXPAD@Z           00403160 f   sound.obj
+ 0001:00002270       ?updatevol@@YAXXZ          00403270 f   sound.obj
+ 0001:000022c0       ?registersound@@YAHPAD@Z   004032c0 f   sound.obj
+ 0001:00002440       ?playsound@@YAXHPAUvec@@@Z 00403440 f   sound.obj
+ 0001:00002590       ?initsound@@YAXXZ          00403590 f   sound.obj
+ 0001:000025f0       ?sound@@YAXH@Z             004035f0 f   sound.obj
+ 0001:00002600       ?playsoundc@@YAXH@Z        00403600 f   sound.obj
+ 0001:00002630       ?menucompare@@YAHPAUmitem@@0@Z 00403630 f   menus.obj
+ 0001:00002670       ?sortmenu@@YAXHH@Z         00403670 f   menus.obj
+ 0001:00002690       ?menuset@@YAXH@Z           00403690 f   menus.obj
+ 0001:000026c0       ?menumanual@@YAXHHPAD@Z    004036c0 f   menus.obj
+ 0001:00002750       ?showmenu@@YAXPAD@Z        00403750 f   menus.obj
+ 0001:000027e0       ?menuitem@@YAXPAD0@Z       004037e0 f   menus.obj
+ 0001:00002890       ?newmenu@@YAXPAD@Z         00403890 f   menus.obj
+ 0001:000028d0       ?rendermenu@@YA_NXZ        004038d0 f   menus.obj
+ 0001:00002a50       ?menukey@@YA_NH_N@Z        00403a50 f   menus.obj
+ 0001:00002b70       ?keyrepeat@@YAX_N@Z        00403b70 f   main.obj
+ 0001:00002b90       ?alloc@@YAPAXH@Z           00403b90 f   main.obj
+ 0001:00002bf0       ?screenshot@@YAXXZ         00403bf0 f   main.obj
+ 0001:00002d80       ?var_gamespeed@@YAXXZ      00403d80 f   main.obj
+ 0001:00002db0       ?cleanup@@YAXPAD@Z         00403db0 f   main.obj
+ 0001:00002e70       ?fatal@@YAXPAD0@Z          00403e70 f   main.obj
+ 0001:00002eb0       ?quit@@YAXXZ               00403eb0 f   main.obj
+ 0001:00002ec0       _SDL_main                  00403ec0 f   main.obj
+ 0001:000036e0       ?writebinds@@YAXPAU_iobuf@@@Z 004046e0 f   console.obj
+ 0001:00003730       ?getcurcommand@@YAPADXZ    00404730 f   console.obj
+ 0001:00003750       ?setconskip@@YAXH@Z        00404750 f   console.obj
+ 0001:00003770       ?mapmsg@@YAXPAD@Z          00404770 f   console.obj
+ 0001:00003790       ?renderconsole@@YAXXZ      00404790 f   console.obj
+ 0001:00003830       ?pasteconsole@@YAXXZ       00404830 f   console.obj
+ 0001:000038a0       ?saycommand@@YAXPAD@Z      004048a0 f   console.obj
+ 0001:00003910       ?conline@@YAXPBD_N@Z       00404910 f   console.obj
+ 0001:000039d0       ?keymap@@YAXPAD00@Z        004049d0 f   console.obj
+ 0001:00003a60       ?conoutf@@YAXPBDZZ         00404a60 f   console.obj
+ 0001:00003b20       ?bindkey@@YAXPAD0@Z        00404b20 f   console.obj
+ 0001:00003bd0       ?history@@YAXH@Z           00404bd0 f   console.obj
+ 0001:00003c10       ?keypress@@YAXH_NH@Z       00404c10 f   console.obj
+ 0001:00003f10       ?explastmillis@@YAHXZ      00404f10 f   command.obj
+ 0001:00003f20       ?rndn@@YAHH@Z              00404f20 f   command.obj
+ 0001:00003f40       ?strcmpa@@YAHPAD0@Z        00404f40 f   command.obj
+ 0001:00003f80       ?gt@@YAHHH@Z               00404f80 f   command.obj
+ 0001:00003f90       ?lt@@YAHHH@Z               00404f90 f   command.obj
+ 0001:00003fa0       ?equal@@YAHHH@Z            00404fa0 f   command.obj
+ 0001:00003fb0       ?mod@@YAHHH@Z              00404fb0 f   command.obj
+ 0001:00003fd0       ?divi@@YAHHH@Z             00404fd0 f   command.obj
+ 0001:00003ff0       ?sub@@YAHHH@Z              00404ff0 f   command.obj
+ 0001:00004000       ?mul@@YAHHH@Z              00405000 f   command.obj
+ 0001:00004010       ?add@@YAHHH@Z              00405010 f   command.obj
+ 0001:00004020       ?listlen@@YAHPAD@Z         00405020 f   command.obj
+ 0001:00004040       ?resetcomplete@@YAXXZ      00405040 f   command.obj
+ 0001:00004050       ?writecfg@@YAXXZ           00405050 f   command.obj
+ 0001:00004190       ?addcommand@@YA_NPADP6AXXZH@Z 00405190 f   command.obj
+ 0001:00004210       ?getalias@@YAPADPAD@Z      00405210 f   command.obj
+ 0001:00004230       ?identexists@@YA_NPAD@Z    00405230 f   command.obj
+ 0001:00004240       ?getvar@@YAHPAD@Z          00405240 f   command.obj
+ 0001:00004250       ?setvar@@YAXPADH@Z         00405250 f   command.obj
+ 0001:00004270       ?variable@@YAHPADHHHPAHP6AXXZ_N@Z 00405270 f   command.obj
+ 0001:000042f0       ?itoa@@YAXPADH@Z           004052f0 f   command.obj
+ 0001:00004310       ?complete@@YAXPAD@Z        00405310 f   command.obj
+ 0001:000044b0       ?exchangestr@@YAPADPAD0@Z  004054b0 f   command.obj
+ 0001:00004520       ?lookup@@YAPADPAD@Z        00405520 f   command.obj
+ 0001:000045a0       ?parseexp@@YAPADAAPADH@Z   004055a0 f   command.obj
+ 0001:00004660       ?alias@@YAXPAD0@Z          00405660 f   command.obj
+ 0001:00004730       ?concat@@YAXPAD@Z          00405730 f   command.obj
+ 0001:00004750       ?intset@@YAXPADH@Z         00405750 f   command.obj
+ 0001:00004790       ?parseword@@YAPADAAPAD@Z   00405790 f   command.obj
+ 0001:00004860       ?at@@YAXPAD0@Z             00405860 f   command.obj
+ 0001:000048d0       ?concatword@@YAXPAD@Z      004058d0 f   command.obj
+ 0001:00004910       ?execute@@YAHPAD_N@Z       00405910 f   command.obj
+ 0001:000051f0       ?onrelease@@YAX_NPAD@Z     004061f0 f   command.obj
+ 0001:00005210       ?whilea@@YAXPAD0@Z         00406210 f   command.obj
+ 0001:00005250       ?loopa@@YAXPAD0@Z          00406250 f   command.obj
+ 0001:000052c0       ?ifthen@@YAXPAD00@Z        004062c0 f   command.obj
+ 0001:000052e0       ?execfile@@YA_NPAD@Z       004062e0 f   command.obj
+ 0001:000053e0       ?exec@@YAXPAD@Z            004063e0 f   command.obj
+ 0001:00005410       ?newprojectile@@YAXAAUvec@@0M_NPAUdynent@@H@Z 00406410 f   weapon.obj
+ 0001:00005470       ?projreset@@YAXXZ          00406470 f   weapon.obj
+ 0001:00005490       ?intersect@@YA_NPAUdynent@@AAUvec@@1@Z 00406490 f   weapon.obj
+ 0001:00005640       ?reloadtime@@YAHH@Z        00406640 f   weapon.obj
+ 0001:00005650       ?playerincrosshair@@YAPADXZ 00406650 f   weapon.obj
+ 0001:000056b0       ?createrays@@YAXAAUvec@@0@Z 004066b0 f   weapon.obj
+ 0001:000057e0       ?shootv@@YAXHAAUvec@@0PAUdynent@@_N@Z 004067e0 f   weapon.obj
+ 0001:000058f0       ?hit@@YAXHHPAUdynent@@0@Z  004068f0 f   weapon.obj
+ 0001:00005990       ?selectgun@@YAXHHH@Z       00406990 f   weapon.obj
+ 0001:00005a90       ?hitpush@@YAXHHPAUdynent@@0AAUvec@@1@Z 00406a90 f   weapon.obj
+ 0001:00005b70       ?radialeffect@@YAXPAUdynent@@AAUvec@@HH0@Z 00406b70 f   weapon.obj
+ 0001:00005cb0       ?weapon@@YAXPAD00@Z        00406cb0 f   weapon.obj
+ 0001:00005d10       ?raydamage@@YAXPAUdynent@@AAUvec@@10H@Z 00406d10 f   weapon.obj
+ 0001:00005dd0       ?splash@@YAXPAUprojectile@@AAUvec@@1HHH@Z 00406dd0 f   weapon.obj
+ 0001:00005ed0       ?shoot@@YAXPAUdynent@@AAUvec@@@Z 00406ed0 f   weapon.obj
+ 0001:000062a0       ?moveprojectiles@@YAXM@Z   004072a0 f   weapon.obj
+ 0001:00006630       ?fixwrap@@YAXPAUdynent@@0@Z 00407630 f   savegamedemo.obj
+ 0001:000066a0       ?catmulrom@@YAXAAUvec@@000M0@Z 004076a0 f   savegamedemo.obj
+ 0001:000068d0       ?scaletime@@YAHH@Z         004078d0 f   savegamedemo.obj
+ 0001:000068f0       ?demoblend@@YAXH@Z         004078f0 f   savegamedemo.obj
+ 0001:00006900       ?demodamage@@YAXHAAUvec@@@Z 00407900 f   savegamedemo.obj
+ 0001:00006930       ?gzget@@YAHXZ              00407930 f   savegamedemo.obj
+ 0001:00006940       ?gzputv@@YAXAAUvec@@@Z     00407940 f   savegamedemo.obj
+ 0001:00006960       ?gzputi@@YAXH@Z            00407960 f   savegamedemo.obj
+ 0001:00006980       ?gzput@@YAXH@Z             00407980 f   savegamedemo.obj
+ 0001:00006990       ?incomingdemodata@@YAXPAEH_N@Z 00407990 f   savegamedemo.obj
+ 0001:00006b70       ?stop@@YAXXZ               00407b70 f   savegamedemo.obj
+ 0001:00006c10       ?stopifrecording@@YAXXZ    00407c10 f   savegamedemo.obj
+ 0001:00006c20       ?loadgameout@@YAXXZ        00407c20 f   savegamedemo.obj
+ 0001:00006c40       ?savestate@@YAXPAD@Z       00407c40 f   savegamedemo.obj
+ 0001:00006e20       ?record@@YAXPAD@Z          00407e20 f   savegamedemo.obj
+ 0001:00006ed0       ?savegame@@YAXPAD@Z        00407ed0 f   savegamedemo.obj
+ 0001:00006f40       ?stopreset@@YAXXZ          00407f40 f   savegamedemo.obj
+ 0001:00006fb0       ?stopn@@YAXXZ              00407fb0 f   savegamedemo.obj
+ 0001:00006fe0       ?gzcheck@@YAXHH@Z          00407fe0 f   savegamedemo.obj
+ 0001:00006ff0       ?gzgetv@@YAXAAUvec@@@Z     00407ff0 f   savegamedemo.obj
+ 0001:00007020       ?gzgeti@@YAHXZ             00408020 f   savegamedemo.obj
+ 0001:00007050       ?readdemotime@@YAXXZ       00408050 f   savegamedemo.obj
+ 0001:000070c0       ?loadstate@@YAXPAD@Z       004080c0 f   savegamedemo.obj
+ 0001:000071c0       ?demoplaybackstep@@YAXXZ   004081c0 f   savegamedemo.obj
+ 0001:00007700       ?startdemo@@YAXXZ          00408700 f   savegamedemo.obj
+ 0001:00007780       ?demo@@YAXPAD@Z            00408780 f   savegamedemo.obj
+ 0001:000077d0       ?loadgamerest@@YAXXZ       004087d0 f   savegamedemo.obj
+ 0001:00007a00       ?loadgame@@YAXPAD@Z        00408a00 f   savegamedemo.obj
+ 0001:00007a40       ?physicsframe@@YAXXZ       00408a40 f   physics.obj
+ 0001:00007a90       ?rad@@YAMM@Z               00408a90 f   physics.obj
+ 0001:00007ab0       ?cornertest@@YA_NHHHHHAAH00@Z 00408ab0 f   physics.obj
+ 0001:00007b70       ?mmcollide@@YAXPAUdynent@@AAM1@Z 00408b70 f   physics.obj
+ 0001:00007cc0       ?plcollide@@YA_NPAUdynent@@0AAM11@Z 00408cc0 f   physics.obj
+ 0001:00007de0       ?collide@@YA_NPAUdynent@@_NMM@Z 00408de0 f   physics.obj
+ 0001:00008440       ?moveplayer@@YAXPAUdynent@@H_NH@Z 00409440 f   physics.obj
+ 0001:00008b50       ?moveplayer@@YAXPAUdynent@@H_N@Z 00409b50 f   physics.obj
+ 0001:00008bb0       ?normalise@@YAXPAUdynent@@M@Z 00409bb0 f   monster.obj
+ 0001:00008c20       ?transition@@YAXPAUdynent@@HHHH@Z 00409c20 f   monster.obj
+ 0001:00008c80       ?getmonsters@@YAAAU?$vector@PAUdynent@@@@XZ 00409c80 f   monster.obj
+ 0001:00008c90       ?restoremonsterstate@@YAXXZ 00409c90 f   monster.obj
+ 0001:00008cd0       ?los@@YA_NMMMMMMAAUvec@@@Z 00409cd0 f   monster.obj
+ 0001:00008ef0       ?enemylos@@YA_NPAUdynent@@AAUvec@@@Z 00409ef0 f   monster.obj
+ 0001:00008f40       ?var_skill@@YAXXZ          00409f40 f   monster.obj
+ 0001:00008f60       ?monsterpain@@YAXPAUdynent@@H0@Z 00409f60 f   monster.obj
+ 0001:000090a0       ?basicmonster@@YAPAUdynent@@HHHHH@Z 0040a0a0 f   monster.obj
+ 0001:00009260       ?monsterclear@@YAXXZ       0040a260 f   monster.obj
+ 0001:00009400       ?spawnmonster@@YAXXZ       0040a400 f   monster.obj
+ 0001:00009600       ?endsp@@YAX_N@Z            0040a600 f   monster.obj
+ 0001:00009690       ?monsterrender@@YAXXZ      0040a690 f   monster.obj
+ 0001:00009920       ?monsteraction@@YAXPAUdynent@@@Z 0040a920 f   monster.obj
+ 0001:00009de0       ?monsterthink@@YAXXZ       0040ade0 f   monster.obj
+ 0001:0000a080       ?baseammo@@YAXH@Z          0040b080 f   entities.obj
+ 0001:0000a0a0       ?setspawn@@YAXI_N@Z        0040b0a0 f   entities.obj
+ 0001:0000a0c0       ?resetspawns@@YAXXZ        0040b0c0 f   entities.obj
+ 0001:0000a0f0       ?putitems@@YAXAAPAE@Z      0040b0f0 f   entities.obj
+ 0001:0000a1a0       ?radditem@@YAXHAAH@Z       0040b1a0 f   entities.obj
+ 0001:0000a210       ?realpickup@@YAXHPAUdynent@@@Z 0040b210 f   entities.obj
+ 0001:0000a2d0       ?checkquad@@YAXH@Z         0040b2d0 f   entities.obj
+ 0001:0000a320       ?teleport@@YAXHPAUdynent@@@Z 0040b320 f   entities.obj
+ 0001:0000a470       ?additem@@YAXHAAHH@Z       0040b470 f   entities.obj
+ 0001:0000a4d0       ?renderent@@YAXAAUentity@@PADMMHHHM@Z 0040b4d0 f   entities.obj
+ 0001:0000a570       ?pickup@@YAXHPAUdynent@@@Z 0040b570 f   entities.obj
+ 0001:0000a7f0       ?renderentities@@YAXXZ     0040b7f0 f   entities.obj
+ 0001:0000abe0       ?checkitems@@YAXXZ         0040bbe0 f   entities.obj
+ 0001:0000ad90       ?distlod@@YAXAAH0HM@Z      0040bd90 f   worldrender.obj
+ 0001:0000ade0       ?issemi@@YA_NHHHHHHH@Z     0040bde0 f   worldrender.obj
+ 0001:0000aec0       ?render_wall@@YAXPAUsqr@@0HHHHH00_N@Z 0040bec0 f   worldrender.obj
+ 0001:0000b2b0       ?render_seg_new@@YAXMMMHHHHH@Z 0040c2b0 f   worldrender.obj
+ 0001:0000be50       ?render_world@@YAXMMMHHMHH@Z 0040ce50 f   worldrender.obj
+ 0001:0000c1e0       ?toggleocull@@YAXXZ        0040d1e0 f   worldocull.obj
+ 0001:0000c1f0       ?isoccluded@@YAHMMMMM@Z    0040d1f0 f   worldocull.obj
+ 0001:0000c860       ?computeraytable@@YAXMM@Z  0040d860 f   worldocull.obj
+ 0001:0000cc40       ?blockcopy@@YAPAUblock@@AAU1@@Z 0040dc40 f   worldlight.obj
+ 0001:0000cd70       ?postlightarea@@YAXAAUblock@@@Z 0040dd70 f   worldlight.obj
+ 0001:0000cf30       ?lightray@@YAXMMAAUpersistent_entity@@@Z 0040df30 f   worldlight.obj
+ 0001:0000d410       ?blockpaste@@YAXAAUblock@@@Z 0040e410 f   worldlight.obj
+ 0001:0000d500       ?cleardlights@@YAXXZ       0040e500 f   worldlight.obj
+ 0001:0000d540       ?calclightsource@@YAXAAUpersistent_entity@@@Z 0040e540 f   worldlight.obj
+ 0001:0000d6b0       ?dodynlight@@YAXAAUvec@@0HHPAUdynent@@@Z 0040e6b0 f   worldlight.obj
+ 0001:0000d830       ?calclight@@YAXXZ          0040e830 f   worldlight.obj
+ 0001:0000d960       ?topt@@YAXPAUsqr@@AA_N1AAH2@Z 0040e960 f   worldio.obj
+ 0001:0000dab0       ?backup@@YAXPAD0@Z         0040eab0 f   worldio.obj
+ 0001:0000dad0       ?toptimize@@YAXXZ          0040ead0 f   worldio.obj
+ 0001:0000dc70       ?voptimize@@YAXXZ          0040ec70 f   worldio.obj
+ 0001:0000dd20       ?setnames@@YAXPAD@Z        0040ed20 f   worldio.obj
+ 0001:0000dea0       ?save_world@@YAXPAD@Z      0040eea0 f   worldio.obj
+ 0001:0000e210       ?readmap@@YAPAEPADPAH@Z    0040f210 f   worldio.obj
+ 0001:0000e260       ?writemap@@YAXPADHPAE@Z    0040f260 f   worldio.obj
+ 0001:0000e2f0       ?load_world@@YAXPAD@Z      0040f2f0 f   worldio.obj
+ 0001:0000e970       ?setupworld@@YAXH@Z        0040f970 f   world.obj
+ 0001:0000ea50       ?scalecomp@@YAXAAEH@Z      0040fa50 f   world.obj
+ 0001:0000ea80       ?findentity@@YAHHH@Z       0040fa80 f   world.obj
+ 0001:0000eae0       ?remip@@YAXAAUblock@@H@Z   0040fae0 f   world.obj
+ 0001:0000f0e0       ?settag@@YAXHH@Z           004100e0 f   world.obj
+ 0001:0000f1d0       ?remipmore@@YAXAAUblock@@H@Z 004101d0 f   world.obj
+ 0001:0000f240       ?settagareas@@YAXXZ        00410240 f   world.obj
+ 0001:0000f290       ?resettagareas@@YAXXZ      00410290 f   world.obj
+ 0001:0000f2a0       ?scalelights@@YAXHH@Z      004102a0 f   world.obj
+ 0001:0000f3a0       ?findtype@@YAHPAD@Z        004103a0 f   world.obj
+ 0001:0000f400       ?clearents@@YAXPAD@Z       00410400 f   world.obj
+ 0001:0000f490       ?closestent@@YAHXZ         00410490 f   world.obj
+ 0001:0000f5f0       ?entproperty@@YAXHH@Z      004105f0 f   world.obj
+ 0001:0000f690       ?empty_world@@YAXH_N@Z     00410690 f   world.obj
+ 0001:0000f9d0       ?newmap@@YAXH@Z            004109d0 f   world.obj
+ 0001:0000f9e0       ?mapenlarge@@YAXXZ         004109e0 f   world.obj
+ 0001:0000f9f0       ?newentity@@YAPAUentity@@HHHPADHHHH@Z 004109f0 f   world.obj
+ 0001:0000fb40       ?delent@@YAXXZ             00410b40 f   world.obj
+ 0001:0000fbc0       ?trigger@@YAXHH_N@Z        00410bc0 f   world.obj
+ 0001:0000fc50       ?noise@@YAMHHH@Z           00410c50 f   rndmap.obj
+ 0001:0000fca0       ?interpolate@@YAMMMM@Z     00410ca0 f   rndmap.obj
+ 0001:0000fd00       ?smoothednoise@@YAMHHH@Z   00410d00 f   rndmap.obj
+ 0001:0000ffa0       ?interpolatednoise@@YAMMMH@Z 00410fa0 f   rndmap.obj
+ 0001:000100d0       ?perlinnoise_2D@@YAMMMHM@Z 004110d0 f   rndmap.obj
+ 0001:00010190       ?perlinarea@@YAXAAUblock@@HHH@Z 00411190 f   rndmap.obj
+ 0001:00010300       ?archvertex@@YAXHHH@Z      00411300 f   editing.obj
+ 0001:00010350       ?tofronttex@@YAXXZ         00411350 f   editing.obj
+ 0001:000103a0       ?pruneundos@@YAXH@Z        004113a0 f   editing.obj
+ 0001:00010420       ?sheight@@YAMPAUsqr@@0M@Z  00411420 f   editing.obj
+ 0001:000104a0       ?correctsel@@YAXXZ         004114a0 f   editing.obj
+ 0001:00010520       ?makesel@@YAXXZ            00411520 f   editing.obj
+ 0001:000105f0       ?selectpos@@YAXHHHH@Z      004115f0 f   editing.obj
+ 0001:00010630       ?editdrag@@YAX_N@Z         00411630 f   editing.obj
+ 0001:00010670       ?makeundo@@YAXXZ           00411670 f   editing.obj
+ 0001:000106f0       ?cursorupdate@@YAXXZ       004116f0 f   editing.obj
+ 0001:00010c70       ?setvdeltaxy@@YAXHAAUblock@@@Z 00411c70 f   editing.obj
+ 0001:00010d50       ?editequalisexy@@YAX_NAAUblock@@@Z 00411d50 f   editing.obj
+ 0001:00010ed0       ?edittypexy@@YAXHAAUblock@@@Z 00411ed0 f   editing.obj
+ 0001:00010f30       ?edittexxy@@YAXHHAAUblock@@@Z 00411f30 f   editing.obj
+ 0001:00010fd0       ?editheightxy@@YAX_NHAAUblock@@@Z 00411fd0 f   editing.obj
+ 0001:00011060       ?noselection@@YA_NXZ       00412060 f   editing.obj
+ 0001:00011090       ?noteditmode@@YA_NXZ       00412090 f   editing.obj
+ 0001:000110c0       ?edittag@@YAXH@Z           004120c0 f   editing.obj
+ 0001:000111b0       ?var_fullbright@@YAXXZ     004121b0 f   editing.obj
+ 0001:00011200       ?perlin@@YAXHHH@Z          00412200 f   editing.obj
+ 0001:000112d0       ?slope@@YAXHH@Z            004122d0 f   editing.obj
+ 0001:00011490       ?arch@@YAXHH@Z             00412490 f   editing.obj
+ 0001:00011680       ?replace@@YAXXZ            00412680 f   editing.obj
+ 0001:000117d0       ?paste@@YAXXZ              004127d0 f   editing.obj
+ 0001:000118a0       ?copy@@YAXXZ               004128a0 f   editing.obj
+ 0001:00011930       ?editundo@@YAXXZ           00412930 f   editing.obj
+ 0001:000119b0       ?toggleedit@@YAXXZ         004129b0 f   editing.obj
+ 0001:00011a80       ?newent@@YAXPAD0000@Z      00412a80 f   editing.obj
+ 0001:00011b40       ?setvdelta@@YAXH@Z         00412b40 f   editing.obj
+ 0001:00011bc0       ?equalize@@YAXH@Z          00412bc0 f   editing.obj
+ 0001:00011c50       ?edittype@@YAXH@Z          00412c50 f   editing.obj
+ 0001:00011d20       ?edittex@@YAXHH@Z          00412d20 f   editing.obj
+ 0001:00011e20       ?editheight@@YAXHH@Z       00412e20 f   editing.obj
+ 0001:00011ec0       ?corner@@YAXXZ             00412ec0 f   editing.obj
+ 0001:00011ed0       ?solid@@YAXH@Z             00412ed0 f   editing.obj
+ 0001:00011ef0       ?heightfield@@YAXH@Z       00412ef0 f   editing.obj
+ 0001:00011f10       _enet_socket_wait          00412f10 f   win32.obj
+ 0001:00011fd0       _enet_socket_receive       00412fd0 f   win32.obj
+ 0001:00012070       _enet_socket_send          00413070 f   win32.obj
+ 0001:00012100       _enet_socket_destroy       00413100 f   win32.obj
+ 0001:00012110       _enet_socket_connect       00413110 f   win32.obj
+ 0001:00012170       _enet_socket_create        00413170 f   win32.obj
+ 0001:00012280       _enet_address_get_host     00413280 f   win32.obj
+ 0001:000122c0       _enet_address_set_host     004132c0 f   win32.obj
+ 0001:000122f0       _enet_time_get             004132f0 f   win32.obj
+ 0001:00012300       _enet_deinitialize         00413300 f   win32.obj
+ 0001:00012310       _enet_initialize           00413310 f   win32.obj
+ 0001:00013bc0       _enet_host_flush           00414bc0 f   protocol.obj
+ 0001:00013c70       _enet_host_service         00414c70 f   protocol.obj
+ 0001:00013e10       _enet_peer_throttle        00414e10 f   peer.obj
+ 0001:00013e70       _enet_peer_queue_outgoing_command 00414e70 f   peer.obj
+ 0001:00013f70       _enet_peer_queue_acknowledgement 00414f70 f   peer.obj
+ 0001:00013fd0       _enet_peer_ping            00414fd0 f   peer.obj
+ 0001:00014010       _enet_peer_send            00415010 f   peer.obj
+ 0001:00014180       _enet_peer_throttle_configure 00415180 f   peer.obj
+ 0001:000141f0       _enet_peer_queue_incoming_command 004151f0 f   peer.obj
+ 0001:00014430       _enet_peer_receive         00415430 f   peer.obj
+ 0001:00014530       _enet_peer_reset_queues    00415530 f   peer.obj
+ 0001:000145e0       _enet_peer_reset           004155e0 f   peer.obj
+ 0001:000146d0       _enet_peer_disconnect      004156d0 f   peer.obj
+ 0001:00014770       _enet_list_remove          00415770 f   list.obj
+ 0001:00014780       _enet_list_insert          00415780 f   list.obj
+ 0001:00014790       _enet_list_clear           00415790 f   list.obj
+ 0001:000147b0       _enet_host_bandwidth_limit 004157b0 f   host.obj
+ 0001:000147d0       _enet_host_bandwidth_throttle 004157d0 f   host.obj
+ 0001:00014b40       _enet_host_broadcast       00415b40 f   host.obj
+ 0001:00014d10       _enet_host_connect         00415d10 f   host.obj
+ 0001:00014eb0       _enet_host_destroy         00415eb0 f   host.obj
+ 0001:00014ff0       _enet_host_create          00415ff0 f   host.obj
+ 0001:00015180       _enet_rand                 00416180 f   callbacks.obj
+ 0001:00015190       _enet_free                 00416190 f   callbacks.obj
+ 0001:000151a0       _enet_malloc               004161a0 f   callbacks.obj
+ 0001:000151c0       ?msgsizelookup@@YADH@Z     004161c0 f   serverutil.obj
+ 0001:000151f0       ?modestr@@YAPBDH@Z         004161f0 f   serverutil.obj
+ 0001:00015210       ?getint@@YAHAAPAE@Z        00416210 f   serverutil.obj
+ 0001:00015260       ?putint@@YAXAAPAEH@Z       00416260 f   serverutil.obj
+ 0001:000152c0       ?sendstring@@YAXPADAAPAE@Z 004162c0 f   serverutil.obj
+ 0001:00015340       ?recvmap@@YAPAU_ENetPacket@@H@Z 00416340 f   serverutil.obj
+ 0001:00015480       ?sendmaps@@YAXHQADHPAE@Z   00416480 f   serverutil.obj
+ 0001:00015530       ?httpgetrecieve@@YAXAAUENetBuffer@@@Z 00416530 f   serverms.obj
+ 0001:000155e0       ?stripheader@@YAPAEPAE@Z   004165e0 f   serverms.obj
+ 0001:00015610       ?httpgetsend@@YAXAAU_ENetAddress@@PAD111@Z 00416610 f   serverms.obj
+ 0001:000157f0       ?retrieveservers@@YAPAEPAEH@Z 004167f0 f   serverms.obj
+ 0001:00015890       ?checkmasterreply@@YAXXZ   00416890 f   serverms.obj
+ 0001:00015900       ?updatemasterserver@@YAXH@Z 00416900 f   serverms.obj
+ 0001:00015970       ?serverms@@YAXHHHPADH_N@Z  00416970 f   serverms.obj
+ 0001:00015c10       ?servermsinit@@YAXPBDPAD_N@Z 00416c10 f   serverms.obj
+ 0001:00015cd0       ?writeservercfg@@YAXXZ     00416cd0 f   serverbrowser.obj
+ 0001:00015d40       ?sicompare@@YAHPBUserverinfo@@0@Z 00416d40 f   serverbrowser.obj
+ 0001:00015d90       ?pingservers@@YAXXZ        00416d90 f   serverbrowser.obj
+ 0001:00015e80       ?getservername@@YAPADH@Z   00416e80 f   serverbrowser.obj
+ 0001:00015e90       ?checkpings@@YAXXZ         00416e90 f   serverbrowser.obj
+ 0001:000161d0       ?addserver@@YAXPAD@Z       004171d0 f   serverbrowser.obj
+ 0001:00016380       ?resolverquery@@YAXPAD@Z   00417380 f   serverbrowser.obj
+ 0001:00016410       ?resolverloop@@YAHPAX@Z    00417410 f   serverbrowser.obj
+ 0001:00016540       ?resolverstop@@YAXAAUresolverthread@@_N@Z 00417540 f   serverbrowser.obj
+ 0001:00016580       ?resolverinit@@YAXHH@Z     00417580 f   serverbrowser.obj
+ 0001:00016620       ?resolvercheck@@YA_NPAPADPAU_ENetAddress@@@Z 00417620 f   serverbrowser.obj
+ 0001:00016720       ?resolverclear@@YAXXZ      00417720 f   serverbrowser.obj
+ 0001:000167f0       ?checkresolver@@YAXXZ      004177f0 f   serverbrowser.obj
+ 0001:00016940       ?refreshservers@@YAXXZ     00417940 f   serverbrowser.obj
+ 0001:00016ab0       ?servermenu@@YAXXZ         00417ab0 f   serverbrowser.obj
+ 0001:00016be0       ?updatefrommaster@@YAXXZ   00417be0 f   serverbrowser.obj
+ 0001:00016c80       ?localdisconnect@@YAXXZ    00417c80 f   server.obj
+ 0001:00016cc0       ?resetvotes@@YAXXZ         00417cc0 f   server.obj
+ 0001:00016cf0       ?pickup@@YAXIHH@Z          00417cf0 f   server.obj
+ 0001:00016d30       ?resetitems@@YAXXZ         00417d30 f   server.obj
+ 0001:00016d50       ?resetserverifempty@@YAXXZ 00417d50 f   server.obj
+ 0001:00016df0       ?restoreserverstate@@YAXAAU?$vector@Uentity@@@@@Z 00417df0 f   server.obj
+ 0001:00016e30       ?addclient@@YAAAUclient@@XZ 00417e30 f   server.obj
+ 0001:00016eb0       ?cleanupserver@@YAXXZ      00417eb0 f   server.obj
+ 0001:00016ed0       ?disconnect_client@@YAXHPAD@Z 00417ed0 f   server.obj
+ 0001:00016f20       ?send@@YAXHPAU_ENetPacket@@@Z 00417f20 f   server.obj
+ 0001:00016f60       ?multicast@@YAXPAU_ENetPacket@@H@Z 00417f60 f   server.obj
+ 0001:00016fd0       ?send_welcome@@YAXH@Z      00417fd0 f   server.obj
+ 0001:00017290       ?sendservmsg@@YAXPAD@Z     00418290 f   server.obj
+ 0001:00017380       ?localconnect@@YAXXZ       00418380 f   server.obj
+ 0001:000173d0       ?vote@@YA_NPADHH@Z         004183d0 f   server.obj
+ 0001:00017590       ?process@@YAXPAU_ENetPacket@@H@Z 00418590 f   server.obj
+ 0001:00017cb0       ?send2@@YAX_NHHH@Z         00418cb0 f   server.obj
+ 0001:00017e70       ?checkintermission@@YAXXZ  00418e70 f   server.obj
+ 0001:00017eb0       ?localclienttoserver@@YAXPAU_ENetPacket@@@Z 00418eb0 f   server.obj
+ 0001:00017ee0       ?serverslice@@YAXHI@Z      00418ee0 f   server.obj
+ 0001:000182f0       ?startintermission@@YAXXZ  004192f0 f   server.obj
+ 0001:00018330       ?initserver@@YAX_NHPAD111H@Z 00419330 f   server.obj
+ 0001:00018490       ?fixplayer1range@@YAXXZ    00419490 f   clientgame.obj
+ 0001:00018520       ?right@@YAX_N@Z            00419520 f   clientgame.obj
+ 0001:00018560       ?left@@YAX_N@Z             00419560 f   clientgame.obj
+ 0001:000185a0       ?forward@@YAX_N@Z          004195a0 f   clientgame.obj
+ 0001:000185e0       ?backward@@YAX_N@Z         004195e0 f   clientgame.obj
+ 0001:00018620       ?arenacount@@YAXPAUdynent@@AAH1AAPADAA_N@Z 00419620 f   clientgame.obj
+ 0001:00018680       ?resetmovement@@YAXPAUdynent@@@Z 00419680 f   clientgame.obj
+ 0001:00018690       ?getclientmap@@YAPADXZ     00419690 f   clientgame.obj
+ 0001:000186a0       ?mousemove@@YAXHH@Z        004196a0 f   clientgame.obj
+ 0001:00018720       ?zapdynent@@YAXAAPAUdynent@@@Z 00419720 f   clientgame.obj
+ 0001:00018740       ?spawnstate@@YAXPAUdynent@@@Z 00419740 f   clientgame.obj
+ 0001:000188f0       ?sleepf@@YAXPAD0@Z         004198f0 f   clientgame.obj
+ 0001:00018930       ?newdynent@@YAPAUdynent@@XZ 00419930 f   clientgame.obj
+ 0001:000189d0       ?initclient@@YAXXZ         004199d0 f   clientgame.obj
+ 0001:000189e0       ?getclient@@YAPAUdynent@@H@Z 004199e0 f   clientgame.obj
+ 0001:00018ab0       ?timeupdate@@YAXH@Z        00419ab0 f   clientgame.obj
+ 0001:00018af0       ?entinmap@@YAXPAUdynent@@@Z 00419af0 f   clientgame.obj
+ 0001:00018be0       ?selfdamage@@YAXHHPAUdynent@@@Z 00419be0 f   clientgame.obj
+ 0001:00018e20       ?spawnplayer@@YAXPAUdynent@@@Z 00419e20 f   clientgame.obj
+ 0001:00018f60       ?respawnself@@YAXXZ        00419f60 f   clientgame.obj
+ 0001:00018f80       ?respawn@@YAXXZ            00419f80 f   clientgame.obj
+ 0001:00018ff0       ?arenarespawn@@YAXXZ       00419ff0 f   clientgame.obj
+ 0001:000191c0       ?startmap@@YAXPAD@Z        0041a1c0 f   clientgame.obj
+ 0001:00019440       ?jumpn@@YAX_N@Z            0041a440 f   clientgame.obj
+ 0001:00019460       ?attack@@YAX_N@Z           0041a460 f   clientgame.obj
+ 0001:000194d0       ?mode@@YAXH@Z              0041a4d0 f   clientgame.obj
+ 0001:000194f0       ?otherplayers@@YAXXZ       0041a4f0 f   clientgame.obj
+ 0001:00019560       ?updateworld@@YAXH@Z       0041a560 f   clientgame.obj
+ 0001:00019720       ?addteamscore@@YAXPAUdynent@@@Z 0041a720 f   clientextras.obj
+ 0001:000197c0       ?showscores@@YAX_N@Z       0041a7c0 f   clientextras.obj
+ 0001:00019800       ?renderscore@@YAXPAUdynent@@@Z 0041a800 f   clientextras.obj
+ 0001:000198c0       ?renderscores@@YAXXZ       0041a8c0 f   clientextras.obj
+ 0001:00019a70       ?getmap@@YAXXZ             0041aa70 f   clientextras.obj
+ 0001:00019b70       ?sendmap@@YAXPAD@Z         0041ab70 f   clientextras.obj
+ 0001:00019d90       ?renderclient@@YAXPAUdynent@@_NPAD1M@Z 0041ad90 f   clientextras.obj
+ 0001:00019fa0       ?renderclients@@YAXXZ      0041afa0 f   clientextras.obj
+ 0001:0001a050       ?netmapstart@@YA_NXZ       0041b050 f   client.obj
+ 0001:0001a070       ?writeclientinfo@@YAXPAU_iobuf@@@Z 0041b070 f   client.obj
+ 0001:0001a0a0       ?var_rate@@YAXXZ           0041b0a0 f   client.obj
+ 0001:0001a0d0       ?getclientnum@@YAHXZ       0041b0d0 f   client.obj
+ 0001:0001a0e0       ?newteam@@YAXPAD@Z         0041b0e0 f   client.obj
+ 0001:0001a110       ?newname@@YAXPAD@Z         0041b110 f   client.obj
+ 0001:0001a140       ?throttle@@YAXXZ           0041b140 f   client.obj
+ 0001:0001a170       ?var_throttle_decel@@YAXXZ 0041b170 f   client.obj
+ 0001:0001a1a0       ?var_throttle_accel@@YAXXZ 0041b1a0 f   client.obj
+ 0001:0001a1d0       ?var_throttle_interval@@YAXXZ 0041b1d0 f   client.obj
+ 0001:0001a200       ?initclientnet@@YAXXZ      0041b200 f   client.obj
+ 0001:0001a270       ?password@@YAXPAD@Z        0041b270 f   client.obj
+ 0001:0001a290       ?echo@@YAXPAD@Z            0041b290 f   client.obj
+ 0001:0001a2b0       ?toserver@@YAXPAD@Z        0041b2b0 f   client.obj
+ 0001:0001a2f0       ?allowedittoggle@@YA_NXZ   0041b2f0 f   client.obj
+ 0001:0001a320       ?multiplayer@@YA_NXZ       0041b320 f   client.obj
+ 0001:0001a350       ?disconnect@@YAXHH@Z       0041b350 f   client.obj
+ 0001:0001a4f0       ?connects@@YAXPAD@Z        0041b4f0 f   client.obj
+ 0001:0001a5f0       ?server_err@@YAXXZ         0041b5f0 f   client.obj
+ 0001:0001a610       ?trydisconnect@@YAXXZ      0041b610 f   client.obj
+ 0001:0001a670       ?gets2c@@YAXXZ             0041b670 f   client.obj
+ 0001:0001a7d0       ?sendpackettoserv@@YAXPAX@Z 0041b7d0 f   client.obj
+ 0001:0001a830       ?addmsg@@YAXHHHZZ          0041b830 f   client.obj
+ 0001:0001a970       ?c2sinfo@@YAXPAUdynent@@@Z 0041b970 f   client.obj
+ 0001:0001ada0       ?draw_envbox_aux@@YAXMMHHHMMHHHMMHHHMMHHHH@Z 0041bda0 f   rendertext.obj
+ 0001:0001aea0       ?draw_text@@YAXPADHHH@Z    0041bea0 f   rendertext.obj
+ 0001:0001b090       ?draw_textf@@YAXPADHHHZZ   0041c090 f   rendertext.obj
+ 0001:0001b0e0       ?text_width@@YAHPAD@Z      0041c0e0 f   rendertext.obj
+ 0001:0001b150       ?draw_envbox@@YAXHH@Z      0041c150 f   rendertext.obj
+ 0001:0001b320       ?setorient@@YAXAAUvec@@0@Z 0041c320 f   renderparticles.obj
+ 0001:0001b360       ?newparticle@@YAXAAUvec@@0HH@Z 0041c360 f   renderparticles.obj
+ 0001:0001b3f0       ?particle_trail@@YAXHHAAUvec@@0@Z 0041c3f0 f   renderparticles.obj
+ 0001:0001b560       ?particle_splash@@YAXHHHAAUvec@@@Z 0041c560 f   renderparticles.obj
+ 0001:0001b6a0       ?render_particles@@YAXH@Z  0041c6a0 f   renderparticles.obj
+ 0001:0001bc00       ?getmminfo@@YAAAUmapmodelinfo@@H@Z 0041cc00 f   rendermd2.obj
+ 0001:0001bc20       ?mapmodelreset@@YAXXZ      0041cc20 f   rendermd2.obj
+ 0001:0001bc40       ?snap@@YAMHM@Z             0041cc40 f   rendermd2.obj
+ 0001:0001bc90       ?load@md2@@QAE_NPAD@Z      0041cc90 f   rendermd2.obj
+ 0001:0001bdf0       ?scale@md2@@QAEXHMH@Z      0041cdf0 f   rendermd2.obj
+ 0001:0001bf80       ?render@md2@@QAEXAAUvec@@HHMMMMMMMHH@Z 0041cf80 f   rendermd2.obj
+ 0001:0001c230       ?loadmodel@@YAPAUmd2@@PAD@Z 0041d230 f   rendermd2.obj
+ 0001:0001c300       ?mapmodel@@YAXPAD0000@Z    0041d300 f   rendermd2.obj
+ 0001:0001c370       ?delayedload@@YAXPAUmd2@@@Z 0041d370 f   rendermd2.obj
+ 0001:0001c450       ?rendermodel@@YAXPADHHHMMMMMM_NMMHH@Z 0041d450 f   rendermd2.obj
+ 0001:0001c620       ?transplayer@@YAXXZ        0041d620 f   rendergl.obj
+ 0001:0001c6d0       ?overbright@@YAXM@Z        0041d6d0 f   rendergl.obj
+ 0001:0001c700       ?renderstrips@@YAXXZ       0041d700 f   rendergl.obj
+ 0001:0001c770       ?renderstripssky@@YAXXZ    0041d770 f   rendergl.obj
+ 0001:0001c7d0       ?texturereset@@YAXXZ       0041d7d0 f   rendergl.obj
+ 0001:0001c7e0       ?purgetextures@@YAXXZ      0041d7e0 f   rendergl.obj
+ 0001:0001c800       ?cleangl@@YAXXZ            0041d800 f   rendergl.obj
+ 0001:0001c820       ?setupworld@@YAXXZ         0041d820 f   rendergl.obj
+ 0001:0001c8e0       ?addstrip@@YAXHHH@Z        0041d8e0 f   rendergl.obj
+ 0001:0001c900       ?texture@@YAXPAD0@Z        0041d900 f   rendergl.obj
+ 0001:0001c970       ?var_gamma@@YAXXZ          0041d970 f   rendergl.obj
+ 0001:0001c9d0       ?installtex@@YA_NHPADAAH1_N@Z 0041d9d0 f   rendergl.obj
+ 0001:0001cbc0       ?lookuptexture@@YAHHAAH0@Z 0041dbc0 f   rendergl.obj
+ 0001:0001cdd0       ?gl_init@@YAXHH@Z          0041ddd0 f   rendergl.obj
+ 0001:0001cf70       ?drawhudmodel@@YAXHHMH@Z   0041df70 f   rendergl.obj
+ 0001:0001cfe0       ?drawhudgun@@YAXMMH@Z      0041dfe0 f   rendergl.obj
+ 0001:0001d100       ?gl_drawframe@@YAXHHM@Z    0041e100 f   rendergl.obj
+ 0001:0001d640       ?damageblend@@YAXH@Z       0041e640 f   renderextras.obj
+ 0001:0001d650       ?invertperspective@@YAXXZ  0041e650 f   renderextras.obj
+ 0001:0001d6c0       ?drawicon@@YAXMMHH@Z       0041e6c0 f   renderextras.obj
+ 0001:0001d7a0       ?depthcorrect@@YAMM@Z      0041e7a0 f   renderextras.obj
+ 0001:0001d7d0       ?readmatrices@@YAXXZ       0041e7d0 f   renderextras.obj
+ 0001:0001d810       ?renderspheres@@YAXH@Z     0041e810 f   renderextras.obj
+ 0001:0001d9b0       ?newsphere@@YAXAAUvec@@MH@Z 0041e9b0 f   renderextras.obj
+ 0001:0001da20       ?blendbox@@YAXHHHH_N@Z     0041ea20 f   renderextras.obj
+ 0001:0001db50       ?dot@@YAXHHM@Z             0041eb50 f   renderextras.obj
+ 0001:0001dc40       ?box@@YAXAAUblock@@MMMM@Z  0041ec40 f   renderextras.obj
+ 0001:0001dcf0       ?linestyle@@YAXMHHH@Z      0041ecf0 f   renderextras.obj
+ 0001:0001dd20       ?line@@YAXHHMHHM@Z         0041ed20 f   renderextras.obj
+ 0001:0001ddf0       ?readdepth@@YAXHH@Z        0041edf0 f   renderextras.obj
+ 0001:0001df40       ?loadsky@@YAXPAD@Z         0041ef40 f   renderextras.obj
+ 0001:0001e060       ?renderents@@YAXXZ         0041f060 f   renderextras.obj
+ 0001:0001e170       ?gl_drawhud@@YAXHHHHH_N@Z  0041f170 f   renderextras.obj
+ 0001:0001e7b0       ?addwaterquad@@YAXHHH@Z    0041f7b0 f   rendercubes.obj
+ 0001:0001e820       ?showmip@@YAXXZ            0041f820 f   rendercubes.obj
+ 0001:0001e830       ?setarraypointers@@YAXXZ   0041f830 f   rendercubes.obj
+ 0001:0001e880       ?finishstrips@@YAXXZ       0041f880 f   rendercubes.obj
+ 0001:0001e8d0       ?var_waterlevel@@YAXXZ     0041f8d0 f   rendercubes.obj
+ 0001:0001e900       ?mipstats@@YAXHHH@Z        0041f900 f   rendercubes.obj
+ 0001:0001e920       ?reallocv@@YAXXZ           0041f920 f   rendercubes.obj
+ 0001:0001e9b0       ?resetcubes@@YAXXZ         0041f9b0 f   rendercubes.obj
+ 0001:0001ea00       ?render_square@@YAXHMMMMHHHHHPAUsqr@@0_N@Z 0041fa00 f   rendercubes.obj
+ 0001:0001edc0       ?render_2tris@@YAXPAUsqr@@0HHHHHH000@Z 0041fdc0 f   rendercubes.obj
+ 0001:0001f140       ?render_flatdelta@@YAXHHHHMMMMPAUsqr@@000_N@Z 00420140 f   rendercubes.obj
+ 0001:0001f5b0       ?render_flat@@YAXHHHHHPAUsqr@@000_N@Z 004205b0 f   rendercubes.obj
+ 0001:0001fb70       ?renderwater@@YAHM@Z       00420b70 f   rendercubes.obj
+ 0001:00020000       ?render_tris@@YAXHHH_NPAUsqr@@11111@Z 00421000 f   rendercubes.obj
+ 0001:000200c0       _enet_packet_resize        004210c0 f   packet.obj
+ 0001:00020110       _enet_packet_destroy       00421110 f   packet.obj
+ 0001:00020130       _enet_packet_create        00421130 f   packet.obj
+ 0001:00020190       ?updatepos@@YAXPAUdynent@@@Z 00421190 f   clients2c.obj
+ 0001:000202c0       ?changemap@@YAXPAD@Z       004212c0 f   clients2c.obj
+ 0001:000202e0       ?neterr@@YAXPAD@Z          004212e0 f   clients2c.obj
+ 0001:00020300       ?changemapserv@@YAXPADH@Z  00421300 f   clients2c.obj
+ 0001:00020320       ?localservertoclient@@YAXPAEH@Z 00421320 f   clients2c.obj
+ 0001:00021210       __ftol2_sse                00422210 f   msvcrt:ftol2.obj
+ 0001:00021219       __ftol2_pentium4           00422219 f   msvcrt:ftol2.obj
+ 0001:0002122c       __ftol2_sse_excpt          0042222c f   msvcrt:ftol2.obj
+ 0001:00021246       __ftol2                    00422246 f   msvcrt:ftol2.obj
+ 0001:000212bc       __CIatan2                  004222bc f   msvcrt:MSVCR100.dll
+ 0001:000212c2       __CIcos                    004222c2 f   msvcrt:MSVCR100.dll
+ 0001:000212c8       __CIsqrt                   004222c8 f   msvcrt:MSVCR100.dll
+ 0001:000212ce       _memset                    004222ce f   msvcrt:MSVCR100.dll
+ 0001:000212d4       __CIsin                    004222d4 f   msvcrt:MSVCR100.dll
+ 0001:000212da       _memcpy                    004222da f   msvcrt:MSVCR100.dll
+ 0001:000212e0       ___sse2_available_init     004222e0 f   msvcrt:cpu_disp.obj
+ 0002:00000000       __imp__gluPerspective@32   00426000     glu32:GLU32.dll
+ 0002:00000004       __imp__gluBuild2DMipmaps@28 00426004     glu32:GLU32.dll
+ 0002:00000008       __imp__gluScaleImage@36    00426008     glu32:GLU32.dll
+ 0002:0000000c       __imp__gluDeleteQuadric@4  0042600c     glu32:GLU32.dll
+ 0002:00000010       __imp__gluSphere@20        00426010     glu32:GLU32.dll
+ 0002:00000014       __imp__gluQuadricTexture@8 00426014     glu32:GLU32.dll
+ 0002:00000018       __imp__gluQuadricOrientation@8 00426018     glu32:GLU32.dll
+ 0002:0000001c       __imp__gluQuadricDrawStyle@8 0042601c     glu32:GLU32.dll
+ 0002:00000020       __imp__gluNewQuadric@0     00426020     glu32:GLU32.dll
+ 0002:00000024       __imp__gluUnProject@48     00426024     glu32:GLU32.dll
+ 0002:00000028       \177GLU32_NULL_THUNK_DATA  00426028     glu32:GLU32.dll
+ 0002:0000002c       __imp__SetPriorityClass@8  0042602c     kernel32:KERNEL32.dll
+ 0002:00000030       __imp__GetCurrentProcess@0 00426030     kernel32:KERNEL32.dll
+ 0002:00000034       __imp__GlobalLock@4        00426034     kernel32:KERNEL32.dll
+ 0002:00000038       __imp__GlobalUnlock@4      00426038     kernel32:KERNEL32.dll
+ 0002:0000003c       __imp__EncodePointer@4     0042603c     kernel32:KERNEL32.dll
+ 0002:00000040       __imp__DecodePointer@4     00426040     kernel32:KERNEL32.dll
+ 0002:00000044       __imp__GetModuleHandleA@4  00426044     kernel32:KERNEL32.dll
+ 0002:00000048       __imp__IsDebuggerPresent@0 00426048     kernel32:KERNEL32.dll
+ 0002:0000004c       __imp__UnhandledExceptionFilter@4 0042604c     kernel32:KERNEL32.dll
+ 0002:00000050       __imp__TerminateProcess@8  00426050     kernel32:KERNEL32.dll
+ 0002:00000054       __imp__GetSystemTimeAsFileTime@4 00426054     kernel32:KERNEL32.dll
+ 0002:00000058       __imp__GetCurrentProcessId@0 00426058     kernel32:KERNEL32.dll
+ 0002:0000005c       __imp__GetCurrentThreadId@0 0042605c     kernel32:KERNEL32.dll
+ 0002:00000060       __imp__GetTickCount@0      00426060     kernel32:KERNEL32.dll
+ 0002:00000064       __imp__QueryPerformanceCounter@4 00426064     kernel32:KERNEL32.dll
+ 0002:00000068       __imp__SetUnhandledExceptionFilter@4 00426068     kernel32:KERNEL32.dll
+ 0002:0000006c       __imp__HeapSetInformation@16 0042606c     kernel32:KERNEL32.dll
+ 0002:00000070       __imp__InterlockedCompareExchange@12 00426070     kernel32:KERNEL32.dll
+ 0002:00000074       __imp__Sleep@4             00426074     kernel32:KERNEL32.dll
+ 0002:00000078       __imp__InterlockedExchange@8 00426078     kernel32:KERNEL32.dll
+ 0002:0000007c       __imp__IsProcessorFeaturePresent@4 0042607c     kernel32:KERNEL32.dll
+ 0002:00000080       \177KERNEL32_NULL_THUNK_DATA 00426080     kernel32:KERNEL32.dll
+ 0002:00000084       __imp___iob                00426084     msvcrt:MSVCR100.dll
+ 0002:00000088       __imp__fgetc               00426088     msvcrt:MSVCR100.dll
+ 0002:0000008c       __imp___crt_debugger_hook  0042608c     msvcrt:MSVCR100.dll
+ 0002:00000090       __imp___controlfp_s        00426090     msvcrt:MSVCR100.dll
+ 0002:00000094       __imp___invoke_watson      00426094     msvcrt:MSVCR100.dll
+ 0002:00000098       __imp_?terminate@@YAXXZ    00426098     msvcrt:MSVCR100.dll
+ 0002:0000009c       __imp___except_handler4_common 0042609c     msvcrt:MSVCR100.dll
+ 0002:000000a0       __imp____set_app_type      004260a0     msvcrt:MSVCR100.dll
+ 0002:000000a4       __imp___fmode              004260a4     msvcrt:MSVCR100.dll
+ 0002:000000a8       __imp___commode            004260a8     msvcrt:MSVCR100.dll
+ 0002:000000ac       __imp____setusermatherr    004260ac     msvcrt:MSVCR100.dll
+ 0002:000000b0       __imp___configthreadlocale 004260b0     msvcrt:MSVCR100.dll
+ 0002:000000b4       __imp___initterm_e         004260b4     msvcrt:MSVCR100.dll
+ 0002:000000b8       __imp___initterm           004260b8     msvcrt:MSVCR100.dll
+ 0002:000000bc       __imp____initenv           004260bc     msvcrt:MSVCR100.dll
+ 0002:000000c0       __imp___XcptFilter         004260c0     msvcrt:MSVCR100.dll
+ 0002:000000c4       __imp___exit               004260c4     msvcrt:MSVCR100.dll
+ 0002:000000c8       __imp___cexit              004260c8     msvcrt:MSVCR100.dll
+ 0002:000000cc       __imp____getmainargs       004260cc     msvcrt:MSVCR100.dll
+ 0002:000000d0       __imp___amsg_exit          004260d0     msvcrt:MSVCR100.dll
+ 0002:000000d4       __imp___onexit             004260d4     msvcrt:MSVCR100.dll
+ 0002:000000d8       __imp___lock               004260d8     msvcrt:MSVCR100.dll
+ 0002:000000dc       __imp____dllonexit         004260dc     msvcrt:MSVCR100.dll
+ 0002:000000e0       __imp___unlock             004260e0     msvcrt:MSVCR100.dll
+ 0002:000000e4       __imp__ftell               004260e4     msvcrt:MSVCR100.dll
+ 0002:000000e8       __imp__calloc              004260e8     msvcrt:MSVCR100.dll
+ 0002:000000ec       __imp__exit                004260ec     msvcrt:MSVCR100.dll
+ 0002:000000f0       __imp__toupper             004260f0     msvcrt:MSVCR100.dll
+ 0002:000000f4       __imp___CIatan2            004260f4     msvcrt:MSVCR100.dll
+ 0002:000000f8       __imp___CIcos              004260f8     msvcrt:MSVCR100.dll
+ 0002:000000fc       __imp___CIsqrt             004260fc     msvcrt:MSVCR100.dll
+ 0002:00000100       __imp__memset              00426100     msvcrt:MSVCR100.dll
+ 0002:00000104       __imp___CIsin              00426104     msvcrt:MSVCR100.dll
+ 0002:00000108       __imp__memcpy              00426108     msvcrt:MSVCR100.dll
+ 0002:0000010c       __imp__strrchr             0042610c     msvcrt:MSVCR100.dll
+ 0002:00000110       __imp__realloc             00426110     msvcrt:MSVCR100.dll
+ 0002:00000114       __imp___vsnprintf          00426114     msvcrt:MSVCR100.dll
+ 0002:00000118       __imp__strncpy             00426118     msvcrt:MSVCR100.dll
+ 0002:0000011c       __imp__strstr              0042611c     msvcrt:MSVCR100.dll
+ 0002:00000120       __imp__free                00426120     msvcrt:MSVCR100.dll
+ 0002:00000124       __imp__atoi                00426124     msvcrt:MSVCR100.dll
+ 0002:00000128       __imp__fopen               00426128     msvcrt:MSVCR100.dll
+ 0002:0000012c       __imp__fread               0042612c     msvcrt:MSVCR100.dll
+ 0002:00000130       __imp_??2@YAPAXI@Z         00426130     msvcrt:MSVCR100.dll
+ 0002:00000134       __imp__fseek               00426134     msvcrt:MSVCR100.dll
+ 0002:00000138       __imp__fclose              00426138     msvcrt:MSVCR100.dll
+ 0002:0000013c       __imp__rand                0042613c     msvcrt:MSVCR100.dll
+ 0002:00000140       __imp__fprintf             00426140     msvcrt:MSVCR100.dll
+ 0002:00000144       __imp__printf              00426144     msvcrt:MSVCR100.dll
+ 0002:00000148       __imp___time64             00426148     msvcrt:MSVCR100.dll
+ 0002:0000014c       __imp__qsort               0042614c     msvcrt:MSVCR100.dll
+ 0002:00000150       __imp__abort               00426150     msvcrt:MSVCR100.dll
+ 0002:00000154       __imp__malloc              00426154     msvcrt:MSVCR100.dll
+ 0002:00000158       __imp__perror              00426158     msvcrt:MSVCR100.dll
+ 0002:0000015c       __imp__strtol              0042615c     msvcrt:MSVCR100.dll
+ 0002:00000160       __imp__srand               00426160     msvcrt:MSVCR100.dll
+ 0002:00000164       __imp__remove              00426164     msvcrt:MSVCR100.dll
+ 0002:00000168       __imp__rename              00426168     msvcrt:MSVCR100.dll
+ 0002:0000016c       __imp__strpbrk             0042616c     msvcrt:MSVCR100.dll
+ 0002:00000170       __imp__fwrite              00426170     msvcrt:MSVCR100.dll
+ 0002:00000174       __imp__strncmp             00426174     msvcrt:MSVCR100.dll
+ 0002:00000178       __imp__strspn              00426178     msvcrt:MSVCR100.dll
+ 0002:0000017c       __imp__strcspn             0042617c     msvcrt:MSVCR100.dll
+ 0002:00000180       __imp__puts                00426180     msvcrt:MSVCR100.dll
+ 0002:00000184       \177MSVCR100_NULL_THUNK_DATA 00426184     msvcrt:MSVCR100.dll
+ 0002:00000188       __imp__glVertex3d@24       00426188     opengl32:OPENGL32.dll
+ 0002:0000018c       __imp__glColor3fv@4        0042618c     opengl32:OPENGL32.dll
+ 0002:00000190       __imp__glColor3f@12        00426190     opengl32:OPENGL32.dll
+ 0002:00000194       __imp__glClear@4           00426194     opengl32:OPENGL32.dll
+ 0002:00000198       __imp__glClearColor@16     00426198     opengl32:OPENGL32.dll
+ 0002:0000019c       __imp__glFogfv@8           0042619c     opengl32:OPENGL32.dll
+ 0002:000001a0       __imp__glMatrixMode@4      004261a0     opengl32:OPENGL32.dll
+ 0002:000001a4       __imp__glTranslated@24     004261a4     opengl32:OPENGL32.dll
+ 0002:000001a8       __imp__glRotated@32        004261a8     opengl32:OPENGL32.dll
+ 0002:000001ac       __imp__glLoadIdentity@0    004261ac     opengl32:OPENGL32.dll
+ 0002:000001b0       __imp__glTexEnvf@12        004261b0     opengl32:OPENGL32.dll
+ 0002:000001b4       __imp__glEnableClientState@4 004261b4     opengl32:OPENGL32.dll
+ 0002:000001b8       __imp__glTexEnvi@12        004261b8     opengl32:OPENGL32.dll
+ 0002:000001bc       __imp__glTexParameteri@12  004261bc     opengl32:OPENGL32.dll
+ 0002:000001c0       __imp__glPixelStorei@8     004261c0     opengl32:OPENGL32.dll
+ 0002:000001c4       __imp__glEndList@0         004261c4     opengl32:OPENGL32.dll
+ 0002:000001c8       __imp__glNewList@8         004261c8     opengl32:OPENGL32.dll
+ 0002:000001cc       __imp__glGetString@4       004261cc     opengl32:OPENGL32.dll
+ 0002:000001d0       __imp__glCullFace@4        004261d0     opengl32:OPENGL32.dll
+ 0002:000001d4       __imp__glPolygonOffset@8   004261d4     opengl32:OPENGL32.dll
+ 0002:000001d8       __imp__glHint@8            004261d8     opengl32:OPENGL32.dll
+ 0002:000001dc       __imp__glFogf@8            004261dc     opengl32:OPENGL32.dll
+ 0002:000001e0       __imp__glFogi@8            004261e0     opengl32:OPENGL32.dll
+ 0002:000001e4       __imp__glShadeModel@4      004261e4     opengl32:OPENGL32.dll
+ 0002:000001e8       __imp__glDepthFunc@4       004261e8     opengl32:OPENGL32.dll
+ 0002:000001ec       __imp__glClearDepth@8      004261ec     opengl32:OPENGL32.dll
+ 0002:000001f0       __imp__glColorPointer@16   004261f0     opengl32:OPENGL32.dll
+ 0002:000001f4       __imp__glTexCoordPointer@16 004261f4     opengl32:OPENGL32.dll
+ 0002:000001f8       __imp__glDepthMask@4       004261f8     opengl32:OPENGL32.dll
+ 0002:000001fc       __imp__glEnable@4          004261fc     opengl32:OPENGL32.dll
+ 0002:00000200       __imp__glBlendFunc@8       00426200     opengl32:OPENGL32.dll
+ 0002:00000204       __imp__glBindTexture@8     00426204     opengl32:OPENGL32.dll
+ 0002:00000208       __imp__glDrawArrays@12     00426208     opengl32:OPENGL32.dll
+ 0002:0000020c       __imp__glDisable@4         0042620c     opengl32:OPENGL32.dll
+ 0002:00000210       __imp__glBegin@4           00426210     opengl32:OPENGL32.dll
+ 0002:00000214       __imp__glVertex3f@12       00426214     opengl32:OPENGL32.dll
+ 0002:00000218       __imp__glEnd@0             00426218     opengl32:OPENGL32.dll
+ 0002:0000021c       __imp__glLineWidth@4       0042621c     opengl32:OPENGL32.dll
+ 0002:00000220       __imp__glColor3ub@12       00426220     opengl32:OPENGL32.dll
+ 0002:00000224       __imp__glColor3d@24        00426224     opengl32:OPENGL32.dll
+ 0002:00000228       __imp__glVertex2i@8        00426228     opengl32:OPENGL32.dll
+ 0002:0000022c       __imp__glPolygonMode@8     0042622c     opengl32:OPENGL32.dll
+ 0002:00000230       __imp__glPushMatrix@0      00426230     opengl32:OPENGL32.dll
+ 0002:00000234       __imp__glColor4f@16        00426234     opengl32:OPENGL32.dll
+ 0002:00000238       __imp__glTranslatef@12     00426238     opengl32:OPENGL32.dll
+ 0002:0000023c       __imp__glRotatef@16        0042623c     opengl32:OPENGL32.dll
+ 0002:00000240       __imp__glScalef@12         00426240     opengl32:OPENGL32.dll
+ 0002:00000244       __imp__glCallList@4        00426244     opengl32:OPENGL32.dll
+ 0002:00000248       __imp__glPopMatrix@0       00426248     opengl32:OPENGL32.dll
+ 0002:0000024c       __imp__glGetIntegerv@8     0042624c     opengl32:OPENGL32.dll
+ 0002:00000250       __imp__glGetDoublev@8      00426250     opengl32:OPENGL32.dll
+ 0002:00000254       __imp__glReadPixels@28     00426254     opengl32:OPENGL32.dll
+ 0002:00000258       __imp__glTexCoord2f@8      00426258     opengl32:OPENGL32.dll
+ 0002:0000025c       __imp__glLoadMatrixd@4     0042625c     opengl32:OPENGL32.dll
+ 0002:00000260       __imp__glOrtho@48          00426260     opengl32:OPENGL32.dll
+ 0002:00000264       __imp__glTexCoord2d@16     00426264     opengl32:OPENGL32.dll
+ 0002:00000268       __imp__glVertex2f@8        00426268     opengl32:OPENGL32.dll
+ 0002:0000026c       __imp__glViewport@16       0042626c     opengl32:OPENGL32.dll
+ 0002:00000270       __imp__glVertexPointer@16  00426270     opengl32:OPENGL32.dll
+ 0002:00000274       \177OPENGL32_NULL_THUNK_DATA 00426274     opengl32:OPENGL32.dll
+ 0002:00000278       __imp__SDL_InitSubSystem   00426278     SDL:SDL.dll
+ 0002:0000027c       __imp__SDL_FreeSurface     0042627c     SDL:SDL.dll
+ 0002:00000280       __imp__SDL_SetGamma        00426280     SDL:SDL.dll
+ 0002:00000284       __imp__SDL_GetError        00426284     SDL:SDL.dll
+ 0002:00000288       __imp__SDL_CreateSemaphore 00426288     SDL:SDL.dll
+ 0002:0000028c       __imp__SDL_mutexV          0042628c     SDL:SDL.dll
+ 0002:00000290       __imp__SDL_SemWait         00426290     SDL:SDL.dll
+ 0002:00000294       __imp__SDL_mutexP          00426294     SDL:SDL.dll
+ 0002:00000298       __imp__SDL_CreateThread    00426298     SDL:SDL.dll
+ 0002:0000029c       __imp__SDL_SemPost         0042629c     SDL:SDL.dll
+ 0002:000002a0       __imp__SDL_WM_GrabInput    004262a0     SDL:SDL.dll
+ 0002:000002a4       __imp__SDL_SemTryWait      004262a4     SDL:SDL.dll
+ 0002:000002a8       __imp__SDL_CreateMutex     004262a8     SDL:SDL.dll
+ 0002:000002ac       __imp__SDL_KillThread      004262ac     SDL:SDL.dll
+ 0002:000002b0       __imp__SDL_GetTicks        004262b0     SDL:SDL.dll
+ 0002:000002b4       __imp__SDL_EnableUNICODE   004262b4     SDL:SDL.dll
+ 0002:000002b8       __imp__SDL_GetModState     004262b8     SDL:SDL.dll
+ 0002:000002bc       __imp__SDL_ShowCursor      004262bc     SDL:SDL.dll
+ 0002:000002c0       __imp__SDL_Quit            004262c0     SDL:SDL.dll
+ 0002:000002c4       __imp__SDL_CreateRGBSurface 004262c4     SDL:SDL.dll
+ 0002:000002c8       __imp__SDL_SaveBMP_RW      004262c8     SDL:SDL.dll
+ 0002:000002cc       __imp__SDL_RWFromFile      004262cc     SDL:SDL.dll
+ 0002:000002d0       __imp__SDL_EnableKeyRepeat 004262d0     SDL:SDL.dll
+ 0002:000002d4       __imp__SDL_Init            004262d4     SDL:SDL.dll
+ 0002:000002d8       __imp__SDL_WM_SetCaption   004262d8     SDL:SDL.dll
+ 0002:000002dc       __imp__SDL_GL_SetAttribute 004262dc     SDL:SDL.dll
+ 0002:000002e0       __imp__SDL_SetVideoMode    004262e0     SDL:SDL.dll
+ 0002:000002e4       __imp__SDL_Delay           004262e4     SDL:SDL.dll
+ 0002:000002e8       __imp__SDL_GL_SwapBuffers  004262e8     SDL:SDL.dll
+ 0002:000002ec       __imp__SDL_PollEvent       004262ec     SDL:SDL.dll
+ 0002:000002f0       __imp__SDL_SetModuleHandle 004262f0     SDL:SDL.dll
+ 0002:000002f4       \177SDL_NULL_THUNK_DATA    004262f4     SDL:SDL.dll
+ 0002:000002f8       __imp__IMG_Load            004262f8     SDL_image:SDL_image.dll
+ 0002:000002fc       \177SDL_image_NULL_THUNK_DATA 004262fc     SDL_image:SDL_image.dll
+ 0002:00000300       __imp__Mix_CloseAudio      00426300     SDL_mixer:SDL_mixer.dll
+ 0002:00000304       __imp__Mix_Volume          00426304     SDL_mixer:SDL_mixer.dll
+ 0002:00000308       __imp__Mix_SetPanning      00426308     SDL_mixer:SDL_mixer.dll
+ 0002:0000030c       __imp__Mix_Playing         0042630c     SDL_mixer:SDL_mixer.dll
+ 0002:00000310       __imp__Mix_LoadWAV_RW      00426310     SDL_mixer:SDL_mixer.dll
+ 0002:00000314       __imp__Mix_VolumeMusic     00426314     SDL_mixer:SDL_mixer.dll
+ 0002:00000318       __imp__Mix_LoadMUS         00426318     SDL_mixer:SDL_mixer.dll
+ 0002:0000031c       __imp__Mix_AllocateChannels 0042631c     SDL_mixer:SDL_mixer.dll
+ 0002:00000320       __imp__Mix_OpenAudio       00426320     SDL_mixer:SDL_mixer.dll
+ 0002:00000324       __imp__Mix_FreeMusic       00426324     SDL_mixer:SDL_mixer.dll
+ 0002:00000328       __imp__Mix_HaltMusic       00426328     SDL_mixer:SDL_mixer.dll
+ 0002:0000032c       __imp__Mix_PlayChannelTimed 0042632c     SDL_mixer:SDL_mixer.dll
+ 0002:00000330       __imp__Mix_PlayMusic       00426330     SDL_mixer:SDL_mixer.dll
+ 0002:00000334       \177SDL_mixer_NULL_THUNK_DATA 00426334     SDL_mixer:SDL_mixer.dll
+ 0002:00000338       __imp__OpenClipboard@4     00426338     user32:USER32.dll
+ 0002:0000033c       __imp__GetClipboardData@4  0042633c     user32:USER32.dll
+ 0002:00000340       __imp__CloseClipboard@0    00426340     user32:USER32.dll
+ 0002:00000344       __imp__MessageBoxA@16      00426344     user32:USER32.dll
+ 0002:00000348       __imp__IsClipboardFormatAvailable@4 00426348     user32:USER32.dll
+ 0002:0000034c       \177USER32_NULL_THUNK_DATA 0042634c     user32:USER32.dll
+ 0002:00000350       __imp__timeBeginPeriod@4   00426350     winmm:WINMM.dll
+ 0002:00000354       __imp__timeGetTime@0       00426354     winmm:WINMM.dll
+ 0002:00000358       __imp__timeEndPeriod@4     00426358     winmm:WINMM.dll
+ 0002:0000035c       \177WINMM_NULL_THUNK_DATA  0042635c     winmm:WINMM.dll
+ 0002:00000360       __imp__WSARecvFrom@36      00426360     ws2_32:WS2_32.dll
+ 0002:00000364       __imp__WSAGetLastError@0   00426364     ws2_32:WS2_32.dll
+ 0002:00000368       __imp__WSACleanup@0        00426368     ws2_32:WS2_32.dll
+ 0002:0000036c       __imp__bind@12             0042636c     ws2_32:WS2_32.dll
+ 0002:00000370       __imp__socket@12           00426370     ws2_32:WS2_32.dll
+ 0002:00000374       __imp____WSAFDIsSet@8      00426374     ws2_32:WS2_32.dll
+ 0002:00000378       __imp__gethostbyaddr@12    00426378     ws2_32:WS2_32.dll
+ 0002:0000037c       __imp__select@20           0042637c     ws2_32:WS2_32.dll
+ 0002:00000380       __imp__WSAStartup@8        00426380     ws2_32:WS2_32.dll
+ 0002:00000384       __imp__connect@12          00426384     ws2_32:WS2_32.dll
+ 0002:00000388       __imp__ioctlsocket@12      00426388     ws2_32:WS2_32.dll
+ 0002:0000038c       __imp__setsockopt@20       0042638c     ws2_32:WS2_32.dll
+ 0002:00000390       __imp__gethostbyname@4     00426390     ws2_32:WS2_32.dll
+ 0002:00000394       __imp__listen@8            00426394     ws2_32:WS2_32.dll
+ 0002:00000398       __imp__WSASendTo@36        00426398     ws2_32:WS2_32.dll
+ 0002:0000039c       __imp__ntohl@4             0042639c     ws2_32:WS2_32.dll
+ 0002:000003a0       __imp__htonl@4             004263a0     ws2_32:WS2_32.dll
+ 0002:000003a4       __imp__ntohs@4             004263a4     ws2_32:WS2_32.dll
+ 0002:000003a8       __imp__htons@4             004263a8     ws2_32:WS2_32.dll
+ 0002:000003ac       __imp__closesocket@4       004263ac     ws2_32:WS2_32.dll
+ 0002:000003b0       \177WS2_32_NULL_THUNK_DATA 004263b0     ws2_32:WS2_32.dll
+ 0002:000003b4       __imp__gzeof@4             004263b4     zlib:zlib.dll
+ 0002:000003b8       __imp__gzgetc@4            004263b8     zlib:zlib.dll
+ 0002:000003bc       __imp__gzread@12           004263bc     zlib:zlib.dll
+ 0002:000003c0       __imp__gzclose@4           004263c0     zlib:zlib.dll
+ 0002:000003c4       __imp__gzputc@8            004263c4     zlib:zlib.dll
+ 0002:000003c8       __imp__gzwrite@12          004263c8     zlib:zlib.dll
+ 0002:000003cc       __imp__gzopen@8            004263cc     zlib:zlib.dll
+ 0002:000003d0       \177zlib_NULL_THUNK_DATA   004263d0     zlib:zlib.dll
+ 0002:000003d4       ___xc_a                    004263d4     msvcrt:cinitexe.obj
+ 0002:00000660       ___xc_z                    00426660     msvcrt:cinitexe.obj
+ 0002:00000664       ___xi_a                    00426664     msvcrt:cinitexe.obj
+ 0002:00000674       ___xi_z                    00426674     msvcrt:cinitexe.obj
+ 0002:000006a4       ??_C@_00CNPNBAHC@?$AA@     004266a4     rendercubes.obj
+ 0002:000006a8       ??_C@_0BC@HIGLBADN@no?5vertex?5memory?$CB?$AA@ 004266a8     rendercubes.obj
+ 0002:000006cc       ??_C@_0BK@FNEGIIGH@1x1?12x2?14x4?3?5?$CFd?5?1?5?$CFd?5?1?5?$CFd?$AA@ 004266cc     rendercubes.obj
+ 0002:000006e8       ??_C@_07BDHOJDLA@showmip?$AA@ 004266e8     rendercubes.obj
+ 0002:000006f0       ??_C@_0L@IEPABEDF@lighterror?$AA@ 004266f0     rendercubes.obj
+ 0002:000006fc       ??_C@_0M@KNDLFDJF@watersubdiv?$AA@ 004266fc     rendercubes.obj
+ 0002:00000708       ??_C@_0L@NEBDHOBF@waterlevel?$AA@ 00426708     rendercubes.obj
+ 0002:00000714       ??_C@_01OGPIMHDM@?$DP?$AA@ 00426714     renderextras.obj
+ 0002:00000718       ??_C@_07LKFDAAK@jumppad?$AA@ 00426718     renderextras.obj
+ 0002:00000720       ??_C@_07DIDNFGDE@trigger?$AA@ 00426720     renderextras.obj
+ 0002:00000728       ??_C@_07JHAJHILB@monster?$AA@ 00426728     renderextras.obj
+ 0002:00000730       ??_C@_08NIOLEMIA@mapmodel?$AA@ 00426730     renderextras.obj
+ 0002:0000073c       ??_C@_08EFDDNDGI@teledest?$AA@ 0042673c     renderextras.obj
+ 0002:00000748       ??_C@_08LOCMGIHJ@teleport?$AA@ 00426748     renderextras.obj
+ 0002:00000754       ??_C@_0L@KPHGGDIO@quaddamage?$AA@ 00426754     renderextras.obj
+ 0002:00000760       ??_C@_0N@OPLOOMAJ@yellowarmour?$AA@ 00426760     renderextras.obj
+ 0002:00000770       ??_C@_0M@LMAKOAIO@greenarmour?$AA@ 00426770     renderextras.obj
+ 0002:0000077c       ??_C@_0M@LPDJFKGJ@healthboost?$AA@ 0042677c     renderextras.obj
+ 0002:00000788       ??_C@_06KJINILIP@health?$AA@ 00426788     renderextras.obj
+ 0002:00000790       ??_C@_0M@LKDFPMNF@riflerounds?$AA@ 00426790     renderextras.obj
+ 0002:0000079c       ??_C@_07DCMGFMFH@rockets?$AA@ 0042679c     renderextras.obj
+ 0002:000007a4       ??_C@_07MOKFMADJ@bullets?$AA@ 004267a4     renderextras.obj
+ 0002:000007ac       ??_C@_06DOEJMPPH@shells?$AA@ 004267ac     renderextras.obj
+ 0002:000007b4       ??_C@_0M@GFCPGAEM@playerstart?$AA@ 004267b4     renderextras.obj
+ 0002:000007c0       ??_C@_05OEPGNJB@light?$AA@ 004267c0     renderextras.obj
+ 0002:000007c8       ??_C@_05KKJKHDCN@none?$DP?$AA@ 004267c8     renderextras.obj
+ 0002:000007d0       ??_C@_05LMJLOIFP@selys?$AA@ 004267d0     renderextras.obj
+ 0002:000007d8       ??_C@_05LNFJICGI@selxs?$AA@ 004267d8     renderextras.obj
+ 0002:000007e0       ??_C@_0DL@GIBJMPH@closest?5entity?5?$DN?5?$CFs?5?$CI?$CFd?0?5?$CFd?0?5?$CFd?0@ 004267e0     renderextras.obj
+ 0002:0000081c       ??_C@_02HLHCNIN@ft?$AA@    0042681c     renderextras.obj
+ 0002:00000820       ??_C@_02MNOEILMP@bk?$AA@   00426820     renderextras.obj
+ 0002:00000824       ??_C@_02HCNENIII@lf?$AA@   00426824     renderextras.obj
+ 0002:00000828       ??_C@_02BMJICGCB@rt?$AA@   00426828     renderextras.obj
+ 0002:0000082c       ??_C@_02LEBOADDI@dn?$AA@   0042682c     renderextras.obj
+ 0002:00000830       ??_C@_02HNLLPFKA@up?$AA@   00426830     renderextras.obj
+ 0002:00000834       ??_C@_0BD@PJLEBFJF@packages?1?$CFs_?$CFs?4jpg?$AA@ 00426834     renderextras.obj
+ 0002:00000848       ??_C@_0BM@OCBMCDLI@could?5not?5load?5sky?5textures?$AA@ 00426848     renderextras.obj
+ 0002:00000864       ??_C@_07MIIENBA@loadsky?$AA@ 00426864     renderextras.obj
+ 0002:0000086c       ??_C@_0O@DOKGGKIC@crosshairsize?$AA@ 0042686c     renderextras.obj
+ 0002:0000087c       ??_C@_09PGDOGKEO@hidestats?$AA@ 0042687c     renderextras.obj
+ 0002:00000888       ??_C@_0M@DDOMLNPO@crosshairfx?$AA@ 00426888     renderextras.obj
+ 0002:00000894       ??_C@_05ENPENPBL@?$DO?5?$CFs_?$AA@ 00426894     renderextras.obj
+ 0002:0000089c       ??_C@_06KAIAELBG@fps?5?$CFd?$AA@ 0042689c     renderextras.obj
+ 0002:000008a4       ??_C@_06HILFEEFL@wqd?5?$CFd?$AA@ 004268a4     renderextras.obj
+ 0002:000008ac       ??_C@_06FFAODGB@wvt?5?$CFd?$AA@ 004268ac     renderextras.obj
+ 0002:000008b4       ??_C@_06PFBBGOIG@evt?5?$CFd?$AA@ 004268b4     renderextras.obj
+ 0002:000008bc       ??_C@_02DPKJAMEF@?$CFd?$AA@ 004268bc     renderextras.obj
+ 0002:000008c0       ??_C@_0O@GOIJHLBP@hudguns?1rifle?$AA@ 004268c0     rendergl.obj
+ 0002:000008d0       ??_C@_0P@EFFLGMKI@hudguns?1rocket?$AA@ 004268d0     rendergl.obj
+ 0002:000008e0       ??_C@_0P@CEIEPOPC@hudguns?1chaing?$AA@ 004268e0     rendergl.obj
+ 0002:000008f0       ??_C@_0O@MFLOFOMK@hudguns?1shotg?$AA@ 004268f0     rendergl.obj
+ 0002:00000900       ??_C@_0N@NCDDKFMA@hudguns?1fist?$AA@ 00426900     rendergl.obj
+ 0002:00000910       ??_C@_0BL@JFMOHFPL@GL_EXT_texture_env_combine?$AA@ 00426910     rendergl.obj
+ 0002:00000930       ??_C@_0ED@FLKBBHPF@WARNING?3?5cannot?5use?5overbright?5l@ 00426930     rendergl.obj
+ 0002:00000974       ??_C@_0L@FJOJBCIM@glu?5sphere?$AA@ 00426974     rendergl.obj
+ 0002:00000980       ??_C@_0BJ@IIJDHNGD@couldn?8t?5load?5texture?5?$CFs?$AA@ 00426980     rendergl.obj
+ 0002:0000099c       ??_C@_0BK@IDBEAGIL@texture?5must?5be?524bpp?3?5?$CFs?$AA@ 0042699c     rendergl.obj
+ 0002:000009b8       ??_C@_0CC@JCIBBKLE@warning?3?5quality?5loss?3?5scaling?5?$CF@ 004269b8     rendergl.obj
+ 0002:000009dc       ??_C@_0BI@EFGPANJF@could?5not?5build?5mipmaps?$AA@ 004269dc     rendergl.obj
+ 0002:000009f4       ??_C@_0N@GHEGLPKK@texturereset?$AA@ 004269f4     rendergl.obj
+ 0002:00000a04       ??_C@_07JDHEGGGP@texture?$AA@ 00426a04     rendergl.obj
+ 0002:00000a0c       ??_C@_0BJ@LBHBLLFP@loaded?5too?5many?5textures?$AA@ 00426a0c     rendergl.obj
+ 0002:00000a28       ??_C@_0N@MGJBJMOP@packages?$CFc?$CFs?$AA@ 00426a28     rendergl.obj
+ 0002:00000a38       ??_C@_05KDLBCAI@gamma?$AA@ 00426a38     rendergl.obj
+ 0002:00000a40       ??_C@_0DG@EEDDPODG@Could?5not?5set?5gamma?5?$CIcard?1driver@ 00426a40     rendergl.obj
+ 0002:00000a78       ??_C@_07MJPKLABF@sdl?3?5?$CFs?$AA@ 00426a78     rendergl.obj
+ 0002:00000a80       ??_C@_03PKBINKFB@fov?$AA@  00426a80     rendergl.obj
+ 0002:00000a84       ??_C@_03KJMBPJEB@fog?$AA@  00426a84     rendergl.obj
+ 0002:00000a88       ??_C@_09KKDACDEI@fogcolour?$AA@ 00426a88     rendergl.obj
+ 0002:00000a94       ??_C@_06OCCCEMNE@hudgun?$AA@ 00426a94     rendergl.obj
+ 0002:00000a9c       ??_C@_02JDPG@rb?$AA@       00426a9c     rendermd2.obj
+ 0002:00000aa0       ??_C@_0BM@GHKCHKHL@packages?1models?1?$CFs?1tris?4md2?$AA@ 00426aa0     rendermd2.obj
+ 0002:00000abc       ??_C@_0M@GMNLPFEJ@loadmodel?3?5?$AA@ 00426abc     rendermd2.obj
+ 0002:00000ac8       ??_C@_0BM@JOELLGPD@packages?1models?1?$CFs?1skin?4jpg?$AA@ 00426ac8     rendermd2.obj
+ 0002:00000ae4       ??_C@_0O@OHIPMJPN@mapmodelreset?$AA@ 00426ae4     rendermd2.obj
+ 0002:00000af4       ??_C@_0N@MPNGNKGM@maxparticles?$AA@ 00426af4     renderparticles.obj
+ 0002:00000b04       ??_C@_0N@BFDOENGB@demotracking?$AA@ 00426b04     renderparticles.obj
+ 0002:00000b14       ??_C@_0N@KDFPFDGD@particlesize?$AA@ 00426b14     renderparticles.obj
+ 0002:00000b24       ??_C@_0CH@HDLCKFDP@operation?5not?5available?5in?5multi@ 00426b24     client.obj
+ 0002:00000b4c       ??_C@_0DC@KLLBGCCJ@editing?5in?5multiplayer?5requires?5@ 00426b4c     client.obj
+ 0002:00000b80       ??_C@_04HCCHHEEF@rate?$AA@ 00426b80     client.obj
+ 0002:00000b88       ??_C@_0BC@HEEPLBOG@throttle_interval?$AA@ 00426b88     client.obj
+ 0002:00000b9c       ??_C@_0P@GOIDANDD@throttle_accel?$AA@ 00426b9c     client.obj
+ 0002:00000bac       ??_C@_0P@LBAOGJCA@throttle_decel?$AA@ 00426bac     client.obj
+ 0002:00000bbc       ??_C@_04KADBPNCB@team?$AA@ 00426bbc     client.obj
+ 0002:00000bc4       ??_C@_04MEMAJGDJ@name?$AA@ 00426bc4     client.obj
+ 0002:00000bcc       ??_C@_0BF@PMBKNMNJ@name?5?$CC?$CFs?$CC?6team?5?$CC?$CFs?$CC?6?$AA@ 00426bcc     client.obj
+ 0002:00000be4       ??_C@_0BM@MMFCJBDC@attempting?5to?5connect?5to?5?$CFs?$AA@ 00426be4     client.obj
+ 0002:00000c00       ??_C@_0BM@GAIBIFNC@could?5not?5resolve?5server?5?$CFs?$AA@ 00426c00     client.obj
+ 0002:00000c1c       ??_C@_0BM@OACHPKED@could?5not?5connect?5to?5server?$AA@ 00426c1c     client.obj
+ 0002:00000c38       ??_C@_0N@GGGDBMDO@disconnected?$AA@ 00426c38     client.obj
+ 0002:00000c48       ??_C@_0O@GLMIBBEG@not?5connected?$AA@ 00426c48     client.obj
+ 0002:00000c58       ??_C@_0BM@JCJFMNM@aborting?5connection?5attempt?$AA@ 00426c58     client.obj
+ 0002:00000c74       ??_C@_0BM@KHAAGKOC@attempting?5to?5disconnect?4?4?4?$AA@ 00426c74     client.obj
+ 0002:00000c90       ??_C@_07MHMEONI@?$CFs?3?$AM?5?$CFs?$AA@ 00426c90     client.obj
+ 0002:00000c98       ??_C@_02DKCKIIND@?$CFs?$AA@ 00426c98     client.obj
+ 0002:00000c9c       ??_C@_04OFDNEFMC@echo?$AA@ 00426c9c     client.obj
+ 0002:00000ca4       ??_C@_03BANJEMDJ@say?$AA@  00426ca4     client.obj
+ 0002:00000ca8       ??_C@_07KAIBNCHO@connect?$AA@ 00426ca8     client.obj
+ 0002:00000cb0       ??_C@_0L@KKPFIJOL@disconnect?$AA@ 00426cb0     client.obj
+ 0002:00000cbc       ??_C@_0CI@ENKCILI@inconsistant?5msg?5size?5for?5?$CFd?5?$CI?$CFd@ 00426cbc     client.obj
+ 0002:00000ce4       ??_C@_0CD@LAGKCBLK@command?5flood?5protection?5?$CItype?5?$CF@ 00426ce4     client.obj
+ 0002:00000d08       ??_C@_0CH@IGDKLAIL@server?5network?5error?0?5disconnect@ 00426d08     client.obj
+ 0002:00000d30       ??_C@_08NLHBPEGP@password?$AA@ 00426d30     client.obj
+ 0002:00000d3c       ??_C@_07LFIJDALL@unnamed?$AA@ 00426d3c     client.obj
+ 0002:00000d44       ??_C@_03FAAAOPJM@red?$AA@  00426d44     client.obj
+ 0002:00000d48       ??_C@_0BJ@NFIAENFO@attempting?5to?5connect?4?4?4?$AA@ 00426d48     client.obj
+ 0002:00000d64       ??_C@_0BE@FHNLFBGA@connected?5to?5server?$AA@ 00426d64     client.obj
+ 0002:00000d78       ??_C@_0N@EMIENNBG@monster?1ogro?$AA@ 00426d78     clientextras.obj
+ 0002:00000d88       ??_C@_04ENHBHKMJ@?$CI?$CFs?$CJ?$AA@ 00426d88     clientextras.obj
+ 0002:00000d90       ??_C@_03MBBJPJFD@LAG?$AA@  00426d90     clientextras.obj
+ 0002:00000d94       ??_C@_0P@DNBNAGFH@?$CFd?7?$CFs?7?$CFd?7?$CFs?7?$CFs?$AA@ 00426d94     clientextras.obj
+ 0002:00000da4       ??_C@_0L@OLIBBMMP@?$FL?5?$CFs?3?5?$CFd?5?$FN?$AA@ 00426da4     clientextras.obj
+ 0002:00000db0       ??_C@_0BM@OEDEFKFJ@map?5?$CFs?5is?5too?5large?5to?5send?$AA@ 00426db0     clientextras.obj
+ 0002:00000dcc       ??_C@_0BM@DHCAAMHI@sending?5map?5?$CFs?5to?5server?4?4?4?$AA@ 00426dcc     clientextras.obj
+ 0002:00000de8       ??_C@_0DE@EKOMANHC@?$FLmap?5?$CFs?5uploaded?5to?5server?0?5?$CCget@ 00426de8     clientextras.obj
+ 0002:00000e1c       ??_C@_0BO@CCEFJPGL@requesting?5map?5from?5server?4?4?4?$AA@ 00426e1c     clientextras.obj
+ 0002:00000e3c       ??_C@_07JAKGJNDP@sendmap?$AA@ 00426e3c     clientextras.obj
+ 0002:00000e44       ??_C@_06NHIPHNDD@getmap?$AA@ 00426e44     clientextras.obj
+ 0002:00000e4c       ??_C@_08NKFOLMGC@gamemode?$AA@ 00426e4c     clientgame.obj
+ 0002:00000e58       ??_C@_04GMGOKAFF@mode?$AA@ 00426e58     clientgame.obj
+ 0002:00000e60       ??_C@_0M@JFLMCFNC@sensitivity?$AA@ 00426e60     clientgame.obj
+ 0002:00000e6c       ??_C@_0BB@CNFCEFCM@sensitivityscale?$AA@ 00426e6c     clientgame.obj
+ 0002:00000e80       ??_C@_08BODLGOGL@invmouse?$AA@ 00426e80     clientgame.obj
+ 0002:00000e8c       ??_C@_0BN@OFGDGKOL@new?5round?5starting?4?4?4?5fight?$CB?$AA@ 00426e8c     clientgame.obj
+ 0002:00000eac       ??_C@_0DA@HHKNIMPN@arena?5round?5is?5over?$CB?5next?5round?5@ 00426eac     clientgame.obj
+ 0002:00000edc       ??_C@_0BN@IKLDFGP@team?5?$CFs?5is?5last?5man?5standing?$AA@ 00426edc     clientgame.obj
+ 0002:00000efc       ??_C@_0P@DOPPFOAF@everyone?5died?$CB?$AA@ 00426efc     clientgame.obj
+ 0002:00000f0c       ??_C@_0CC@LIMFEOKC@waiting?5for?5new?5round?5to?5start?4?4@ 00426f0c     clientgame.obj
+ 0002:00000f30       ??_C@_05PCJCMMHD@sleep?$AA@ 00426f30     clientgame.obj
+ 0002:00000f38       ??_C@_0CH@LJEGDCEP@can?8t?5find?5entity?5spawn?5spot?$CB?5?$CI?$CF@ 00426f38     clientgame.obj
+ 0002:00000f60       ??_C@_08DBMDPFJD@backward?$AA@ 00426f60     clientgame.obj
+ 0002:00000f6c       ??_C@_07CJMBKHEI@forward?$AA@ 00426f6c     clientgame.obj
+ 0002:00000f74       ??_C@_04GOOOJOPP@left?$AA@ 00426f74     clientgame.obj
+ 0002:00000f7c       ??_C@_05DHJDAOHK@right?$AA@ 00426f7c     clientgame.obj
+ 0002:00000f84       ??_C@_04NJIOBGCF@jump?$AA@ 00426f84     clientgame.obj
+ 0002:00000f8c       ??_C@_06JMLBDJHL@attack?$AA@ 00426f8c     clientgame.obj
+ 0002:00000f94       ??_C@_0L@NHHNPEKO@showscores?$AA@ 00426f94     clientgame.obj
+ 0002:00000fa0       ??_C@_0BG@IBFIAEKI@you?5got?5killed?5by?5?$CFs?$CB?$AA@ 00426fa0     clientgame.obj
+ 0002:00000fb8       ??_C@_0O@CHMLBHLN@you?5suicided?$CB?$AA@ 00426fb8     clientgame.obj
+ 0002:00000fc8       ??_C@_0CD@IGABJGEC@you?5got?5fragged?5by?5a?5teammate?5?$CI?$CF@ 00426fc8     clientgame.obj
+ 0002:00000fec       ??_C@_0BG@DOFPEFBN@you?5got?5fragged?5by?5?$CFs?$AA@ 00426fec     clientgame.obj
+ 0002:00001004       ??_C@_0O@KOJAFHGL@intermission?3?$AA@ 00427004     clientgame.obj
+ 0002:00001014       ??_C@_0BA@LAOCDKCK@game?5has?5ended?$CB?$AA@ 00427014     clientgame.obj
+ 0002:00001024       ??_C@_0BL@IHGEOKDN@time?5remaining?3?5?$CFd?5minutes?$AA@ 00427024     clientgame.obj
+ 0002:00001040       ??_C@_09ONOEJFNM@clientnum?$AA@ 00427040     clientgame.obj
+ 0002:0000104c       ??_C@_0BK@GCAEJPFL@coop?5sp?5not?5supported?5yet?$AA@ 0042704c     clientgame.obj
+ 0002:00001068       ??_C@_09MBCHPELG@gamespeed?$AA@ 00427068     clientgame.obj
+ 0002:00001074       ??_C@_0BA@PKEJBEDA@game?5mode?5is?5?$CFs?$AA@ 00427074     clientgame.obj
+ 0002:00001084       ??_C@_03HBNNNHNM@map?$AA@  00427084     clientgame.obj
+ 0002:00001088       ??_C@_0BN@OIBAOKOD@illegal?5network?5message?5?$CI?$CFs?$CJ?$AA@ 00427088     clients2c.obj
+ 0002:000010a8       ??_C@_0O@DCIADJFE@packet?5length?$AA@ 004270a8     clients2c.obj
+ 0002:000010b8       ??_C@_0DO@BNFOIPBN@you?5are?5using?5a?5different?5game?5p@ 004270b8     clients2c.obj
+ 0002:000010f8       ??_C@_0DK@JJMKNMHD@you?5need?5to?5set?5the?5correct?5pass@ 004270f8     clients2c.obj
+ 0002:00001134       ??_C@_0CA@DEKMKMNH@server?5is?5FULL?0?5disconnecting?4?4?$AA@ 00427134     clients2c.obj
+ 0002:00001154       ??_C@_0L@LLJEGCGB@nextmap_?$CFs?$AA@ 00427154     clients2c.obj
+ 0002:00001160       ??_C@_0BG@FECIBIAO@?$CFs?5is?5now?5known?5as?5?$CFs?$AA@ 00427160     clients2c.obj
+ 0002:00001178       ??_C@_0O@HFFMEDJP@connected?3?5?$CFs?$AA@ 00427178     clients2c.obj
+ 0002:00001188       ??_C@_0BG@HNENEPBF@?$FLincompatible?5client?$FN?$AA@ 00427188     clients2c.obj
+ 0002:000011a0       ??_C@_0BH@HBGOAALC@player?5?$CFs?5disconnected?$AA@ 004271a0     clients2c.obj
+ 0002:000011b8       ??_C@_0M@POBOGEHM@?$CFs?5suicided?$AA@ 004271b8     clients2c.obj
+ 0002:000011c4       ??_C@_0BM@BOHBGLEN@you?5fragged?5a?5teammate?5?$CI?$CFs?$CJ?$AA@ 004271c4     clients2c.obj
+ 0002:000011e0       ??_C@_0P@GHGBHPP@you?5fragged?5?$CFs?$AA@ 004271e0     clients2c.obj
+ 0002:000011f0       ??_C@_0BN@EAGAHFLK@?$CFs?5fragged?5his?5teammate?5?$CI?$CFs?$CJ?$AA@ 004271f0     clients2c.obj
+ 0002:00001210       ??_C@_0O@EDFLFCKL@?$CFs?5fragged?5?$CFs?$AA@ 00427210     clients2c.obj
+ 0002:00001220       ??_C@_0CL@KMNLOPGL@received?5map?5?$CC?$CFs?$CC?5from?5server?0?5r@ 00427220     clients2c.obj
+ 0002:0000124c       ??_C@_04GPMDFGEJ@type?$AA@ 0042724c     clients2c.obj
+ 0002:00001254       ??_C@_0CA@LDLPFFFB@disconnecting?5client?5?$CI?$CFs?$CJ?5?$FL?$CFs?$FN?6?$AA@ 00427254     server.obj
+ 0002:00001274       ??_C@_0CL@LMEGDBCL@?$CFs?5suggests?5?$CFs?5on?5map?5?$CFs?5?$CIset?5ma@ 00427274     server.obj
+ 0002:000012a0       ??_C@_0M@DLOEMCPE@vote?5passed?$AA@ 004272a0     server.obj
+ 0002:000012ac       ??_C@_0L@CNDFKLPO@client?5num?$AA@ 004272ac     server.obj
+ 0002:000012b8       ??_C@_08LHFLPAFL@tag?5type?$AA@ 004272b8     server.obj
+ 0002:000012c4       ??_C@_0O@JBDOGIMF@end?5of?5packet?$AA@ 004272c4     server.obj
+ 0002:000012d4       ??_C@_0DI@OCJOGBJA@status?3?5?$CFd?5remote?5clients?0?5?$CF?41f?5@ 004272d4     server.obj
+ 0002:0000130c       ??_C@_09IPAEKDAI@localhost?$AA@ 0042730c     server.obj
+ 0002:00001318       ??_C@_0BH@HNHNFPPG@client?5connected?5?$CI?$CFs?$CJ?6?$AA@ 00427318     server.obj
+ 0002:00001330       ??_C@_0BK@ILDBAMNM@disconnected?5client?5?$CI?$CFs?$CJ?6?$AA@ 00427330     server.obj
+ 0002:0000134c       ??_C@_0BD@FOLBHBIP@maxclients?5reached?$AA@ 0042734c     server.obj
+ 0002:00001360       ??_C@_05IDKHKMLA@local?$AA@ 00427360     server.obj
+ 0002:00001368       ??_C@_0CF@GNPMMMNH@wouter?4fov120?4com?1cube?1masterser@ 00427368     server.obj
+ 0002:00001390       ??_C@_0CA@JDMEILNB@WARNING?3?5server?5ip?5not?5resolved?$AA@ 00427390     server.obj
+ 0002:000013b0       ??_C@_0BO@EAKOHJIH@could?5not?5create?5server?5host?6?$AA@ 004273b0     server.obj
+ 0002:000013d0       ??_C@_0EC@JPKNINDD@dedicated?5server?5started?0?5waitin@ 004273d0     server.obj
+ 0002:00001414       ??_C@_0BN@JGFALBKL@?$CFs?5?$FLdifferent?5cube?5protocol?$FN?$AA@ 00427414     serverbrowser.obj
+ 0002:00001434       ??_C@_09DJENBFJK@?$FLunknown?$FN?$AA@ 00427434     serverbrowser.obj
+ 0002:00001440       ??_C@_0BE@OHLFDCCK@?$CFd?7?$CFd?7?$CFs?0?5?$CFs?3?5?$CFs?5?$CFs?$AA@ 00427440     serverbrowser.obj
+ 0002:00001454       ??_C@_0CB@HBBDBHPC@?$CFs?5?$FLwaiting?5for?5server?5response?$FN@ 00427454     serverbrowser.obj
+ 0002:00001478       ??_C@_0BD@OMOOOBFO@?$CFs?5?$FLunknown?5host?$FN?7?$AA@ 00427478     serverbrowser.obj
+ 0002:0000148c       ??_C@_06CMOBCCHI@?$DMhtml?$DO?$AA@ 0042748c     serverbrowser.obj
+ 0002:00001494       ??_C@_06HCPDOBJE@?$DMHTML?$DO?$AA@ 00427494     serverbrowser.obj
+ 0002:0000149c       ??_C@_0BL@EGCJNHEC@master?5server?5not?5replying?$AA@ 0042749c     serverbrowser.obj
+ 0002:000014b8       ??_C@_09GMJEIMCB@addserver?$AA@ 004274b8     serverbrowser.obj
+ 0002:000014c4       ??_C@_0L@JCCDNGEN@servermenu?$AA@ 004274c4     serverbrowser.obj
+ 0002:000014d0       ??_C@_0BB@MIFKGAAB@updatefrommaster?$AA@ 004274d0     serverbrowser.obj
+ 0002:000014e4       ??_C@_01NOFIACDB@w?$AA@    004274e4     serverbrowser.obj
+ 0002:000014e8       ??_C@_0M@NILGCMNM@servers?4cfg?$AA@ 004274e8     serverbrowser.obj
+ 0002:000014f4       ??_C@_0DH@LBOGOOCC@?1?1?5servers?5connected?5to?5are?5adde@ 004274f4     serverbrowser.obj
+ 0002:0000152c       ??_C@_0O@FLPNAGFJ@addserver?5?$CFs?6?$AA@ 0042752c     serverbrowser.obj
+ 0002:0000153c       ??_C@_0BC@OLOAMEH@looking?5up?5?$CFs?4?4?4?6?$AA@ 0042753c     serverms.obj
+ 0002:00001550       ??_C@_0BH@NLFHHPMF@could?5not?5open?5socket?6?$AA@ 00427550     serverms.obj
+ 0002:00001568       ??_C@_0BD@MLHLLNB@could?5not?5connect?6?$AA@ 00427568     serverms.obj
+ 0002:0000157c       ??_C@_0DG@FAGPNFDM@GET?5?$CFs?5HTTP?11?40?6Host?3?5?$CFs?6Referer@ 0042757c     serverms.obj
+ 0002:000015b4       ??_C@_0BK@NNFCCKPL@sending?5request?5to?5?$CFs?4?4?4?6?$AA@ 004275b4     serverms.obj
+ 0002:000015d0       ??_C@_03EDDBLLFO@?6?$AN?6?$AA@ 004275d0     serverms.obj
+ 0002:000015d4       ??_C@_02PHMGELLB@?6?6?$AA@ 004275d4     serverms.obj
+ 0002:000015d8       ??_C@_0BJ@FDJLCHNG@?$CFsregister?4do?$DPaction?$DNadd?$AA@ 004275d8     serverms.obj
+ 0002:000015f4       ??_C@_0M@KCGFODEC@Cube?5Server?$AA@ 004275f4     serverms.obj
+ 0002:00001600       ??_C@_0L@LMFKPNAE@cubeserver?$AA@ 00427600     serverms.obj
+ 0002:0000160c       ??_C@_0BI@BAPJJCHE@masterserver?5reply?3?5?$CFs?6?$AA@ 0042760c     serverms.obj
+ 0002:00001624       ??_C@_0BI@JNENKJCG@?$CFsretrieve?4do?$DPitem?$DNlist?$AA@ 00427624     serverms.obj
+ 0002:0000163c       ??_C@_07FECINNIN@?$FLFULL?$FN?5?$AA@ 0042763c     serverms.obj
+ 0002:00001644       ??_C@_01KMDKNFGN@?1?$AA@   00427644     serverms.obj
+ 0002:00001648       ??_C@_0CF@PONAMABO@could?5not?5create?5server?5info?5soc@ 00427648     serverms.obj
+ 0002:00001670       ??_C@_0BD@HNNLPKLF@tactics?5clan?5arena?$AA@ 00427670     serverutil.obj
+ 0002:00001684       ??_C@_0O@MIEGMPKN@tactics?5arena?$AA@ 00427684     serverutil.obj
+ 0002:00001694       ??_C@_0BB@CDPCCMIN@insta?5clan?5arena?$AA@ 00427694     serverutil.obj
+ 0002:000016a8       ??_C@_0M@CCFDDDGB@insta?5arena?$AA@ 004276a8     serverutil.obj
+ 0002:000016b4       ??_C@_0BA@KDAPCABB@efficiency?5team?$AA@ 004276b4     serverutil.obj
+ 0002:000016c4       ??_C@_0L@CCDNIEMB@efficiency?$AA@ 004276c4     serverutil.obj
+ 0002:000016d0       ??_C@_0O@KOBPMHEA@instagib?5team?$AA@ 004276d0     serverutil.obj
+ 0002:000016e0       ??_C@_08HDAKIDIL@instagib?$AA@ 004276e0     serverutil.obj
+ 0002:000016ec       ??_C@_08IKNDEHFO@teamplay?$AA@ 004276ec     serverutil.obj
+ 0002:000016f8       ??_C@_08EMDHOGLC@ffa?1duel?$AA@ 004276f8     serverutil.obj
+ 0002:00001704       ??_C@_08OKMMABNO@coopedit?$AA@ 00427704     serverutil.obj
+ 0002:00001710       ??_C@_0M@DJOGCPJO@ffa?1default?$AA@ 00427710     serverutil.obj
+ 0002:0000171c       ??_C@_04CJJBLLDG@DMSP?$AA@ 0042771c     serverutil.obj
+ 0002:00001724       ??_C@_02NEPPOLFA@SP?$AA@   00427724     serverutil.obj
+ 0002:00001728       ??_C@_07CIFAGBMG@unknown?$AA@ 00427728     serverutil.obj
+ 0002:00001730       ??_C@_0CD@FLEKKJFF@Error?5dispatching?5incoming?5packe@ 00427730     protocol.obj
+ 0002:00001754       ??_C@_0BP@CMCNMCMC@Error?5sending?5outgoing?5packets?$AA@ 00427754     protocol.obj
+ 0002:00001774       ??_C@_0CB@HOPEGIPO@Error?5receiving?5incoming?5packets@ 00427774     protocol.obj
+ 0002:00001798       ??_C@_04DEGHGFDH@sely?$AA@ 00427798     editing.obj
+ 0002:000017a0       ??_C@_04CNHMFEHG@selx?$AA@ 004277a0     editing.obj
+ 0002:000017a8       ??_C@_07HAFNFNOB@editing?$AA@ 004277a8     editing.obj
+ 0002:000017b0       ??_C@_0L@IAAMPIAA@edittoggle?$AA@ 004277b0     editing.obj
+ 0002:000017bc       ??_C@_0CL@CKAECIKB@this?5function?5is?5only?5allowed?5in@ 004277bc     editing.obj
+ 0002:000017e8       ??_C@_0N@PBGNHGLN@no?5selection?$AA@ 004277e8     editing.obj
+ 0002:000017f8       ??_C@_07NKIBNNFJ@flrceil?$AA@ 004277f8     editing.obj
+ 0002:00001800       ??_C@_08MECIEJGG@undomegs?$AA@ 00427800     editing.obj
+ 0002:0000180c       ??_C@_0BF@DGCBDMDA@nothing?5more?5to?5undo?$AA@ 0042780c     editing.obj
+ 0002:00001824       ??_C@_0BB@INIJAAO@nothing?5to?5paste?$AA@ 00427824     editing.obj
+ 0002:00001838       ??_C@_0BE@KFGLHOJH@incorrect?5selection?$AA@ 00427838     editing.obj
+ 0002:0000184c       ??_C@_0L@GKAJBIHB@editheight?$AA@ 0042784c     editing.obj
+ 0002:00001858       ??_C@_0CM@HLADCLA@corner?5selection?5must?5be?5power?5o@ 00427858     editing.obj
+ 0002:00001884       ??_C@_0M@IDAFPHFA@heightfield?$AA@ 00427884     editing.obj
+ 0002:00001890       ??_C@_05OPIONHBI@solid?$AA@ 00427890     editing.obj
+ 0002:00001898       ??_C@_06CKJBOKFG@corner?$AA@ 00427898     editing.obj
+ 0002:000018a0       ??_C@_08EJAAMNGG@equalize?$AA@ 004278a0     editing.obj
+ 0002:000018ac       ??_C@_0L@GEONJGBK@fullbright?$AA@ 004278ac     editing.obj
+ 0002:000018b8       ??_C@_06LGNCCACI@select?$AA@ 004278b8     editing.obj
+ 0002:000018c0       ??_C@_07NJHCJFJO@edittag?$AA@ 004278c0     editing.obj
+ 0002:000018c8       ??_C@_07CLEHDIEJ@replace?$AA@ 004278c8     editing.obj
+ 0002:000018d0       ??_C@_0L@IIEKFBII@archvertex?$AA@ 004278d0     editing.obj
+ 0002:000018dc       ??_C@_04LLAMKKNO@arch?$AA@ 004278dc     editing.obj
+ 0002:000018e4       ??_C@_05LAHHKLJI@slope?$AA@ 004278e4     editing.obj
+ 0002:000018ec       ??_C@_06HBHCKCDA@vdelta?$AA@ 004278ec     editing.obj
+ 0002:000018f4       ??_C@_04HOKNPDPJ@undo?$AA@ 004278f4     editing.obj
+ 0002:000018fc       ??_C@_04COAGEIMF@copy?$AA@ 004278fc     editing.obj
+ 0002:00001904       ??_C@_05NDLFFNHM@paste?$AA@ 00427904     editing.obj
+ 0002:0000190c       ??_C@_07BDCBDDNM@edittex?$AA@ 0042790c     editing.obj
+ 0002:00001914       ??_C@_06KPDDOIOG@newent?$AA@ 00427914     editing.obj
+ 0002:0000191c       ??_C@_06JIFICDNB@perlin?$AA@ 0042791c     editing.obj
+ 0002:00001924       ??_C@_0BB@MKGBKILG@level_trigger_?$CFd?$AA@ 00427924     world.obj
+ 0002:00001938       ??_C@_0BB@GLIPKCJB@no?5more?5entities?$AA@ 00427938     world.obj
+ 0002:0000194c       ??_C@_0BC@DGENABJJ@?$CFs?5entity?5deleted?$AA@ 0042794c     world.obj
+ 0002:00001960       ??_C@_0BJ@IDBMAGIP@unknown?5entity?5type?5?$CC?$CFs?$CC?$AA@ 00427960     world.obj
+ 0002:0000197c       ??_C@_09LCBDINLK@clearents?$AA@ 0042797c     world.obj
+ 0002:00001988       ??_C@_0M@ODDGMPIH@scalelights?$AA@ 00427988     world.obj
+ 0002:00001994       ??_C@_04CEENDHAF@CUBE?$AA@ 00427994     world.obj
+ 0002:0000199c       ??_C@_0BI@DJPFJNDC@Untitled?5Map?5by?5Unknown?$AA@ 0042799c     world.obj
+ 0002:000019b4       ??_C@_0N@PMBFAJG@base?1unnamed?$AA@ 004279b4     world.obj
+ 0002:000019c4       ??_C@_0N@FHFBOJBF@fullbright?51?$AA@ 004279c4     world.obj
+ 0002:000019d4       ??_C@_0L@MNHMBLFM@mapenlarge?$AA@ 004279d4     world.obj
+ 0002:000019e0       ??_C@_06FLHECDA@newmap?$AA@ 004279e0     world.obj
+ 0002:000019e8       ??_C@_06BDEIOILB@recalc?$AA@ 004279e8     world.obj
+ 0002:000019f0       ??_C@_06BMHDBBDL@delent?$AA@ 004279f0     world.obj
+ 0002:000019f8       ??_C@_0M@JMDAEMLI@entproperty?$AA@ 004279f8     world.obj
+ 0002:00001a04       ??_C@_02CFKBDFGI@?1?2?$AA@ 00427a04     worldio.obj
+ 0002:00001a08       ??_C@_04BHIIPFEC@base?$AA@ 00427a08     worldio.obj
+ 0002:00001a10       ??_C@_0BD@MOOJBCGG@packages?1?$CFs?1?$CFs?4cgz?$AA@ 00427a10     worldio.obj
+ 0002:00001a24       ??_C@_0BG@LCJGLGDE@packages?1?$CFs?1?$CFs_?$CFd?4BAK?$AA@ 00427a24     worldio.obj
+ 0002:00001a3c       ??_C@_0BI@DECNJLBC@packages?1?$CFs?1package?4cfg?$AA@ 00427a3c     worldio.obj
+ 0002:00001a54       ??_C@_0BD@DAEHBEEN@packages?1?$CFs?1?$CFs?4cfg?$AA@ 00427a54     worldio.obj
+ 0002:00001a68       ??_C@_02GMLFBBN@wb?$AA@    00427a68     worldio.obj
+ 0002:00001a6c       ??_C@_0BK@MMNKLJGP@could?5not?5write?5map?5to?5?$CFs?$AA@ 00427a6c     worldio.obj
+ 0002:00001a88       ??_C@_0BI@PEIMBANL@wrote?5map?5?$CFs?5as?5file?5?$CFs?$AA@ 00427a88     worldio.obj
+ 0002:00001aa0       ??_C@_0BG@IENFPLMB@could?5not?5read?5map?5?$CFs?$AA@ 00427aa0     worldio.obj
+ 0002:00001ab8       ??_C@_03GNIECKDC@wb9?$AA@  00427ab8     worldio.obj
+ 0002:00001abc       ??_C@_0BC@GPFGLKNK@wrote?5map?5file?5?$CFs?$AA@ 00427abc     worldio.obj
+ 0002:00001ad0       ??_C@_03FKFKNKAA@rb9?$AA@  00427ad0     worldio.obj
+ 0002:00001ad4       ??_C@_0CH@FDNECKOJ@while?5reading?5map?3?5header?5malfor@ 00427ad4     worldio.obj
+ 0002:00001afc       ??_C@_0CK@BHPKAIHE@this?5map?5requires?5a?5newer?5versio@ 00427afc     worldio.obj
+ 0002:00001b28       ??_C@_0BB@IDGIDGOK@illegal?5map?5size?$AA@ 00427b28     worldio.obj
+ 0002:00001b3c       ??_C@_07JEMIPMLL@?$CFd?5?$EA?5?$CFd?$AA@ 00427b3c     worldio.obj
+ 0002:00001b44       ??_C@_0CH@JAGAMOFA@while?5reading?5map?3?5type?5out?5of?5r@ 00427b44     worldio.obj
+ 0002:00001b6c       ??_C@_0BO@ENGPGFAH@read?5map?5?$CFs?5?$CI?$CFd?5milliseconds?$CJ?$AA@ 00427b6c     worldio.obj
+ 0002:00001b8c       ??_C@_0BO@JFIDHGKH@data?1default_map_settings?4cfg?$AA@ 00427b8c     worldio.obj
+ 0002:00001bac       ??_C@_07LGAMBAGK@savemap?$AA@ 00427bac     worldio.obj
+ 0002:00001bb4       ??_C@_0L@EJJGIJDP@lightscale?$AA@ 00427bb4     worldlight.obj
+ 0002:00001bc0       ??_C@_08DAJNLFDH@dynlight?$AA@ 00427bc0     worldlight.obj
+ 0002:00001bcc       __real@3f000000            00427bcc      CIL library: CIL module
+ 0002:00001bcc       ?fhalf@?1??fast_f2nat@@YAHM@Z@4MB 00427bcc     worldlight.obj
+ 0002:00001bd0       ??_C@_0M@MGONDCGE@toggleocull?$AA@ 00427bd0     worldocull.obj
+ 0002:00001bdc       ??_C@_0L@OOIBIHEG@teleporter?$AA@ 00427bdc     entities.obj
+ 0002:00001be8       ??_C@_04OJAKJOIH@quad?$AA@ 00427be8     entities.obj
+ 0002:00001bf0       ??_C@_08OPAPHBEI@y_armour?$AA@ 00427bf0     entities.obj
+ 0002:00001bfc       ??_C@_08ILANOIKL@g_armour?$AA@ 00427bfc     entities.obj
+ 0002:00001c08       ??_C@_05GOMCJNDP@boost?$AA@ 00427c08     entities.obj
+ 0002:00001c10       ??_C@_07FHPKGMLA@rrounds?$AA@ 00427c10     entities.obj
+ 0002:00001c18       ??_C@_06FBJJEBFB@carrot?$AA@ 00427c18     entities.obj
+ 0002:00001c20       ??_C@_07DAEDNGNJ@switch2?$AA@ 00427c20     entities.obj
+ 0002:00001c28       ??_C@_07BLGOIFBK@switch1?$AA@ 00427c28     entities.obj
+ 0002:00001c30       ??_C@_0BC@KOGJFBDM@you?5got?5the?5quad?$CB?$AA@ 00427c30     entities.obj
+ 0002:00001c44       ??_C@_0CD@NCENENAK@no?5teleport?5destination?5for?5tag?5@ 00427c44     entities.obj
+ 0002:00001c68       ??_C@_0BE@PPEDDOEK@quad?5damage?5is?5over?$AA@ 00427c68     entities.obj
+ 0002:00001c7c       ??_C@_0P@PFGLBFNK@monster?1goblin?$AA@ 00427c7c     monster.obj
+ 0002:00001c8c       ??_C@_08DCFBAJBE@a?5goblin?$AA@ 00427c8c     monster.obj
+ 0002:00001c98       ??_C@_0P@OIKJIKPH@monster?1knight?$AA@ 00427c98     monster.obj
+ 0002:00001ca8       ??_C@_08CPJDJGDJ@a?5knight?$AA@ 00427ca8     monster.obj
+ 0002:00001cb4       ??_C@_0BA@CDELIPLN@monster?1hellpig?$AA@ 00427cb4     monster.obj
+ 0002:00001cc4       ??_C@_09FPFAFKBG@a?5hellpig?$AA@ 00427cc4     monster.obj
+ 0002:00001cd0       ??_C@_0O@ICGIONEG@monster?1bauul?$AA@ 00427cd0     monster.obj
+ 0002:00001ce0       ??_C@_05GIMAHAEO@bauul?$AA@ 00427ce0     monster.obj
+ 0002:00001ce8       ??_C@_0O@MNBDLPNN@monster?1slith?$AA@ 00427ce8     monster.obj
+ 0002:00001cf8       ??_C@_07CAKHMFKG@a?5slith?$AA@ 00427cf8     monster.obj
+ 0002:00001d00       ??_C@_0M@MAGEGAJO@monster?1rat?$AA@ 00427d00     monster.obj
+ 0002:00001d0c       ??_C@_0M@IECCFDFG@ratamahatta?$AA@ 00427d0c     monster.obj
+ 0002:00001d18       ??_C@_0O@KNDPHKNJ@monster?1rhino?$AA@ 00427d18     monster.obj
+ 0002:00001d28       ??_C@_07EAILAAKC@a?5rhino?$AA@ 00427d28     monster.obj
+ 0002:00001d30       ??_C@_07KINFLOMH@an?5ogre?$AA@ 00427d30     monster.obj
+ 0002:00001d38       ??_C@_05ODMCMJAJ@skill?$AA@ 00427d38     monster.obj
+ 0002:00001d40       ??_C@_0BA@IPHAGMEM@skill?5is?5now?5?$CFd?$AA@ 00427d40     monster.obj
+ 0002:00001d50       ??_C@_0CG@FODOFOEK@warning?3?5unknown?5monster?5in?5spaw@ 00427d50     monster.obj
+ 0002:00001d78       ??_C@_0BN@HNAEMCEP@only?5?$CFd?5monster?$CIs?$CJ?5remaining?$AA@ 00427d78     monster.obj
+ 0002:00001d98       ??_C@_0BK@LCAOIHAJ@you?5have?5cleared?5the?5map?$CB?$AA@ 00427d98     monster.obj
+ 0002:00001db4       ??_C@_0BG@DGBLHDIF@you?5reached?5the?5exit?$CB?$AA@ 00427db4     monster.obj
+ 0002:00001dcc       ??_C@_0BO@JCCCAHDD@score?3?5?$CFd?5kills?5in?5?$CFd?5seconds?$AA@ 00427dcc     monster.obj
+ 0002:00001dec       ??_C@_0BI@DEHBDJN@The?5invasion?5has?5begun?$CB?$AA@ 00427dec     monster.obj
+ 0002:00001e04       ??_C@_07HDFBBPBE@maxroll?$AA@ 00427e04     physics.obj
+ 0002:00001e0c       ??_C@_0BO@LMIJHHDO@savegame?5file?5corrupt?5?$CIshort?$CJ?$AA@ 00427e0c     savegamedemo.obj
+ 0002:00001e2c       ??_C@_0BD@GHONOCMO@could?5not?5write?5?$CFs?$AA@ 00427e2c     savegamedemo.obj
+ 0002:00001e40       ??_C@_08NGAKLFLP@CUBESAVE?$AA@ 00427e40     savegamedemo.obj
+ 0002:00001e4c       ??_C@_0BP@PGMLNOML@can?5only?5save?5classic?5sp?5games?$AA@ 00427e4c     savegamedemo.obj
+ 0002:00001e6c       ??_C@_0BC@DBNKEKPD@savegames?1?$CFs?4csgz?$AA@ 00427e6c     savegamedemo.obj
+ 0002:00001e80       ??_C@_08EFHIFJEG@wrote?5?$CFs?$AA@ 00427e80     savegamedemo.obj
+ 0002:00001e8c       ??_C@_0BC@NKBHMGME@could?5not?5open?5?$CFs?$AA@ 00427e8c     savegamedemo.obj
+ 0002:00001ea0       ??_C@_0EN@OGLIEJOI@aborting?3?5savegame?1demo?5from?5a?5d@ 00427ea0     savegamedemo.obj
+ 0002:00001ef0       ??_C@_0ED@LCADJEJG@loadgame?5incomplete?3?5savegame?5fr@ 00427ef0     savegamedemo.obj
+ 0002:00001f34       ??_C@_0BC@MOOFFJDA@savegame?5restored?$AA@ 00427f34     savegamedemo.obj
+ 0002:00001f48       ??_C@_0CB@EIEJOMP@cannot?5record?5singleplayer?5games@ 00427f48     savegamedemo.obj
+ 0002:00001f6c       ??_C@_0O@DOCAHAGE@demos?1?$CFs?4cdgz?$AA@ 00427f6c     savegamedemo.obj
+ 0002:00001f7c       ??_C@_0BN@FLILCNCJ@started?5recording?5demo?5to?5?$CFs?$AA@ 00427f7c     savegamedemo.obj
+ 0002:00001f9c       ??_C@_0BP@HAKBJGAF@demo?5stopped?5?$CI?$CFd?5msec?5elapsed?$CJ?$AA@ 00427f9c     savegamedemo.obj
+ 0002:00001fbc       ??_C@_0BC@ODABIACD@demoplaybackspeed?$AA@ 00427fbc     savegamedemo.obj
+ 0002:00001fd0       ??_C@_0BB@FBNFFHCC@now?5playing?5demo?$AA@ 00427fd0     savegamedemo.obj
+ 0002:00001fe4       ??_C@_0O@INIMKDDD@demodelaymsec?$AA@ 00427fe4     savegamedemo.obj
+ 0002:00001ff4       ??_C@_0CJ@KPBGGECM@error?3?5huge?5packet?5during?5demo?5p@ 00427ff4     savegamedemo.obj
+ 0002:00002020       ??_C@_0N@KJFHCMDD@demo?5stopped?$AA@ 00428020     savegamedemo.obj
+ 0002:00002030       ??_C@_06KKGOIHDP@record?$AA@ 00428030     savegamedemo.obj
+ 0002:00002038       ??_C@_04PLPNPBEF@demo?$AA@ 00428038     savegamedemo.obj
+ 0002:00002040       ??_C@_04PEGFANN@stop?$AA@  00428040     savegamedemo.obj
+ 0002:00002048       ??_C@_08OLBFDDDG@savegame?$AA@ 00428048     savegamedemo.obj
+ 0002:00002054       ??_C@_08OEMDNNEB@loadgame?$AA@ 00428054     savegamedemo.obj
+ 0002:00002060       ??_C@_04NHHDMLCI@bite?$AA@ 00428060     weapon.obj
+ 0002:00002068       ??_C@_09COENHBFK@slimeball?$AA@ 00428068     weapon.obj
+ 0002:00002074       ??_C@_07FPPDPBDD@iceball?$AA@ 00428074     weapon.obj
+ 0002:0000207c       ??_C@_08DCAIFFKA@fireball?$AA@ 0042807c     weapon.obj
+ 0002:00002088       ??_C@_05NLPPOCND@rifle?$AA@ 00428088     weapon.obj
+ 0002:00002090       ??_C@_0P@DBMKEOAJ@rocketlauncher?$AA@ 00428090     weapon.obj
+ 0002:000020a0       ??_C@_08FEJLBOPJ@chaingun?$AA@ 004280a0     weapon.obj
+ 0002:000020ac       ??_C@_07PKBOGMMP@shotgun?$AA@ 004280ac     weapon.obj
+ 0002:000020b4       ??_C@_04HEGFFIHN@fist?$AA@ 004280b4     weapon.obj
+ 0002:000020bc       ??_C@_06GEPNGEJI@weapon?$AA@ 004280bc     weapon.obj
+ 0002:000020c4       ??_C@_0CJ@BELNJKOL@cannot?5redefine?5builtin?5?$CFs?5with?5@ 004280c4     command.obj
+ 0002:000020f0       ??_C@_05NKHOCLEE@alias?$AA@ 004280f0     command.obj
+ 0002:000020f8       ??_C@_0N@MLMDLNLH@missing?5?$CC?$CFc?$CC?$AA@ 004280f8     command.obj
+ 0002:00002108       ??_C@_03MEPGMKBP@?5?7?$AN?$AA@ 00428108     command.obj
+ 0002:0000210c       ??_C@_02NCJKDDL@?6?$AA?$AA@ 0042810c     command.obj
+ 0002:00002110       ??_C@_04HNCBCJIN@?$CC?$AN?6?$AA?$AA@ 00428110     command.obj
+ 0002:00002118       ??_C@_06DNLGOLGF@?$DL?5?7?$AN?6?$AA?$AA@ 00428118     command.obj
+ 0002:00002120       ??_C@_0BJ@BKLIPAHN@unknown?5alias?5lookup?3?5?$CFs?$AA@ 00428120     command.obj
+ 0002:0000213c       ??_C@_03PEAGNKJF@?$DL?6?$AA?$AA@ 0042813c     command.obj
+ 0002:00002140       ??_C@_0BE@CNMPJHMN@unknown?5command?3?5?$CFs?$AA@ 00428140     command.obj
+ 0002:00002154       ??_C@_01CLKCMJKC@?5?$AA@   00428154     command.obj
+ 0002:00002158       ??_C@_07DHPDHKIF@?$CFs?5?$DN?5?$CFd?$AA@ 00428158     command.obj
+ 0002:00002160       ??_C@_0BG@BAIIJJPI@variable?5is?5read?9only?$AA@ 00428160     command.obj
+ 0002:00002178       ??_C@_0BN@PCLEJOAB@valid?5range?5for?5?$CFs?5is?5?$CFd?4?4?$CFd?$AA@ 00428178     command.obj
+ 0002:00002198       ??_C@_05JHGBNEBO@arg?$CFd?$AA@ 00428198     command.obj
+ 0002:000021a0       ??_C@_0BE@GEOPOPEN@could?5not?5read?5?$CC?$CFs?$CC?$AA@ 004281a0     command.obj
+ 0002:000021b4       ??_C@_0L@MFNMKHHD@config?4cfg?$AA@ 004281b4     command.obj
+ 0002:000021c0       ??_C@_0MF@JIBCNEAF@?1?1?5automatically?5written?5on?5exit@ 004281c0     command.obj
+ 0002:00002288       ??_C@_01EEMJAFIK@?6?$AA@   00428288     command.obj
+ 0002:0000228c       ??_C@_06JBLMLCKL@?$CFs?5?$CFd?6?$AA@ 0042828c     command.obj
+ 0002:00002294       ??_C@_08NBICMEHC@nextmap_?$AA@ 00428294     command.obj
+ 0002:000022a0       ??_C@_0BB@CEIMGEFP@alias?5?$CC?$CFs?$CC?5?$FL?$CFs?$FN?6?$AA@ 004282a0     command.obj
+ 0002:000022b4       ??_C@_08PDHLHPGD@writecfg?$AA@ 004282b4     command.obj
+ 0002:000022c0       ??_C@_01KBJDNOO@i?$AA@     004282c0     command.obj
+ 0002:000022c4       ??_C@_01LKDEMHDF@s?$AA@    004282c4     command.obj
+ 0002:000022c8       ??_C@_02DIPDGAAN@?5?$AA?$AA@ 004282c8     command.obj
+ 0002:000022cc       ??_C@_04GKOOIABA@loop?$AA@ 004282cc     command.obj
+ 0002:000022d4       ??_C@_05OODBEKIG@while?$AA@ 004282d4     command.obj
+ 0002:000022dc       ??_C@_02HEBPBKGD@if?$AA@   004282dc     command.obj
+ 0002:000022e0       ??_C@_09HMIAIJHM@onrelease?$AA@ 004282e0     command.obj
+ 0002:000022ec       ??_C@_04MGEIEJAD@exec?$AA@ 004282ec     command.obj
+ 0002:000022f4       ??_C@_06CMLIEHFC@concat?$AA@ 004282f4     command.obj
+ 0002:000022fc       ??_C@_0L@HEEGNNCI@concatword?$AA@ 004282fc     command.obj
+ 0002:00002308       ??_C@_02CPIDLAI@at?$AA@    00428308     command.obj
+ 0002:0000230c       ??_C@_07EGMBKCGN@listlen?$AA@ 0042830c     command.obj
+ 0002:00002314       ??_C@_01MIFGBAGJ@?$CL?$AA@ 00428314     command.obj
+ 0002:00002318       ??_C@_01NBENCBCI@?$CK?$AA@ 00428318     command.obj
+ 0002:0000231c       ??_C@_01JOAMLHOP@?9?$AA@   0042831c     command.obj
+ 0002:00002320       ??_C@_03FEJMGOGI@div?$AA@  00428320     command.obj
+ 0002:00002324       ??_C@_03FFONCNID@mod?$AA@  00428324     command.obj
+ 0002:00002328       ??_C@_01NEMOKFLO@?$DN?$AA@ 00428328     command.obj
+ 0002:0000232c       ??_C@_01MNNFJEPP@?$DM?$AA@ 0042832c     command.obj
+ 0002:00002330       ??_C@_01PPODPGHN@?$DO?$AA@ 00428330     command.obj
+ 0002:00002334       ??_C@_06OKBBGPCH@strcmp?$AA@ 00428334     command.obj
+ 0002:0000233c       ??_C@_03FMFFAAHN@rnd?$AA@  0042833c     command.obj
+ 0002:00002340       ??_C@_06MJCPFLFL@millis?$AA@ 00428340     command.obj
+ 0002:00002348       ??_C@_07LBNFLGKM@conskip?$AA@ 00428348     console.obj
+ 0002:00002350       ??_C@_06OILPNDPG@keymap?$AA@ 00428350     console.obj
+ 0002:00002358       ??_C@_0BB@LFGCCFPC@unknown?5key?5?$CC?$CFs?$CC?$AA@ 00428358     console.obj
+ 0002:0000236c       ??_C@_04NPNJNMMP@bind?$AA@ 0042836c     console.obj
+ 0002:00002374       ??_C@_0L@KHINIMOC@saycommand?$AA@ 00428374     console.obj
+ 0002:00002380       ??_C@_06HMPDFCD@mapmsg?$AA@ 00428380     console.obj
+ 0002:00002388       ??_C@_07MMNEDCBK@history?$AA@ 00428388     console.obj
+ 0002:00002390       ??_C@_0BA@EKPJKACF@bind?5?$CC?$CFs?$CC?5?$FL?$CFs?$FN?6?$AA@ 00428390     console.obj
+ 0002:000023a0       ??_C@_0BB@MABFMEB@cube?5fatal?5error?$AA@ 004283a0     main.obj
+ 0002:000023b4       ??_C@_0L@NOOIGKG@?$CFs?$CFs?5?$CI?$CFs?$CJ?6?$AA@ 004283b4     main.obj
+ 0002:000023c0       ??_C@_0P@IEOPPKNF@out?5of?5memory?$CB?$AA@ 004283c0     main.obj
+ 0002:000023d0       ??_C@_0BO@BGNLPGMF@screenshots?1screenshot_?$CFd?4bmp?$AA@ 004283d0     main.obj
+ 0002:000023f0       ??_C@_0L@CMHOPIGK@screenshot?$AA@ 004283f0     main.obj
+ 0002:000023fc       ??_C@_04KNNLNNGO@quit?$AA@ 004283fc     main.obj
+ 0002:00002404       ??_C@_09KGHBOGOF@minmillis?$AA@ 00428404     main.obj
+ 0002:00002410       ??_C@_03CBKHGIMG@sdl?$AA@  00428410     main.obj
+ 0002:00002414       ??_C@_08NDPNIJOB@init?3?5?$CFs?$AA@ 00428414     main.obj
+ 0002:00002420       ??_C@_0BL@COFEKIFK@unknown?5commandline?5option?$AA@ 00428420     main.obj
+ 0002:0000243c       ??_C@_0BN@JEEHKGLF@unknown?5commandline?5argument?$AA@ 0042843c     main.obj
+ 0002:0000245c       ??_C@_0BJ@GJADECML@Unable?5to?5initialize?5SDL?$AA@ 0042845c     main.obj
+ 0002:00002478       ??_C@_03NBFOK@net?$AA@     00428478     main.obj
+ 0002:0000247c       ??_C@_0CE@BHIAAJAA@Unable?5to?5initialise?5network?5mod@ 0042847c     main.obj
+ 0002:000024a0       ??_C@_05MCBCHHEJ@world?$AA@ 004284a0     main.obj
+ 0002:000024a8       ??_C@_0L@NAFLPIII@video?3?5sdl?$AA@ 004284a8     main.obj
+ 0002:000024b4       ??_C@_0BP@JFNKGDKC@Unable?5to?5initialize?5SDL?5Video?$AA@ 004284b4     main.obj
+ 0002:000024d4       ??_C@_0M@PNPLDAFC@video?3?5mode?$AA@ 004284d4     main.obj
+ 0002:000024e0       ??_C@_0BP@HKFPLANC@Unable?5to?5create?5OpenGL?5screen?$AA@ 004284e0     main.obj
+ 0002:00002500       ??_C@_0M@JHKDHNPN@video?3?5misc?$AA@ 00428500     main.obj
+ 0002:0000250c       ??_C@_0M@LCIMGMFN@cube?5engine?$AA@ 0042850c     main.obj
+ 0002:00002518       ??_C@_02IEGONPOD@gl?$AA@   00428518     main.obj
+ 0002:0000251c       ??_C@_07LEBBIKKN@basetex?$AA@ 0042851c     main.obj
+ 0002:00002524       ??_C@_0BC@DCALDMKA@data?1newchars?4png?$AA@ 00428524     main.obj
+ 0002:00002538       ??_C@_0BF@NBINLKMJ@data?1martin?1base?4png?$AA@ 00428538     main.obj
+ 0002:00002550       ??_C@_0BG@DCGCLGFN@data?1martin?1ball1?4png?$AA@ 00428550     main.obj
+ 0002:00002568       ??_C@_0BG@MAANNMBD@data?1martin?1smoke?4png?$AA@ 00428568     main.obj
+ 0002:00002580       ??_C@_0BG@LEPGMEPD@data?1martin?1ball2?4png?$AA@ 00428580     main.obj
+ 0002:00002598       ??_C@_0BG@HPKKBHFG@data?1martin?1ball3?4png?$AA@ 00428598     main.obj
+ 0002:000025b0       ??_C@_0BD@FIBOEGJJ@data?1explosion?4jpg?$AA@ 004285b0     main.obj
+ 0002:000025c4       ??_C@_0P@CPDIJEOG@data?1items?4png?$AA@ 004285c4     main.obj
+ 0002:000025d4       ??_C@_0BD@CHDLEBKN@data?1crosshair?4png?$AA@ 004285d4     main.obj
+ 0002:000025e8       ??_C@_0FD@EEPDPFNE@could?5not?5find?5core?5textures?5?$CIhi@ 004285e8     main.obj
+ 0002:0000263c       ??_C@_05MHNANJII@sound?$AA@ 0042863c     main.obj
+ 0002:00002644       ??_C@_03JBMODCPM@cfg?$AA@  00428644     main.obj
+ 0002:00002648       ??_C@_0BI@FJCGOFCF@frags?7pj?7ping?7team?7name?$AA@ 00428648     main.obj
+ 0002:00002660       ??_C@_0BA@LOAICFHL@ping?7plr?7server?$AA@ 00428660     main.obj
+ 0002:00002670       ??_C@_0BA@LEAEHOL@data?1keymap?4cfg?$AA@ 00428670     main.obj
+ 0002:00002680       ??_C@_0P@NIIMAFJI@data?1menus?4cfg?$AA@ 00428680     main.obj
+ 0002:00002690       ??_C@_0BB@IOMBHBOF@data?1prefabs?4cfg?$AA@ 00428690     main.obj
+ 0002:000026a4       ??_C@_0BA@LEEAFLFC@data?1sounds?4cfg?$AA@ 004286a4     main.obj
+ 0002:000026b4       ??_C@_0BC@IKDMLNLE@data?1defaults?4cfg?$AA@ 004286b4     main.obj
+ 0002:000026c8       ??_C@_0N@PODLOBMM@autoexec?4cfg?$AA@ 004286c8     main.obj
+ 0002:000026d8       ??_C@_0N@EJBMDGIO@localconnect?$AA@ 004286d8     main.obj
+ 0002:000026e8       ??_C@_05PKHONKFK@metl3?$AA@ 004286e8     main.obj
+ 0002:000026f0       ??_C@_08NHHIMCGJ@mainloop?$AA@ 004286f0     main.obj
+ 0002:000026fc       ??_C@_0M@CJJAFCCA@?$FL?5?$CFs?5menu?5?$FN?$AA@ 004286fc     menus.obj
+ 0002:00002708       ??_C@_08ECIHLGGB@menuitem?$AA@ 00428708     menus.obj
+ 0002:00002714       ??_C@_08MFFEHBGO@showmenu?$AA@ 00428714     menus.obj
+ 0002:00002720       ??_C@_07ONEOBDHA@newmenu?$AA@ 00428720     menus.obj
+ 0002:00002728       ??_C@_08PNJILBIL@soundvol?$AA@ 00428728     sound.obj
+ 0002:00002734       ??_C@_08LIBENMBJ@musicvol?$AA@ 00428734     sound.obj
+ 0002:00002740       ??_C@_0P@ONIMEKAC@soundbufferlen?$AA@ 00428740     sound.obj
+ 0002:00002750       ??_C@_0CC@DLAGIPBA@sound?5init?5failed?5?$CISDL_mixer?$CJ?3?5?$CF@ 00428750     sound.obj
+ 0002:00002774       ??_C@_09NGBIKGEG@packages?1?$AA@ 00428774     sound.obj
+ 0002:00002780       ??_C@_05LLDJOKNO@music?$AA@ 00428780     sound.obj
+ 0002:00002788       ??_C@_0O@JLOKPBOM@registersound?$AA@ 00428788     sound.obj
+ 0002:00002798       ??_C@_06BDDNELGJ@stereo?$AA@ 00428798     sound.obj
+ 0002:000027a0       ??_C@_0BH@NBCKLDLH@unregistered?5sound?3?5?$CFd?$AA@ 004287a0     sound.obj
+ 0002:000027b8       ??_C@_0BH@FEHBGDLC@packages?1sounds?1?$CFs?4wav?$AA@ 004287b8     sound.obj
+ 0002:000027d0       ??_C@_0BK@LIJKEEBL@failed?5to?5load?5sample?3?5?$CFs?$AA@ 004287d0     sound.obj
+ 0002:000027f0       __real@c066800000000000    004287f0      CIL library: CIL module
+ 0002:000027f8       __real@4076800000000000    004287f8      CIL library: CIL module
+ 0002:00002800       __real@4066800000000000    00428800      CIL library: CIL module
+ 0002:00002808       __real@3ff0000000000000    00428808      CIL library: CIL module
+ 0002:00002810       __real@4008000000000000    00428810      CIL library: CIL module
+ 0002:00002818       __real@4000000000000000    00428818      CIL library: CIL module
+ 0002:00002820       __real@3fe0000000000000    00428820      CIL library: CIL module
+ 0002:00002828       __real@4059000000000000    00428828      CIL library: CIL module
+ 0002:00002830       __real@400921fa00000000    00428830      CIL library: CIL module
+ 0002:00002838       __real@3fb70a3d70a3d70a    00428838      CIL library: CIL module
+ 0002:00002840       __real@3f800000            00428840      CIL library: CIL module
+ 0002:00002848       __real@3e10000000000000    00428848      CIL library: CIL module
+ 0002:00002850       __real@3fd0000000000000    00428850      CIL library: CIL module
+ 0002:00002858       __real@43b40000            00428858      CIL library: CIL module
+ 0002:0000285c       __real@c2b40000            0042885c      CIL library: CIL module
+ 0002:00002860       __real@42b40000            00428860      CIL library: CIL module
+ 0002:00002868       __real@3f60000000000000    00428868      CIL library: CIL module
+ 0002:00002870       __real@3fc99999a0000000    00428870      CIL library: CIL module
+ 0002:00002878       __real@bff0000000000000    00428878      CIL library: CIL module
+ 0002:00002880       __real@0000000000000000    00428880      CIL library: CIL module
+ 0002:00002888       __real@3fd5555560000000    00428888      CIL library: CIL module
+ 0002:00002890       __real@4068000000000000    00428890      CIL library: CIL module
+ 0002:00002898       __real@4070000000000000    00428898      CIL library: CIL module
+ 0002:000028a0       __real@3b800000            004288a0      CIL library: CIL module
+ 0002:000028a4       __real@3f4ccccd            004288a4      CIL library: CIL module
+ 0002:000028a8       __real@4014000000000000    004288a8      CIL library: CIL module
+ 0002:000028b0       __real@3fc999999999999a    004288b0      CIL library: CIL module
+ 0002:000028b8       __real@3fe6666666666666    004288b8      CIL library: CIL module
+ 0002:000028c0       __real@3fd3333333333333    004288c0      CIL library: CIL module
+ 0002:000028c8       __real@3fd999999999999a    004288c8      CIL library: CIL module
+ 0002:000028d0       __real@3fb99999a0000000    004288d0      CIL library: CIL module
+ 0002:000028d8       __real@3f847ae140000000    004288d8      CIL library: CIL module
+ 0002:000028e0       __real@400921fb60000000    004288e0      CIL library: CIL module
+ 0002:000028e8       __real@3fb0000000000000    004288e8      CIL library: CIL module
+ 0002:000028f0       __real@3fc0000000000000    004288f0      CIL library: CIL module
+ 0002:000028f8       __real@4040800000000000    004288f8      CIL library: CIL module
+ 0002:00002900       __real@40d3880000000000    00428900      CIL library: CIL module
+ 0002:00002908       __real@3f99999a            00428908      CIL library: CIL module
+ 0002:0000290c       __real@3dcccccd            0042890c      CIL library: CIL module
+ 0002:00002910       __real@3da3d70a            00428910      CIL library: CIL module
+ 0002:00002914       __real@3e4ccccd            00428914      CIL library: CIL module
+ 0002:00002918       __real@3e19999a            00428918      CIL library: CIL module
+ 0002:0000291c       __real@3d75c28f            0042891c      CIL library: CIL module
+ 0002:00002920       __real@3e99999a            00428920      CIL library: CIL module
+ 0002:00002924       __real@3f19999a            00428924      CIL library: CIL module
+ 0002:00002928       __real@3f333333            00428928      CIL library: CIL module
+ 0002:00002930       __real@4030000000000000    00428930      CIL library: CIL module
+ 0002:00002938       __real@3fa99999a0000000    00428938      CIL library: CIL module
+ 0002:00002940       __real@3fe41b2f80000000    00428940      CIL library: CIL module
+ 0002:00002948       __real@408c200000000000    00428948      CIL library: CIL module
+ 0002:00002950       __real@3fa47ae140000000    00428950      CIL library: CIL module
+ 0002:00002958       __real@408f400000000000    00428958      CIL library: CIL module
+ 0002:00002960       __real@406ffcccc0000000    00428960      CIL library: CIL module
+ 0002:00002968       __real@3f91df46a0000000    00428968      CIL library: CIL module
+ 0002:00002970       __real@406fe00000000000    00428970      CIL library: CIL module
+ 0002:00002978       __real@c008000000000000    00428978      CIL library: CIL module
+ 0002:00002980       __real@41200000            00428980      CIL library: CIL module
+ 0002:00002988       __real@3feccccccccccccd    00428988      CIL library: CIL module
+ 0002:00002990       __real@4050000000000000    00428990      CIL library: CIL module
+ 0002:00002998       __real@4018000000000000    00428998      CIL library: CIL module
+ 0002:000029a0       __real@4010000000000000    004289a0      CIL library: CIL module
+ 0002:000029a8       __real@4020000000000000    004289a8      CIL library: CIL module
+ 0002:000029b0       __real@40800000            004289b0      CIL library: CIL module
+ 0002:000029b8       __real@401c000000000000    004289b8      CIL library: CIL module
+ 0002:000029c0       __real@bf800000            004289c0      CIL library: CIL module
+ 0002:000029c4       __real@40400000            004289c4      CIL library: CIL module
+ 0002:000029c8       __real@42340000            004289c8      CIL library: CIL module
+ 0002:000029d0       __real@401921fb60000000    004289d0      CIL library: CIL module
+ 0002:000029d8       __real@4056800000000000    004289d8      CIL library: CIL module
+ 0002:000029e0       __real@3ff8000000000000    004289e0      CIL library: CIL module
+ 0002:000029e8       __real@40b0000000000000    004289e8      CIL library: CIL module
+ 0002:000029f0       __real@3ff99999a0000000    004289f0      CIL library: CIL module
+ 0002:000029f8       __real@bf000000            004289f8      CIL library: CIL module
+ 0002:000029fc       __real@404ccccd            004289fc      CIL library: CIL module
+ 0002:00002a00       __real@3f8ccccd            00428a00      CIL library: CIL module
+ 0002:00002a04       __real@41b00000            00428a04      CIL library: CIL module
+ 0002:00002a08       __real@43870000            00428a08      CIL library: CIL module
+ 0002:00002a10       __real@3f50624de0000000    00428a10      CIL library: CIL module
+ 0002:00002a18       __real@bfb999999999999a    00428a18      CIL library: CIL module
+ 0002:00002a20       __real@bfa147ae            00428a20      CIL library: CIL module
+ 0002:00002a28       __real@bf847ae147ae147b    00428a28      CIL library: CIL module
+ 0002:00002a30       __real@c08f400000000000    00428a30      CIL library: CIL module
+ 0002:00002a38       __real@4012000000000000    00428a38      CIL library: CIL module
+ 0002:00002a40       __real@c3000000            00428a40      CIL library: CIL module
+ 0002:00002a44       __real@42fe0000            00428a44      CIL library: CIL module
+ 0002:00002a48       __real@3fe99999a0000000    00428a48      CIL library: CIL module
+ 0002:00002a50       __real@4039000000000000    00428a50      CIL library: CIL module
+ 0002:00002a58       __real@4049000000000000    00428a58      CIL library: CIL module
+ 0002:00002a60       __real@3c23d70a            00428a60      CIL library: CIL module
+ 0002:00002a68       __real@4024000000000000    00428a68      CIL library: CIL module
+ 0002:00002a70       __real@47c34f80            00428a70      CIL library: CIL module
+ 0002:00002a74       __real@42700000            00428a74      CIL library: CIL module
+ 0002:00002a78       __real@3ffe666660000000    00428a78      CIL library: CIL module
+ 0002:00002a80       __real@3ff33333            00428a80      CIL library: CIL module
+ 0002:00002a84       __real@43000000            00428a84      CIL library: CIL module
+ 0002:00002a88       __real@40ac200000000000    00428a88      CIL library: CIL module
+ 0002:00002a90       __real@40a5180000000000    00428a90      CIL library: CIL module
+ 0002:00002a98       __real@40a9000000000000    00428a98      CIL library: CIL module
+ 0002:00002aa0       __real@4092c00000000000    00428aa0      CIL library: CIL module
+ 0002:00002aa8       __real@3fecccccc0000000    00428aa8      CIL library: CIL module
+ 0002:00002ab0       __real@40a2c00000000000    00428ab0      CIL library: CIL module
+ 0002:00002ab8       __real@409c200000000000    00428ab8      CIL library: CIL module
+ 0002:00002ac0       __real@c0400000            00428ac0      CIL library: CIL module
+ 0002:00002ac4       __real@3e800000            00428ac4      CIL library: CIL module
+ 0002:00002ac8       __real@403e000000000000    00428ac8      CIL library: CIL module
+ 0002:00002ad0       __real@3ff3333340000000    00428ad0      CIL library: CIL module
+ 0002:00002ad8       __real@4033000000000000    00428ad8      CIL library: CIL module
+ 0002:00002ae0       __real@402e000000000000    00428ae0      CIL library: CIL module
+ 0002:00002ae8       __real@3fd9999a            00428ae8      CIL library: CIL module
+ 0002:00002af0       __real@4034000000000000    00428af0      CIL library: CIL module
+ 0002:00002af8       __real@40c00000            00428af8      CIL library: CIL module
+ 0002:00002afc       __real@41f00000            00428afc      CIL library: CIL module
+ 0002:00002b00       __real@41a00000            00428b00      CIL library: CIL module
+ 0002:00002b04       __real@447a0000            00428b04      CIL library: CIL module
+ 0002:00002b08       __real@44fa0000            00428b08      CIL library: CIL module
+ 0002:00002b10       __real@3f50000000000000    00428b10      CIL library: CIL module
+ 0002:00002b18       __real@404e000000000000    00428b18      CIL library: CIL module
+ 0002:00002b20       __real@3fe6666660000000    00428b20      CIL library: CIL module
+ 0002:00002b28       __real@3fe3333340000000    00428b28      CIL library: CIL module
+ 0002:00002b30       __real@3f70000000000000    00428b30      CIL library: CIL module
+ 0002:00002b38       __real@3fb999999999999a    00428b38      CIL library: CIL module
+ 0002:00002b40       __real@4040000000000000    00428b40      CIL library: CIL module
+ 0002:00002b48       __real@4089000000000000    00428b48      CIL library: CIL module
+ 0002:00002b50       __real@3fc00000            00428b50      CIL library: CIL module
+ 0002:00002b58       __real@4072c00000000000    00428b58      CIL library: CIL module
+ 0002:00002b60       __real@4202a05f20000000    00428b60      CIL library: CIL module
+ 0002:00002b68       __real@3ff8ccccc0000000    00428b68      CIL library: CIL module
+ 0002:00002b70       __real@42c80000            00428b70      CIL library: CIL module
+ 0002:00002b78       __real@3fc3333340000000    00428b78      CIL library: CIL module
+ 0002:00002b80       __real@4032000000000000    00428b80      CIL library: CIL module
+ 0002:00002b88       __real@3fd3333340000000    00428b88      CIL library: CIL module
+ 0002:00002b90       __real@40af400000000000    00428b90      CIL library: CIL module
+ 0002:00002b98       __real@41800000            00428b98      CIL library: CIL module
+ 0002:00002b9c       __real@be19999a            00428b9c      CIL library: CIL module
+ 0002:00002ba0       __real@420c0000            00428ba0      CIL library: CIL module
+ 0002:00002ba4       __real@44834000            00428ba4      CIL library: CIL module
+ 0002:00002ba8       __real@42a00000            00428ba8      CIL library: CIL module
+ 0002:00002bb0       __real@bf847ae140000000    00428bb0      CIL library: CIL module
+ 0002:00002bb8       __real@42800000            00428bb8      CIL library: CIL module
+ 0002:00002bbc       __real@43070000            00428bbc      CIL library: CIL module
+ 0002:00002bc0       __real@41000000            00428bc0      CIL library: CIL module
+ 0002:00002bc8       __real@4004000000000000    00428bc8      CIL library: CIL module
+ 0002:00002bd0       __real@4052c00000000000    00428bd0      CIL library: CIL module
+ 0002:00002bd8       __real@4049800000000000    00428bd8      CIL library: CIL module
+ 0002:00002c18       ___rtc_iaa                 00428c18     msvcrt:_initsect_.obj
+ 0002:00002c1c       ___rtc_izz                 00428c1c     msvcrt:_initsect_.obj
+ 0002:00002c20       ___rtc_taa                 00428c20     msvcrt:_initsect_.obj
+ 0002:00002c24       ___rtc_tzz                 00428c24     msvcrt:_initsect_.obj
+ 0002:00002c84       __IMPORT_DESCRIPTOR_zlib   00428c84     zlib:zlib.dll
+ 0002:00002c98       __IMPORT_DESCRIPTOR_OPENGL32 00428c98     opengl32:OPENGL32.dll
+ 0002:00002cac       __IMPORT_DESCRIPTOR_GLU32  00428cac     glu32:GLU32.dll
+ 0002:00002cc0       __IMPORT_DESCRIPTOR_MSVCR100 00428cc0     msvcrt:MSVCR100.dll
+ 0002:00002cd4       __IMPORT_DESCRIPTOR_SDL    00428cd4     SDL:SDL.dll
+ 0002:00002ce8       __IMPORT_DESCRIPTOR_SDL_image 00428ce8     SDL_image:SDL_image.dll
+ 0002:00002cfc       __IMPORT_DESCRIPTOR_WS2_32 00428cfc     ws2_32:WS2_32.dll
+ 0002:00002d10       __IMPORT_DESCRIPTOR_WINMM  00428d10     winmm:WINMM.dll
+ 0002:00002d24       __IMPORT_DESCRIPTOR_SDL_mixer 00428d24     SDL_mixer:SDL_mixer.dll
+ 0002:00002d38       __IMPORT_DESCRIPTOR_KERNEL32 00428d38     kernel32:KERNEL32.dll
+ 0002:00002d4c       __IMPORT_DESCRIPTOR_USER32 00428d4c     user32:USER32.dll
+ 0002:00002d60       __NULL_IMPORT_DESCRIPTOR   00428d60     zlib:zlib.dll
+ 0003:00000000       ___native_dllmain_reason   0042a000     msvcrt:natstart.obj
+ 0003:00000004       ___native_vcclrit_reason   0042a004     msvcrt:natstart.obj
+ 0003:00000008       ___globallocalestatus      0042a008     msvcrt:xthdloc.obj
+ 0003:0000000c       ___defaultmatherr          0042a00c     msvcrt:merr.obj
+ 0003:00000010       ___security_cookie         0042a010     msvcrt:gs_cookie.obj
+ 0003:00000014       ___security_cookie_complement 0042a014     msvcrt:gs_cookie.obj
+ 0003:00000018       ??_C@_0BA@FFEO@WinMain?$CI?$CJ?5error?$AA@ 0042a018     SDLmain:SDL_win32_main.obj
+ 0003:00000028       ??_C@_07OEOL@?$CFs?3?5?$CFs?6?$AA@ 0042a028     SDLmain:SDL_win32_main.obj
+ 0003:00000030       ??_C@_0M@MMAJ@Fatal?5Error?$AA@ 0042a030     SDLmain:SDL_win32_main.obj
+ 0003:0000003c       ??_C@_0BJ@EJNJ@Out?5of?5memory?5?9?5aborting?$AA@ 0042a03c     SDLmain:SDL_win32_main.obj
+ 0003:00000058       ??_C@_02JKAF@rb?$AA@       0042a058     SDLmain:SDL_win32_main.obj
+ 0003:00000060       ?vmenu@@3HA                0042a060     menus.obj
+ 0003:00000064       ?scr_w@@3HA                0042a064     main.obj
+ 0003:00000068       ?scr_h@@3HA                0042a068     main.obj
+ 0003:0000006c       ?islittleendian@@3HA       0042a06c     main.obj
+ 0003:00000070       ?guns@@3PAUguninfo@@A      0042a070     weapon.obj
+ 0003:00000100       ?monstertypes@@3PAUmonstertype@@A 0042a100     monster.obj
+ 0003:00000200       ?entmdlnames@@3PAPADA      0042a200     entities.obj
+ 0003:00000228       ?itemstats@@3PAUitemstat@@A 0042a228     entities.obj
+ 0003:00000294       ?lod@@3HA                  0042a294     worldrender.obj
+ 0003:00000298       ?ocull@@3_NA               0042a298     worldocull.obj
+ 0003:00000299       ?notgotitems@@3_NA         0042a299     server.obj
+ 0003:0000029c       ?odist@@3MA                0042a29c     worldocull.obj
+ 0003:000002a0       ?curedittex@@3PAHA         0042a2a0     editing.obj
+ 0003:000002b8       ?modenames@@3PAPBDA        0042a2b8     serverutil.obj
+ 0003:000002f0       ?msgsizesl@@3PADA          0042a2f0     serverutil.obj
+ 0003:00000334       ?mssock@@3IA               0042a334     serverms.obj
+ 0003:00000338       ?masterserver@@3U_ENetAddress@@A 0042a338     serverms.obj
+ 0003:00000340       ?pongsock@@3IA             0042a340     serverms.obj
+ 0003:00000344       ?resolverlimit@@3HA        0042a344     serverbrowser.obj
+ 0003:00000348       ?pingsock@@3IA             0042a348     serverbrowser.obj
+ 0003:0000034c       ?maxclients@@3HA           0042a34c     server.obj
+ 0003:00000350       ?serverpassword@@3PADA     0042a350     server.obj
+ 0003:00000354       ?curtime@@3HA              0042a354     clientgame.obj
+ 0003:00000358       ?spawncycle@@3HA           0042a358     clientgame.obj
+ 0003:0000035c       ?fixspawn@@3HA             0042a35c     clientgame.obj
+ 0003:00000360       ?frame@@3PAHA              0042a360     clientextras.obj
+ 0003:000003b0       ?range@@3PAHA              0042a3b0     clientextras.obj
+ 0003:00000400       ?clientnum@@3HA            0042a400     client.obj
+ 0003:00000404       ?glmaxtexsize@@3HA         0042a404     rendergl.obj
+ 0003:00000408       ?char_coords@@3PAY03FA     0042a408     rendertext.obj
+ 0003:00000708       ?hudgunnames@@3PAPADA      0042a708     rendergl.obj
+ 0003:0000071c       ?cursordepth@@3MA          0042a71c     renderextras.obj
+ 0003:00000720       ?entnames@@3PAPADA         0042a720     renderextras.obj
+ 0003:0000077c       ?curmaxverts@@3HA          0042a77c     rendercubes.obj
+ 0003:000007b0       __dowildcard               0042a7b0     msvcrt:wildcard.obj
+ 0003:000007b4       __newmode                  0042a7b4     msvcrt:_newmode.obj
+ 0003:000007b8       __commode                  0042a7b8     msvcrt:xncommod.obj
+ 0003:000007bc       __fmode                    0042a7bc     msvcrt:xtxtmode.obj
+ 0003:00000cf8       ?wy2@@3HA                  0042acf8     rendercubes.obj
+ 0003:00000cfc       ?wx2@@3HA                  0042acfc     rendercubes.obj
+ 0003:00000d00       ?wy1@@3HA                  0042ad00     rendercubes.obj
+ 0003:00000d04       ?wx1@@3HA                  0042ad04     rendercubes.obj
+ 0003:00000d08       ?sdark@@3Usqr@@A           0042ad08     rendercubes.obj
+ 0003:00000d16       ?isdedicated@@3_NA         0042ad16     server.obj
+ 0003:00000d17       ?render_ceil@@3_NA         0042ad17     worldrender.obj
+ 0003:00000d18       ?sbright@@3Usqr@@A         0042ad18     rendercubes.obj
+ 0003:00000d26       ?render_floor@@3_NA        0042ad26     worldrender.obj
+ 0003:00000d28       ?firstindex@@3HA           0042ad28     rendercubes.obj
+ 0003:00000d2c       ?ol4b@@3HA                 0042ad2c     rendercubes.obj
+ 0003:00000d30       ?ol4g@@3HA                 0042ad30     rendercubes.obj
+ 0003:00000d34       ?ol4r@@3HA                 0042ad34     rendercubes.obj
+ 0003:00000d38       ?ol3b@@3HA                 0042ad38     rendercubes.obj
+ 0003:00000d3c       ?ol3g@@3HA                 0042ad3c     rendercubes.obj
+ 0003:00000d40       ?ol3r@@3HA                 0042ad40     rendercubes.obj
+ 0003:00000d44       ?ogltex@@3HA               0042ad44     rendercubes.obj
+ 0003:00000d48       ?ox@@3HA                   0042ad48     rendercubes.obj
+ 0003:00000d4c       ?oy@@3HA                   0042ad4c     rendercubes.obj
+ 0003:00000d50       ?oh@@3HA                   0042ad50     rendercubes.obj
+ 0003:00000d54       ?nquads@@3HA               0042ad54     rendercubes.obj
+ 0003:00000d58       ?curvert@@3HA              0042ad58     rendercubes.obj
+ 0003:00000d5c       ?worldpos@@3Uvec@@A        0042ad5c     renderextras.obj
+ 0003:00000d68       ?pm@@3PANA                 0042ad68     renderextras.obj
+ 0003:00000de8       ?mm@@3PANA                 0042ade8     renderextras.obj
+ 0003:00000e68       ?viewport@@3PAHA           0042ae68     renderextras.obj
+ 0003:00000e78       ?closeent@@3PADA           0042ae78     renderextras.obj
+ 0003:00000f7c       ?xtraverts@@3HA            0042af7c     rendergl.obj
+ 0003:00000f80       ?spheres@@3PAUsphere@@A    0042af80     renderextras.obj
+ 0003:000014f8       ?skyoglid@@3HA             0042b4f8     rendergl.obj
+ 0003:000014fc       ?up@@3Uvec@@A              0042b4fc     renderparticles.obj
+ 0003:00001508       ?mapname@@3PAY11BAE@DA     0042b508     rendergl.obj
+ 0003:00021d08       ?mapping@@3PAY01HA         0044bd08     rendergl.obj
+ 0003:00022508       ?texname@@3PAY0BAE@DA      0044c508     rendergl.obj
+ 0003:00061ca8       ?texy@@3PAHA               0048bca8     rendergl.obj
+ 0003:00062c48       ?texx@@3PAHA               0048cc48     rendergl.obj
+ 0003:00063be8       ?right@@3Uvec@@A           0048dbe8     renderparticles.obj
+ 0003:00063bf4       ?teamsused@@3HA            0048dbf4     clientextras.obj
+ 0003:00063bf8       ?particles@@3PAUparticle@@A 0048dbf8     renderparticles.obj
+ 0003:000ca498       ?clientpassword@@3PADA     004f4498     client.obj
+ 0003:000ca59c       ?resolvermutex@@3PAUSDL_mutex@@A 004f459c     serverbrowser.obj
+ 0003:000ca5a0       ?toservermap@@3PADA        004f45a0     client.obj
+ 0003:000ca6a4       ?resolversem@@3PAUSDL_semaphore@@A 004f46a4     serverbrowser.obj
+ 0003:000ca6a8       ?ctext@@3PADA              004f46a8     client.obj
+ 0003:000ca7ac       ?copysize@@3HA             004f47ac     serverutil.obj
+ 0003:000ca7b0       ?teamscores@@3PADA         004f47b0     clientextras.obj
+ 0003:000ca8b4       ?teamscore@@3PAHA          004f48b4     clientextras.obj
+ 0003:000ca8c4       ?teamname@@3PAPADA         004f48c4     clientextras.obj
+ 0003:000ca8d8       ?sleepcmd@@3PADA           004f48d8     clientgame.obj
+ 0003:000ca9dc       ?lasth@@3HA                004f49dc     editing.obj
+ 0003:000ca9e0       ?clientmap@@3PADA          004f49e0     clientgame.obj
+ 0003:000caae4       ?lasty@@3HA                004f4ae4     editing.obj
+ 0003:000caae8       ?smapname@@3PADA           004f4ae8     server.obj
+ 0003:000cabec       ?lastx@@3HA                004f4bec     editing.obj
+ 0003:000cabf0       ?masterrep@@3PAEA          004f4bf0     serverms.obj
+ 0003:000cbf78       ?masterb@@3UENetBuffer@@A  004f5f78     serverms.obj
+ 0003:000cbf80       ?masterbase@@3PADA         004f5f80     serverms.obj
+ 0003:000cc084       ?ch@@3HA                   004f6084     editing.obj
+ 0003:000cc088       ?serverdesc@@3PADA         004f6088     serverms.obj
+ 0003:000cc18c       ?cy@@3HA                   004f618c     editing.obj
+ 0003:000cc190       ?masterpath@@3PADA         004f6190     serverms.obj
+ 0003:000cc294       ?cx@@3HA                   004f6294     editing.obj
+ 0003:000cc298       ?copyname@@3PADA           004f6298     serverutil.obj
+ 0003:000cc39c       ?mipsize@@3HA              004f639c     world.obj
+ 0003:000cc3a0       ?archverts@@3PAY0DC@HA     004f63a0     editing.obj
+ 0003:000ceab0       ?rtex@@3Usqr@@A            004f8ab0     editing.obj
+ 0003:000ceac0       ?wmip@@3PAPAUsqr@@A        004f8ac0     world.obj
+ 0003:000ceb18       ?hdr@@3Uheader@@A          004f8b18     world.obj
+ 0003:000ceeec       ?cubicsize@@3HA            004f8eec     world.obj
+ 0003:000ceef0       ?ssize@@3HA                004f8ef0     world.obj
+ 0003:000ceef4       ?sfactor@@3HA              004f8ef4     world.obj
+ 0003:000ceef8       ?mcfname@@3PADA            004f8ef8     worldio.obj
+ 0003:000ceffc       ?stats@@3PAHA              004f8ffc     worldrender.obj
+ 0003:000cf028       ?pcfname@@3PADA            004f9028     worldio.obj
+ 0003:000cf12c       ?min_lod@@3HA              004f912c     worldrender.obj
+ 0003:000cf130       ?bakname@@3PADA            004f9130     worldio.obj
+ 0003:000cf234       ?lodright@@3HA             004f9234     worldrender.obj
+ 0003:000cf238       ?cgzname@@3PADA            004f9238     worldio.obj
+ 0003:000cf33c       ?lodleft@@3HA              004f933c     worldrender.obj
+ 0003:000cf340       ?rdist@@3PAMA              004f9340     worldocull.obj
+ 0003:000cfb40       ?lodbot@@3HA               004f9b40     worldrender.obj
+ 0003:000cfb44       ?lodtop@@3HA               004f9b44     worldrender.obj
+ 0003:000cfb48       ?mtimestart@@3HA           004f9b48     monster.obj
+ 0003:000cfb4c       ?monstertotal@@3HA         004f9b4c     monster.obj
+ 0003:000cfb50       ?numkilled@@3HA            004f9b50     monster.obj
+ 0003:000cfb54       ?spawnremain@@3HA          004f9b54     monster.obj
+ 0003:000cfb58       ?nextmonster@@3HA          004f9b58     monster.obj
+ 0003:000cfb5c       ?dorig@@3Uvec@@A           004f9b5c     savegamedemo.obj
+ 0003:000cfb68       ?bdamage@@3HA              004f9b68     savegamedemo.obj
+ 0003:000cfb6c       ?ddamage@@3HA              004f9b6c     savegamedemo.obj
+ 0003:000cfb70       ?projs@@3PAUprojectile@@A  004f9b70     weapon.obj
+ 0003:000d0b10       ?sg@@3PAUvec@@A            004fab10     weapon.obj
+ 0003:000d0c00       ?keyms@@3PAUkeym@@A        004fac00     console.obj
+ 0003:000d1800       ?commandbuf@@3PADA         004fb800     console.obj
+ 0003:000d1904       ___@@_PchSym_@00@UdUxfyvUexkkUivovzhvUkxsOlyq@ 004fb904     pch.obj
+ 0003:000d1908       ?soundlocs@@3PAUsoundloc@@A 004fb908     sound.obj
+ 0003:000d1b08       ?verts@@3PAUvertex@@A      004fbb08     rendercubes.obj
+ 0003:000d1b0c       ?floorstrip@@3_NA          004fbb0c     rendercubes.obj
+ 0003:000d1b0d       ?deltastrip@@3_NA          004fbb0d     rendercubes.obj
+ 0003:000d1b0e       ?showm@@3_NA               004fbb0e     rendercubes.obj
+ 0003:000d1b0f       ?sinit@@3_NA               004fbb0f     renderextras.obj
+ 0003:000d1b10       ?slist@@3PAUsphere@@A      004fbb10     renderextras.obj
+ 0003:000d1b14       ?sempty@@3PAUsphere@@A     004fbb14     renderextras.obj
+ 0003:000d1b18       ?dblend@@3HA               004fbb18     renderextras.obj
+ 0003:000d1b1c       ?hasoverbright@@3_NA       004fbb1c     rendergl.obj
+ 0003:000d1b1d       ?parinit@@3_NA             004fbb1d     renderparticles.obj
+ 0003:000d1b1e       ?c2sinit@@3_NA             004fbb1e     client.obj
+ 0003:000d1b1f       ?senditemstoserver@@3_NA   004fbb1f     client.obj
+ 0003:000d1b20       ?qsphere@@3PAVGLUquadric@@A 004fbb20     rendergl.obj
+ 0003:000d1b24       ?curtex@@3HA               004fbb24     rendergl.obj
+ 0003:000d1b28       ?curtexnum@@3HA            004fbb28     rendergl.obj
+ 0003:000d1b2c       ?mdllookup@@3PAU?$hashtable@PAUmd2@@@@A 004fbb2c     rendermd2.obj
+ 0003:000d1b30       ?modelnum@@3HA             004fbb30     rendermd2.obj
+ 0003:000d1b34       ?parlist@@3PAUparticle@@A  004fbb34     renderparticles.obj
+ 0003:000d1b38       ?parempty@@3PAUparticle@@A 004fbb38     renderparticles.obj
+ 0003:000d1b3c       ?clienthost@@3PAU_ENetHost@@A 004fbb3c     client.obj
+ 0003:000d1b40       ?connecting@@3HA           004fbb40     client.obj
+ 0003:000d1b44       ?connattempts@@3HA         004fbb44     client.obj
+ 0003:000d1b48       ?disconnecting@@3HA        004fbb48     client.obj
+ 0003:000d1b4c       ?lastupdate@@3HA           004fbb4c     client.obj
+ 0003:000d1b50       ?lastping@@3HA             004fbb50     client.obj
+ 0003:000d1b54       ?scoreson@@3_NA            004fbb54     clientextras.obj
+ 0003:000d1b55       ?intermission@@3_NA        004fbb55     clientgame.obj
+ 0003:000d1b56       ?mapreload@@3_NA           004fbb56     server.obj
+ 0003:000d1b57       ?editmode@@3_NA            004fbb57     editing.obj
+ 0003:000d1b58       ?nextmode@@3HA             004fbb58     clientgame.obj
+ 0003:000d1b5c       ?lastmillis@@3HA           004fbb5c     clientgame.obj
+ 0003:000d1b60       ?arenarespawnwait@@3HA     004fbb60     clientgame.obj
+ 0003:000d1b64       ?arenadetectwait@@3HA      004fbb64     clientgame.obj
+ 0003:000d1b68       ?sleepwait@@3HA            004fbb68     clientgame.obj
+ 0003:000d1b6c       ?mode@@3HA                 004fbb6c     server.obj
+ 0003:000d1b70       ?interm@@3HA               004fbb70     server.obj
+ 0003:000d1b74       ?minremain@@3HA            004fbb74     server.obj
+ 0003:000d1b78       ?mapend@@3HA               004fbb78     server.obj
+ 0003:000d1b7c       ?serverhost@@3PAU_ENetHost@@A 004fbb7c     server.obj
+ 0003:000d1b80       ?bsend@@3HA                004fbb80     server.obj
+ 0003:000d1b84       ?brec@@3HA                 004fbb84     server.obj
+ 0003:000d1b88       ?laststatus@@3HA           004fbb88     server.obj
+ 0003:000d1b8c       ?lastsec@@3HA              004fbb8c     server.obj
+ 0003:000d1b90       ?nonlocalclients@@3HA      004fbb90     server.obj
+ 0003:000d1b94       ?lastconnect@@3HA          004fbb94     server.obj
+ 0003:000d1b98       ?lastinfo@@3HA             004fbb98     serverbrowser.obj
+ 0003:000d1b9c       ?updmaster@@3HA            004fbb9c     serverms.obj
+ 0003:000d1ba0       ?copydata@@3PAEA           004fbba0     serverutil.obj
+ 0003:000d1ba8       ?selh@@3HA                 004fbba8     editing.obj
+ 0003:000d1bac       ?selset@@3_NA              004fbbac     editing.obj
+ 0003:000d1bad       ?dragging@@3_NA            004fbbad     editing.obj
+ 0003:000d1bae       ?archvinit@@3_NA           004fbbae     editing.obj
+ 0003:000d1baf       ?demorecording@@3_NA       004fbbaf     savegamedemo.obj
+ 0003:000d1bb0       ?lasttype@@3HA             004fbbb0     editing.obj
+ 0003:000d1bb4       ?lasttex@@3HA              004fbbb4     editing.obj
+ 0003:000d1bb8       ?copybuf@@3PAUblock@@A     004fbbb8     editing.obj
+ 0003:000d1bbc       ?world@@3PAUsqr@@A         004fbbbc     world.obj
+ 0003:000d1bc0       ?triggertime@@3HA          004fbbc0     entities.obj
+ 0003:000d1bc4       ?physicsfraction@@3HA      004fbbc4     physics.obj
+ 0003:000d1bc8       ?physicsrepeat@@3HA        004fbbc8     physics.obj
+ 0003:000d1bcc       ?f@@3PAXA                  004fbbcc     savegamedemo.obj
+ 0003:000d1bd0       ?demoplayback@@3_NA        004fbbd0     savegamedemo.obj
+ 0003:000d1bd1       ?demoloading@@3_NA         004fbbd1     savegamedemo.obj
+ 0003:000d1bd2       ?saycommandon@@3_NA        004fbbd2     console.obj
+ 0003:000d1bd3       ?nosound@@3_NA             004fbbd3     sound.obj
+ 0003:000d1bd4       ?democlientnum@@3HA        004fbbd4     savegamedemo.obj
+ 0003:000d1bd8       ?starttime@@3HA            004fbbd8     savegamedemo.obj
+ 0003:000d1bdc       ?playbacktime@@3HA         004fbbdc     savegamedemo.obj
+ 0003:000d1be0       ?idents@@3PAU?$hashtable@Uident@@@@A 004fbbe0     command.obj
+ 0003:000d1be4       ?completesize@@3HA         004fbbe4     command.obj
+ 0003:000d1be8       ?completeidx@@3HA          004fbbe8     command.obj
+ 0003:000d1bec       ?conskip@@3HA              004fbbec     console.obj
+ 0003:000d1bf0       ?numkm@@3HA                004fbbf0     console.obj
+ 0003:000d1bf4       ?histpos@@3HA              004fbbf4     console.obj
+ 0003:000d1bf8       ?framesinmap@@3HA          004fbbf8     main.obj
+ 0003:000d1bfc       ?mod@@3PAU_Mix_Music@@A    004fbbfc     sound.obj
+ 0003:000d1c00       ?stream@@3PAXA             004fbc00     sound.obj
+ 0003:000d1c04       ?soundsatonce@@3HA         004fbc04     sound.obj
+ 0003:000d1c08       ?lastsoundmillis@@3HA      004fbc08     sound.obj
+ 0003:000d1c10       ?lighterror@@3HA           004fbc10     rendercubes.obj
+ 0003:000d1c14       ?watersubdiv@@3HA          004fbc14     rendercubes.obj
+ 0003:000d1c20       ?crosshairsize@@3HA        004fbc20     renderextras.obj
+ 0003:000d1c24       ?hidestats@@3HA            004fbc24     renderextras.obj
+ 0003:000d1c28       ?crosshairfx@@3HA          004fbc28     renderextras.obj
+ 0003:000d1c30       ?strips@@3U?$vector@Ustrip@@@@A 004fbc30     rendergl.obj
+ 0003:000d1c44       ?fov@@3HA                  004fbc44     rendergl.obj
+ 0003:000d1c48       ?fog@@3HA                  004fbc48     rendergl.obj
+ 0003:000d1c4c       ?fogcolour@@3HA            004fbc4c     rendergl.obj
+ 0003:000d1c50       ?hudgun@@3HA               004fbc50     rendergl.obj
+ 0003:000d1c54       ?mapmodels@@3U?$vector@PAUmd2@@@@A 004fbc54     rendermd2.obj
+ 0003:000d1c68       ?maxparticles@@3HA         004fbc68     renderparticles.obj
+ 0003:000d1c6c       ?demotracking@@3HA         004fbc6c     renderparticles.obj
+ 0003:000d1c70       ?particlesize@@3HA         004fbc70     renderparticles.obj
+ 0003:000d1c8c       ?messages@@3U?$vector@U?$vector@H@@@@A 004fbc8c     client.obj
+ 0003:000d1c9c       ?scorelines@@3U?$vector@Usline@@@@A 004fbc9c     clientextras.obj
+ 0003:000d1cb0       ?gamemode@@3HA             004fbcb0     clientgame.obj
+ 0003:000d1cb4       ?player1@@3PAUdynent@@A    004fbcb4     clientgame.obj
+ 0003:000d1cb8       ?players@@3U?$vector@PAUdynent@@@@A 004fbcb8     clientgame.obj
+ 0003:000d1cc8       ?sensitivity@@3HA          004fbcc8     clientgame.obj
+ 0003:000d1ccc       ?sensitivityscale@@3HA     004fbccc     clientgame.obj
+ 0003:000d1cd0       ?invmouse@@3HA             004fbcd0     clientgame.obj
+ 0003:000d1cdc       ?clients@@3U?$vector@Uclient@@@@A 004fbcdc     server.obj
+ 0003:000d1cec       ?sents@@3U?$vector@Userver_entity@@@@A 004fbcec     server.obj
+ 0003:000d1cfc       ?servers@@3U?$vector@Userverinfo@@@@A 004fbcfc     serverbrowser.obj
+ 0003:000d1d0c       ?resolverresults@@3U?$vector@Uresolverresult@@@@A 004fbd0c     serverbrowser.obj
+ 0003:000d1d1c       ?resolverthreads@@3U?$vector@Uresolverthread@@@@A 004fbd1c     serverbrowser.obj
+ 0003:000d1d2c       ?resolverqueries@@3U?$vector@PAD@@A 004fbd2c     serverbrowser.obj
+ 0003:000d1d40       ?editing@@3HA              004fbd40     editing.obj
+ 0003:000d1d44       ?flrceil@@3HA              004fbd44     editing.obj
+ 0003:000d1d48       ?undos@@3U?$vector@PAUblock@@@@A 004fbd48     editing.obj
+ 0003:000d1d58       ?undomegs@@3HA             004fbd58     editing.obj
+ 0003:000d1d74       ?sel@@3Ublock@@A           004fbd74     editing.obj
+ 0003:000d1d90       ?lightscale@@3HA           004fbd90     worldlight.obj
+ 0003:000d1d94       ?dynlight@@3HA             004fbd94     worldlight.obj
+ 0003:000d1d98       ?dlights@@3U?$vector@PAUblock@@@@A 004fbd98     worldlight.obj
+ 0003:000d1dac       ?ents@@3U?$vector@Uentity@@@@A 004fbdac     entities.obj
+ 0003:000d1dbc       ?monsters@@3U?$vector@PAUdynent@@@@A 004fbdbc     monster.obj
+ 0003:000d1dd0       ?maxroll@@3HA              004fbdd0     physics.obj
+ 0003:000d1dd4       ?demodelaymsec@@3HA        004fbdd4     savegamedemo.obj
+ 0003:000d1dd8       ?demoplaybackspeed@@3HA    004fbdd8     savegamedemo.obj
+ 0003:000d1de0       ?playerhistory@@3U?$vector@PAUdynent@@@@A 004fbde0     savegamedemo.obj
+ 0003:000d1e08       ?conlines@@3U?$vector@Ucline@@@@A 004fbe08     console.obj
+ 0003:000d1e20       ?vhistory@@3U?$vector@PAD@@A 004fbe20     console.obj
+ 0003:000d1e38       ?minmillis@@3HA            004fbe38     main.obj
+ 0003:000d1e3c       ?menus@@3U?$vector@Ugmenu@@@@A 004fbe3c     menus.obj
+ 0003:000d1e4c       ?menustack@@3U?$vector@H@@A 004fbe4c     menus.obj
+ 0003:000d1e60       ?soundvol@@3HA             004fbe60     sound.obj
+ 0003:000d1e64       ?musicvol@@3HA             004fbe64     sound.obj
+ 0003:000d1e68       ?soundbufferlen@@3HA       004fbe68     sound.obj
+ 0003:000d1e6c       ?samples@@3U?$vector@PAUMix_Chunk@@@@A 004fbe6c     sound.obj
+ 0003:000d1e7c       ?snames@@3U?$vector@PAD@@A 004fbe7c     sound.obj
+ 0003:000d1e90       ?stereo@@3HA               004fbe90     sound.obj
+ 0003:000d1fac       ___sse2_available          004fbfac     <common>
+ 0003:000d1fb0       ___native_startup_state    004fbfb0     <common>
+ 0003:000d1fb4       ___native_startup_lock     004fbfb4     <common>
+ 0003:000d1fb8       __NoHeapEnableTerminationOnCorruption 004fbfb8     <common>
+ 0003:000d1fbc       ___dyn_tls_init_callback   004fbfbc     <common>
+ 0003:000d1fc0       ___onexitend               004fbfc0     <common>
+ 0003:000d1fc4       ___onexitbegin             004fbfc4     <common>
+
+ entry point at        0001:00001494
+
+ Static symbols
+
+ 0001:00001206       _pre_cpp_init              00402206 f   msvcrt:crtexe.obj
+ 0001:00001251       ___tmainCRTStartup         00402251 f   msvcrt:crtexe.obj
+ 0001:000013da       _pre_c_init                004023da f   msvcrt:crtexe.obj
+ 0001:00001a30       _ShowError                 00402a30 f   SDLmain:SDL_win32_main.obj
+ 0001:00001a60       _OutOfMemory               00402a60 f   SDLmain:SDL_win32_main.obj
+ 0001:00001a80       _cleanup_output            00402a80 f   SDLmain:SDL_win32_main.obj
+ 0001:00002b60       _time                      00403b60 f    CIL library: CIL module
+ 0001:00012360       _enet_protocol_handle_verify_connect 00413360 f    CIL library: CIL module
+ 0001:00012470       _enet_protocol_handle_throttle_configure 00413470 f    CIL library: CIL module
+ 0001:000124a0       _enet_protocol_handle_bandwidth_limit 004134a0 f    CIL library: CIL module
+ 0001:00012520       _enet_protocol_handle_ping 00413520 f    CIL library: CIL module
+ 0001:00012530       _enet_protocol_send_reliable_outgoing_commands 00413530 f    CIL library: CIL module
+ 0001:00012730       _enet_protocol_send_acknowledgements 00413730 f    CIL library: CIL module
+ 0001:00012870       _enet_protocol_send_unreliable_outgoing_commands 00413870 f    CIL library: CIL module
+ 0001:00012a80       _enet_protocol_handle_connect 00413a80 f    CIL library: CIL module
+ 0001:00012d60       _enet_protocol_remove_sent_reliable_command 00413d60 f    CIL library: CIL module
+ 0001:00012e10       _enet_protocol_remove_sent_unreliable_commands 00413e10 f    CIL library: CIL module
+ 0001:00012e70       _enet_protocol_handle_send_fragment 00413e70 f    CIL library: CIL module
+ 0001:00013040       _enet_protocol_handle_send_unreliable 00414040 f    CIL library: CIL module
+ 0001:00013080       _enet_protocol_handle_send_unsequenced 00414080 f    CIL library: CIL module
+ 0001:00013140       _enet_protocol_handle_send_reliable 00414140 f    CIL library: CIL module
+ 0001:00013180       _enet_protocol_check_timeouts 00414180 f    CIL library: CIL module
+ 0001:000132b0       _enet_protocol_handle_acknowledge 004142b0 f    CIL library: CIL module
+ 0001:00013440       _enet_protocol_handle_disconnect 00414440 f    CIL library: CIL module
+ 0001:00013470       _enet_protocol_dispatch_incoming_commands 00414470 f    CIL library: CIL module
+ 0001:00013560       _enet_protocol_send_outgoing_commands 00414560 f    CIL library: CIL module
+ 0001:000138b0       _enet_protocol_handle_incoming_commands 004148b0 f    CIL library: CIL module
+ 0001:00013be0       _enet_protocol_receive_incoming_commands 00414be0 f    CIL library: CIL module
+ 0001:00014360       _enet_peer_reset_incoming_commands 00415360 f    CIL library: CIL module
+ 0001:000143d0       _enet_peer_reset_outgoing_commands 004153d0 f    CIL library: CIL module
+ 0001:00016c70       _time                      00417c70 f    CIL library: CIL module
+ 0001:000212f0       ??__E__dummy_showmip@@YAXXZ 004222f0 f    CIL library: CIL module
+ 0001:00021310       ??__Elighterror@@YAXXZ     00422310 f    CIL library: CIL module
+ 0001:000213a0       ??__Ewatersubdiv@@YAXXZ    004223a0 f    CIL library: CIL module
+ 0001:00021430       ??__Ewaterlevel@@YAXXZ     00422430 f    CIL library: CIL module
+ 0001:000214c0       ??__E__dummy_loadsky@@YAXXZ 004224c0 f    CIL library: CIL module
+ 0001:000214e0       ??__Ecrosshairsize@@YAXXZ  004224e0 f    CIL library: CIL module
+ 0001:00021570       ??__Ehidestats@@YAXXZ      00422570 f    CIL library: CIL module
+ 0001:000215f0       ??__Ecrosshairfx@@YAXXZ    004225f0 f    CIL library: CIL module
+ 0001:00021680       ??__E__dummy_texturereset@@YAXXZ 00422680 f    CIL library: CIL module
+ 0001:000216a0       ??__E__dummy_texture@@YAXXZ 004226a0 f    CIL library: CIL module
+ 0001:000216c0       ??__Estrips@@YAXXZ         004226c0 f    CIL library: CIL module
+ 0001:000216e0       ??__Egamma@@YAXXZ          004226e0 f    CIL library: CIL module
+ 0001:00021770       ??__Efov@@YAXXZ            00422770 f    CIL library: CIL module
+ 0001:00021800       ??__Efog@@YAXXZ            00422800 f    CIL library: CIL module
+ 0001:00021890       ??__Efogcolour@@YAXXZ      00422890 f    CIL library: CIL module
+ 0001:00021920       ??__Ehudgun@@YAXXZ         00422920 f    CIL library: CIL module
+ 0001:000219b0       ??__Emapmodels@@YAXXZ      004229b0 f    CIL library: CIL module
+ 0001:000219d0       ??__E__dummy_mapmodel@@YAXXZ 004229d0 f    CIL library: CIL module
+ 0001:000219f0       ??__E__dummy_mapmodelreset@@YAXXZ 004229f0 f    CIL library: CIL module
+ 0001:00021a10       ??__Emaxparticles@@YAXXZ   00422a10 f    CIL library: CIL module
+ 0001:00021aa0       ??__Edemotracking@@YAXXZ   00422aa0 f    CIL library: CIL module
+ 0001:00021b20       ??__Eparticlesize@@YAXXZ   00422b20 f    CIL library: CIL module
+ 0001:00021bb0       ??__Erate@@YAXXZ           00422bb0 f    CIL library: CIL module
+ 0001:00021c40       ??__Ethrottle_interval@@YAXXZ 00422c40 f    CIL library: CIL module
+ 0001:00021cd0       ??__Ethrottle_accel@@YAXXZ 00422cd0 f    CIL library: CIL module
+ 0001:00021d60       ??__Ethrottle_decel@@YAXXZ 00422d60 f    CIL library: CIL module
+ 0001:00021df0       ??__E__dummy_newteam@@YAXXZ 00422df0 f    CIL library: CIL module
+ 0001:00021e10       ??__E__dummy_newname@@YAXXZ 00422e10 f    CIL library: CIL module
+ 0001:00021e30       ??__E__dummy_echo@@YAXXZ   00422e30 f    CIL library: CIL module
+ 0001:00021e50       ??__E__dummy_toserver@@YAXXZ 00422e50 f    CIL library: CIL module
+ 0001:00021e70       ??__E__dummy_connects@@YAXXZ 00422e70 f    CIL library: CIL module
+ 0001:00021e90       ??__E__dummy_trydisconnect@@YAXXZ 00422e90 f    CIL library: CIL module
+ 0001:00021eb0       ??__Emessages@@YAXXZ       00422eb0 f    CIL library: CIL module
+ 0001:00021ed0       ??__E__dummy_password@@YAXXZ 00422ed0 f    CIL library: CIL module
+ 0001:00021ef0       ??__Escorelines@@YAXXZ     00422ef0 f    CIL library: CIL module
+ 0001:00021f30       ??__E__dummy_sendmap@@YAXXZ 00422f30 f    CIL library: CIL module
+ 0001:00021f50       ??__E__dummy_getmap@@YAXXZ 00422f50 f    CIL library: CIL module
+ 0001:00021f70       ??__Egamemode@@YAXXZ       00422f70 f    CIL library: CIL module
+ 0001:00021ff0       ??__E__dummy_mode@@YAXXZ   00422ff0 f    CIL library: CIL module
+ 0001:00022010       ??__Eplayer1@@YAXXZ        00423010 f    CIL library: CIL module
+ 0001:00022020       ??__Eplayers@@YAXXZ        00423020 f    CIL library: CIL module
+ 0001:00022040       ??__Esensitivity@@YAXXZ    00423040 f    CIL library: CIL module
+ 0001:000220d0       ??__Esensitivityscale@@YAXXZ 004230d0 f    CIL library: CIL module
+ 0001:00022160       ??__Einvmouse@@YAXXZ       00423160 f    CIL library: CIL module
+ 0001:000221e0       ??__E__dummy_sleepf@@YAXXZ 004231e0 f    CIL library: CIL module
+ 0001:00022200       ??__E__dummy_backward@@YAXXZ 00423200 f    CIL library: CIL module
+ 0001:00022220       ??__E__dummy_forward@@YAXXZ 00423220 f    CIL library: CIL module
+ 0001:00022240       ??__E__dummy_left@@YAXXZ   00423240 f    CIL library: CIL module
+ 0001:00022260       ??__E__dummy_right@@YAXXZ  00423260 f    CIL library: CIL module
+ 0001:00022280       ??__E__dummy_jumpn@@YAXXZ  00423280 f    CIL library: CIL module
+ 0001:000222a0       ??__E__dummy_attack@@YAXXZ 004232a0 f    CIL library: CIL module
+ 0001:000222c0       ??__E__dummy_showscores@@YAXXZ 004232c0 f    CIL library: CIL module
+ 0001:000222e0       ??__E__dummy_changemap@@YAXXZ 004232e0 f    CIL library: CIL module
+ 0001:00022300       ??__Eclients@@YAXXZ        00423300 f    CIL library: CIL module
+ 0001:00022340       ??__Esents@@YAXXZ          00423340 f    CIL library: CIL module
+ 0001:00022360       ??__Eresolverthreads@@YAXXZ 00423360 f    CIL library: CIL module
+ 0001:00022380       ??__Eresolverqueries@@YAXXZ 00423380 f    CIL library: CIL module
+ 0001:000223a0       ??__Eresolverresults@@YAXXZ 004233a0 f    CIL library: CIL module
+ 0001:000223c0       ??__Eservers@@YAXXZ        004233c0 f    CIL library: CIL module
+ 0001:00022400       ??__E__dummy_addserver@@YAXXZ 00423400 f    CIL library: CIL module
+ 0001:00022420       ??__E__dummy_servermenu@@YAXXZ 00423420 f    CIL library: CIL module
+ 0001:00022440       ??__E__dummy_updatefrommaster@@YAXXZ 00423440 f    CIL library: CIL module
+ 0001:00022460       ??__Esel@@YAXXZ            00423460 f    CIL library: CIL module
+ 0001:00022620       ??__Eediting@@YAXXZ        00423620 f    CIL library: CIL module
+ 0001:000226a0       ??__E__dummy_toggleedit@@YAXXZ 004236a0 f    CIL library: CIL module
+ 0001:000226c0       ??__Eflrceil@@YAXXZ        004236c0 f    CIL library: CIL module
+ 0001:00022740       ??__Eundos@@YAXXZ          00423740 f    CIL library: CIL module
+ 0001:00022760       ??__Eundomegs@@YAXXZ       00423760 f    CIL library: CIL module
+ 0001:000227f0       ??__E__dummy_editheight@@YAXXZ 004237f0 f    CIL library: CIL module
+ 0001:00022810       ??__E__dummy_heightfield@@YAXXZ 00423810 f    CIL library: CIL module
+ 0001:00022830       ??__E__dummy_solid@@YAXXZ  00423830 f    CIL library: CIL module
+ 0001:00022850       ??__E__dummy_corner@@YAXXZ 00423850 f    CIL library: CIL module
+ 0001:00022870       ??__E__dummy_equalize@@YAXXZ 00423870 f    CIL library: CIL module
+ 0001:00022890       ??__Efullbright@@YAXXZ     00423890 f    CIL library: CIL module
+ 0001:00022920       ??__E__dummy_selectpos@@YAXXZ 00423920 f    CIL library: CIL module
+ 0001:00022940       ??__E__dummy_edittag@@YAXXZ 00423940 f    CIL library: CIL module
+ 0001:00022960       ??__E__dummy_replace@@YAXXZ 00423960 f    CIL library: CIL module
+ 0001:00022980       ??__E__dummy_archvertex@@YAXXZ 00423980 f    CIL library: CIL module
+ 0001:000229a0       ??__E__dummy_arch@@YAXXZ   004239a0 f    CIL library: CIL module
+ 0001:000229c0       ??__E__dummy_slope@@YAXXZ  004239c0 f    CIL library: CIL module
+ 0001:000229e0       ??__E__dummy_setvdelta@@YAXXZ 004239e0 f    CIL library: CIL module
+ 0001:00022a00       ??__E__dummy_editundo@@YAXXZ 00423a00 f    CIL library: CIL module
+ 0001:00022a20       ??__E__dummy_copy@@YAXXZ   00423a20 f    CIL library: CIL module
+ 0001:00022a40       ??__E__dummy_paste@@YAXXZ  00423a40 f    CIL library: CIL module
+ 0001:00022a60       ??__E__dummy_edittex@@YAXXZ 00423a60 f    CIL library: CIL module
+ 0001:00022a80       ??__E__dummy_newent@@YAXXZ 00423a80 f    CIL library: CIL module
+ 0001:00022aa0       ??__E__dummy_perlin@@YAXXZ 00423aa0 f    CIL library: CIL module
+ 0001:00022ac0       ??__E__dummy_trigger@@YAXXZ 00423ac0 f    CIL library: CIL module
+ 0001:00022ae0       ??__E__dummy_clearents@@YAXXZ 00423ae0 f    CIL library: CIL module
+ 0001:00022b00       ??__E__dummy_scalelights@@YAXXZ 00423b00 f    CIL library: CIL module
+ 0001:00022b20       ??__E__dummy_mapenlarge@@YAXXZ 00423b20 f    CIL library: CIL module
+ 0001:00022b40       ??__E__dummy_newmap@@YAXXZ 00423b40 f    CIL library: CIL module
+ 0001:00022b60       ??__E__dummy_calclight@@YAXXZ 00423b60 f    CIL library: CIL module
+ 0001:00022b80       ??__E__dummy_delent@@YAXXZ 00423b80 f    CIL library: CIL module
+ 0001:00022ba0       ??__E__dummy_entproperty@@YAXXZ 00423ba0 f    CIL library: CIL module
+ 0001:00022bc0       ??__E__dummy_save_world@@YAXXZ 00423bc0 f    CIL library: CIL module
+ 0001:00022be0       ??__Elightscale@@YAXXZ     00423be0 f    CIL library: CIL module
+ 0001:00022c70       ??__Edynlight@@YAXXZ       00423c70 f    CIL library: CIL module
+ 0001:00022d00       ??__Edlights@@YAXXZ        00423d00 f    CIL library: CIL module
+ 0001:00022d20       ??__E__dummy_toggleocull@@YAXXZ 00423d20 f    CIL library: CIL module
+ 0001:00022d40       ??__Eents@@YAXXZ           00423d40 f    CIL library: CIL module
+ 0001:00022d60       ??__Emonsters@@YAXXZ       00423d60 f    CIL library: CIL module
+ 0001:00022d80       ??__Eskill@@YAXXZ          00423d80 f    CIL library: CIL module
+ 0001:00022e10       ??__Emaxroll@@YAXXZ        00423e10 f    CIL library: CIL module
+ 0001:00022ea0       ??__Eplayerhistory@@YAXXZ  00423ea0 f    CIL library: CIL module
+ 0001:00022ec0       ??__Edemoplaybackspeed@@YAXXZ 00423ec0 f    CIL library: CIL module
+ 0001:00022f50       ??__Edemodelaymsec@@YAXXZ  00423f50 f    CIL library: CIL module
+ 0001:00022fe0       ??__E__dummy_record@@YAXXZ 00423fe0 f    CIL library: CIL module
+ 0001:00023000       ??__E__dummy_demo@@YAXXZ   00424000 f    CIL library: CIL module
+ 0001:00023020       ??__E__dummy_stopn@@YAXXZ  00424020 f    CIL library: CIL module
+ 0001:00023040       ??__E__dummy_savegame@@YAXXZ 00424040 f    CIL library: CIL module
+ 0001:00023060       ??__E__dummy_loadgame@@YAXXZ 00424060 f    CIL library: CIL module
+ 0001:00023080       ??__E__dummy_weapon@@YAXXZ 00424080 f    CIL library: CIL module
+ 0001:000230a0       ??__E__dummy_alias@@YAXXZ  004240a0 f    CIL library: CIL module
+ 0001:000230c0       ??__E__dummy_writecfg@@YAXXZ 004240c0 f    CIL library: CIL module
+ 0001:000230e0       ??__E__dummy_loopa@@YAXXZ  004240e0 f    CIL library: CIL module
+ 0001:00023100       ??__E__dummy_whilea@@YAXXZ 00424100 f    CIL library: CIL module
+ 0001:00023120       ??__E__dummy_ifthen@@YAXXZ 00424120 f    CIL library: CIL module
+ 0001:00023140       ??__E__dummy_onrelease@@YAXXZ 00424140 f    CIL library: CIL module
+ 0001:00023160       ??__E__dummy_exec@@YAXXZ   00424160 f    CIL library: CIL module
+ 0001:00023180       ??__E__dummy_concat@@YAXXZ 00424180 f    CIL library: CIL module
+ 0001:000231a0       ??__E__dummy_concatword@@YAXXZ 004241a0 f    CIL library: CIL module
+ 0001:000231c0       ??__E__dummy_at@@YAXXZ     004241c0 f    CIL library: CIL module
+ 0001:000231e0       ??__E__dummy_listlen@@YAXXZ 004241e0 f    CIL library: CIL module
+ 0001:00023270       ??__E__dummy_add@@YAXXZ    00424270 f    CIL library: CIL module
+ 0001:00023300       ??__E__dummy_mul@@YAXXZ    00424300 f    CIL library: CIL module
+ 0001:00023390       ??__E__dummy_sub@@YAXXZ    00424390 f    CIL library: CIL module
+ 0001:00023420       ??__E__dummy_divi@@YAXXZ   00424420 f    CIL library: CIL module
+ 0001:000234b0       ??__E__dummy_mod@@YAXXZ    004244b0 f    CIL library: CIL module
+ 0001:00023540       ??__E__dummy_equal@@YAXXZ  00424540 f    CIL library: CIL module
+ 0001:000235d0       ??__E__dummy_lt@@YAXXZ     004245d0 f    CIL library: CIL module
+ 0001:00023660       ??__E__dummy_gt@@YAXXZ     00424660 f    CIL library: CIL module
+ 0001:000236f0       ??__E__dummy_strcmpa@@YAXXZ 004246f0 f    CIL library: CIL module
+ 0001:00023780       ??__E__dummy_rndn@@YAXXZ   00424780 f    CIL library: CIL module
+ 0001:000237a0       ??__E__dummy_explastmillis@@YAXXZ 004247a0 f    CIL library: CIL module
+ 0001:00023830       ??__Econlines@@YAXXZ       00424830 f    CIL library: CIL module
+ 0001:00023850       ??__E__dummy_setconskip@@YAXXZ 00424850 f    CIL library: CIL module
+ 0001:00023870       ??__E__dummy_keymap@@YAXXZ 00424870 f    CIL library: CIL module
+ 0001:00023890       ??__E__dummy_bindkey@@YAXXZ 00424890 f    CIL library: CIL module
+ 0001:000238b0       ??__E__dummy_saycommand@@YAXXZ 004248b0 f    CIL library: CIL module
+ 0001:000238d0       ??__E__dummy_mapmsg@@YAXXZ 004248d0 f    CIL library: CIL module
+ 0001:000238f0       ??__Evhistory@@YAXXZ       004248f0 f    CIL library: CIL module
+ 0001:00023910       ??__E__dummy_history@@YAXXZ 00424910 f    CIL library: CIL module
+ 0001:00023930       ??__E__dummy_screenshot@@YAXXZ 00424930 f    CIL library: CIL module
+ 0001:00023950       ??__E__dummy_quit@@YAXXZ   00424950 f    CIL library: CIL module
+ 0001:00023970       ??__Egamespeed@@YAXXZ      00424970 f    CIL library: CIL module
+ 0001:00023a00       ??__Eminmillis@@YAXXZ      00424a00 f    CIL library: CIL module
+ 0001:00023a90       ??__Emenus@@YAXXZ          00424a90 f    CIL library: CIL module
+ 0001:00023ab0       ??__Emenustack@@YAXXZ      00424ab0 f    CIL library: CIL module
+ 0001:00023ad0       ??__E__dummy_menuitem@@YAXXZ 00424ad0 f    CIL library: CIL module
+ 0001:00023af0       ??__E__dummy_showmenu@@YAXXZ 00424af0 f    CIL library: CIL module
+ 0001:00023b10       ??__E__dummy_newmenu@@YAXXZ 00424b10 f    CIL library: CIL module
+ 0001:00023b30       ??__Esoundvol@@YAXXZ       00424b30 f    CIL library: CIL module
+ 0001:00023bb0       ??__Emusicvol@@YAXXZ       00424bb0 f    CIL library: CIL module
+ 0001:00023c40       ??__Esoundbufferlen@@YAXXZ 00424c40 f    CIL library: CIL module
+ 0001:00023cd0       ??__E__dummy_music@@YAXXZ  00424cd0 f    CIL library: CIL module
+ 0001:00023cf0       ??__Esamples@@YAXXZ        00424cf0 f    CIL library: CIL module
+ 0001:00023d10       ??__Esnames@@YAXXZ         00424d10 f    CIL library: CIL module
+ 0001:00023d30       ??__E__dummy_registersound@@YAXXZ 00424d30 f    CIL library: CIL module
+ 0001:00023d50       ??__Estereo@@YAXXZ         00424d50 f    CIL library: CIL module
+ 0001:00023de0       ??__E__dummy_sound@@YAXXZ  00424de0 f    CIL library: CIL module
+ 0001:00023e00       ??__Fstrips@@YAXXZ         00424e00 f    CIL library: CIL module
+ 0001:00023e60       ??__Fmapmodels@@YAXXZ      00424e60 f    CIL library: CIL module
+ 0001:00023eb0       ??__Fmessages@@YAXXZ       00424eb0 f    CIL library: CIL module
+ 0001:00023ef0       ??__Fscorelines@@YAXXZ     00424ef0 f    CIL library: CIL module
+ 0001:00023f50       ??__Fplayers@@YAXXZ        00424f50 f    CIL library: CIL module
+ 0001:00023fa0       ??__Fclients@@YAXXZ        00424fa0 f    CIL library: CIL module
+ 0001:00024000       ??__Fsents@@YAXXZ          00425000 f    CIL library: CIL module
+ 0001:00024060       ??__Fresolverthreads@@YAXXZ 00425060 f    CIL library: CIL module
+ 0001:000240c0       ??__Fresolverqueries@@YAXXZ 004250c0 f    CIL library: CIL module
+ 0001:00024110       ??__Fresolverresults@@YAXXZ 00425110 f    CIL library: CIL module
+ 0001:00024170       ??__Fservers@@YAXXZ        00425170 f    CIL library: CIL module
+ 0001:000241d0       ??__Fundos@@YAXXZ          004251d0 f    CIL library: CIL module
+ 0001:00024220       ??__Fdlights@@YAXXZ        00425220 f    CIL library: CIL module
+ 0001:00024270       ??__Fents@@YAXXZ           00425270 f    CIL library: CIL module
+ 0001:00024280       ??__Fmonsters@@YAXXZ       00425280 f    CIL library: CIL module
+ 0001:000242d0       ??__Fplayerhistory@@YAXXZ  004252d0 f    CIL library: CIL module
+ 0001:00024320       ??__Fconlines@@YAXXZ       00425320 f    CIL library: CIL module
+ 0001:00024380       ??__Fvhistory@@YAXXZ       00425380 f    CIL library: CIL module
+ 0001:000243d0       ??__Fmenus@@YAXXZ          004253d0 f    CIL library: CIL module
+ 0001:00024420       ??__Fmenustack@@YAXXZ      00425420 f    CIL library: CIL module
+ 0001:00024470       ??__Fsamples@@YAXXZ        00425470 f    CIL library: CIL module
+ 0001:000244c0       ??__Fsnames@@YAXXZ         004254c0 f    CIL library: CIL module

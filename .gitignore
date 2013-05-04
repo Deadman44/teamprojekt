@@ -1,0 +1,6 @@
+.DS_Store
+/cube/Cube/*
+/cube/enet/*
+/cube/include/*
+/cube/lib/*
+/cube/vcpp/*

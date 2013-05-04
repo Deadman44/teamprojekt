@@ -1,4 +1,0 @@
-﻿C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\w\cube\vcpp\.\Release\cube.exe) entspricht nicht dem OutputFile-Eigenschaftswert (c:\w\cube\cube\bin\cube.exe) von Linker. Das Projekt wird daher möglicherweise nicht ordnungsgemäß erstellt. Damit dieses Problem behoben werden kann, müssen die Eigenschaftswerte für $(OutDir), $(TargetName) und $(TargetExt) dem in %(Link.OutputFile) angegebenen Wert entsprechen.
-  Code wird generiert.
-  Codegenerierung ist abgeschlossen.
-  cube.vcxproj -> C:\w\cube\vcpp\.\Release\cube.exe

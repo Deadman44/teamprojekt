@@ -253,7 +253,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             players[cn]->frags = getint(p);
             break;
 
-        case SV_ITEMPICKUP:
+        case SV_ITEMPICKUP: //gegenstände aufnehmen
             setspawn(getint(p), false);
             getint(p);
             break;

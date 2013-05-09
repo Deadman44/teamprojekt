@@ -5,3 +5,4 @@
 /cube/lib/*
 /cube/vcpp/*
 /cube/readme.txt
+*.o

@@ -11,6 +11,7 @@
 using namespace std;
 
 void SHA256(string, byte*);
+void SHA256extended(byte*);
 
 int main(int argc, const char *args[]) {
 	long licenseNumber;
@@ -49,4 +50,21 @@ void SHA256(string str, byte *hash)
     byte const* bStr = (byte*) str.data();
     unsigned int strLen = str.size();
     CryptoPP::SHA256().CalculateDigest(hash, bStr, strLen);
+	SHA256extended(hash);
+}
+
+void SHA256extended(byte *hash){
+	unsigned int byteLen = sizeof(hash)/sizeof(hash[0]);
+	for (int i=0;i<3;i++){
+		CryptoPP::SHA256().CalculateDigest(hash, hash, byteLen);
+		if(DEBUG){
+			cout << "Hashwert Extended "<<i+1<<" : ";
+			for(int j=0; j<DIGESTSIZE; j++) {
+				cout << hex << int(hash[j]);
+			}
+			cout << endl;
+			cout <<"Größe.: "<< sizeof(hash)/sizeof(hash[0]);
+			cout << endl;
+		}
+	}
 }

@@ -6,5 +6,5 @@
 /cube/vcpp/*
 /cube/readme.txt
 *.o
-/lizenzierung/server/generate.o
 /lizenzierung/server/generate
+/lizenzierung/server/database/connect

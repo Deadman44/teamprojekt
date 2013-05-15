@@ -21,7 +21,7 @@ int main(int argc, const char *args[]) {
 		licenseNumber = long(rand());
 	} else {
 		cout << "Anzahl der uebergebenen Parameter: " << argc << endl;
-		licenseNumber = atol(args[1]);	// Parameter zu Long umwandeln
+		licenseNumber = atol(args[1]);	// String zu Long umwandeln
 		
 	}
 	long salt = long(rand());
@@ -29,14 +29,14 @@ int main(int argc, const char *args[]) {
 	ss << licenseNumber << salt;
 	SHA256(ss.str(), hash);
 	if(DEBUG) {
-		cout << "Lizenznummer: " << licenseNumber << endl;
-		cout << "Salt: " << salt << endl;
+		cout << "Lizenznummer: " << dec << licenseNumber << endl;
+		cout << "Salt: " << dec << salt << endl;
 		cout << "Hashwert für " << ss.str() << ": ";
 		for(int i=0; i<DIGESTSIZE; i++) {
 			cout << hex << int(hash[i]);
 		}
 		cout << endl;
-	}else {
+	}else {	// ohne DEBUG
 		// Rückgabe Hash
 		for(int i=0; i<DIGESTSIZE; i++) {
 			cout << hex << int(hash[i]);

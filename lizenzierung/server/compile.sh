@@ -1,1 +1,1 @@
-alias run='g++ -c generate.cpp;g++ -o generate generate.o libcryptopp.so;./generate'
+c++ -c generate.cpp;c++ -o generate generate.o libcryptopp.so;./generate

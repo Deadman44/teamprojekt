@@ -49,7 +49,7 @@ void SHA256(string str, byte *hash)
 {
     byte const* bStr = (byte*) str.data();
     unsigned int strLen = str.size();
-    CryptoPP::SHA256().CalculateDigest(hash, bStr, strLen);
+    CryptoPP::SHA256().CalculateDigest(hash, bStr, strLen);	
 	SHA256extended(hash);
 }
 

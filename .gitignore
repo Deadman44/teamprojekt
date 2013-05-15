@@ -7,4 +7,5 @@
 /cube/readme.txt
 *.o
 /lizenzierung/server/generate
-/lizenzierung/server/database/connect
+lizenzierung/server/database/connect
+lizenzierung/server/generate

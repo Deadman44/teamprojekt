@@ -15,23 +15,41 @@ void SHA256extended(byte*);
 
 int main(int argc, const char *args[]) {
 	long licenseNumber;
+	long salt;
 	byte hash[DIGESTSIZE];
 	srand(time(NULL) * time(NULL));
 	if(argc < 2){	// Dem Programm wurde kein Parameter übergeben
 		licenseNumber = long(rand());
-	} else {
-		cout << "Anzahl der uebergebenen Parameter: " << argc << endl;
+		salt = long(rand());
+	} else if(argc < 3) {// Dem Programm wurde nur die Lizenznummer übergeben
 		licenseNumber = atol(args[1]);	// String zu Long umwandeln
-		
+		salt = long(rand());
+	} else {	// Dem programm wurde die Lizenznummer und der Salt übergeben		
+		licenseNumber = atol(args[1]);	// Linzenznummer zu Long umwandeln
+		salt = atol(args[2]);			// Lizenznummer zu Long umwandeln
 	}
-	long salt = long(rand());
-	stringstream ss;
-	ss << licenseNumber << salt;
-	SHA256(ss.str(), hash);
+	stringstream licenseNumberStr;
+	licenseNumberStr << licenseNumber;
+	// Mit 0 auffüllen, bis 10 Zeichen erreicht sind
+	for(int i=licenseNumberStr.str().size();i<=10;i++) {
+		licenseNumberStr << 0;
+	}
+	stringstream key;
+	key << licenseNumberStr.str() << salt;
+	// Hash erzeugen
+	SHA256(key.str(), hash);
+	SHA256extended(hash);
 	if(DEBUG) {
-		cout << "Lizenznummer: " << dec << licenseNumber << endl;
-		cout << "Salt: " << dec << salt << endl;
-		cout << "Hashwert für " << ss.str() << ": ";
+		cout << "Lizenznummer: " << licenseNumberStr.str() << endl;
+		cout << "Salt/SKEY: " << dec << salt << endl;
+		cout << "Hashwert für " << key.str() << ": ";
+		cout << licenseNumberStr.str();
+		for(int i=0; i<DIGESTSIZE; i++) {
+			cout << hex << int(hash[i]);
+		}
+		cout << endl;
+		cout << "HSerial: ";
+		SHA256(licenseNumberStr.str(),hash);
 		for(int i=0; i<DIGESTSIZE; i++) {
 			cout << hex << int(hash[i]);
 		}
@@ -50,7 +68,6 @@ void SHA256(string str, byte *hash)
     byte const* bStr = (byte*) str.data();
     unsigned int strLen = str.size();
     CryptoPP::SHA256().CalculateDigest(hash, bStr, strLen);
-	SHA256extended(hash);
 }
 
 void SHA256extended(byte *hash){

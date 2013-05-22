@@ -33,9 +33,7 @@ function writeAllEntriesFromDB()
 		{
 			writeSingleEntry($name,$email,$date,$content);
 		}
-	}
-		
-		
+	}	
 	$mysqli->close();
 }
 

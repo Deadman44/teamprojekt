@@ -11,8 +11,14 @@
             
             
             //echo create_hash("HELLO");
-            addNewUserToDB("Hoor", "Johannes", "hoorj@fh-trier.de", "bratwurst");
-            checkUserLogin("hoorj@fh-trier.de", "bratwurst");
+            addNewUserToDB("antoinette2", "marie", "test2@best.de", "bratwurst");
+            checkUserLogin("test@best.de", "bratwurst");
+            
+            $stuff = getAllDataFromUser("test2@best.de");
+            echo $stuff[0];
+            echo $stuff[1];
+            echo $stuff[2];
+            echo $stuff[3];
             
             
         ?>

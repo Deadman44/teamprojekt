@@ -216,7 +216,9 @@ function check_EmailUnique($Qemail)
 		while($result->fetch())
 		{
 			$exists++;
+                        echo "COUNT";
 		}
+                
                 
                 if($exists >=1)
                 {
@@ -231,19 +233,15 @@ function check_EmailUnique($Qemail)
     
 }
 
-function dbtester()
+
+
+function getAllDataFromUser($Qemail)
 {
-    $handle = fopen("D:/xampp/credentials/database.txt","r");
-    $pwd;
-    $user;
-    $userpw;
     
-    //eine zeile lesen, die oberste
-    $buffer = fgets($handle);
-    $userpw = explode(":", $buffer);
-    $user = $userpw[0];
-    $pwd = $userpw[1];
-    fclose($handle);
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
 
 
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
@@ -254,18 +252,21 @@ function dbtester()
 	}
 	else
 	{
-		$query = 'SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT,SKEY,HSERIAL,ACTIVE,SUSPECT from USER';
+		$query = "SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT,SKEY,HSERIAL,ACTIVE,SUSPECT from USER where EMAIL = '$Qemail' ";
 		$result = $mysqli->prepare($query);
 		$result->execute();
 		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt,$skey,$hserial,$active,$suspect);
 		while($result->fetch())
 		{
-			echo $id . $email . $nname . $vname . $pass . $psalt . $skey . $active. $suspect. "<br>";
+			$all = $id .":". $email .":". $nname .":". $vname .":". $pass .":". $psalt .":". $skey .":". $hserial . ":".$active.":". $suspect;
 		}
+                
+                $allArr = explode(":", $all);
                 
         
 	}
         $mysqli->close();
+        return $allArr;
 }
 
 

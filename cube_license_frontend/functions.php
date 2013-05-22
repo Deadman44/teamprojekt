@@ -19,7 +19,7 @@
  */
 
 // These constants may be changed without breaking existing hashes.
-define("PBKDF2_HASH_ALGORITHM", "sha256");
+define("PBKDF2_HASH_ALGORITHM", "sha512");
 define("PBKDF2_ITERATIONS", 1000);
 define("PBKDF2_SALT_BYTES", 24);
 define("PBKDF2_HASH_BYTES", 24);
@@ -44,6 +44,230 @@ function create_hash($password)
             true
         ));
 }
+
+//eigene Funktion
+function returnSaltFromAll($entry)
+{
+    $params = explode(":",$entry);
+    $saltBig = $params[0].":".$params[1].":".$params[2];
+    return $saltBig;
+}
+
+//eigene Funktion
+function returnHashFromAll($entry)
+{
+    $params = explode(":",$entry);
+    return $params[3];
+}
+//eigene fkt
+function reconstructAll($saltBig,$hash)
+{
+    return $saltBig.":".$hash;
+}
+
+function getCredentialsFromFile()
+{
+    $handle = fopen("D:/xampp/credentials/database.txt","r");
+    $pwd;
+    $user;
+    $userpw;
+    
+    //eine zeile lesen, die oberste
+    $buffer = fgets($handle);
+    $userpw = explode(":", $buffer);
+    $user = $userpw[0];
+    $pwd = $userpw[1];
+    fclose($handle);
+    
+    return $user.":".$pwd;
+}
+
+//eigene ftk, fuegt neuen user zu db hinzu
+function addNewUserToDB($nname, $vname, $email, $pass)
+{
+    //separierung von hash und salt, salt bsteht auch aus algo-nr und interations...
+    $securePass = create_hash($pass);
+    $secureHash = returnHashFromAll($securePass);
+    $secureSalt = returnSaltFromAll($securePass);
+    
+    if(!check_email($email))
+    {
+       return false; 
+    }
+    
+    if(!check_EmailUnique($email))
+    {
+       return false; 
+    }
+    
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno)
+	{
+		echo "FAIL";
+	}
+	else
+	{
+		
+		$insert = 'INSERT INTO USER(NNAME, VNAME, EMAIL, PASS, PSALT) VALUES(?,?,?,?,?)';
+		$eintrag = $mysqli->prepare($insert);
+		$eintrag->bind_param('sssss',$nname, $vname,$email,$secureHash,$secureSalt);
+		$eintrag->execute();
+		
+		if ($eintrag->affected_rows == 1)
+        {
+            echo 'Der neue Eintrage wurde hinzugef&uuml;gt.';
+			echo '<br />';
+        }
+        else
+        {
+            echo 'Der Eintrag konnte nicht hinzugef&uuml;gt werden.';
+        }	
+	}
+	
+	$mysqli->close();
+}
+
+function checkUserLogin($Qemail, $Qpass)
+{
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    
+    	if($mysqli->connect_errno)
+	{
+		echo "FAIL" . $user . $pwd;
+	}
+	else
+	{
+		$query = "SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT from USER where EMAIL = '$Qemail' ";
+		$result = $mysqli->prepare($query);
+		$result->execute();
+		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt);
+		while($result->fetch())
+		{
+			//echo $id . $email . $nname . $vname . $pass . $psalt. "<br>";
+		}
+                
+                $allPass = reconstructAll($psalt, $pass);
+                if(!validate_password($Qpass, $allPass))
+                {
+                    echo "wrong password";
+                    $mysqli->close();
+                    return false;
+                }
+                else
+                {
+                    echo "succ login";
+                }
+                
+        
+	}
+        $mysqli->close();
+        return true;
+}
+
+
+function check_email($email)
+{        
+    if(preg_match('/^[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+(?:\.[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+)*\@[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+(?:\.[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+)+$/i', $email))
+	{
+            return true;
+	}
+	else
+	{
+	    return false;
+	}
+    
+
+}
+
+function check_EmailUnique($Qemail)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    
+    	if($mysqli->connect_errno)
+	{
+		echo "FAIL" . $user . $pwd;
+	}
+	else
+	{
+                $exists = 0;
+		$query = "SELECT ID,EMAIL from USER where EMAIL = '$Qemail' ";
+		$result = $mysqli->prepare($query);
+		$result->execute();
+		$result->bind_result($id,$email);
+		while($result->fetch())
+		{
+			$exists++;
+		}
+                
+                if($exists >=1)
+                {
+                    $mysqli->close();
+                    echo "email already exists";
+                    return false;
+                }
+
+	}
+        $mysqli->close();
+        return true;
+    
+}
+
+function dbtester()
+{
+    $handle = fopen("D:/xampp/credentials/database.txt","r");
+    $pwd;
+    $user;
+    $userpw;
+    
+    //eine zeile lesen, die oberste
+    $buffer = fgets($handle);
+    $userpw = explode(":", $buffer);
+    $user = $userpw[0];
+    $pwd = $userpw[1];
+    fclose($handle);
+
+
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    
+    	if($mysqli->connect_errno)
+	{
+		echo "FAIL" . $user . $pwd;
+	}
+	else
+	{
+		$query = 'SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT,SKEY,HSERIAL,ACTIVE,SUSPECT from USER';
+		$result = $mysqli->prepare($query);
+		$result->execute();
+		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt,$skey,$hserial,$active,$suspect);
+		while($result->fetch())
+		{
+			echo $id . $email . $nname . $vname . $pass . $psalt . $skey . $active. $suspect. "<br>";
+		}
+                
+        
+	}
+        $mysqli->close();
+}
+
 
 function validate_password($password, $good_hash)
 {
@@ -120,4 +344,3 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
         return bin2hex(substr($output, 0, $key_length));
 }
 
-?>

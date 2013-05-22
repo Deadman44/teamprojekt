@@ -5,61 +5,14 @@
  * and open the template in the editor.
  */
 
-function check_email($email)
-{        
-    if(preg_match('/^[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+(?:\.[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+)*\@[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+(?:\.[^\x00-\x20()<>@,;:\\".[\]\x7f-\xff]+)+$/i', $email))
-	{
-            return true;
-	}
-	else
-	{
-	    return false;
-	}
-    
 
-}
 
 function check_textfieldEmpty($text)
 {
 	return (!empty($text));
 }
 
-function dbtester()
-{
-    $handle = fopen("D:/xampp/credentials/database.txt","r");
-    $pwd;
-    $user;
-    $userpw;
-    
-    //eine zeile lesen, die oberste
-    $buffer = fgets($handle);
-    $userpw = explode(":", $buffer);
-    $user = $userpw[0];
-    $pwd = $userpw[1];
-    fclose($handle);
 
-
-    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
-    
-    	if($mysqli->connect_errno)
-	{
-		echo "FAIL" . $user . $pwd;
-	}
-	else
-	{
-		$query = 'SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT,SKEY,HSERIAL,ACTIVE,SUSPECT from USER';
-		$result = $mysqli->prepare($query);
-		$result->execute();
-		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt,$skey,$hserial,$active,$suspect);
-		while($result->fetch())
-		{
-			echo $id . $email . $nname . $vname . $pass . $psalt . $skey . $active. $suspect. "<br>";
-		}
-                
-        
-	}
-        $mysqli->close();
-}
 
 function writeAllEntriesFromDB()
 {

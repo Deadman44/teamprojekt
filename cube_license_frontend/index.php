@@ -10,7 +10,9 @@
             include 'dbtests.php';
             
             
-            dbtester();
+            //echo create_hash("HELLO");
+            addNewUserToDB("Hoor", "Johannes", "hoorj@fh-trier.de", "bratwurst");
+            checkUserLogin("hoorj@fh-trier.de", "bratwurst");
             
             
         ?>

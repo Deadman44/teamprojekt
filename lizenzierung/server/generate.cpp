@@ -5,7 +5,9 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
-#define DEBUG 1
+#include <fstream>
+#include <cmath>
+#define DEBUG 0
 #define DIGESTSIZE CryptoPP::SHA256::DIGESTSIZE
 
 using namespace std;
@@ -14,42 +16,55 @@ void SHA256(string, byte*);
 void SHA256extended(byte*);
 
 int main(int argc, const char *args[]) {
-	long licenseNumber;
-	long salt;
+	unsigned int licenseNumber=0;
+	unsigned int salt=0;
+	unsigned int seed = 0;
 	byte hash[DIGESTSIZE];
-	srand(time(NULL) * time(NULL));
+	string licenseNumberStr;
+	char urand[4];
+	ifstream src;
+	src.open("/dev/urandom", ios::binary|ios::in);
+	src.read(urand, 4);
+	srand(seed);
 	if(argc < 2){	// Dem Programm wurde kein Parameter übergeben
-		licenseNumber = long(rand());
-		salt = long(rand());
+		licenseNumber = rand();
+		stringstream tmp;
+		tmp << licenseNumber;
+		licenseNumberStr = tmp.str();
+		salt = rand();
 	} else if(argc < 3) {// Dem Programm wurde nur die Lizenznummer übergeben
-		licenseNumber = atol(args[1]);	// String zu Long umwandeln
-		salt = long(rand());
-	} else {	// Dem programm wurde die Lizenznummer und der Salt übergeben		
-		licenseNumber = atol(args[1]);	// Linzenznummer zu Long umwandeln
-		salt = atol(args[2]);			// Lizenznummer zu Long umwandeln
+		licenseNumberStr = args[1];
+		licenseNumber = atoi(args[1]);	// String zu Long umwandeln
+		salt = rand();
+	} else if(argc==3){	// Dem programm wurde die Lizenznummer und der Salt übergeben		
+		licenseNumberStr = args[1];
+		licenseNumber = atoi(args[1]);	// Lizenznummer zu int umwandeln
+		salt = atoi(args[2]);			// Salt zu int umwandeln
+	} else {	// Dem Programm wurden zu viele Parameter übergeben
+		exit(-1);
 	}
-	stringstream licenseNumberStr;
-	licenseNumberStr << licenseNumber;
 	// Mit 0 auffüllen, bis 10 Zeichen erreicht sind
-	for(int i=licenseNumberStr.str().size();i<=10;i++) {
-		licenseNumberStr << 0;
+	for(int i=licenseNumberStr.size(); i<10; i++) {
+		licenseNumberStr.insert(0, "0");
 	}
+	// Lizenzschlüssel, konkateniert aus der Lizenznummer und dem Salt erstellen
 	stringstream key;
-	key << licenseNumberStr.str() << salt;
+	key << licenseNumber << salt;
+	stringstream saltStr;
+	saltStr << salt;	// Salt zu String umwandeln
 	// Hash erzeugen
 	SHA256(key.str(), hash);
 	SHA256extended(hash);
 	if(DEBUG) {
-		cout << "Lizenznummer: " << licenseNumberStr.str() << endl;
+		cout << "Lizenznummer: " << licenseNumberStr << endl;
 		cout << "Salt/SKEY: " << dec << salt << endl;
 		cout << "Hashwert für " << key.str() << ": ";
-		cout << licenseNumberStr.str();
 		for(int i=0; i<DIGESTSIZE; i++) {
 			cout << hex << int(hash[i]);
 		}
 		cout << endl;
 		cout << "HSerial: ";
-		SHA256(licenseNumberStr.str(),hash);
+		SHA256(licenseNumberStr,hash);
 		for(int i=0; i<DIGESTSIZE; i++) {
 			cout << hex << int(hash[i]);
 		}
@@ -59,6 +74,7 @@ int main(int argc, const char *args[]) {
 		for(int i=0; i<DIGESTSIZE; i++) {
 			cout << hex << int(hash[i]);
 		}
+		cout << endl;
 	} 
 	return 0;
 }
@@ -74,7 +90,7 @@ void SHA256extended(byte *hash){
 	unsigned int byteLen = sizeof(hash)/sizeof(hash[0]);
 	for (int i=0;i<3;i++){
 		CryptoPP::SHA256().CalculateDigest(hash, hash, byteLen);
-		if(DEBUG){
+		/*if(DEBUG){
 			cout << "Hashwert Extended "<<i+1<<" : ";
 			for(int j=0; j<DIGESTSIZE; j++) {
 				cout << hex << int(hash[j]);
@@ -82,6 +98,6 @@ void SHA256extended(byte *hash){
 			cout << endl;
 			cout <<"Größe.: "<< sizeof(hash)/sizeof(hash[0]);
 			cout << endl;
-		}
+		}*/
 	}
 }

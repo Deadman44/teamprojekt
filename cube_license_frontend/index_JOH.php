@@ -9,16 +9,14 @@
             include 'functions.php';
             include 'dbtests.php';
             
+            addNewUserToDB("blaise", "pascal", "blaise@pascal.de", "horst");
+            checkUserLogin("blaise@pascal.de", "horst");
             
-            //echo create_hash("HELLO");
-            addNewUserToDB("antoinette2", "marie", "test2@best.de", "bratwurst");
-            checkUserLogin("test@best.de", "bratwurst");
+            create_license_key("blaise@pascal.de", "false");
+
             
-            $stuff = getAllDataFromUser("test2@best.de");
-            echo $stuff[0];
-            echo $stuff[1];
-            echo $stuff[2];
-            echo $stuff[3];
+            echo license_exists("homo@fh-trier.de");
+
             
             
         ?>

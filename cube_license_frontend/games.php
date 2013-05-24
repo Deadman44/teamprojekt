@@ -23,15 +23,18 @@
 <div class="anmeldung">
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
+<?php
+    session_start();
+	if (isset($_SESSION['validLogin']) || $_SESSION['validLogin']) {
+		echo '<form action="logout.php"> <input type="submit" value="Logout"></input> </form>';
+	}
+?>
+</div>
 
-
+<div class="main">
 <form action="buyCube.php" method="post"><p>
 <input type="submit" value="Cube kaufen"/></p>
 </form>
-
-</div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
-<p></p>
 </div>
 </div>
 </div>

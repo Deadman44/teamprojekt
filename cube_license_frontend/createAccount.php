@@ -15,7 +15,18 @@
 		
 		// Neuen Benutzer anlegen
 		addNewUserToDB($name, $firstname, $email, $password);
-		echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
+		
+		
+		if(checkUserLogin($email, $password)) {
+			session_start();
+			$user = $email;
+			$password = $password;
+			$_SESSION['validLogin'] = true;
+			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/userIndex.php">';
+			exit();
+		} else {
+			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
+		}
     }
 ?>
 </head>

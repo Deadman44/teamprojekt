@@ -18,7 +18,7 @@
 <div class="menue">
 <ul>
 <li class="menue"><a href="index.php">Home</a></li>
-<li class="menue"><a href="games.html">Games</a></li>
+<li class="menue"><a href="games.php">Games</a></li>
 <li class="menue"><a href="community.html">Community</a></li>
 <li class="menue"><br /></li>
 <li class="menue"><a href="impressum.html">Impressum</a></li>
@@ -32,7 +32,7 @@
 <input type="submit" value="Logout"></input>
 </form>
 </div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlägen lässt..</h2><br />
+<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
 <p></p>
 </div>
 </div>

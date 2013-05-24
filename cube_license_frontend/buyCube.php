@@ -4,7 +4,7 @@
 <head>
   <title>Gaming and other sins</title>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />  
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />    
 </head>
 
 <body>
@@ -26,28 +26,14 @@
 </div>
 <div class="main">
 
-<form action="createAccount.php" method="post"><p class="anmeld"> 
-<table>
-	<tr>
-		<td> Vorname:&nbsp; </td>
-		<td><input type="text" name="firstname" value="" /></td>
-	</tr>
-	<tr>
-		<td> Nachname:&nbsp; </td>
-		<td><input type="text" name="name" value="" /></td>
-	</tr>
-	<tr>
-		<td> Email:&nbsp;</td>
-		<td><input type="text" name="email" value="" /></td>
-	</tr>
-	<tr>
-		<td> Passwort:&nbsp;</td>
-		<td><input type="password" name="password" value="" /></td>
-	</tr>
-</table>
-<input type="submit" value="Login"/></p>
-</form>
-
+  <?php
+	require('auth.php');
+	require('functions.php');
+	echo 'Lizenzkey wurde generiert: ';
+	echo create_license_key($_SESSION['user'],false);
+	
+	?>
+	
 </div>
 </div>
 </div>

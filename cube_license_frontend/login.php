@@ -12,13 +12,14 @@
 		session_start();
 		$user = $_POST['user'];
 		$password = $_POST['password'];
-		
+		$_SESSION['user'] = $user;
 		// Benutzername und Passwort werden überprüft
 		if(checkUserLogin($user, $password)) {
 			$_SESSION['validLogin'] = true;
-			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/userIndex.php">';
+			echo '<meta http-equiv="refresh" content="0; URL=http://localhost/userIndex.php">';
 			exit();
 		} else {
+			$_SESSION['validLogin'] = false;
 			echo 'Falsche Login-Daten!';
 			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
 		}

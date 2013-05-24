@@ -9,7 +9,7 @@
 
 <body>
 <div class="mySite">
-<div class="oben"></div>
+<div class="oben">	<p>Oben</p></div>
 <div class="menue">
 <ul>
 <li class="menue"><a href="index.html">Home</a></li>
@@ -23,20 +23,19 @@
 <div class="anmeldung">
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
-
 <form action="login.php" method="post">
-<p class="anmeld">
-Benutzername:&nbsp; <input type="text" name="user" value="" ></input>
-Passwort:&nbsp; <input type="password" name="password" value="" ></input>
-<input type="submit" value="Login"/>
-</p>
-
-</form>
-
-</div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
+<table><tr><td><p class="anmeld">Benutzername:&nbsp; <input type="text" name="user" value="" /><br />Passwort:&nbsp; <input type="text" name="password" value="" /></p></td><td>
+<input type="submit" value="Login"></input></td></tr></table>
+</form></div>
+<div class="main"><br /><h2>Alles was dein Gamerherz höher schlägen lässt..</h2><br />
 <p></p>
 </div>
+<?php
+	require('functions.php');
+	addNewUserToDB("Hoor", "Johannes", "hoorj@hochschule-trier.de", "cube");
+	addNewUserToDB("Schneider", "Florian", "schneif@hochschule-trier.de", "cube");
+	addNewUserToDB("Munster", "Herman", "munsterh@hochschule-trier.de", "cube");
+?>
 </div>
 </div>
 </div>

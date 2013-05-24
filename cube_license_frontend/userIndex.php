@@ -5,6 +5,11 @@
   <title>Gaming and other sins</title>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />  
+
+  <?php
+	require('auth.php');
+  ?>
+
 </head>
 
 <body>
@@ -23,18 +28,11 @@
 <div class="anmeldung">
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
-
-<form action="login.php" method="post">
-<p class="anmeld">
-Benutzername:&nbsp; <input type="text" name="user" value="" ></input>
-Passwort:&nbsp; <input type="password" name="password" value="" ></input>
-<input type="submit" value="Login"/>
-</p>
-
+<form action="logout.php">
+<input type="submit" value="Logout"></input>
 </form>
-
 </div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
+<div class="main"><br /><h2>Alles was dein Gamerherz höher schlägen lässt..</h2><br />
 <p></p>
 </div>
 </div>

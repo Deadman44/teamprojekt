@@ -1,0 +1,48 @@
+
+body {background-color:#303030}
+
+ul, p.catdescript {list-style-type:none; font-family:sans-serif;
+ font-weight:bold; margin:10px; padding:0px;}
+
+p.anmeldung, p.anmeld {list-style-type:none; font-family:sans-serif;
+ font-weight:bold; margin:0px; padding-top:10px; line-height:26px; color:#f2f2f2}
+
+li.menue{line-height:40px; }
+
+h2{color:#f2f2f2; font-family: arial; font-style:normal;}
+
+a{color:#f2f2f2; text-decoration:none; }
+a:hover { color:#3b3b3b; }
+
+p,p.vote {color:#f2f2f2; }
+
+img.user { border:white 2px solid; }
+
+
+
+
+
+
+div {  }
+
+div.mySite {position:relative; width:1190px; height:auto; min-height:620px; margin:0 auto;
+background-image:url('../katzen-tatzen-spur.gif'); background-position: left top; background-repeat:no-repeat;}
+
+div.oben {position:absolute; right:42px; background-repeat:no-repeat; background-color: #808080;
+width:860px; height:115px; background-image:url('../banner.jpg'); background-position:top;}
+  
+div.menue {background-color:#808080; border-width:2px; border-style:solid; border-color:#EFEFEF; width:180px; height:280px; text-align:center;
+position:absolute; left:94px; top:120px; padding-top:20px;} 
+  
+div.anmeldemain {text-align:left; top:6px; position:absolute; left:20px;}
+  
+div.anmeldung { height:80px; width:860px; position:absolute; top:120px; right:40px; background-color:#808080; border-width:2px; border-style:solid; border-color:#EFEFEF;}  
+  
+div.anmeldebox {text-align:right; top:6px; right:20px; position:absolute;}
+
+
+
+
+
+div.main { padding-left:20px; background-color:#808080; width:840px; min-height:460px; height:auto;            
+  position:absolute; right:-2px; top:90px; border-width:2px; border-style:solid; border-color:#EFEFEF; }

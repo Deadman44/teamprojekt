@@ -23,18 +23,28 @@
 <div class="anmeldung">
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
+
 <?php
-    session_start();
-	if (isset($_SESSION['validLogin']) || $_SESSION['validLogin']) {
-		echo '<form action="logout.php"> <input type="submit" value="Logout"></input> </form>';
+
+		echo '<form action="logout.php"> <input type="submit" value="Logout"></input> </form>';	
+
+?>
+
+</div>
+<div class="main">
+
+<?php
+	require('functions.php');
+    if (isset($_SESSION['validLogin'])){
+		if(license_exists($_SESSION['user'])){
+			echo '<p>Lizenz wurde bereits erzeugt!</p>';
+		} else {
+			echo '<form action="buyCube.php" method="post"><p> <input type="submit" value="Cube kaufen"/></p></form>';
+		}
+	} else {
+		echo '<form action="buyCube.php" method="post"><p> <input type="submit" value="Cube kaufen"/></p></form>';
 	}
 ?>
-</div>
-
-<div class="main">
-<form action="buyCube.php" method="post"><p>
-<input type="submit" value="Cube kaufen"/></p>
-</form>
 </div>
 </div>
 </div>

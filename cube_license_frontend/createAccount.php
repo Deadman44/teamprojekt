@@ -22,6 +22,7 @@
 			$user = $email;
 			$password = $password;
 			$_SESSION['validLogin'] = true;
+			$_SESSION['user'] = $email;
 			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/userIndex.php">';
 			exit();
 		} else {

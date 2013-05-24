@@ -23,9 +23,14 @@
 <div class="anmeldung">
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
-<form action="logout.php">
-<input type="submit" value="Logout"></input>
-</form>
+
+<?php
+	//Button wurde sonst kurz angezeigt, wenn Meldung zum Login erfolgte.
+	if (isset($_SESSION['validLogin']) ) {
+		echo '<form action="logout.php"> <input type="submit" value="Logout"></input> </form>';
+	}
+?>
+
 </div>
 <div class="main">
 
@@ -33,7 +38,6 @@
 	require('auth.php');
 	require('functions.php');
 	echo '<p> Lizenzkey wurde generiert: </p>';
-	echo $_SESSION['user'];
 	echo '<textarea name="Lizenzkey" cols="50" rows="10">';
 	echo create_license_key($_SESSION['user'],false);
 	echo '</textarea>';	

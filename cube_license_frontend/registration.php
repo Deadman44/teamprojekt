@@ -23,19 +23,31 @@
 <div class="anmeldung">
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
+</div>
+<div class="main">
 
-<form action="login.php" method="post">
-<p class="anmeld"> Email-Adresse:&nbsp; <input type="text" name="user" value="" ></input> Passwort:&nbsp; <input type="password" name="password" value="" ></input>
+<form action="createAccount.php" method="post"><p class="anmeld"> 
+<table>
+	<tr>
+		<td> Vorname:&nbsp; </td>
+		<td><input type="text" name="firstname" value="" /></td>
+	</tr>
+	<tr>
+		<td> Nachname:&nbsp; </td>
+		<td><input type="text" name="name" value="" /></td>
+	</tr>
+	<tr>
+		<td> Email:&nbsp;</td>
+		<td><input type="text" name="email" value="" /></td>
+	</tr>
+	<tr>
+		<td> Passwort:&nbsp;</td>
+		<td><input type="password" name="password" value="" /></td>
+	</tr>
+</table>
 <input type="submit" value="Login"/></p>
 </form>
 
-<form action="registration.php" method="post"><p>
-<input type="submit" value="Registration"/></p>
-</form>
-
-</div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
-<p></p>
 </div>
 </div>
 </div>

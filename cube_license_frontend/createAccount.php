@@ -9,18 +9,13 @@
 	require('functions.php');
 	
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		session_start();
-		$user = $_POST['user'];
+		$firstname = $_POST['firstname'];
+		$name = $_POST['name'];
+		$email = $_POST['email'];
 		$password = $_POST['password'];
 		
-		// Benutzername und Passwort werden überprüft
-		if(checkUserLogin($user, $password)) {
-			$_SESSION['validLogin'] = true;
-			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/userIndex.php">';
-			exit();
-		} else {
-			echo 'Falsche Login-Daten!';
-			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
+		// Neuen Benutzer anlegen
+		function addNewUserToDB($name, $firstname, $email, $password)
 		}
     }
 ?>

@@ -7,7 +7,6 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />  
   <?php
 	require('functions.php');
-	
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$firstname = $_POST['firstname'];
 		$name = $_POST['name'];
@@ -15,8 +14,8 @@
 		$password = $_POST['password'];
 		
 		// Neuen Benutzer anlegen
-		function addNewUserToDB($name, $firstname, $email, $password)
-		}
+		addNewUserToDB($name, $firstname, $email, $password);
+		echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
     }
 ?>
 </head>

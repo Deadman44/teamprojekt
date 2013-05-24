@@ -12,7 +12,7 @@
 <div class="oben"></div>
 <div class="menue">
 <ul>
-<li class="menue"><a href="index.html">Home</a></li>
+<li class="menue"><a href="index.php">Home</a></li>
 <li class="menue"><a href="games.html">Games</a></li>
 <li class="menue"><a href="community.html">Community</a></li>
 <li class="menue"><br /></li>

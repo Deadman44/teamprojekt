@@ -89,8 +89,9 @@ function check_license_key($Qemail,$Qpass,$license_key)
     }
     else
     {
-            $query = "SELECT SKEY,HSERIAL from USER where EMAIL = '$Qemail' ";
+            $query = "SELECT SKEY,HSERIAL from USER where EMAIL = ? ";
             $result = $mysqli->prepare($query);
+            $result->bind_param('s',$Qemail);
             $result->execute();
             $result->bind_result($skey,$hserial);
             while($result->fetch())
@@ -132,10 +133,62 @@ function check_license_key($Qemail,$Qpass,$license_key)
     
 }
 
+function get_hserial($Qemail)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+
+
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    
+    	if($mysqli->connect_errno)
+	{
+		echo "FAIL" . $user . $pwd;
+	}
+	else
+	{
+		$query = 'SELECT HSERIAL from USER where email=? ';
+		$result = $mysqli->prepare($query);
+                $result->bind_param('s',$Qemail);
+		$result->execute();
+
+		$result->bind_result($hserial);
+		while($result->fetch())
+		{
+			
+		}  
+	}
+        $mysqli->close();
+        return $hserial;
+    
+}
+
+function license_exists($Qemail)
+{
+
+    if(get_hserial($Qemail) != null)
+    {
+        //echo get_hserial($Qemail);
+        return true;
+    }
+    
+    echo "license not available";
+    return false;
+    
+    
+}
+
 // eigene fkt
-function create_license_key($Qemail)
+function create_license_key($Qemail,$forgotten_license)
 {
    
+    if( (license_exists($Qemail) && $forgotten_license == "false"))
+    {
+        return false;
+    }
+    
     $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_URANDOM)); // 32 bit random
     $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM)); 
     $hashed_random = create_hash_with_salt($random,$salt);
@@ -288,8 +341,9 @@ function checkUserLogin($Qemail, $Qpass)
 	}
 	else
 	{
-		$query = "SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT from USER where EMAIL = '$Qemail' ";
+		$query = "SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT from USER where EMAIL = ? ";
 		$result = $mysqli->prepare($query);
+                $result->bind_param('s',$Qemail);
 		$result->execute();
 		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt);
 		while($result->fetch())
@@ -346,8 +400,9 @@ function check_EmailUnique($Qemail)
 	else
 	{
                 $exists = 0;
-		$query = "SELECT ID,EMAIL from USER where EMAIL = '$Qemail' ";
+		$query = "SELECT ID,EMAIL from USER where EMAIL = ? ";
 		$result = $mysqli->prepare($query);
+                $result->bind_param('s',$Qemail);
 		$result->execute();
 		$result->bind_result($id,$email);
 		while($result->fetch())
@@ -389,8 +444,9 @@ function getAllDataFromUser($Qemail)
 	}
 	else
 	{
-		$query = "SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT,SKEY,HSERIAL,ACTIVE,SUSPECT from USER where EMAIL = '$Qemail' ";
+		$query = "SELECT ID,EMAIL,NNAME,VNAME,PASS,PSALT,SKEY,HSERIAL,ACTIVE,SUSPECT from USER where EMAIL = ? ";
 		$result = $mysqli->prepare($query);
+                $result->bind_param('s',$Qemail);
 		$result->execute();
 		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt,$skey,$hserial,$active,$suspect);
 		while($result->fetch())

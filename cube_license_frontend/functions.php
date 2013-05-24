@@ -21,8 +21,8 @@
 // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha512");
 define("PBKDF2_ITERATIONS", 1000);
-define("PBKDF2_SALT_BYTES", 24);
-define("PBKDF2_HASH_BYTES", 24);
+define("PBKDF2_SALT_BYTES", 64);
+define("PBKDF2_HASH_BYTES", 64);
 
 define("HASH_SECTIONS", 4);
 define("HASH_ALGORITHM_INDEX", 0);
@@ -43,6 +43,143 @@ function create_hash($password)
             PBKDF2_HASH_BYTES,
             true
         ));
+}
+
+// modifikation von oben, vorgegebener salt
+function create_hash_with_salt($password, $salt)
+{
+    // format: algorithm:iterations:salt:hash
+    
+    return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" .  $salt . ":" .
+        base64_encode(pbkdf2(
+            PBKDF2_HASH_ALGORITHM,
+            $password,
+            $salt,
+            PBKDF2_ITERATIONS,
+            PBKDF2_HASH_BYTES,
+            true
+        ));
+}
+
+function check_license_key($Qemail,$Qpass,$license_key)
+{
+
+    if(!checkUserLogin($Qemail, $Qpass))
+    {
+        return false;
+    }
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $lkeyArr = explode(":", $license_key);
+    $random = $lkeyArr[0]; //die vom user gegeben random zahl
+    $hashed_random = $lkeyArr[3]; //die hmac, also random und salt;; warum 3?da 1 = sha512, 2 = 1000 iterations
+    
+    
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    
+    if($mysqli->connect_errno)
+    {
+            //echo "FAIL" . $user . $pwd;
+            return false;
+    }
+    else
+    {
+            $query = "SELECT SKEY,HSERIAL from USER where EMAIL = '$Qemail' ";
+            $result = $mysqli->prepare($query);
+            $result->execute();
+            $result->bind_result($skey,$hserial);
+            while($result->fetch())
+            {
+                    //noch keine fehlerüberprüfung...
+            }     
+
+    }
+    $mysqli->close();
+    
+
+    /*
+     * erstes überprüfung kann umgangen werden, fall an eine gültige lizenz ein doppelpunkt
+     * angehängt wird, die zweite überprüfung schlägt dann aber fehl!
+     * deswegen beide wichtig
+     * wobei der angesprochene angriff bedingt, dass man den originalkey hat
+     * ggfls muss bei eingaben auf doppelpunkt gefiltert werden...
+     */
+    $hashed_random_candidate = explode(":",create_hash_with_salt($random, $skey))[2];
+    if($hashed_random_candidate != $hashed_random)
+    {
+        //echo $hashed_random . " ORIGINAL" . "<br>";
+        //echo $hashed_random_candidate . " GESENDET" . "<br>";
+        //echo "SERIAL WRONG -- hashed_random_error" .  "<br>";
+        return false;
+    }
+    
+    $hserial_candidate = hash("sha512",$license_key);
+    
+    if($hserial_candidate != $hserial)
+    {
+        //echo $hserial_candidate . " gesendet ". " <br>";
+        //echo $hserial . " original " . " <br>";
+        //echo "Serial Wrong -- hserial error";
+        return false;
+    }
+    
+    return true;
+    
+}
+
+// eigene fkt
+function create_license_key($Qemail)
+{
+   
+    $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_URANDOM)); // 32 bit random
+    $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM)); 
+    $hashed_random = create_hash_with_salt($random,$salt);
+    $license_key = $random.":".$hashed_random;
+    $hserial = hash("sha512", $license_key);
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "ERROR_NO_LICENSE_KEY";
+    }
+    else
+    {
+
+            $insert = 'UPDATE USER SET skey=?, hserial=? WHERE email =? ';
+            $eintrag = $mysqli->prepare($insert);
+            $eintrag->bind_param('sss',$salt,$hserial,$Qemail);
+            $eintrag->execute();
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo $license_key;
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            
+            return $license_key;
+
+    }
+
+
+    //return $license_key . "ERRRRRRRRR"; //temporär
+    $mysqli->close();
+    
+
+
+
+
 }
 
 //eigene Funktion
@@ -67,7 +204,7 @@ function reconstructAll($saltBig,$hash)
 
 function getCredentialsFromFile()
 {
-    $handle = fopen("D:/xampp/credentials/database.txt","r");
+    $handle = fopen("C:/w/cube_license_frontend/credentials/database.txt","r");
     $pwd;
     $user;
     $userpw;
@@ -163,13 +300,13 @@ function checkUserLogin($Qemail, $Qpass)
                 $allPass = reconstructAll($psalt, $pass);
                 if(!validate_password($Qpass, $allPass))
                 {
-                    echo "wrong password";
+                    //echo "wrong password";
                     $mysqli->close();
                     return false;
                 }
                 else
                 {
-                    echo "succ login";
+                    //echo "succ login";
                 }
                 
         

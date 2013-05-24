@@ -45,7 +45,7 @@
 		<td><input type="password" name="password" value="" /></td>
 	</tr>
 </table>
-<input type="submit" value="Login"/></p>
+<input type="submit" value="Registrierung durchführen"/></p>
 </form>
 
 </div>

@@ -29,9 +29,10 @@
   <?php
 	require('auth.php');
 	require('functions.php');
-	echo 'Lizenzkey wurde generiert: ';
+	echo '<p> Lizenzkey wurde generiert: </p>';
+	echo '<textarea name="Lizenzkey" cols="50" rows="10">';
 	echo create_license_key($_SESSION['user'],false);
-	
+	echo '</textarea>';	
 	?>
 	
 </div>

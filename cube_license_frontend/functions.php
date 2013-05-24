@@ -63,17 +63,7 @@ function create_hash_with_salt($password, $salt)
 
 function check_license_key($Qemail,$Qpass,$license_key)
 {
-    /*
-     * license-prüfung
-     * 
-     * params: 
-     * licenseKey(rnd und hash)
-     * user: email
-     * password
-     * 
-     * return true/false
-     */
-    
+
     if(!checkUserLogin($Qemail, $Qpass))
     {
         return false;
@@ -94,7 +84,8 @@ function check_license_key($Qemail,$Qpass,$license_key)
     
     if($mysqli->connect_errno)
     {
-            echo "FAIL" . $user . $pwd;
+            //echo "FAIL" . $user . $pwd;
+            return false;
     }
     else
     {
@@ -121,9 +112,9 @@ function check_license_key($Qemail,$Qpass,$license_key)
     $hashed_random_candidate = explode(":",create_hash_with_salt($random, $skey))[2];
     if($hashed_random_candidate != $hashed_random)
     {
-        echo $hashed_random . " ORIGINAL" . "<br>";
-        echo $hashed_random_candidate . " GESENDET" . "<br>";
-        echo "SERIAL WRONG -- hashed_random_error" .  "<br>";
+        //echo $hashed_random . " ORIGINAL" . "<br>";
+        //echo $hashed_random_candidate . " GESENDET" . "<br>";
+        //echo "SERIAL WRONG -- hashed_random_error" .  "<br>";
         return false;
     }
     
@@ -131,9 +122,9 @@ function check_license_key($Qemail,$Qpass,$license_key)
     
     if($hserial_candidate != $hserial)
     {
-        echo $hserial_candidate . " gesendet ". " <br>";
-        echo $hserial . " original " . " <br>";
-        echo "Serial Wrong -- hserial error";
+        //echo $hserial_candidate . " gesendet ". " <br>";
+        //echo $hserial . " original " . " <br>";
+        //echo "Serial Wrong -- hserial error";
         return false;
     }
     
@@ -141,21 +132,10 @@ function check_license_key($Qemail,$Qpass,$license_key)
     
 }
 
-// eigene ftk
+// eigene fkt
 function create_license_key($Qemail)
 {
-    /*
-     * key erstellen
-     * 
-     * urandom... --> zahl (4 byte)
-     * 
-     * salt --> zahl 64 byte = PSALT
-     * 
-     * hash (urandom + salt) = LICENSE_KEY (bekommt nur der user)
-     * 
-     * hash(license_key) == HSERIAL
-     */
-    
+   
     $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_URANDOM)); // 32 bit random
     $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM)); 
     $hashed_random = create_hash_with_salt($random,$salt);
@@ -193,7 +173,7 @@ function create_license_key($Qemail)
     }
 
 
-    return $license_key . "ERRRRRRRRR"; //temporär
+    //return $license_key . "ERRRRRRRRR"; //temporär
     $mysqli->close();
     
 
@@ -224,7 +204,7 @@ function reconstructAll($saltBig,$hash)
 
 function getCredentialsFromFile()
 {
-    $handle = fopen("D:/xampp/credentials/database.txt","r");
+    $handle = fopen("C:/w/cube_license_frontend/credentials/database.txt","r");
     $pwd;
     $user;
     $userpw;

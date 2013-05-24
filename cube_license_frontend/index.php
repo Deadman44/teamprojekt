@@ -11,14 +11,14 @@
             
             
             //echo create_hash("HELLO");
-            addNewUserToDB("antoinette2", "marie", "test2@best.de", "bratwurst");
-            checkUserLogin("test@best.de", "bratwurst");
+            //addNewUserToDB("feilen", "markus", "homo@fh-trier.de", "bratwurst");
+
+            //checkUserLogin("homo@fh-trier.de", "bratwurst");
             
-            $stuff = getAllDataFromUser("test2@best.de");
-            echo $stuff[0];
-            echo $stuff[1];
-            echo $stuff[2];
-            echo $stuff[3];
+            $lkey = create_license_key("homo@fh-trier.de");
+            check_license_key("homo@fh-trier.de", "bratwurst", $lkey);
+            
+
             
             
         ?>

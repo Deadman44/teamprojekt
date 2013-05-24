@@ -13,7 +13,7 @@
 		session_start();
 		session_destroy();
 		
-		header('Location: http://'.localhost.'/index.php');
+		echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
 ?>
 </body>
 </html>

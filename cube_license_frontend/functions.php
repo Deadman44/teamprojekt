@@ -204,7 +204,7 @@ function create_license_key($Qemail,$forgotten_license)
     if($mysqli->connect_errno)
     {
             echo "FAIL";
-            return "ERROR_NO_LICENSE_KEY";
+            return "SERVER_ERROR";
     }
     else
     {
@@ -213,13 +213,13 @@ function create_license_key($Qemail,$forgotten_license)
             $eintrag = $mysqli->prepare($insert);
             $eintrag->bind_param('sss',$salt,$hserial,$Qemail);
             $eintrag->execute();
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
-            echo $license_key;
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
+            //echo "<br>";
+            //echo "<br>";
+            //echo "<br>";
+            //echo $license_key;
+            //echo "<br>";
+            //echo "<br>";
+            //echo "<br>";
             
             return $license_key;
 
@@ -408,14 +408,13 @@ function check_EmailUnique($Qemail)
 		while($result->fetch())
 		{
 			$exists++;
-                        echo "COUNT";
 		}
                 
                 
                 if($exists >=1)
                 {
                     $mysqli->close();
-                    echo "email already exists";
+                    //echo "email already exists";
                     return false;
                 }
 
@@ -430,6 +429,12 @@ function check_EmailUnique($Qemail)
 function getAllDataFromUser($Qemail)
 {
     
+    if(check_EmailUnique($Qemail))
+    {
+        echo " NO USER FOR REQUEST";
+        return false;
+        
+    }
     $credentials = getCredentialsFromFile();
     $credentialsArr = explode(":", $credentials);
     $user = $credentialsArr[0];
@@ -451,8 +456,10 @@ function getAllDataFromUser($Qemail)
 		$result->bind_result($id,$email,$nname,$vname,$pass,$psalt,$skey,$hserial,$active,$suspect);
 		while($result->fetch())
 		{
+                        $psalt = explode(":", $psalt)[2];    //nur salt nehmen, nicht zusatzinfos                        
 			$all = $id .":". $email .":". $nname .":". $vname .":". $pass .":". $psalt .":". $skey .":". $hserial . ":".$active.":". $suspect;
 		}
+                
                 
                 $allArr = explode(":", $all);
                 

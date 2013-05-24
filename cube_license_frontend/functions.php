@@ -61,7 +61,8 @@ function create_hash_with_salt($password, $salt)
         ));
 }
 
-function check_license_key($Qemail,$Qpass,$license_key)
+function check_license_key($Qemail,$Qpass,$license_key) //mit password für user, da man ansonsten geklaute lizenz mit emailliste 
+        //vergleichen kann, hat man einen treffer, muss man nur noch password stehlen
 {
 
     if(!checkUserLogin($Qemail, $Qpass))
@@ -174,7 +175,7 @@ function license_exists($Qemail)
         return true;
     }
     
-    echo "license not available";
+    //echo "license not available";
     return false;
     
     
@@ -184,15 +185,16 @@ function license_exists($Qemail)
 function create_license_key($Qemail,$forgotten_license)
 {
    
-    if( (license_exists($Qemail) && $forgotten_license == "false"))
+    if( license_exists($Qemail)) //  && $forgotten_license == "false")
     {
+        echo "ERRRRRRRRRRRRR" ;
         return false;
     }
     
     $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_URANDOM)); // 32 bit random
     $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM)); 
     $hashed_random = create_hash_with_salt($random,$salt);
-    $license_key = $random.":".$hashed_random;
+    $license_key = $random.":".$hashed_random; //form: random:algo:interation:hashed_random
     $hserial = hash("sha512", $license_key);
     
     $credentials = getCredentialsFromFile();

@@ -187,7 +187,7 @@ function create_license_key($Qemail,$forgotten_license)
    
     if( license_exists($Qemail)) //  && $forgotten_license == "false")
     {
-        echo "ERRRRRRRRRRRRR" ;
+        echo "Lizenzkey existiert bereits" ;
         return false;
     }
     

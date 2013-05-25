@@ -9,10 +9,10 @@
             include 'functions.php';
             include 'dbtests.php';
             
-            addNewUserToDB("ttt", "www", "tttt@pascal.de", "horst");
-            checkUserLogin("tttt@pascal.de", "horst");
+            addNewUserToDB("ttt", "www", "tttt9@pascal.de", "horst");
+            checkUserLogin("tttt9@pascal.de", "horst");
             
-            create_license_key("tttt@pascal.de", "false");
+            create_license_key("tttt9@pascal.de", "false");
 
             echo "<br>";
             echo "<br>";

@@ -3,7 +3,7 @@ CXX = g++
 SRC = generate.cpp
 OBJ = generate.o
 
-all: generate connect
+all: generate connect generator
 	
 libcryptopp.so:
 	cd cryptopp; make libcryptopp.so
@@ -22,3 +22,9 @@ connect: connect.o
 
 clean:
 	rm cryptopp/libcryptopp.so database/*.o database/connect *.o *.so generate
+	
+generator.o: generator.cpp
+	$(CXX) -c generator.cpp -I/opt/local/include
+	
+generator: generator.o
+	$(CXX) -o generator generator.o /opt/local/lib/libboost_system-mt.a /opt/Local/lib/libboost_thread-mt.a

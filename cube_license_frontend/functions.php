@@ -83,6 +83,8 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     
+    $skey = "NO KEY ERROR";
+    $hserial ="NO SERIAL ERROR";
     if($mysqli->connect_errno)
     {
             //echo "FAIL" . $user . $pwd;
@@ -111,7 +113,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
      * wobei der angesprochene angriff bedingt, dass man den originalkey hat
      * ggfls muss bei eingaben auf doppelpunkt gefiltert werden...
      */
-    $hashed_random_candidate = explode(":",create_hash_with_salt($random, $skey))[2];
+    $hashed_random_candidate = explode(':',create_hash_with_salt($random, $skey))[2];
     if($hashed_random_candidate != $hashed_random)
     {
         //echo $hashed_random . " ORIGINAL" . "<br>";
@@ -137,7 +139,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
 function get_hserial($Qemail)
 {
     $credentials = getCredentialsFromFile();
-    $credentialsArr = explode(":", $credentials);
+    $credentialsArr = explode(':', $credentials);
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
 

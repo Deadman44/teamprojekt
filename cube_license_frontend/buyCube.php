@@ -40,7 +40,6 @@
 <div class="main">
 
   <?php
-	require('auth.php');
 	require('functions.php');
 	echo '<p> Lizenzkey wurde generiert: </p>';
 	echo '<textarea name="Lizenzkey" cols="50" rows="10">';

@@ -9,13 +9,13 @@
 
 <body>
 <?php
-     session_start();
-
-     if (!isset($_SESSION['validLogin']) || !$_SESSION['validLogin']) {
+	session_start();
+    
+	if (!isset($_SESSION['validLogin']) || !$_SESSION['validLogin']) {
 		echo '<p>Bitte anmelden/registrieren! Weiterleitung zur Startseite erfolgt..</p>';
 		echo '<meta http-equiv="refresh" content="3; URL=http://localhost/index.php">';
 		exit;
-     }
+    }
 ?>
 </body>
 </html>

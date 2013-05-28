@@ -27,7 +27,7 @@
 		} else { */
 		
 		echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
-		}
+		
     }
 ?>
 </head>

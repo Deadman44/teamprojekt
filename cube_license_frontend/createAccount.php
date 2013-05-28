@@ -18,7 +18,6 @@
 		
 		
 		if(checkUserLogin($email, $password)) {
-			session_start();
 			$user = $email;
 			$password = $password;
 			$_SESSION['validLogin'] = true;

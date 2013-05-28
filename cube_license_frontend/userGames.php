@@ -46,8 +46,6 @@
 		} else {
 			echo '<form action="buyCube.php" method="post"><p> <input type="submit" value="Cube kaufen"/></p></form>';
 		}
-	} else {
-		echo '<form action="buyCube.php" method="post"><p> <input type="submit" value="Cube kaufen"/></p></form>';
 	}
 ?>
 </div>

@@ -13,7 +13,7 @@
     
 	if (!isset($_SESSION['validLogin']) || !$_SESSION['validLogin']) {
 		echo '<p>Bitte anmelden/registrieren! Weiterleitung zur Startseite erfolgt..</p>';
-		echo '<meta http-equiv="refresh" content="3; URL=http://localhost/index.php">';
+		echo '<meta http-equiv="refresh" content="3; URL=https://localhost/index.php">';
 		exit;
     }
 ?>

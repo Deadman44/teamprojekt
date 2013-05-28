@@ -16,12 +16,12 @@
 		// Benutzername und Passwort werden überprüft
 		if(checkUserLogin($user, $password)) {
 			$_SESSION['validLogin'] = true;
-			echo '<meta http-equiv="refresh" content="0; URL=http://localhost/userIndex.php">';
+			echo '<meta http-equiv="refresh" content="0; URL=https://localhost/userIndex.php">';
 			exit();
 		} else {
 			$_SESSION['validLogin'] = false;
 			echo 'Falsche Login-Daten!';
-			echo '<meta http-equiv="refresh" content="2; URL=http://localhost/index.php">';
+			echo '<meta http-equiv="refresh" content="2; URL=https://localhost/index.php">';
 		}
     }
 ?>

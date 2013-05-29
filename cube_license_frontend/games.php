@@ -24,6 +24,15 @@
 <div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
 
+<form action="login.php" method="post">
+<p class="anmeld"> Email-Adresse:&nbsp; <input type="text" name="user" value="" ></input> Passwort:&nbsp; <input type="password" name="password" value="" ></input>
+<input type="submit" value="Login"/></p>
+</form>
+
+<form action="registration.php" method="post"><p>
+<input type="submit" value="Registration"/></p>
+</form>
+
 </div>
 <div class="main">
 

@@ -51,11 +51,11 @@
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat-Software (Aimbot, Wallhack, etc.)</td>
-		<td class="tosnormal">Temporärer Ban (1 Stunde)</td>
+		<td class="tosnormal">Temporärer Ban (1 Stunde), ab 2. Erkennung Enzug des Lizenzschlüssels</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Ausnutzen von Bugs / Exploits</td>
-		<td class="tosnormal">Temporärer Ban (1 Stunde)</td>
+		<td class="tosnormal">Temporärer Ban (1 Stunde), ab 2. Erkennung Enzug des Lizenzschlüssels</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Beleidigung / Diskriminierung anderer Spieler</td>

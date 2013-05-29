@@ -33,7 +33,7 @@ define("HASH_PBKDF2_INDEX", 3);
 function create_hash($password)
 {
     // format: algorithm:iterations:salt:hash
-    $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM));
+    $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_RANDOM));
     return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" .  $salt . ":" .
         base64_encode(pbkdf2(
             PBKDF2_HASH_ALGORITHM,
@@ -143,6 +143,7 @@ function get_hserial($Qemail)
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
 
+    $hserial ="nofetched";
 
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     
@@ -186,15 +187,16 @@ function license_exists($Qemail)
 // eigene fkt
 function create_license_key($Qemail,$forgotten_license)
 {
-   
+    $forgotten_license = "NOINTEREST";
+    
     if( license_exists($Qemail)) //  && $forgotten_license == "false")
     {
         echo "Lizenzkey existiert bereits" ;
         return false;
     }
     
-    $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_URANDOM)); // 32 bit random
-    $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM)); 
+    $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_RANDOM)); // 32 bit random
+    $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_RANDOM)); 
     $hashed_random = create_hash_with_salt($random,$salt);
     $license_key = $random.":".$hashed_random; //form: random:algo:interation:hashed_random
     $hserial = hash("sha512", $license_key);
@@ -262,9 +264,6 @@ function reconstructAll($saltBig,$hash)
 function getCredentialsFromFile()
 {
     $handle = fopen("C:/w/cube_license_frontend/credentials/database.txt","r");
-    $pwd;
-    $user;
-    $userpw;
     
     //eine zeile lesen, die oberste
     $buffer = fgets($handle);
@@ -337,6 +336,16 @@ function checkUserLogin($Qemail, $Qpass)
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
     
+    
+    $id = "null";
+    $email = "null";
+    $nname = "null";
+    $vname = "null";
+    $pass = "null";
+    $psalt = "null";
+
+    
+    
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     
     	if($mysqli->connect_errno)
@@ -394,6 +403,8 @@ function check_EmailUnique($Qemail)
     $credentialsArr = explode(":", $credentials);
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
+    $id = "noid";
+    $email ="noemail";
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     
@@ -444,6 +455,16 @@ function getAllDataFromUser($Qemail)
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
 
+    $id = "null";
+    $email = "null";
+    $nname = "null";
+    $vname = "null";
+    $pass = "null";
+    $psalt = "null";
+    $skey = "null";
+    $hserial = "null";
+    $active = "null";
+    $suspect = "null";
 
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     

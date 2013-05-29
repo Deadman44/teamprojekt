@@ -34,7 +34,7 @@
 </form>
 
 </div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
+<div class="main"><br /><h2>Unsere allgemeinen Terms of Service</h2><br />
 <p></p>
 </div>
 </div>

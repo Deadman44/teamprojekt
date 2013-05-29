@@ -14,9 +14,9 @@
 <ul>
 <li class="menue"><a href="index.php">Home</a></li>
 <li class="menue"><a href="games.php">Games</a></li>
-<li class="menue"><a href="community.html">Community</a></li>
+<li class="menue"><a href="tos.php">Terms of Service</a></li>
 <li class="menue"><br /></li>
-<li class="menue"><a href="impressum.html">Impressum</a></li>
+<li class="menue"><a href="impressum.php">Impressum</a></li>
 </ul>
 </div>
 <div class="rahmenMain">

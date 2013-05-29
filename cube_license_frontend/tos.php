@@ -35,7 +35,38 @@
 
 </div>
 <div class="main"><br /><h2>Unsere allgemeinen Terms of Service</h2><br />
-<p></p>
+
+<table>
+	<tr>
+		<td class="tos">Verstoß</td>
+		<td class="tos">Ahndung</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Verwendung von bereits aktiviertem Lizenz-schlüssel (eines anderen Spielers)</td>
+		<td class="tosnormal">Keine weitere Aktivierung möglich</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Mehrfache Versuche bereits aktivierte Lizenz-schlüssel zu verwenden</td>
+		<td class="tosnormal">Daten des Anwenders werden protokolliert und Möglichkeit für rechtliche Schritte wird sich vorbehalten</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Verwendung von Cheat-Software (Aimbot, Wallhack, etc.)</td>
+		<td class="tosnormal">Temporärer Ban (1 Stunde)</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Ausnutzen von Bugs / Exploits</td>
+		<td class="tosnormal">Temporärer Ban (1 Stunde)</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Beleidigung / Diskriminierung anderer Spieler</td>
+		<td class="tosnormal">Temporärer Ban (1 Tag)</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Werbung im Chat</td>
+		<td class="tosnormal">Temporärer Ban (1 Tag)</td>
+	</tr>
+</table>
+
 </div>
 </div>
 </div>

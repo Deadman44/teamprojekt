@@ -18,8 +18,9 @@ p,p.vote {color:#f2f2f2; }
 
 img.user { border:white 2px solid; }
 
+td.tos {border-width:2px; border-style:solid; border-color:#EFEFEF; color:#f2f2f2; font-weight: bold;}
 
-
+td.tosnormal{border-width:1px; border-style:solid; border-color:#EFEFEF; color:#f2f2f2; max-width: 350px; word-wrap: break-word;}
 
 
 

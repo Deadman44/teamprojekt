@@ -17,11 +17,8 @@
 <div class="oben"></div>
 <div class="menue">
 <ul>
-<li class="menue"><a href="index.php">Home</a></li>
+<li class="menue"><a href="userIndex.php">Home</a></li>
 <li class="menue"><a href="userGames.php">Games</a></li>
-<li class="menue"><a href="tos.php">Terms of Service</a></li>
-<li class="menue"><br /></li>
-<li class="menue"><a href="impressum.php">Impressum</a></li>
 </ul>
 </div>
 <div class="rahmenMain">

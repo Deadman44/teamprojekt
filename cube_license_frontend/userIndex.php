@@ -29,8 +29,11 @@
 <input type="submit" value="Logout"></input>
 </form>
 </div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
-<p></p>
+<div class="main"><br /><h2>Herzlich Willkommen.. 
+  <?php
+	echo $_SESSION['user'];
+  ?>
+  </h2>
 </div>
 </div>
 </div>

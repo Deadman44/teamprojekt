@@ -6,6 +6,7 @@
     </head>
     <body>
         <?php
+        
             include 'functions.php';
             include 'dbtests.php';
             

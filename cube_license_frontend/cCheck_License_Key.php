@@ -1,10 +1,14 @@
 <?php
-
+include "functions.php";
 $Qemail = $_GET['email'];
 $Qpass = $_GET['pass'];
 $license_key = $_GET['license'];
 
 
 
-check_license_key($Qemail, $Qpass, $license_key);
+if(check_license_key($Qemail, $Qpass, $license_key)) {
+	echo "True";
+} else {
+	echo "False";
+}
 ?>

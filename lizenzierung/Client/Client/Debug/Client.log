@@ -1,0 +1,31 @@
+﻿Der Buildvorgang wurde am 29.05.2013 16:26:52 gestartet.
+Projekt "C:\Users\markus\Desktop\Client\Client\Client.vcxproj" auf Knoten "2", build Ziel(e).
+InitializeBuildStatus:
+  "Debug\Client.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+ClCompile:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\OpenSSL-Win32\include" /I"C:\Boost\include\boost-1_53" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Client.cpp
+  Client.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0501 to the compiler command line; or
+  - add _WIN32_WINNT=0x0501 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0501 (i.e. Windows XP target).
+ManifestResourceCompile:
+  Alle Ausgaben sind aktuell.
+Link:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\markus\Desktop\Client\Debug\Client.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\OpenSSL-Win32\bin" /LIBPATH:"C:\OpenSSL-Win32\lib\VC\static" /LIBPATH:"C:\OpenSSL-Win32\lib\VC" /LIBPATH:C:\Boost\lib\i386 /LIBPATH:"C:\OpenSSL-Win32\lib" libeay32MD.lib libeay32Md.lib libeay32MT.lib libeay32MTd.lib ssleay32MD.lib ssleay32MDd.lib ssleay32MT.lib ssleay32MTd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Client.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\markus\Desktop\Client\Debug\Client.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\markus\Desktop\Client\Debug\Client.lib" /MACHINE:X86 Debug\Client.exe.embed.manifest.res
+  Debug\Client.obj
+  Debug\stdafx.obj
+Manifest:
+  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Client.exe.embed.manifest" /manifest Debug\Client.exe.intermediate.manifest
+  Alle Ausgaben sind aktuell.
+LinkEmbedManifest:
+  Alle Ausgaben sind aktuell.
+  Client.vcxproj -> C:\Users\markus\Desktop\Client\Debug\Client.exe
+FinalizeBuildStatus:
+  Die Datei "Debug\Client.unsuccessfulbuild" wird gelöscht.
+  Aktualisieren des Timestamps von "Debug\Client.lastbuildstate".
+Die Erstellung des Projekts "C:\Users\markus\Desktop\Client\Client\Client.vcxproj" ist abgeschlossen, build Ziel(e).
+
+Das Erstellen war erfolgreich.
+
+Verstrichene Zeit 00:00:06.98

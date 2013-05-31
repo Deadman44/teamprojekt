@@ -195,7 +195,7 @@ function create_license_key($Qemail,$forgotten_license)
         return false;
     }
     
-    $random = base64_encode(mcrypt_create_iv(4, MCRYPT_DEV_RANDOM)); // 32 bit random
+    $random = base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_RANDOM)); // 128 bit random
     $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_RANDOM)); 
     $hashed_random = create_hash_with_salt($random,$salt);
     $license_key = $random.":".$hashed_random; //form: random:algo:interation:hashed_random

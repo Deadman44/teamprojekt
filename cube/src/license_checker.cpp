@@ -129,6 +129,7 @@ public:
 	//handle_write(error, bytes_transferred);
   }
 
+
 private:
   boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_;
   char request_[max_length];

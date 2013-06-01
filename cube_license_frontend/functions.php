@@ -278,25 +278,28 @@ function getCredentialsFromFile()
 //eigene ftk, fuegt neuen user zu db hinzu
 function addNewUserToDB($nname, $vname, $email, $pass)
 {
-    //separierung von hash und salt, salt bsteht auch aus algo-nr und interations...
+    //separierung von hash und salt, salt bsteht auch aus algo-nr und iterations...
     $securePass = create_hash($pass);
     $secureHash = returnHashFromAll($securePass);
     $secureSalt = returnSaltFromAll($securePass);
     
     if(!check_email($email))
     {
+       echo "<h3> EMAIL im falschen Format </h3>";
        return false; 
     }
     
     if(!check_EmailUnique($email))
     {
+        echo "<h3> EMAIL existiert bereits </h3>";
        return false; 
     }
 	
-	if(!check_password($pass))
-	{
-		return false;
-	}
+    if(!check_password($pass))
+    {
+        echo "<h3> Passwort entspricht nicht den Richtlinien </h3>";
+        return false;
+    }
     
     
     $credentials = getCredentialsFromFile();

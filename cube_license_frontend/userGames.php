@@ -19,6 +19,7 @@
 <ul>
 <li class="menue"><a href="userIndex.php">Home</a></li>
 <li class="menue"><a href="userGames.php">Games</a></li>
+<li class="menue"><a href="userData.php">Change Userdata</a></li>
 </ul>
 </div>
 <div class="rahmenMain">
@@ -34,7 +35,7 @@
 
 </div>
 <div class="main">
-<p> Platzhalter Cube Einkauf</p>
+<h2>Loslegen? Cube kaufen!</h2>
 <?php
 	require('functions.php');
     if (isset($_SESSION['validLogin'])){
@@ -45,6 +46,20 @@
 		}
 	}
 ?>
+<h2>Eindrücke des Games..</h2> 
+<p>
+<a href="images/screenshot_59277.jpg"><img src="images/screenshot_59277_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<a href="images/screenshot_129601.jpg"><img src="images/screenshot_129601_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<a href="images/screenshot_802899.jpg"><img src="images/screenshot_802899_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<p>
+<a href="images/screenshot_522827.jpg"><img src="images/screenshot_522827_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<a href="images/screenshot_828390.jpg"><img src="images/screenshot_828390_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<a href="images/screenshot_1027650.jpg"><img src="images/screenshot_1027650_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<p>
+<a href="images/screenshot_1478660.jpg"><img src="images/screenshot_1478660_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<a href="images/screenshot_1675435.jpg"><img src="images/screenshot_1675435_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<a href="images/screenshot_1914089.jpg"><img src="images/screenshot_1914089_thumb.jpg" width="160" height="120" border=0 alt="click to enlarge"></a>
+<p>
 </div>
 </div>
 </div>

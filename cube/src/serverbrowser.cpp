@@ -251,12 +251,12 @@ void refreshservers()
         serverinfo &si = servers[i];
         if(si.address.host != ENET_HOST_ANY && si.ping != 9999)
         {
-            if(si.protocol!=PROTOCOL_VERSION) sprintf_s(si.full)("%s [different cube protocol]", si.name);
-            else sprintf_s(si.full)("%d\t%d\t%s, %s: %s %s", si.ping, si.numplayers, si.map[0] ? si.map : "[unknown]", modestr(si.mode), si.name, si.sdesc);
+            if(si.protocol!=PROTOCOL_VERSION) qsprintf_s(si.full)("%s [different cube protocol]", si.name);
+            else qsprintf_s(si.full)("%d\t%d\t%s, %s: %s %s", si.ping, si.numplayers, si.map[0] ? si.map : "[unknown]", modestr(si.mode), si.name, si.sdesc);
         }
         else
         {
-            sprintf_s(si.full)(si.address.host != ENET_HOST_ANY ? "%s [waiting for server response]" : "%s [unknown host]\t", si.name);
+            qsprintf_s(si.full)(si.address.host != ENET_HOST_ANY ? "%s [waiting for server response]" : "%s [unknown host]\t", si.name);
         }
         si.full[50] = 0; // cut off too long server descriptions
         menumanual(1, i, si.full);

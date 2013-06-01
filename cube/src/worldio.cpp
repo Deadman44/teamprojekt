@@ -24,10 +24,10 @@ void setnames(char *name)
         strcpy_s(pakname, "base");
         strcpy_s(mapname, name);
     };
-    sprintf_s(cgzname)("packages/%s/%s.cgz",      pakname, mapname);
-    sprintf_s(bakname)("packages/%s/%s_%d.BAK",   pakname, mapname, lastmillis);
-    sprintf_s(pcfname)("packages/%s/package.cfg", pakname);
-    sprintf_s(mcfname)("packages/%s/%s.cfg",      pakname, mapname);
+    qsprintf_s(cgzname)("packages/%s/%s.cgz",      pakname, mapname);
+    qsprintf_s(bakname)("packages/%s/%s_%d.BAK",   pakname, mapname, lastmillis);
+    qsprintf_s(pcfname)("packages/%s/package.cfg", pakname);
+    qsprintf_s(mcfname)("packages/%s/%s.cfg",      pakname, mapname);
 
     path(cgzname);
     path(bakname);

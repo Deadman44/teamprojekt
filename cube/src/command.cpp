@@ -17,7 +17,7 @@ struct ident
     bool persist;
 };
 
-void itoa(char *s, int i) { sprintf_s(s)("%d", i); };
+void itoa(char *s, int i) { qsprintf_s(s)("%d", i); };
 char *exchangestr(char *o, char *n) { gp()->deallocstr(o); return newstring(n); };
 
 hashtable<ident> *idents = NULL;        // contains ALL vars/commands/aliases

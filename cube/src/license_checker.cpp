@@ -8,6 +8,9 @@ class client
 public:
     std::stringstream ss;	// Hier wird die vollstaendige Antwort des Servers gespeichert
     std::string response;	// Hier wird der HTTP Body der Antwort gespeichert
+	std::string user;
+	std::string password;
+
   client(boost::asio::io_service& io_service,
       boost::asio::ssl::context& context,
       boost::asio::ip::tcp::resolver::iterator endpoint_iterator)
@@ -64,10 +67,11 @@ public:
       //size_t request_length = strlen(request_);
 	  size_t request_length = strlen(request_);
       boost::asio::async_write(socket_,
-          boost::asio::buffer("GET /cCheck_License_Key.php?email=Hans&pass=hw&license=123 HTTP/1.1\r\nHost: localhost\r\n\r\n"),
+          boost::asio::buffer("GET /cCheck_License_Key.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
           boost::bind(&client::handle_write, this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::bytes_transferred));
+	  //std::cout << "GET /cCheck_License_Key.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
     }
     else
     {
@@ -129,16 +133,60 @@ public:
 	//handle_write(error, bytes_transferred);
   }
 
+  void setLicense(std::string l) {
+	  license = urlencode(l);
+	  //std::cout << license << std::endl;
+  }
+
+std::string urlencode(const std::string &c)
+{
+    
+    std::string escaped="";
+    int max = c.length();
+    for(int i=0; i<max; i++)
+    {
+        if ( (48 <= c[i] && c[i] <= 57) ||//0-9
+             (65 <= c[i] && c[i] <= 90) ||//abc...xyz
+             (97 <= c[i] && c[i] <= 122) || //ABC...XYZ
+             (c[i]=='~' || c[i]=='!' || c[i]=='*' || c[i]=='(' || c[i]==')' || c[i]=='\'')
+        )
+        {
+            escaped.append( &c[i], 1);
+        }
+        else
+        {
+            escaped.append("%");
+            escaped.append( char2hex(c[i]) );//converts char 255 to string "ff"
+        }
+    }
+    return escaped;
+}
+
+std::string char2hex( char dec )
+{
+    char dig1 = (dec&0xF0)>>4;
+    char dig2 = (dec&0x0F);
+    if ( 0<= dig1 && dig1<= 9) dig1+=48;    //0,48inascii
+    if (10<= dig1 && dig1<=15) dig1+=97-10; //a,97inascii
+    if ( 0<= dig2 && dig2<= 9) dig2+=48;
+    if (10<= dig2 && dig2<=15) dig2+=97-10;
+
+    std::string r;
+    r.append( &dig1, 1);
+    r.append( &dig2, 1);
+    return r;
+}
 
 private:
   boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_;
   char request_[max_length];
   char reply_[max_length];
+  std::string license;
 
   
 };
 
-int check_license()
+int check_license(std::string u, std::string p, std::string l)
 {
   try
   {
@@ -150,9 +198,12 @@ int check_license()
     boost::asio::ip::tcp::resolver::iterator iterator = resolver.resolve(query);
 
     boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
-    ctx.load_verify_file("server.crt");
+	ctx.load_verify_file("server.crt");
 
     client c(io_service, ctx, iterator);
+	c.user = u;
+	c.password = p;
+	c.setLicense(l);
 
     io_service.run();
 	char del = '\n';
@@ -172,14 +223,15 @@ int check_license()
 		if(item.compare("Content-Type: text/html\r")==0)
 			headerEnd = true;
 	}
-    std::cout << c.response;
-	const char wahr[4]= {'T', 'r', 'u', 'e'}; //weil cstrings /0 am ende haben, hier aber weg... weil php skript true zurück gibt
+    std::cout << c.response << std::endl;
+	const char wahr[5]= {'T', 'r', 'u', 'e', '\0'}; //weil cstrings /0 am ende haben, hier aber weg... weil php skript true zurück gibt
 	if(c.response.compare(wahr) == 0) {
-
 		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
 		return 200;
 	} else {
 		std::cout << "Lizenzpruefung fehlgeschlagen" << std::endl;
+		//std::system("MSG * Lizenzpruefung fehlgeschlagen");
+		//std::system("pause");
 		return 404;
 	}
   }

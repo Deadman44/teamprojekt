@@ -488,12 +488,12 @@ function change_Password($Qemail,$oldpass, $pass)
 {
     if(!checkUserLogin($Qemail, $oldpass))
     {
-        echo "<h1> Aktuelles Passwort nicht korrekt </h1>";
+        echo "<h3> Aktuelles Passwort nicht korrekt </h3>";
         return false;
     }
     if(!check_password($pass))
     {
-        echo "<h1>Bitte anderes Passwort eingeben</h1>";
+        echo "<h3>Bitte anderes Passwort eingeben</h3>";
     }
     
     $securePass = create_hash($pass);

@@ -30,11 +30,31 @@
 <input type="submit" value="Logout"></input>
 </form>
 </div>
-<div class="main"><br /><h2>Herzlich Willkommen.. 
-  <?php
-	echo $_SESSION['user'];
-  ?>
-  </h2>
+<div class="main"><br /><h2>Hier besteht die Möglichkeit das Passwort zu verändern.. </h2>
+
+<form action="changePasswd.php" method="post"><p class="anmeld"> 
+<table>
+	<tr>
+		<td> Altes Passwort:&nbsp;</td>
+		<td><input type="password" name="password" value="" /></td>
+	</tr>
+	<tr>
+		<td> Neues Passwort:&nbsp;</td>
+		<td><input type="password" name="new_password" value="" /></td>
+		<td> (Mind. 10 Zeichen + Zahl enthalten.)</td>
+	</tr>
+	<tr>
+		<td> Wdh. neues Passwort:&nbsp;</td>
+		<td><input type="password" name="new_password_copy" value="" /></td>
+		<td> (Passwort erneut eingeben)</td>
+	</tr>
+</table>
+<input type="submit" value="Passwort ändern"/></p>
+</form>
+
+
+
+
 </div>
 </div>
 </div>

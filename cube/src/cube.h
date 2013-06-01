@@ -210,6 +210,7 @@ extern int curtime;                     // current frame time
 extern int gamemode, nextmode;
 extern int xtraverts;
 extern bool demoplayback;
+extern int allowed; // MODLIZENZ 200 für ok, 404 für not available
 
 
 #define DMF 16.0f 

@@ -136,3 +136,56 @@ private:
 
   
 };
+
+int check_license()
+{
+  try
+  {
+
+    boost::asio::io_service io_service;
+
+    boost::asio::ip::tcp::resolver resolver(io_service);
+    boost::asio::ip::tcp::resolver::query query("localhost","443");
+    boost::asio::ip::tcp::resolver::iterator iterator = resolver.resolve(query);
+
+    boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
+    ctx.load_verify_file("server.crt");
+
+    client c(io_service, ctx, iterator);
+
+    io_service.run();
+	char del = '\n';
+	std::string item;
+	//std::cout << "#####" << std::endl;
+	//std::cout << c.ss.str() << std::endl;
+	bool headerEnd = false;
+	while(std::getline(c.ss, item, del)) {
+		//std::cout << item << std::endl;
+		//std::cout << "###" << std::endl;
+		if(headerEnd && item != "\r") {
+			c.response.append(item);
+			//c.response.append("\n");
+			//std::cout << "gefunden" << std::endl;
+		}
+		// HTTP Body beginnt mit naechster Zeile
+		if(item.compare("Content-Type: text/html\r")==0)
+			headerEnd = true;
+	}
+    std::cout << c.response;
+	const char wahr[4]= {'T', 'r', 'u', 'e'}; //weil cstrings /0 am ende haben, hier aber weg... weil php skript true zurück gibt
+	if(c.response.compare(wahr) == 0) {
+
+		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
+		return 200;
+	} else {
+		std::cout << "Lizenzpruefung fehlgeschlagen" << std::endl;
+		return 404;
+	}
+  }
+  catch (std::exception& e)
+  {
+    std::cerr << "Exception: " << e.what() << "\n";
+  }
+
+  return 0;
+}

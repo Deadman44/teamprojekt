@@ -463,8 +463,8 @@ function check_password_length($password)
 	}
 	else
 	{
-		return false;
 		echo "Passwortlänge zu kurz, bitte erneut registrieren.";
+		return false;
 	}
 }
 
@@ -476,8 +476,8 @@ function check_password_number_included($password)
 	}
 	else
 	{
-		return false;
 		echo "Keine Zahlen enthalten, bitte erneut registrieren.";
+		return false;
 	}
 }
 

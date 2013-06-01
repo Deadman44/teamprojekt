@@ -45,6 +45,11 @@
 		<td><input type="password" name="password" value="" /></td>
 		<td> (Mind. 10 Zeichen + Zahl enthalten.)</td>
 	</tr>
+	<tr>
+		<td> Wdh. Passwort:&nbsp;</td>
+		<td><input type="password" name="password_copy" value="" /></td>
+		<td> (Passwort erneut eingeben)</td>
+	</tr>
 </table>
 <input type="submit" value="Registrierung durchführen"/></p>
 </form>

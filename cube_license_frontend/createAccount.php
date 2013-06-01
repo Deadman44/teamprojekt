@@ -12,11 +12,19 @@
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
+		$password_copy = $_POST['password_copy'];
 		
-		// Neuen Benutzer anlegen
-		addNewUserToDB($name, $firstname, $email, $password);
-		
-		echo '<meta http-equiv="refresh" content="2; URL=https://localhost/index.php">';	
+		if($password==$password_copy)
+		{
+			// Neuen Benutzer anlegen
+			addNewUserToDB($name, $firstname, $email, $password);
+			echo '<meta http-equiv="refresh" content="2; URL=https://localhost/index.php">';
+		}
+		else
+		{
+			echo "Passwörter sind ungleich!";
+			echo '<meta http-equiv="refresh" content="2; URL=https://localhost/index.php">';
+		}
     }
 ?>
 </head>

@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 	hier stehen auch infos zu gamespeed, max fps usw
 	*/
 
-    for(;;)
+	for(;allowed == 200;)
     {
         int millis = SDL_GetTicks()*gamespeed/100;
         if(millis-lastmillis>200) lastmillis = millis-200;

@@ -86,6 +86,7 @@ int framesinmap = 0;
 
 int main(int argc, char **argv)
 {    
+	int allowconnect = 200; // MOD
     bool dedicated = false;
     int fs = SDL_FULLSCREEN, par = 0, uprate = 0, maxcl = 4;
     char *sdesc = "", *ip = "", *master = NULL, *passwd = "";
@@ -184,7 +185,8 @@ int main(int argc, char **argv)
 	hier stehen auch infos zu gamespeed, max fps usw
 	*/
 
-	for(;allowed == 200;)
+	
+	for(;allowconnect == 200;)
     {
         int millis = SDL_GetTicks()*gamespeed/100;
         if(millis-lastmillis>200) lastmillis = millis-200;

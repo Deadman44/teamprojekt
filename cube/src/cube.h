@@ -1,7 +1,12 @@
 // one big bad include file for the whole engine... nasty!
 
 #include "tools.h"	
-//#include <boost\asio.hpp>
+#include <cstdlib>
+#include <iostream>
+#include <boost/bind.hpp>
+#include <boost/asio.hpp>
+//#include <boost/asio/ssl.hpp>
+#include <string>
 
 
 

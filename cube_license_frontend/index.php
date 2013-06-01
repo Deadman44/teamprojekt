@@ -21,7 +21,7 @@
 </div>
 <div class="rahmenMain">
 <div class="anmeldung">
-<div class="anmeldemain"> <p>Anmeldemain</p></div>
+<div class="anmeldemain"></div>
 <div class="anmeldebox">
 
 <form action="login.php" method="post">

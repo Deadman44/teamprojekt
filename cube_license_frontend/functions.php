@@ -484,6 +484,45 @@ function check_password_number_included($password)
 }
 
 
+function change_Password($Qemail,$oldpass, $pass)
+{
+    if(!checkUserLogin($Qemail, $oldpass))
+    {
+        echo "<h3> Aktuelles Passwort nicht korrekt </h3>";
+        return false;
+    }
+    if(!check_password($pass))
+    {
+        echo "<h3>Bitte anderes Passwort eingeben</h3>";
+    }
+    
+    $securePass = create_hash($pass);
+    $secureHash = returnHashFromAll($securePass);
+    $secureSalt = returnSaltFromAll($securePass);
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+            $insert = 'UPDATE USER SET PASS = ?,PSALT=? WHERE email =? ';
+            $eintrag = $mysqli->prepare($insert);
+            $eintrag->bind_param('sss',$secureHash,$secureSalt,$Qemail);
+            $eintrag->execute();
+    }
+
+    $mysqli->close();   
+}
+
 function getAllDataFromUser($Qemail)
 {
     

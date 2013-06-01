@@ -185,8 +185,7 @@ int main(int argc, char **argv)
 	hier stehen auch infos zu gamespeed, max fps usw
 	*/
 
-	allowconnect = check_license("hans@wurst.de", "hanswurst12", "13p+Y9WAHkleEZ8k4R01sA==:sha512:1000:VvLLMXpCahKSXTP2g2QOLfm55YrJSMHCxEzgZTeUFLm4SRkjBE0d4AtnQgr0IxwY0ab11V8hyNYtOpZxEhyJ8A==:vPRAWDK1T0CBqvLKIMl8mU/2l3+j4KQWSjBcY2BpxW6n/9JEg/PeD6DiDvZyJH/EFjmyrnABx1un6G5K3Niwgw==");
-	std::cout << allowconnect << std::endl;
+	
 	for(;allowconnect == 200;)
     {
         int millis = SDL_GetTicks()*gamespeed/100;

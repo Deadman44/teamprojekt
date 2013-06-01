@@ -8,11 +8,17 @@
   <?php
 	require('functions.php');
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	
 		$firstname = $_POST['firstname'];
+		$firstname = htmlentities($firstname);
 		$name = $_POST['name'];
+		$name = htmlentities($name);
 		$email = $_POST['email'];
+		$email = htmlentities($email);
 		$password = $_POST['password'];
+		$password = htmlentities($password);
 		$password_copy = $_POST['password_copy'];
+		$password_copy = htmlentities($password_copy);
 		
 		if($password==$password_copy)
 		{

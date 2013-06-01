@@ -1,0 +1,75 @@
+﻿Der Buildvorgang wurde am 01.06.2013 11:55:50 gestartet.
+     1>Projekt "C:\w\cube\vcpp\cube.vcxproj" auf Knoten "2", build Ziel(e).
+     1>InitializeBuildStatus:
+         Aktualisieren des Timestamps von ".\Release\cube.unsuccessfulbuild".
+       ClCompile:
+         Alle Ausgaben sind aktuell.
+         Alle Ausgaben sind aktuell.
+         Alle Ausgaben sind aktuell.
+         Alle Ausgaben sind aktuell.
+         Alle Ausgaben sind aktuell.
+         Alle Ausgaben sind aktuell.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\w\cube\vcpp\.\Release\cube.exe) entspricht nicht dem OutputFile-Eigenschaftswert (c:\w\cube\cube\bin\cube.exe) von Linker. Das Projekt wird daher möglicherweise nicht ordnungsgemäß erstellt. Damit dieses Problem behoben werden kann, müssen die Eigenschaftswerte für $(OutDir), $(TargetName) und $(TargetExt) dem in %(Link.OutputFile) angegebenen Wert entsprechen.
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\w\cube\cube\bin\cube.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\OpenSSL-Win32\bin" /LIBPATH:"C:\OpenSSL-Win32\lib\VC\static" /LIBPATH:"C:\OpenSSL-Win32\lib\VC" /LIBPATH:C:\Boost\lib\i386 /LIBPATH:"C:\OpenSSL-Win32\lib" /LIBPATH:C:\w\cube\lib libeay32MD.lib libeay32Md.lib libeay32MT.lib libeay32MTd.lib ssleay32MD.lib ssleay32MDd.lib ssleay32MT.lib ssleay32MTd.lib odbc32.lib odbccp32.lib zlib.lib opengl32.lib glu32.lib msvcrt.lib SDLmain.lib SDL.lib SDL_image.lib ws2_32.lib winmm.lib SDL_mixer.lib "libboost_system-vc100-mt-1_53.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB /MANIFEST /ManifestFile:".\Release\cube.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Release/cube.pdb" /MAP:".\Release/cube.map" /MAPINFO:EXPORTS /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Release\cube.lib" /MACHINE:X86 .\Release/rendercubes.obj
+         .\Release/renderextras.obj
+         .\Release/rendergl.obj
+         .\Release/rendermd2.obj
+         .\Release/renderparticles.obj
+         .\Release/rendertext.obj
+         .\Release/client.obj
+         .\Release/clientextras.obj
+         .\Release/clientgame.obj
+         .\Release/clients2c.obj
+         .\Release/server.obj
+         .\Release/serverbrowser.obj
+         .\Release/serverms.obj
+         .\Release/serverutil.obj
+         .\Release/callbacks.obj
+         .\Release/host.obj
+         .\Release/list.obj
+         .\Release/memory.obj
+         .\Release/packet.obj
+         .\Release/peer.obj
+         .\Release/protocol.obj
+         .\Release/unix.obj
+         .\Release/win32.obj
+         .\Release/editing.obj
+         .\Release/rndmap.obj
+         .\Release/world.obj
+         .\Release/worldio.obj
+         .\Release/worldlight.obj
+         .\Release/worldocull.obj
+         .\Release/worldrender.obj
+         .\Release/entities.obj
+         .\Release/monster.obj
+         .\Release/physics.obj
+         .\Release/savegamedemo.obj
+         .\Release/weapon.obj
+         .\Release/command.obj
+         .\Release/console.obj
+         .\Release/main.obj
+         .\Release/menus.obj
+         .\Release/pch.obj
+         .\Release/sound.obj
+         .\Release/tools.obj /MACHINE:I386 
+     1>savegamedemo.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z)".
+     1>pch.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z)".
+     1>clients2c.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z)".
+     1>serverbrowser.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z)".
+     1>serverms.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z)".
+     1>serverutil.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z)".
+     1>savegamedemo.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z)".
+     1>pch.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z)".
+     1>clients2c.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z)".
+     1>serverbrowser.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z)".
+     1>serverms.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z)".
+     1>serverutil.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z)".
+     1>libboost_system-vc100-mt-1_53.lib(error_code.obj) : error LNK2001: Nicht aufgelöstes externes Symbol ""__declspec(dllimport) void __cdecl std::_Xout_of_range(char const *)" (__imp_?_Xout_of_range@std@@YAXPBD@Z)".
+     1>libboost_system-vc100-mt-1_53.lib(error_code.obj) : error LNK2001: Nicht aufgelöstes externes Symbol ""__declspec(dllimport) void __cdecl std::_Xlength_error(char const *)" (__imp_?_Xlength_error@std@@YAXPBD@Z)".
+     1>c:\w\cube\cube\bin\cube.exe : fatal error LNK1120: 4 nicht aufgelöste externe Verweise.
+     1>Die Erstellung des Projekts "C:\w\cube\vcpp\cube.vcxproj" ist abgeschlossen, build Ziel(e) -- FEHLER.
+
+Fehler beim Erstellen
+
+Verstrichene Zeit 00:00:00.64

@@ -1,7 +1,12 @@
 // one big bad include file for the whole engine... nasty!
 
 #include "tools.h"	
-//#include <boost\asio.hpp>
+#include <cstdlib>
+#include <iostream>
+#include <boost/bind.hpp>
+#include <boost/asio.hpp>
+#include <boost/asio/ssl.hpp>
+#include <string>
 
 
 
@@ -205,6 +210,7 @@ extern int curtime;                     // current frame time
 extern int gamemode, nextmode;
 extern int xtraverts;
 extern bool demoplayback;
+extern int allowed; // MODLIZENZ 200 für ok, 404 für not available
 
 
 #define DMF 16.0f 

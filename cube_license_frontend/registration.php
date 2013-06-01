@@ -43,6 +43,7 @@
 	<tr>
 		<td> Passwort:&nbsp;</td>
 		<td><input type="password" name="password" value="" /></td>
+		<td> (Mind. 10 Zeichen + Zahl enthalten.)</td>
 	</tr>
 </table>
 <input type="submit" value="Registrierung durchführen"/></p>

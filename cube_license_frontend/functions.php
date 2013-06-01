@@ -292,6 +292,11 @@ function addNewUserToDB($nname, $vname, $email, $pass)
     {
        return false; 
     }
+	
+	if(!check_password($pass))
+	{
+		return false;
+	}
     
     
     $credentials = getCredentialsFromFile();
@@ -393,8 +398,6 @@ function check_email($email)
 	{
 	    return false;
 	}
-    
-
 }
 
 function check_EmailUnique($Qemail)
@@ -439,6 +442,44 @@ function check_EmailUnique($Qemail)
     
 }
 
+
+function check_password($password)
+{
+	if(check_password_length($password) && check_password_number_included($password))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function check_password_length($password)
+{
+	if(strlen($password) >= 10)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+		echo "Passwortlänge zu kurz, bitte erneut registrieren.";
+	}
+}
+
+function check_password_number_included($password)
+{
+	if(preg_match( "/\d+/", $password ))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+		echo "Keine Zahlen enthalten, bitte erneut registrieren.";
+	}
+}
 
 
 function getAllDataFromUser($Qemail)

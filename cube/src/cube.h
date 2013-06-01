@@ -5,7 +5,7 @@
 #include <iostream>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
-//#include <boost/asio/ssl.hpp>
+#include <boost/asio/ssl.hpp>
 #include <string>
 
 

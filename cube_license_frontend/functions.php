@@ -321,12 +321,11 @@ function addNewUserToDB($nname, $vname, $email, $pass)
 		
 		if ($eintrag->affected_rows == 1)
         {
-            echo 'Der neue Eintrage wurde hinzugef&uuml;gt.';
-			echo '<br />';
+            echo '<h3>Der neue Eintrage wurde hinzugef&uuml;gt.</h3> <br />';
         }
         else
         {
-            echo 'Der Eintrag konnte nicht hinzugef&uuml;gt werden.';
+            echo '<h3>Der Eintrag konnte nicht hinzugef&uuml;gt werden.</h3>';
         }	
 	}
 	
@@ -463,7 +462,7 @@ function check_password_length($password)
 	}
 	else
 	{
-		echo "Passwortlänge zu kurz, bitte erneut registrieren.";
+		echo '<h3> Passwortlänge zu kurz, bitte erneut registrieren. </h3>';
 		return false;
 	}
 }
@@ -476,7 +475,7 @@ function check_password_number_included($password)
 	}
 	else
 	{
-		echo "Keine Zahlen enthalten, bitte erneut registrieren.";
+		echo '<h3>Keine Zahlen enthalten, bitte erneut registrieren.</h3>';
 		return false;
 	}
 }

@@ -20,7 +20,7 @@
 			exit();
 		} else {
 			$_SESSION['validLogin'] = false;
-			echo 'Falsche Login-Daten!';
+			echo '<h3>Falsche Login-Daten!</h3>';
 			echo '<meta http-equiv="refresh" content="2; URL=https://localhost/index.php">';
 		}
     }

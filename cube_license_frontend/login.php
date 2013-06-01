@@ -10,12 +10,8 @@
 	
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		session_start();
-		
 		$user = $_POST['user'];
-		$user = htmlentities($user);
 		$password = $_POST['password'];
-		$password = htmlentities($password);
-		
 		$_SESSION['user'] = $user;
 		// Benutzername und Passwort werden überprüft
 		if(checkUserLogin($user, $password)) {

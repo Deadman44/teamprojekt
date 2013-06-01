@@ -19,12 +19,11 @@
 <ul>
 <li class="menue"><a href="userIndex.php">Home</a></li>
 <li class="menue"><a href="userGames.php">Games</a></li>
-<li class="menue"><a href="userData.php">Change Userdata</a></li>
 </ul>
 </div>
 <div class="rahmenMain">
 <div class="anmeldung">
-<div class="anmeldemain"></div>
+<div class="anmeldemain"> <p>Anmeldemain</p></div>
 <div class="anmeldebox">
 <form action="logout.php">
 <input type="submit" value="Logout"></input>

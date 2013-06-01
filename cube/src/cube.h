@@ -8,7 +8,7 @@
 #include <boost/asio/ssl.hpp>
 #include <string>
 
-
+int check_license(std::string u, std::string p, std::string l);
 
 enum                            // block types, order matters!
 {

@@ -230,9 +230,9 @@ int check_license(std::string u, std::string p, std::string l)
 		return 200;
 	} else {
 		std::cout << "Lizenzpruefung fehlgeschlagen" << std::endl;
-		//std::system("MSG * Lizenzpruefung fehlgeschlagen");
+		std::system("MSG /W * Lizenzpruefung fehlgeschlagen");
 		//std::system("pause");
-		Sleep(3000);
+		Sleep(10000);
 		return 404;
 	}
   }

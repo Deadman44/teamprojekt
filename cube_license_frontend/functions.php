@@ -109,7 +109,8 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     
     if(strcmp($active,"1"))
     {
-        return false;
+        echo $active;
+        return "ERRERRERR";
     }
 
     /*

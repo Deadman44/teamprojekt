@@ -67,6 +67,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
 
     if(!checkUserLogin($Qemail, $Qpass))
     {
+        echo "Wrong Login";
         return false;
     }
     
@@ -77,9 +78,8 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     
     $lkeyArr = explode(":", $license_key);
     $random = $lkeyArr[0]; //die vom user gegeben random zahl
-    $hashed_random = $lkeyArr[3]; //die hmac, also random und salt;; warum 3?da 1 = sha512, 2 = 1000 iterations
-    
-    
+    $hashed_random = $lkeyArr[1]; //test... //die hmac, also random und salt;; 
+       
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     
@@ -113,7 +113,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
      * wobei der angesprochene angriff bedingt, dass man den originalkey hat
      * ggfls muss bei eingaben auf doppelpunkt gefiltert werden...
      */
-    $hashed_random_candidate = explode(':',create_hash_with_salt($random, $skey))[2];
+    $hashed_random_candidate = explode(':',create_hash_with_salt($random, $skey))[3];
     if($hashed_random_candidate != $hashed_random)
     {
         //echo $hashed_random . " ORIGINAL" . "<br>";
@@ -197,8 +197,9 @@ function create_license_key($Qemail,$forgotten_license)
     
     $random = base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_RANDOM)); // 128 bit random
     $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_RANDOM)); 
-    $hashed_random = create_hash_with_salt($random,$salt);
-    $license_key = $random.":".$hashed_random; //form: random:algo:interation:hashed_random
+    $hashed_random = explode(":",create_hash_with_salt($random,$salt));
+     
+    $license_key = $random.":".$hashed_random[3]; //nur hashed_random ausgeben, kein salt und params
     $hserial = hash("sha512", $license_key);
     
     $credentials = getCredentialsFromFile();

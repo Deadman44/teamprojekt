@@ -66,11 +66,24 @@ public:
 		//std::cin.getline(request_, max_length);
       //size_t request_length = strlen(request_);
 	  size_t request_length = strlen(request_);
-      boost::asio::async_write(socket_,
-          boost::asio::buffer("GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
-          boost::bind(&client::handle_write, this,
-            boost::asio::placeholders::error,
-            boost::asio::placeholders::bytes_transferred));
+	  
+	  if(initialization) {
+		  boost::asio::async_write(socket_,
+			  boost::asio::buffer("GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
+			  boost::bind(&client::handle_write, this,
+				boost::asio::placeholders::error,
+				boost::asio::placeholders::bytes_transferred));
+		  initialization = false;
+		  std::cout << "URL: " << "GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
+	  } else {
+		  boost::asio::async_write(socket_,
+			  boost::asio::buffer("GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
+			  boost::bind(&client::handle_write, this,
+				boost::asio::placeholders::error,
+				boost::asio::placeholders::bytes_transferred));
+		  std::cout << "Lizenz mit Ticket" << std::endl;
+		  std::cout << "GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
+	  }
     }
     else
     {
@@ -218,21 +231,22 @@ int check_license(std::string u, std::string p, std::string l)
 		if(item.compare("Content-Type: text/html\r")==0)
 			headerEnd = true;
 	}
-    conoutf("c.response: ", c.response.c_str());
 	std::cout << "c.repsonse (cout): " << c.response << std::endl;
-	const char falsch[]= "False"; 
-	if(c.response.compare(falsch) == 0) {
+	//const char falsch[]= "False"; 
+	if(c.response.substr(0,4).compare("True")==0) {
+		conoutf("Lizenzpruefung erfolgreich");
+		std::cout << "HTTP Response: " << c.response.c_str() << std::endl;
+		std::string responseTicket = c.response.substr(4);
+		ticket = responseTicket;
+		std::cout << "Ticket: " << responseTicket << std::endl;
+		return 200;
+	} else if(c.response.substr(0,5).compare("False")==0) {
 		conoutf("Lizenzpruefung fehlgeschlagen");
 		Sleep(10000);
 		return 404;
 	} else {
-		conoutf("Lizenzpruefung erfolgreich");
-		conoutf("HTTP Response: ", c.response.c_str());
-		std::string foo;
-		foo = c.response.substr(4);
-		//conoutf("Ticket: ", foo.c_str());
-		std::cout << "Ticket: " << foo << std::endl;
-		return 200;
+		conoutf("Falsche HTTP Antwort");
+		std::cout << c.response << std::endl;
 	}
   }
   catch (std::exception& e)

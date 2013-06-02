@@ -847,16 +847,16 @@ function permanentcheck($Qemail,$oldticket)
     
     if(!$active)
     {
-        return "false";
+        return "False";
     }
     if(strcmp($oldticket, $ticket) != 0)
     {
-        return "false";
+        return "False";
     }
     
     $ticket = createTicketWithOldTicket($Qemail, $ticket);
     
     
     $mysqli->close();   
-    return $ticket;
+    return "True\n" . $ticket;
 }

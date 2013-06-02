@@ -5,6 +5,8 @@
 std::string user;
 std::string user_password;
 std::string license;
+bool initialization;
+std::string ticket;
 
 void cleanup(char *msg)         // single program exit point;
 {
@@ -89,7 +91,8 @@ int islittleendian = 1;
 int framesinmap = 0;
 
 int main(int argc, char **argv)
-{   
+{   initialization=true;
+	ticket = "";
 	std::cout << "Bitte Benutzernamen eingeben: ";
 	std::cin >> user;
 	std::cout << "Bitte Passwort eingeben: ";
@@ -192,6 +195,7 @@ int main(int argc, char **argv)
 	
 	// Lizenzpruefung Thread aktivieren, Lizenz wird alle 20s geprüft
 	permanent_check();
+
 	
 	/*
 	hauptloop, das spiel bleibt hier "haengen" und laeuft dann in einer endlosschleife

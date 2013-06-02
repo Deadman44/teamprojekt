@@ -225,6 +225,7 @@ extern std::string user;
 extern std::string user_password;
 extern std::string license;
 extern std::string ticket;
+extern bool initialization;
 
 
 #define DMF 16.0f 

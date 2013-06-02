@@ -85,7 +85,13 @@ int islittleendian = 1;
 int framesinmap = 0;
 
 int main(int argc, char **argv)
-{    
+{   
+	std::cout << "Bitte Benutzernamen eingeben: ";
+	std::string user;
+	std::cin >> user;
+	std::cout << "Bitte Passwort eingeben: ";
+	std::string password;
+	std::cin >> password;
 	int allowconnect = 200; // MOD
     bool dedicated = false;
     int fs = SDL_FULLSCREEN, par = 0, uprate = 0, maxcl = 4;
@@ -184,8 +190,7 @@ int main(int argc, char **argv)
 	hauptloop, das spiel bleibt hier "haengen" und laeuft dann in einer endlosschleife
 	hier stehen auch infos zu gamespeed, max fps usw
 	*/
-
-	allowconnect = check_license("hans@wurst.de", "hanswurst123", license_datei());
+	allowconnect = check_license(user, password, license_datei());
 	std::cout << "Lizenzschluessel: " << license_datei() << std::endl;
 	std::cout << allowconnect << std::endl;
 	for(;allowconnect == 200;)

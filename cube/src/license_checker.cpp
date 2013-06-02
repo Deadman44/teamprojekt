@@ -81,7 +81,7 @@ public:
 			  boost::bind(&client::handle_write, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
-		  std::cout << "Lizenz mit Ticket" << std::endl;
+		  std::cout << "Lizenz mit Ticket:" << ticket << std::endl;
 		  std::cout << "GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
 	  }
     }
@@ -237,8 +237,8 @@ int check_license(std::string u, std::string p, std::string l)
 		conoutf("Lizenzpruefung erfolgreich");
 		std::cout << "HTTP Response: " << c.response.c_str() << std::endl;
 		std::string responseTicket = c.response.substr(4);
-		ticket = responseTicket;
-		std::cout << "Ticket: " << responseTicket << std::endl;
+		ticket = c.urlencode(responseTicket);
+		std::cout << "Ticket: " << ticket << std::endl;
 		return 200;
 	} else if(c.response.substr(0,5).compare("False")==0) {
 		conoutf("Lizenzpruefung fehlgeschlagen");

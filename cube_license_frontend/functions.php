@@ -693,6 +693,7 @@ function setUserInActive($Qemail,$ticket)
     $pwd = $credentialsArr[1];
     
     $active = 0;
+    $newticket = "empty";
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     if($mysqli->connect_errno)
@@ -703,9 +704,9 @@ function setUserInActive($Qemail,$ticket)
     else
     {
 
-            $insert = 'UPDATE USER SET ACTIVE=? WHERE email =? AND TICKET=? ';
+            $insert = 'UPDATE USER SET ACTIVE=?, TICKET=? WHERE email =? AND TICKET=? ';
             $eintrag = $mysqli->prepare($insert);
-            $eintrag->bind_param('sss',$active,$Qemail,$ticket);
+            $eintrag->bind_param('ssss',$active,$newticket,$Qemail,$ticket);
             $eintrag->execute();
     }
 
@@ -719,7 +720,7 @@ function getUserActive($Qemail,$ticket)
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
     
-    $active = 1;
+    $active = "ERROR NOT FOUND";
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     if($mysqli->connect_errno)
@@ -777,7 +778,79 @@ function createAndReturnTicket($Qemail,$Qpass)
 
     $mysqli->close();
     
-    setUserActive($Qemail, $temporaryticket);
-    
+    setUserActive($Qemail, $temporaryticket);  
     return $temporaryticket;
+}
+
+function createTicketWithOldTicket($Qemail,$ticket)
+{
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+       
+    $hashAndSalt = create_hash($Qemail.$ticket);
+    $temporaryticket = returnHashFromAll($hashAndSalt); //Salt implizit, gibt nur Hash aus     
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $insert = 'UPDATE USER SET TICKET=? WHERE email =? AND ticket=? ';
+            $eintrag = $mysqli->prepare($insert);
+            $eintrag->bind_param('sss',$temporaryticket,$Qemail,$ticket);
+            $eintrag->execute();
+    }
+
+    $mysqli->close();   
+    return $temporaryticket;
+    
+}
+
+function permanentcheck($Qemail,$oldticket)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $active = "ERROR NOT FOUND";
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+            $query = "SELECT ACTIVE,TICKET from USER where EMAIL = ? AND TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('ss',$Qemail,$oldticket);
+            $result->execute();
+            $result->bind_result($active,$ticket);
+            while($result->fetch())
+            {
+            }     
+    }
+    
+    if(!$active)
+    {
+        return "false";
+    }
+    if(strcmp($oldticket, $ticket) != 0)
+    {
+        return "false";
+    }
+    
+    $ticket = createTicketWithOldTicket($Qemail, $ticket);
+    
+    
+    $mysqli->close();   
+    return $ticket;
 }

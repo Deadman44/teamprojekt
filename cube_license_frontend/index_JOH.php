@@ -23,32 +23,29 @@
             echo checkUserLogin("test@test.de", "testtesttest1");
             echo "<br>";
             
-            echo check_license_key("test@test.de", "testtesttest1", $serial);
+            echo check_license_key("test@test.de", "testtesttest1", $serial)."<br>";
             
+            $ticket = createAndReturnTicket("test@test.de", "testtesttest1");
+            echo "ACTIVE?? ".getUserActive("test@test.de", $ticket)."<br>";
+            echo "setting active   ".setUserActive("test@test.de", $ticket)."<br>";;
+            echo " active? ".getUserActive("test@test.de", $ticket)."<br>";
+            echo "setting inactive ".setUserInActive("test@test.de", $ticket)."<br>";
+            echo " active? ".getUserActive("test@test.de", $ticket);
 
-            
-            
-            /*
-            $ticket = createAndReturnTicket("error@error.de", "testtesttest1");
             echo $ticket."<br>";
-            setUserActive("error@error.de", $ticket);
-            echo getUserActive("error@error.de", $ticket)."<br>";
-            setUserInActive("error@error.de", $ticket);
-            echo getUserActive("error@error.de", $ticket)."<br>";
+            
+            $newticket = permanentcheck("test@test.de", $ticket);
+            
+            echo $newticket;
+            
+            
+    
+            
+            
 
-*/
             
-            /*
-            $data1 = getAllDataFromUser("blaise@pascal.de");
-            var_dump($data1);
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
-            $data2 = getAllDataFromUser("test2@best.de");
-            var_dump($data2);
-            */
             
-            //echo license_exists("blaise@pascal.de");
+
 
             
             

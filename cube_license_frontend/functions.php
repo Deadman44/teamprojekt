@@ -67,7 +67,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
 
     if(!checkUserLogin($Qemail, $Qpass))
     {
-        echo "Wrong Login";
+        //echo "Wrong Login";
         return false;
     }
     

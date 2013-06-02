@@ -8,7 +8,6 @@
         <?php
         
             include 'functions.php';
-            include 'specialfunctions.php';
             include 'dbtests.php';
             
             //addNewUserToDB("ttt", "www", "tttt9@pascal.de", "horst");
@@ -23,12 +22,14 @@
             $lickey = "JCoH96LFUm+tNfvJUMCk8w==:sha512:1000:nz0mrnS54YbgskdiZG/GwyL+HQlvcQdzHvUDhLR9/yJSwzrG80IILVYHbACU23Q+Va4bsu/d/1OQPkGbkzIU3w==:Rh0Rng7Y0isPuWfRWkLLziVAnuYrbenDw7XJ0gqVT+9A7Zr8g+3IUGsJ0nBke8mI2h9W/K0WKYEacd9CmgmMgg==";
             echo check_license_key("error@error.de", "blabla", $lickey);
             echo "<br>";
-            setUserActive("error@error.de");
-            echo getUserActive("error@error.de");
-            echo "<br>";
-            setUserInActive("error@error.de");
-            echo "<br>";
-            echo getUserActive("error@error.de");
+            
+            $ticket = createAndReturnTicket("error@error.de", "testtesttest1");
+            echo $ticket."<br>";
+            setUserActive("error@error.de", $ticket);
+            echo getUserActive("error@error.de", $ticket)."<br>";
+            setUserInActive("error@error.de", $ticket);
+            echo getUserActive("error@error.de", $ticket)."<br>";
+
             
             /*
             $data1 = getAllDataFromUser("blaise@pascal.de");

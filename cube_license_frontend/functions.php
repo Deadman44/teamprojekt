@@ -652,3 +652,131 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
         return bin2hex(substr($output, 0, $key_length));
 }
 
+
+/*
+ * Special Authentication Functions
+ * 
+ */
+
+function setUserActive($Qemail,$ticket)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $active = 1;
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $insert = 'UPDATE USER SET ACTIVE=? WHERE email =? AND TICKET=?';
+            $eintrag = $mysqli->prepare($insert);
+            $eintrag->bind_param('sss',$active,$Qemail,$ticket);
+            $eintrag->execute();
+    }
+
+    $mysqli->close();   
+}
+function setUserInActive($Qemail,$ticket)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $active = 0;
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $insert = 'UPDATE USER SET ACTIVE=? WHERE email =? AND TICKET=? ';
+            $eintrag = $mysqli->prepare($insert);
+            $eintrag->bind_param('sss',$active,$Qemail,$ticket);
+            $eintrag->execute();
+    }
+
+    $mysqli->close();   
+}
+
+function getUserActive($Qemail,$ticket)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $active = 1;
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $query = "SELECT ACTIVE from USER where EMAIL = ? AND TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('ss',$Qemail,$ticket);
+            $result->execute();
+            $result->bind_result($active);
+            while($result->fetch())
+            {
+            }     
+    }
+    
+    $mysqli->close();   
+    return $active;
+
+}
+
+
+function createAndReturnTicket($Qemail,$Qpass)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    if(!checkUserLogin($Qemail, $Qpass))
+    {
+        return false;
+    }
+    
+    $hashAndSalt = create_hash($Qemail.$Qpass);
+    $temporaryticket = returnHashFromAll($hashAndSalt); //Salt implizit, gibt nur Hash aus     
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $insert = 'UPDATE USER SET TICKET=? WHERE email =? ';
+            $eintrag = $mysqli->prepare($insert);
+            $eintrag->bind_param('ss',$temporaryticket,$Qemail);
+            $eintrag->execute();
+    }
+
+    $mysqli->close();
+    
+    setUserActive($Qemail, $temporaryticket);
+    
+    return $temporaryticket;
+}

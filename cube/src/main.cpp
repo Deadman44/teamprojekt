@@ -193,6 +193,7 @@ int main(int argc, char **argv)
 	allowconnect = check_license(user, password, license_datei());
 	std::cout << "Lizenzschluessel: " << license_datei() << std::endl;
 	std::cout << allowconnect << std::endl;
+	permanent_check();
 	for(;allowconnect == 200;)
     {
         int millis = SDL_GetTicks()*gamespeed/100;

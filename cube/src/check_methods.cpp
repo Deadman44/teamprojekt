@@ -1,5 +1,4 @@
 #include "cube.h"
-#include <boost\thread.hpp>
 
 void permanent_check()
 {

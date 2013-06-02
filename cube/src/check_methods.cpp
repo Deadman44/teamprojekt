@@ -9,9 +9,14 @@ void permanent_check()
 
 void worker()
 {
-	conoutf("WORKING WORKING");
-	boost::posix_time::seconds waiting(10);
-	boost::this_thread::sleep(waiting);
+	while(true)
+	{
+		conoutf("WORKING WORKING");
+		boost::posix_time::seconds waiting(10);
+		boost::this_thread::sleep(waiting);
+	}
+
+
 
 
 }

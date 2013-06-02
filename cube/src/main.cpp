@@ -2,6 +2,10 @@
 
 #include "cube.h"
 
+std::string user;
+std::string user_password;
+std::string license;
+
 void cleanup(char *msg)         // single program exit point;
 {
 	stop();
@@ -87,11 +91,11 @@ int framesinmap = 0;
 int main(int argc, char **argv)
 {   
 	std::cout << "Bitte Benutzernamen eingeben: ";
-	std::string user;
 	std::cin >> user;
 	std::cout << "Bitte Passwort eingeben: ";
-	std::string password;
-	std::cin >> password;
+	std::cin >> user_password;
+	// Lizenzschluessel auslesen
+	license = license_datei();
 	int allowconnect = 200; // MOD
     bool dedicated = false;
     int fs = SDL_FULLSCREEN, par = 0, uprate = 0, maxcl = 4;
@@ -185,16 +189,15 @@ int main(int argc, char **argv)
     
     log("mainloop");
     int ignore = 5;
-
+	
+	// Lizenzpruefung Thread aktivieren, Lizenz wird alle 20s geprüft
+	permanent_check();
+	
 	/*
 	hauptloop, das spiel bleibt hier "haengen" und laeuft dann in einer endlosschleife
 	hier stehen auch infos zu gamespeed, max fps usw
 	*/
-	allowconnect = check_license(user, password, license_datei());
-	std::cout << "Lizenzschluessel: " << license_datei() << std::endl;
-	std::cout << allowconnect << std::endl;
-	permanent_check();
-	for(;allowconnect == 200;)
+	for(;;)
     {
         int millis = SDL_GetTicks()*gamespeed/100;
         if(millis-lastmillis>200) lastmillis = millis-200;

@@ -7,6 +7,7 @@
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/thread.hpp>
+#include <boost/lexical_cast.hpp>
 #include <fstream>
 #include <string>
 
@@ -14,6 +15,9 @@ int check_license(std::string u, std::string p, std::string l);
 std::string license_datei();
 void permanent_check();
 void worker();
+void quit();					// Cube Funktion
+
+
 
 enum                            // block types, order matters!
 {
@@ -216,6 +220,10 @@ extern int gamemode, nextmode;
 extern int xtraverts;
 extern bool demoplayback;
 extern int allowconnect;
+// Eigene globale Variablen für Lizenzpruefung
+extern std::string user;
+extern std::string user_password;
+extern std::string license;
 
 
 #define DMF 16.0f 

@@ -67,11 +67,10 @@ public:
       //size_t request_length = strlen(request_);
 	  size_t request_length = strlen(request_);
       boost::asio::async_write(socket_,
-          boost::asio::buffer("GET /cCheck_License_Key.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
+          boost::asio::buffer("GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
           boost::bind(&client::handle_write, this,
             boost::asio::placeholders::error,
             boost::asio::placeholders::bytes_transferred));
-	  //std::cout << "GET /cCheck_License_Key.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
     }
     else
     {
@@ -208,12 +207,8 @@ int check_license(std::string u, std::string p, std::string l)
     io_service.run();
 	char del = '\n';
 	std::string item;
-	//std::cout << "#####" << std::endl;
-	//std::cout << c.ss.str() << std::endl;
 	bool headerEnd = false;
 	while(std::getline(c.ss, item, del)) {
-		//std::cout << item << std::endl;
-		//std::cout << "###" << std::endl;
 		if(headerEnd && item != "\r") {
 			c.response.append(item);
 			//c.response.append("\n");
@@ -223,17 +218,21 @@ int check_license(std::string u, std::string p, std::string l)
 		if(item.compare("Content-Type: text/html\r")==0)
 			headerEnd = true;
 	}
-    std::cout << c.response << std::endl;
-	const char wahr[5]= {'T', 'r', 'u', 'e', '\0'}; //weil cstrings /0 am ende haben, hier aber weg... weil php skript true zurück gibt
-	if(c.response.compare(wahr) == 0) {
-		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
-		return 200;
-	} else {
-		std::cout << "Lizenzpruefung fehlgeschlagen" << std::endl;
-		std::system("MSG /W * Lizenzpruefung fehlgeschlagen");
-		//std::system("pause");
+    conoutf("c.response: ", c.response.c_str());
+	std::cout << "c.repsonse (cout): " << c.response << std::endl;
+	const char falsch[]= "False"; 
+	if(c.response.compare(falsch) == 0) {
+		conoutf("Lizenzpruefung fehlgeschlagen");
 		Sleep(10000);
 		return 404;
+	} else {
+		conoutf("Lizenzpruefung erfolgreich");
+		conoutf("HTTP Response: ", c.response.c_str());
+		std::string foo;
+		foo = c.response.substr(4);
+		//conoutf("Ticket: ", foo.c_str());
+		std::cout << "Ticket: " << foo << std::endl;
+		return 200;
 	}
   }
   catch (std::exception& e)
@@ -249,7 +248,7 @@ std::string license_datei(){
 	licence_key_datei.open("Lizenzschluessel.txt");
     if (!licence_key_datei)	// muss existieren
     {
-        std::cout << "Lizenzschluessel.txt " << " kann nicht geoeffnet werden!\n";
+        conoutf("Lizenzschluessel.txt kann nicht geoeffnet werden!");
       	exit(-1);
     }
 	char c;

@@ -224,6 +224,7 @@ extern int allowconnect;
 extern std::string user;
 extern std::string user_password;
 extern std::string license;
+extern std::string ticket;
 
 
 #define DMF 16.0f 

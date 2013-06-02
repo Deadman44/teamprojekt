@@ -24,7 +24,7 @@ void worker()
 			boost::this_thread::sleep(waiting);
 			quit();
 		}
-			
+		// Pruefungsintervall 20s	
 		boost::posix_time::seconds waiting(20);
 		boost::this_thread::sleep(waiting);
 	}

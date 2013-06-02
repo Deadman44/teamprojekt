@@ -85,6 +85,8 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     
     $skey = "NO KEY ERROR";
     $hserial ="NO SERIAL ERROR";
+    $active = "0";
+    
     if($mysqli->connect_errno)
     {
             //echo "FAIL" . $user . $pwd;
@@ -92,11 +94,11 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     }
     else
     {
-            $query = "SELECT SKEY,HSERIAL from USER where EMAIL = ? ";
+            $query = "SELECT SKEY,HSERIAL,ACTIVE from USER where EMAIL = ? ";
             $result = $mysqli->prepare($query);
             $result->bind_param('s',$Qemail);
             $result->execute();
-            $result->bind_result($skey,$hserial);
+            $result->bind_result($skey,$hserial,$active);
             while($result->fetch())
             {
                     //noch keine fehlerüberprüfung...
@@ -105,6 +107,10 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     }
     $mysqli->close();
     
+    if(strcmp($active,"1"))
+    {
+        return false;
+    }
 
     /*
      * erstes überprüfung kann umgangen werden, fall an eine gültige lizenz ein doppelpunkt

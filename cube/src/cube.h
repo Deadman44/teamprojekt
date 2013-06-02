@@ -6,9 +6,11 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+#include <fstream>
 #include <string>
 
 int check_license(std::string u, std::string p, std::string l);
+std::string license_datei();
 
 enum                            // block types, order matters!
 {

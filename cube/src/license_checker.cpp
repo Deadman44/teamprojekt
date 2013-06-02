@@ -243,3 +243,21 @@ int check_license(std::string u, std::string p, std::string l)
 
   return 0;
 }
+
+std::string license_datei(){
+	std::ifstream licence_key_datei;
+	licence_key_datei.open("Lizenzschluessel.txt");
+    if (!licence_key_datei)	// muss existieren
+    {
+        std::cout << "Lizenzschluessel.txt " << " kann nicht geoeffnet werden!\n";
+      	exit(-1);
+    }
+	char c;
+	std::string licencenumber;
+	while (licence_key_datei.get(c))
+	{
+		licencenumber += c;
+	}
+	licence_key_datei.close();
+	return licencenumber;
+}

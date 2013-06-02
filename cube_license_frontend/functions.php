@@ -107,7 +107,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     }
     $mysqli->close();
     
-    if(strcmp($active,"1"))
+    if(strcmp($active,"1") == 0)
     {
         echo $active;
         return "ERRERRERR";

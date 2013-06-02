@@ -29,8 +29,8 @@
             echo "ACTIVE?? ".getUserActive("test@test.de", $ticket)."<br>";
             echo "setting active   ".setUserActive("test@test.de", $ticket)."<br>";;
             echo " active? ".getUserActive("test@test.de", $ticket)."<br>";
-            //echo "setting inactive ".setUserInActive("test@test.de", $ticket)."<br>";
-            //echo " active? ".getUserActive("test@test.de", $ticket);
+            echo "setting inactive ".setUserInActive("test@test.de", $ticket)."<br>";
+            echo " active? ".getUserActive("test@test.de", $ticket);
             
             check_license_key("test@test.de", "testtesttest1", $serial);
 

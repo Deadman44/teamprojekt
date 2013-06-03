@@ -8,7 +8,7 @@ void permanent_check()
 
 void worker()
 {
-	while(true)
+	while(thread_exit==false)
 	{
 		int repsonse = check_license(user, user_password, license);
 		conoutf(user.c_str());

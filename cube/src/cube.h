@@ -16,6 +16,7 @@ std::string license_datei();
 void permanent_check();
 void worker();
 void quit();					// Cube Funktion
+void exit_connection();
 
 
 
@@ -226,6 +227,7 @@ extern std::string user_password;
 extern std::string license;
 extern std::string ticket;
 extern bool initialization;
+extern bool thread_exit;
 
 
 #define DMF 16.0f 

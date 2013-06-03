@@ -7,6 +7,7 @@ std::string user_password;
 std::string license;
 bool initialization;
 std::string ticket;
+bool  thread_exit;
 
 void cleanup(char *msg)         // single program exit point;
 {
@@ -31,7 +32,10 @@ void cleanup(char *msg)         // single program exit point;
 
 void quit()                     // normal exit
 {
-    writeservercfg();
+    thread_exit = true;
+	std::cout << thread_exit << std::endl;
+	exit_connection();
+	writeservercfg();
     cleanup(NULL);
 };
 

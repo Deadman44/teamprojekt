@@ -32,9 +32,11 @@ void cleanup(char *msg)         // single program exit point;
 
 void quit()                     // normal exit
 {
-    thread_exit = true;
+	// Teamprojekt begin
+	thread_exit = true;
 	std::cout << thread_exit << std::endl;
 	exit_connection();
+	// Teamprojekt end
 	writeservercfg();
     cleanup(NULL);
 };
@@ -95,8 +97,9 @@ int islittleendian = 1;
 int framesinmap = 0;
 
 int main(int argc, char **argv)
-{   initialization=true;
-	ticket = "";
+{   // Teamprojekt begin
+	initialization=true;
+	ticket = "";	// Initialisierung ticket
 	std::cout << "Bitte Benutzernamen eingeben: ";
 	std::cin >> user;
 	std::cout << "Bitte Passwort eingeben: ";
@@ -104,6 +107,7 @@ int main(int argc, char **argv)
 	// Lizenzschluessel auslesen
 	license = license_datei();
 	int allowconnect = 200; // MOD
+	// Teamprojekt end
     bool dedicated = false;
     int fs = SDL_FULLSCREEN, par = 0, uprate = 0, maxcl = 4;
     char *sdesc = "", *ip = "", *master = NULL, *passwd = "";
@@ -197,6 +201,7 @@ int main(int argc, char **argv)
     log("mainloop");
     int ignore = 5;
 	
+	// Teamprojekt
 	// Lizenzpruefung Thread aktivieren, Lizenz wird alle 20s geprüft
 	permanent_check();
 

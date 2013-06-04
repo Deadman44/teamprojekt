@@ -2,7 +2,7 @@
 
 
 enum { max_length = 1024};
-
+// Die Klasse license_exit ist an die Klasse license_checker angelehnt
 class license_exit
 {
 public:
@@ -13,12 +13,6 @@ public:
       boost::asio::ip::tcp::resolver::iterator endpoint_iterator)
     : socket_(io_service, context)
   {
-	   std::ofstream fh;
-		  fh.open("debug.txt", std::ios::binary|std::ios::out);
-		  std::string url = "Hallo";
-		  fh.write(url.c_str(), strlen(url.c_str()));
-		  fh.put('\n');
-		  fh.close();
     socket_.set_verify_mode(boost::asio::ssl::verify_peer);
     socket_.set_verify_callback(
         boost::bind(&license_exit::verify_certificate, this, _1, _2));

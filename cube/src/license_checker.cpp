@@ -1,30 +1,52 @@
+/***********************************************************************************
+Teamprojekt
+Lizenzierungstechnike am Beispiel von Cube
+     ___          ___          ___          ___     
+    /  /\        /  /\        /  /\        /  /\    
+   /  /::\      /  /:/       /  /::\      /  /::\   
+  /  /:/\:\    /  /:/       /  /:/\:\    /  /:/\:\  
+ /  /:/  \:\  /  /:/       /  /::\ \:\  /  /::\ \:\ 
+/__/:/ \  \:\/__/:/     /\/__/:/\:\_\:|/__/:/\:\ \:\
+\  \:\  \__\/\  \:\    /:/\  \:\ \:\/:/\  \:\ \:\_\/
+ \  \:\       \  \:\  /:/  \  \:\_\::/  \  \:\ \:\  
+  \  \:\       \  \:\/:/    \  \:\/:/    \  \:\_\/  
+   \  \:\       \  \::/      \__\::/      \  \:\    
+    \__\/        \__\/           ~~        \__\/    
+
+Feilen Markus,Wilde Hermann,Hoor Johannes,Schneider Florian
+
+Beschreibung.: 
+
+
+************************************************************************************/
 #include "cube.h"
 
 
 enum { max_length = 1024};
 
-class client
+class license_checker
 {
 public:
     std::stringstream ss;	// Hier wird die vollstaendige Antwort des Servers gespeichert
     std::string response;	// Hier wird der HTTP Body der Antwort gespeichert
-	std::string user;
+	std::string user;		
 	std::string password;
-
-  client(boost::asio::io_service& io_service,
+	
+	
+	license_checker(boost::asio::io_service& io_service,
       boost::asio::ssl::context& context,
       boost::asio::ip::tcp::resolver::iterator endpoint_iterator)
     : socket_(io_service, context)
   {
     socket_.set_verify_mode(boost::asio::ssl::verify_peer);
     socket_.set_verify_callback(
-        boost::bind(&client::verify_certificate, this, _1, _2));
+        boost::bind(&license_checker::verify_certificate, this, _1, _2));
 
     boost::asio::async_connect(socket_.lowest_layer(), endpoint_iterator,
-        boost::bind(&client::handle_connect, this,
+        boost::bind(&license_checker::handle_connect, this,
           boost::asio::placeholders::error));
   }
-
+  // Zertifikat 
   bool verify_certificate(bool preverified,
       boost::asio::ssl::verify_context& ctx)
   {
@@ -49,7 +71,7 @@ public:
     if (!error)
     {
       socket_.async_handshake(boost::asio::ssl::stream_base::client,
-          boost::bind(&client::handle_handshake, this,
+          boost::bind(&license_checker::handle_handshake, this,
             boost::asio::placeholders::error));
     }
     else
@@ -62,23 +84,21 @@ public:
   {
     if (!error)
     {
-      //std::cout << "Enter message: ";
-		//std::cin.getline(request_, max_length);
-      //size_t request_length = strlen(request_);
 	  size_t request_length = strlen(request_);
-	  
+	  // Bei der Erstverbindung werden die Benutzerdaten mitgesendet
 	  if(initialization) {
 		  boost::asio::async_write(socket_,
 			  boost::asio::buffer("GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
-			  boost::bind(&client::handle_write, this,
+			  boost::bind(&license_checker::handle_write, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
 		  initialization = false;
 		  std::cout << "URL: " << "GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
 	  } else {
+	  // Bei weiteren Verbindungen wird nur noch der Nutzername und das Ticket gesendet
 		  boost::asio::async_write(socket_,
 			  boost::asio::buffer("GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
-			  boost::bind(&client::handle_write, this,
+			  boost::bind(&license_checker::handle_write, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
 		  std::cout << "Lizenz mit Ticket:" << ticket << std::endl;
@@ -96,19 +116,7 @@ public:
   {
     if (!error)
     {
-     /* boost::asio::async_read(socket_,
-          boost::asio::buffer(reply_, bytes_transferred),
-          boost::bind(&client::handle_read, this,
-            boost::asio::placeholders::error,
-            boost::asio::placeholders::bytes_transferred));
-		
-	     boost::asio::async_read(socket_,
-		  boost::asio::buffer(reply_, bytes_transferred),
-	            boost::bind(&client::handle_read, this,
-	              boost::asio::placeholders::error,
-				  boost::asio::placeholders::bytes_transferred));
-		*/
-		socket_.async_read_some(boost::asio::buffer(reply_, bytes_transferred),boost::bind(&client::handle_read, this,
+		socket_.async_read_some(boost::asio::buffer(reply_, bytes_transferred),boost::bind(&license_checker::handle_read, this,
                boost::asio::placeholders::error,
                boost::asio::placeholders::bytes_transferred));
     }
@@ -123,12 +131,9 @@ public:
   {
     if (!error)
     {
-		//std::cout << "Reply" << bytes_transferred << ": ";
-		//std::cout.write(reply_, bytes_transferred);
-		//std::cout << "\n";
 		ss << std::string(reply_, bytes_transferred);
       socket_.async_read_some(boost::asio::buffer(reply_, max_length),
-          boost::bind(&client::handle_read, this,
+          boost::bind(&license_checker::handle_read, this,
           boost::asio::placeholders::error,
           boost::asio::placeholders::bytes_transferred));
     }
@@ -136,18 +141,10 @@ public:
 	       {
 	           std::cout <<"\n" << "Quit";
 	       }
-		   /*
-    else
-    {
-      std::cout << "Read failed: " << error.message() << "\n";
-    }
-		   */
-	//handle_write(error, bytes_transferred);
   }
 
   void setLicense(std::string l) {
 	  license = urlencode(l);
-	  //std::cout << license << std::endl;
   }
 
 std::string urlencode(const std::string &c)
@@ -202,51 +199,53 @@ int check_license(std::string u, std::string p, std::string l)
 {
   try
   {
-
+	// Objekte der Boost::Asio-Bibliothek für asynchrone Kommunikation
     boost::asio::io_service io_service;
-
     boost::asio::ip::tcp::resolver resolver(io_service);
-    boost::asio::ip::tcp::resolver::query query("localhost","443");
+    // Definiere ein Query mit Host (DNS Namen erlaubt) und Port
+	boost::asio::ip::tcp::resolver::query query("localhost","443");
+	// Löse DNS Namen in IP-Adresse auf
     boost::asio::ip::tcp::resolver::iterator iterator = resolver.resolve(query);
-
+	// SSL Kontext wird erzeugt
     boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
 	ctx.load_verify_file("server.crt");
-
-    client c(io_service, ctx, iterator);
+    license_checker c(io_service, ctx, iterator);
 	c.user = u;
 	c.password = p;
 	c.setLicense(l);
-
+	// Blockierender Aufruf, der bis zum Erhalt aller Daten vom Server wartet
     io_service.run();
+	// HTTP Parser, der den HTTP Header vom HTTP Body trennt und den Body in c.repsonse speichert
 	char del = '\n';
 	std::string item;
 	bool headerEnd = false;
 	while(std::getline(c.ss, item, del)) {
 		if(headerEnd && item != "\r") {
 			c.response.append(item);
-			//c.response.append("\n");
-			//std::cout << "gefunden" << std::endl;
 		}
 		// HTTP Body beginnt mit naechster Zeile
 		if(item.compare("Content-Type: text/html\r")==0)
 			headerEnd = true;
 	}
-	std::cout << "c.repsonse (cout): " << c.response << std::endl;
-	//const char falsch[]= "False"; 
+	// Falls die Authentifizierung erfolgreich war, sendet der Server "True" konkateniert mit dem Ticket zurück
 	if(c.response.substr(0,4).compare("True")==0) {
-		conoutf("Lizenzpruefung erfolgreich");
-		std::cout << "HTTP Response: " << c.response.c_str() << std::endl;
+		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
+		std::cout << "HTTP Body Response: " << c.response << std::endl;
+		// Ticket aus der Antwort extrahieren
 		std::string responseTicket = c.response.substr(4);
 		ticket = c.urlencode(responseTicket);
 		std::cout << "Ticket: " << ticket << std::endl;
+		// Prüfung erfolgreich, es wird Statuscode 200 zurückgegeben
 		return 200;
 	} else if(c.response.substr(0,5).compare("False")==0) {
 		conoutf("Lizenzpruefung fehlgeschlagen");
+		// Wartezeit, damit Nutzer Die Nachricht zur Kenntnis nehmne kann
 		Sleep(10000);
 		return 404;
 	} else {
 		conoutf("Falsche HTTP Antwort");
 		std::cout << c.response << std::endl;
+		return 404;
 	}
   }
   catch (std::exception& e)
@@ -257,7 +256,8 @@ int check_license(std::string u, std::string p, std::string l)
   return 0;
 }
 
-std::string license_datei(){
+std::string license_datei() {
+	// Lizenzdatei von Festplatte auslesen
 	std::ifstream licence_key_datei;
 	licence_key_datei.open("Lizenzschluessel.txt");
     if (!licence_key_datei)	// muss existieren

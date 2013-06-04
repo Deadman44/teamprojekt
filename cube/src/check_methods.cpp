@@ -8,6 +8,8 @@ void permanent_check()
 
 void worker()
 {
+	// Globale Variable, die das Beenden von Cube signalisiert
+	// --> Ticketsstream wird gestoppt
 	while(thread_exit==false)
 	{
 		int repsonse = check_license(user, user_password, license);

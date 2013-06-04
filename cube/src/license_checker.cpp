@@ -7,7 +7,7 @@ Lizenzierungstechnike am Beispiel von Cube
   /  /:/\:\    /  /:/       /  /:/\:\    /  /:/\:\  
  /  /:/  \:\  /  /:/       /  /::\ \:\  /  /::\ \:\ 
 /__/:/ \  \:\/__/:/     /\/__/:/\:\_\:|/__/:/\:\ \:\
-\  \:\  \__\/\  \:\    /:/\  \:\ \:\/:/\  \:\ \:\_\/
+\  \:\  \__\/\  \:\    /:/\  \:\ \:\/:/\  \:\ \:\_\/ 
  \  \:\       \  \:\  /:/  \  \:\_\::/  \  \:\ \:\  
   \  \:\       \  \:\/:/    \  \:\/:/    \  \:\_\/  
    \  \:\       \  \::/      \__\::/      \  \:\    
@@ -15,9 +15,8 @@ Lizenzierungstechnike am Beispiel von Cube
 
 Feilen Markus,Wilde Hermann,Hoor Johannes,Schneider Florian
 
-Beschreibung.: 
-
-
+Beschreibung.:
+Baut die SSL Verbindung zum Lizenzserver auf und managed die Tickets
 ************************************************************************************/
 #include "cube.h"
 
@@ -203,7 +202,7 @@ int check_license(std::string u, std::string p, std::string l)
     boost::asio::io_service io_service;
     boost::asio::ip::tcp::resolver resolver(io_service);
     // Definiere ein Query mit Host (DNS Namen erlaubt) und Port
-	boost::asio::ip::tcp::resolver::query query("localhost","443");
+	boost::asio::ip::tcp::resolver::query query("127.0.0.1","443");
 	// Löse DNS Namen in IP-Adresse auf
     boost::asio::ip::tcp::resolver::iterator iterator = resolver.resolve(query);
 	// SSL Kontext wird erzeugt
@@ -240,12 +239,12 @@ int check_license(std::string u, std::string p, std::string l)
 	} else if(c.response.substr(0,5).compare("False")==0) {
 		conoutf("Lizenzpruefung fehlgeschlagen");
 		// Wartezeit, damit Nutzer Die Nachricht zur Kenntnis nehmne kann
-		Sleep(10000);
-		return 404;
+		return 403;
 	} else {
+		// Verbindungsfehler
 		conoutf("Falsche HTTP Antwort");
 		std::cout << c.response << std::endl;
-		return 404;
+		return 500;
 	}
   }
   catch (std::exception& e)
@@ -263,7 +262,10 @@ std::string license_datei() {
     if (!licence_key_datei)	// muss existieren
     {
         conoutf("Lizenzschluessel.txt kann nicht geoeffnet werden!");
-      	exit(-1);
+		conoutf("Bitte legen Sie die Datei Lizenzschluessel.txt an und speichern Sie in dieser den Lizenzschlüssel");
+		boost::posix_time::seconds waiting(10);
+		boost::this_thread::sleep(waiting);
+		quit();
     }
 	char c;
 	std::string licencenumber;

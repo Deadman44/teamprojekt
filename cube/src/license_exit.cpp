@@ -1,3 +1,25 @@
+/***********************************************************************************
+Teamprojekt
+Lizenzierungstechnike am Beispiel von Cube
+     ___          ___          ___          ___     
+    /  /\        /  /\        /  /\        /  /\    
+   /  /::\      /  /:/       /  /::\      /  /::\   
+  /  /:/\:\    /  /:/       /  /:/\:\    /  /:/\:\  
+ /  /:/  \:\  /  /:/       /  /::\ \:\  /  /::\ \:\ 
+/__/:/ \  \:\/__/:/     /\/__/:/\:\_\:|/__/:/\:\ \:\
+\  \:\  \__\/\  \:\    /:/\  \:\ \:\/:/\  \:\ \:\_\/ 
+ \  \:\       \  \:\  /:/  \  \:\_\::/  \  \:\ \:\  
+  \  \:\       \  \:\/:/    \  \:\/:/    \  \:\_\/  
+   \  \:\       \  \::/      \__\::/      \  \:\    
+    \__\/        \__\/           ~~        \__\/    
+
+Feilen Markus,Wilde Hermann,Hoor Johannes,Schneider Florian
+
+Beschreibung.:
+Wird bei Beendigung von Cube mittels quit() Funktion aufgerufen.
+Kappt die Verbindung zum Lizenzierungsserver und informiert diesen über den
+Verbindungsabbau
+************************************************************************************/
 #include "cube.h"
 
 
@@ -67,14 +89,6 @@ public:
 			  boost::bind(&license_exit::handle_write, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
-		  conoutf("Abgesendet");
-		  std::ofstream fh;
-		  fh.open("debug.txt", std::ios::binary|std::ios::out);
-		  std::string url = "GET /cCheck_shutdown.php?email=" +user +"&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n";
-		  fh.write(url.c_str(), strlen(url.c_str()));
-		  fh.put('\n');
-		  fh.close();
-
     }
     else
     {
@@ -87,31 +101,12 @@ public:
   {
     if (!error)
     {
-		socket_.async_read_some(boost::asio::buffer(reply_, bytes_transferred),boost::bind(&license_exit::handle_read, this,
-               boost::asio::placeholders::error,
-               boost::asio::placeholders::bytes_transferred));
+		std::cout << "Verbindung erfolgreich geschlossen" << std::endl;
     }
     else
     {
       std::cout << "Write failed: " << error.message() << "\n";
     }
-  }
-
-  void handle_read(const boost::system::error_code& error,
-      size_t bytes_transferred)
-  {
-    if (!error)
-    {
-		ss << std::string(reply_, bytes_transferred);
-      socket_.async_read_some(boost::asio::buffer(reply_, max_length),
-          boost::bind(&license_exit::handle_read, this,
-          boost::asio::placeholders::error,
-          boost::asio::placeholders::bytes_transferred));
-    }
-	else if (0 != bytes_transferred)
-	       {
-	           std::cout <<"\n" << "Quit";
-	       }
   }
 
 

@@ -1,6 +1,7 @@
 // one big bad include file for the whole engine... nasty!
 
-#include "tools.h"	
+#include "tools.h"
+// Teamprojekt begin
 #include <cstdlib>
 #include <iostream>
 #include <boost/bind.hpp>
@@ -17,6 +18,7 @@ void permanent_check();
 void worker();
 void quit();					// Cube Funktion
 void exit_connection();
+// Teamprojekt end
 
 
 
@@ -221,6 +223,7 @@ extern int gamemode, nextmode;
 extern int xtraverts;
 extern bool demoplayback;
 extern int allowconnect;
+// Teamprojekt begin
 // Eigene globale Variablen für Lizenzpruefung
 extern std::string user;
 extern std::string user_password;
@@ -228,7 +231,7 @@ extern std::string license;
 extern std::string ticket;
 extern bool initialization;
 extern bool thread_exit;
-
+// Teamprojekt end
 
 #define DMF 16.0f 
 #define DAF 1.0f 

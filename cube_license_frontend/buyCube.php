@@ -36,11 +36,7 @@
 
 </div>
 <div class="main">
-<h1> Lizenzkey </h1>
-<p> Es ist wichtig den Lizenzkey sofort zu speichern.
-Bitte kopieren Sie den Key in eine Textdatei mit Namen "Lizenzschluessel.txt".
-Speichern Sie diese im Cube-Verzeichnis mit der Datei "cube.bat", diese sollte sich im Ordner "../cube/Cube" befinden.
-</p></ br>
+
   <?php
 	require('functions.php');
 	echo '<h2> Lizenzkey wurde generiert: </h2>';
@@ -48,6 +44,12 @@ Speichern Sie diese im Cube-Verzeichnis mit der Datei "cube.bat", diese sollte s
 	echo create_license_key($_SESSION['user'],false);
 	echo '</textarea>';	
 	?>
+	
+</ br>
+<p> Es ist wichtig den Lizenzkey sofort zu speichern.
+Bitte kopieren Sie den Key in eine Textdatei mit Namen "Lizenzschluessel.txt".
+Speichern Sie diese im Cube-Verzeichnis mit der Datei "cube.bat", diese sollte sich im Ordner "../cube/Cube" befinden.
+</p></ br>
 	
 <h2>Eindrücke des Games..</h2> 
 <p>

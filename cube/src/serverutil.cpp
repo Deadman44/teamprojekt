@@ -20,8 +20,8 @@ void putint(uchar *&p, int n)
 
 
     if(n<128 && n>-127) { *p++ = n; } //werte zwischen 127 und -126 werden direkt reingelegt
-    else if(n<0x8000 && n>=-0x8000) { *p++ = 0x80; *p++ = n; *p++ = n>>8;  } 
-    else { *p++ = 0x81; *p++ = n; *p++ = n>>8; *p++ = n>>16; *p++ = n>>24; };
+    else if(n<0x8000 && n>=-0x8000) { *p++ = 0x80; *p++ = n; *p++ = n>>8;  } // so weit komprimieren wie möglich, aufteilen der bits auf mehrere
+    else { *p++ = 0x81; *p++ = n; *p++ = n>>8; *p++ = n>>16; *p++ = n>>24; }; //uchars (8bit) werte
 };
 
 /*
@@ -31,7 +31,7 @@ wird bei serverprocessing gebraucht
 int getint(uchar *&p)
 {
 	/* erinnerung:
-	  *char ist in c ein pointer auf ddas erste zeichen einer
+	  *char ist in c ein pointer auf das erste zeichen einer
 	zeichenkette, also strings!
 	*/
 

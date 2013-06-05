@@ -135,7 +135,7 @@ void hit(int target, int damage, dynent *d, dynent *at)
     if(d==player1) selfdamage(damage, at==player1 ? -1 : -2, at);
     else if(d->monsterstate) monsterpain(d, damage, at);
 	//die untere zeile fuegt eine msg einem vector hinzu, dieser vector beinhaltet die nachrichten die an den
-	//server geschickt werden, hier: der schaden den andere spieler bekommen! (?unsicher)
+	//server geschickt werden, hier: der schaden den andere spieler bekommen!
     else { addmsg(1, 4, SV_DAMAGE, target, damage, d->lifesequence); playsound(S_PAIN1+rnd(5), &d->o); }; 
     particle_splash(3, damage, 1000, d->o);
 	demodamage(damage, d->o);
@@ -271,7 +271,7 @@ void shootv(int gun, vec &from, vec &to, dynent *d, bool local)     // create vi
     };
 };
 
-//rueckstoss???
+//rueckstoss
 void hitpush(int target, int damage, dynent *d, dynent *at, vec &from, vec &to)
 {
     hit(target, damage, d, at);
@@ -296,10 +296,10 @@ void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
 };
 
 void shoot(dynent *d, vec &targ)
-	/* hier wird geschossen, wir vom clientgame.cpp aufgerufen
+	/* hier wird geschossen, wird von clientgame.cpp aufgerufen
 
 	die dynent d schießt richtung vector targ
-	targ ist die richtung des crosshairs, also die genauen ko
+	targ ist die richtung des crosshairs, also die genauen koordinaten
 	*/
 	{
     int attacktime = lastmillis-d->lastaction;

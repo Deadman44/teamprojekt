@@ -55,7 +55,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
     incomingdemodata(buf, len);
     
     uchar *end = buf+len;
-    uchar *p = buf+2; //da bei buf +0 die anfangskennung steht (??)
+    uchar *p = buf+2; //da bei buf +0 die anfangskennung steht // zeiger 16 bits weiter setzen (??)
     char text[MAXTRANS];
     int cn = -1, type;
     dynent *d = NULL;
@@ -69,7 +69,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             cn = getint(p);
             int prot = getint(p);
 			/* hier ebenfalls wichtig für mod client 
-			auskommentieren ermoegtlich verbindung mit mod client
+			auskommentieren ermoegtlicth verbindung mit mod client
 			*/
 
             if(prot!=PROTOCOL_VERSION)
@@ -173,7 +173,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             d->lifesequence = getint(p);
             break;
         };
-		// wichtige stelle für incompatible client...  ändern ermöglicht connect mit mod client
+		// wichtige stelle für incompatible/mod clients...  ändern ermöglicht connect mit mod client
         case SV_CDIS:
             cn = getint(p);
             if(!(d = getclient(cn))) break;

@@ -67,7 +67,7 @@ void send(int n, ENetPacket *packet) // normale übertragung
             break;
         };
 
-        case ST_LOCAL: //falls das ziel local liegt bzw localhost, dann oefnne direkt die funktion unten
+        case ST_LOCAL: //falls das ziel local liegt bzw localhost, dann oeffne direkt die funktion unten
             localservertoclient(packet->data, packet->dataLength);
             break;
 
@@ -75,6 +75,7 @@ void send(int n, ENetPacket *packet) // normale übertragung
 };
 
 void send2(bool rel, int cn, int a, int b) //wird bei einigen übertragungen eingesetzt, z.b. ping, item placement usw
+	//entspricht dem ENET RELIABLE PACKET
 {
     ENetPacket *packet = enet_packet_create(NULL, 32, rel ? ENET_PACKET_FLAG_RELIABLE : 0);
     uchar *start = packet->data;
@@ -158,7 +159,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
     };
         
     uchar *end = packet->data + packet->dataLength;
-    uchar *p = packet->data+2; // die eigentlichen daten ??
+    uchar *p = packet->data+2; // die übertragenen daten
     char text[MAXTRANS];
     int cn = -1, type;
 
@@ -410,7 +411,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             }
             case ENET_EVENT_TYPE_RECEIVE: //statusabfrage von enet, siehe doku von enet
                 brec += event.packet->dataLength;
-                process(event.packet, (int)event.peer->data); //processing methode, quasi multicast der daten an weitere clients)
+                process(event.packet, (int)event.peer->data); //processing methode, versenden der daten an weitere clients)
 				/* man muss hier unterscheiden zwischen event.packet (enthält die daten) und
 				event.peer (informationen über den client)
 				*/
@@ -478,7 +479,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
 
 	/*
 	falls das spiel dedicated ist, dann läuft es hier unten in den main loop, also nicht wie bei main.c
-	dort in dne loop, das passiert nur bei clients!
+	dort in den loop, das passiert nur bei clients!
 	*/
 
     if(isdedicated)       // do not return, this becomes main loop

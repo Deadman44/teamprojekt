@@ -54,7 +54,7 @@ void writeclientinfo(FILE *f)
 void connects(char *servername)
 {   
 	/*
-	das wars bei /t connect ip passiert...
+	das was bei /t connect ip im spiel passiert...
 	*/
 
     disconnect(1);  // reset state
@@ -160,7 +160,7 @@ void addmsg(int rel, int num, int type, ...)
     msg.add(rel);
     msg.add(type);
     va_list marker;
-    va_start(marker, type); //?? marker evtl die SV_?
+    va_start(marker, type); //c-style varargs verarbeitung...
     loopi(num-1) msg.add(va_arg(marker, int));
     va_end(marker);  
 };
@@ -209,7 +209,7 @@ void c2sinfo(dynent *d)                     // send update to the server
 	*/
 
     ENetPacket *packet = enet_packet_create (NULL, MAXTRANS, 0); //erstellt hier ein packet..... mit größe von MAXTRANS
-    uchar *start = packet->data; //start ist zeiger aufs erste datenbyte/int/whatever wie groß das ist
+    uchar *start = packet->data; //start ist zeiger aufs erste datenbyte
     uchar *p = start+2;
     bool serveriteminitdone = false;
     if(toservermap[0])                      // suggest server to change map
@@ -266,7 +266,7 @@ void c2sinfo(dynent *d)                     // send update to the server
             putint(p, player1->lifesequence);
         };
         loopv(messages)     // send messages collected during the previous frames
-			/* setzt alle möglchen anderen sachen ins datenpaket ab
+			/* setzt alle anderen messages ins datenpaket ab
 			*/
 
         {
@@ -317,7 +317,7 @@ void gets2c()           // get updates from the server
             throttle();
             break;
          
-        case ENET_EVENT_TYPE_RECEIVE: //hier "normales" paket, der paketinhalt wird dan die methode localservetoclient weitergereicht
+        case ENET_EVENT_TYPE_RECEIVE: //hier "normales" paket, der paketinhalt wird dann die methode localservetoclient weitergereicht
             if(disconnecting) conoutf("attempting to disconnect...");
             else localservertoclient(event.packet->data, event.packet->dataLength);
             enet_packet_destroy(event.packet);

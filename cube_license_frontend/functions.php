@@ -883,11 +883,11 @@ function permanentcheck($Qemail,$oldticket)
     
     if(!$active)
     {
-        return "False";
+        return false ; //bug..."False"
     }
     if(strcmp($oldticket, $ticket) != 0)
     {
-        return "False";
+        return false ;// bug "False";
     }
     
     $ticket = createTicketWithOldTicket($Qemail, $ticket);

@@ -231,7 +231,7 @@ int check_license(std::string u, std::string p, std::string l)
 		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
 		std::cout << "HTTP Body Response: " << c.response << std::endl;
 		// Ticket aus der Antwort extrahieren
-		std::string responseTicket = c.response.substr(4);
+		std::string responseTicket = c.response.substr(4,92); //test 88+4 als länge des ticket
 		ticket = c.urlencode(responseTicket);
 		std::cout << "Ticket: " << ticket << std::endl;
 		// Prüfung erfolgreich, es wird Statuscode 200 zurückgegeben

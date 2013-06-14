@@ -1,5 +1,31 @@
-﻿  hashing_proj.cpp
-c:\testproj\hashing_proj\hashing_proj\hashing_proj.cpp(48): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
-c:\testproj\hashing_proj\hashing_proj\hashing_proj.cpp(82): warning C4244: 'Initialisierung': Konvertierung von 'std::streamoff' in 'unsigned int', möglicher Datenverlust
-c:\testproj\hashing_proj\hashing_proj\hashing_proj.cpp(94): warning C4244: 'Argument': Konvertierung von 'std::streamoff' in 'int', möglicher Datenverlust
-  hashing_proj.vcxproj -> C:\testproj\hashing_proj\Debug\hashing_proj.exe
+﻿Der Buildvorgang wurde am 14.06.2013 17:39:42 gestartet.
+     1>Projekt "C:\w\hashing_proj\hashing_proj\hashing_proj.vcxproj" auf Knoten "2", build Ziel(e).
+     1>InitializeBuildStatus:
+         "Debug\hashing_proj.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+       ClCompile:
+         Alle Ausgaben sind aktuell.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\OpenSSL-Win32\include" /IC:\x\boost_1_53_0\stage\lib /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\hashing_proj.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt hashing_proj.cpp
+         hashing_proj.cpp
+     1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(48): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+     1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(82): warning C4244: 'Initialisierung': Konvertierung von 'std::streamoff' in 'unsigned int', möglicher Datenverlust
+     1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(94): warning C4244: 'Argument': Konvertierung von 'std::streamoff' in 'int', möglicher Datenverlust
+       ManifestResourceCompile:
+         Alle Ausgaben sind aktuell.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\w\hashing_proj\Debug\hashing_proj.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\OpenSSL-Win32\lib\VC\static" /LIBPATH:"C:\OpenSSL-Win32\lib\VC" /LIBPATH:"C:\OpenSSL-Win32\include\openssl" /LIBPATH:"C:\OpenSSL-Win32" libeay32MD.lib libeay32Md.lib libeay32MT.lib libeay32MTd.lib ssleay32MD.lib ssleay32MDd.lib ssleay32MT.lib ssleay32MTd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\hashing_proj.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\w\hashing_proj\Debug\hashing_proj.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\w\hashing_proj\Debug\hashing_proj.lib" /MACHINE:X86 Debug\hashing_proj.exe.embed.manifest.res
+         Debug\hashing_proj.obj
+         Debug\stdafx.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\hashing_proj.exe.embed.manifest" /manifest Debug\hashing_proj.exe.intermediate.manifest
+         Alle Ausgaben sind aktuell.
+       LinkEmbedManifest:
+         Alle Ausgaben sind aktuell.
+         hashing_proj.vcxproj -> C:\w\hashing_proj\Debug\hashing_proj.exe
+       FinalizeBuildStatus:
+         Die Datei "Debug\hashing_proj.unsuccessfulbuild" wird gelöscht.
+         Aktualisieren des Timestamps von "Debug\hashing_proj.lastbuildstate".
+     1>Die Erstellung des Projekts "C:\w\hashing_proj\hashing_proj\hashing_proj.vcxproj" ist abgeschlossen, build Ziel(e).
+
+Das Erstellen war erfolgreich.
+
+Verstrichene Zeit 00:00:01.30

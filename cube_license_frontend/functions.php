@@ -197,6 +197,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     }
     $mysqli->close();
     
+    
     if(strcmp($active,"1") == 0)
     {
         echo $active;
@@ -895,4 +896,88 @@ function permanentcheck($Qemail,$oldticket)
     
     $mysqli->close();   
     return "True\n" . $ticket;
+}
+
+/// integration checks
+
+function check_client_hash($Qemail,$ticket,$hash,$challengeNR)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $active = "ERROR NOT FOUND";
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $query = "SELECT ACTIVE from USER where EMAIL = ? AND TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('ss',$Qemail,$ticket);
+            $result->execute();
+            $result->bind_result($active);
+            while($result->fetch())
+            {
+            }     
+    }
+    //wenn user eingeloggt ist...
+    if(strcasecmp("0", $active) == 0) //ACHTUNG HIER INAKTEIVE BENUTZER DEBUG
+    {
+        $dbhash = getDataHash($challengeNR);     
+        if(strcasecmp($hash, $dbhash) ==0)
+        {
+            $mysqli->close(); 
+            return "True";
+        }
+        else
+        {
+            $mysqli->close(); 
+            return "False";
+        }
+    }
+    else
+    {
+        $mysqli->close(); 
+        return "False";
+
+    }
+    $mysqli->close();   
+    return "False";
+
+}
+
+function getDataHash($challengeNR) //achtung keine abfrage nach gültigem ticket usw...
+{
+    $hash = "NO HASH AVAILABLE";
+    
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $query = "SELECT HASH from DATA_HASHES where ID=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('s',$challengeNR);
+            $result->execute();
+            $result->bind_result($hash);
+            while($result->fetch())
+            {
+            }     
+    }
+    return $hash;
 }

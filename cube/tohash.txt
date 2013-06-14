@@ -1,0 +1,4 @@
+//TOHASH
+
+bin/cube.exe
+bin/SDL.dll

@@ -36,11 +36,11 @@ string hashing(const char *thing, int size, const char *salt, int saltsize) //üb
 		thing++; //um eins verschieben
 
 	}
-	EVP_DigestUpdate(mdctx,salt,saltsize);
+	//EVP_DigestUpdate(mdctx,salt,saltsize);
 	EVP_DigestFinal_ex(mdctx, md_value, &md_len); //schreibt in mdvalue, anzahl zeichen in md_len
 	EVP_MD_CTX_destroy(mdctx); // zerstört mdctx obj
 
-	string test = "";
+	string hash = "";
 
 	int i;
 	printf("Digest is: \n");
@@ -48,7 +48,7 @@ string hashing(const char *thing, int size, const char *salt, int saltsize) //üb
 	for(i = 0; i < md_len; i++)
 	{
 		printf("%02x", md_value[i]); //format fügt nullen hinzu wenn gebruacht z.b. b --> 0b
-		test+=md_value[i];
+		hash+=md_value[i];
 		
 	}
 
@@ -63,7 +63,7 @@ string hashing(const char *thing, int size, const char *salt, int saltsize) //üb
 	}
 	*/
 	printf("\n");
-	return test; //überprüfen, ob hier irgendwann delete aufgerufen werden muss für speicherbereinigung... landet string auf heap oder stack??
+	return hash; //überprüfen, ob hier irgendwann delete aufgerufen werden muss für speicherbereinigung... landet string auf heap oder stack??
 }
 
 void readFile(string filename)
@@ -74,18 +74,18 @@ void readFile(string filename)
 	string myhash;
 
 	//hier unten eher filename...
-	ifstream myfile ("C:/Windows/System32/calc.exe",ios::in |ios::binary | ios::ate);
+	ifstream myfile ("../Debug/hashing_proj.exe",ios::in |ios::binary | ios::ate);
 	
 	if (myfile.is_open())
 	{
-    size = myfile.tellg();
+    size = myfile.tellg(); //weil zeiger am ende der datei steht kann hier einfach die dateigroesse abgelesen werden
     memblock = new char [size];
     myfile.seekg (0, ios::beg);
     myfile.read (memblock, size);
     myfile.close();
 
 
-	salt = new char[64];
+	salt = new char[64]; //64 * 8 = 512!
 	for(int i = 0; i < 64; i++)
 	{
 		salt[i] = 'L';
@@ -104,9 +104,14 @@ void readFile(string filename)
 	for(int m = 0; m < 20; m++)
 	{
 			unsigned char i = myhash[m];
-			outfile << hex <<setfill('0') << setw(2) << (int) i << "\n"; // minimale ausgabebreit 2, mit 0en füllen
-			//cout << ss.re
+			ss << hex << setfill('0') << setw(2) << (int) i; // minimale ausgabebreit 2, mit 0en füllen
 	}
+
+	char *formattedhash = new char[60];
+	ss.getline(formattedhash,60);
+	string s (formattedhash);
+	cout << formattedhash;
+	delete[] formattedhash;
 
 	outfile.close();
 
@@ -114,7 +119,7 @@ void readFile(string filename)
 }
 int _tmain(int argc, _TCHAR* argv[])
 {
-	readFile("LOL");
+	readFile("BEGIN");
 	
 
 	int x;

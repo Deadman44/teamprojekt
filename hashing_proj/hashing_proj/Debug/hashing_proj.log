@@ -1,0 +1,5 @@
+﻿  hashing_proj.cpp
+c:\testproj\hashing_proj\hashing_proj\hashing_proj.cpp(48): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
+c:\testproj\hashing_proj\hashing_proj\hashing_proj.cpp(82): warning C4244: 'Initialisierung': Konvertierung von 'std::streamoff' in 'unsigned int', möglicher Datenverlust
+c:\testproj\hashing_proj\hashing_proj\hashing_proj.cpp(94): warning C4244: 'Argument': Konvertierung von 'std::streamoff' in 'int', möglicher Datenverlust
+  hashing_proj.vcxproj -> C:\testproj\hashing_proj\Debug\hashing_proj.exe

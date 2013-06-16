@@ -7,6 +7,8 @@ std::string user_password;
 std::string license;
 bool initialization;
 std::string ticket;
+std::string hashticket; //definition der globalen var...
+int toHashData;
 bool  thread_exit;
 
 void cleanup(char *msg)         // single program exit point;

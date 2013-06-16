@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 14.06.2013 17:39:42 gestartet.
+﻿Der Buildvorgang wurde am 16.06.2013 15:07:06 gestartet.
      1>Projekt "C:\w\hashing_proj\hashing_proj\hashing_proj.vcxproj" auf Knoten "2", build Ziel(e).
      1>InitializeBuildStatus:
          "Debug\hashing_proj.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
@@ -8,7 +8,7 @@
          hashing_proj.cpp
      1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(48): warning C4018: '<': Konflikt zwischen 'signed' und 'unsigned'
      1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(82): warning C4244: 'Initialisierung': Konvertierung von 'std::streamoff' in 'unsigned int', möglicher Datenverlust
-     1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(94): warning C4244: 'Argument': Konvertierung von 'std::streamoff' in 'int', möglicher Datenverlust
+     1>c:\w\hashing_proj\hashing_proj\hashing_proj.cpp(96): warning C4244: 'Argument': Konvertierung von 'std::streamoff' in 'int', möglicher Datenverlust
        ManifestResourceCompile:
          Alle Ausgaben sind aktuell.
        Link:
@@ -28,4 +28,4 @@
 
 Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:00:01.30
+Verstrichene Zeit 00:00:01.28

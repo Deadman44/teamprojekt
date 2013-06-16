@@ -19,6 +19,7 @@ Beschreibung.:
 Baut die SSL Verbindung zum Lizenzserver auf und managed die Tickets
 ************************************************************************************/
 #include "cube.h"
+#include <sstream>
 
 
 enum { max_length = 1024};
@@ -95,13 +96,15 @@ public:
 		  std::cout << "URL: " << "GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
 	  } else {
 	  // Bei weiteren Verbindungen wird nur noch der Nutzername und das Ticket gesendet
+		  std::string hash = start_integrity_check();
+
 		  boost::asio::async_write(socket_,
-			  boost::asio::buffer("GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
+			  boost::asio::buffer("GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + "&hash="+ hash +" HTTP/1.1\r\nHost: localhost\r\n\r\n"),
 			  boost::bind(&license_checker::handle_write, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
 		  std::cout << "Lizenz mit Ticket:" << ticket << std::endl;
-		  std::cout << "GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
+		  std::cout << "GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + "&hash="+ hash +" HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
 	  }
     }
     else
@@ -231,7 +234,12 @@ int check_license(std::string u, std::string p, std::string l)
 		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
 		std::cout << "HTTP Body Response: " << c.response << std::endl;
 		// Ticket aus der Antwort extrahieren
-		std::string responseTicket = c.response.substr(4,92); //test 88+4 als länge des ticket
+		std::string responseTicket = c.response.substr(4,88); //test 88 als länge des ticket
+		hashticket = responseTicket; //zuweisung zu globaler var..
+
+		//welche datei ist zu hashen? Umwandlung string in int
+		toHashData = atoi(c.response.substr(92).c_str());
+
 		ticket = c.urlencode(responseTicket);
 		std::cout << "Ticket: " << ticket << std::endl;
 		// Prüfung erfolgreich, es wird Statuscode 200 zurückgegeben

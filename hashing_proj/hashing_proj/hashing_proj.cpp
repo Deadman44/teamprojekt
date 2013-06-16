@@ -36,7 +36,7 @@ string hashing(const char *thing, int size, const char *salt, int saltsize) //üb
 		thing++; //um eins verschieben
 
 	}
-	//EVP_DigestUpdate(mdctx,salt,saltsize);
+	EVP_DigestUpdate(mdctx,salt,saltsize);
 	EVP_DigestFinal_ex(mdctx, md_value, &md_len); //schreibt in mdvalue, anzahl zeichen in md_len
 	EVP_MD_CTX_destroy(mdctx); // zerstört mdctx obj
 
@@ -74,7 +74,7 @@ void readFile(string filename)
 	string myhash;
 
 	//hier unten eher filename...
-	ifstream myfile ("../Debug/hashing_proj.exe",ios::in |ios::binary | ios::ate);
+	ifstream myfile ("C:/w/cube/Cube/bin/SDL.dll",ios::in |ios::binary | ios::ate);
 	
 	if (myfile.is_open())
 	{
@@ -88,10 +88,12 @@ void readFile(string filename)
 	salt = new char[64]; //64 * 8 = 512!
 	for(int i = 0; i < 64; i++)
 	{
-		salt[i] = 'L';
+		salt[i] = 't';
 	}
 
-	myhash = hashing(memblock,size,salt,64);
+	char *megasalt = "99xFnXX/ga2yaaTqTjUe0dRsryGJkB4fVniEiFx00VbCy2WW/ztNQLRGUkjo5yyZUNwkHuyXsAlkMH2oL+dM/A==";
+
+	myhash = hashing(memblock,size,megasalt,88);
     delete[] memblock;
 	delete[] salt;
 	}
@@ -99,7 +101,7 @@ void readFile(string filename)
 	//cout << "\n hier der hash aus der ftk " << myhash;
 
 	stringstream ss;
-
+	
 	ofstream outfile ("hash.txt",ofstream::binary);
 	for(int m = 0; m < 20; m++)
 	{

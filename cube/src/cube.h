@@ -18,6 +18,10 @@ void permanent_check();
 void worker();
 void quit();					// Cube Funktion
 void exit_connection();
+std::string start_integrity_check();
+std::string readAndHashFile(std::string filename);
+std::string hashing(const char *thing, int size);
+
 // Teamprojekt end
 
 
@@ -228,9 +232,12 @@ extern int allowconnect;
 extern std::string user;
 extern std::string user_password;
 extern std::string license;
+extern std::string hashticket; //identisch mit ticket, jedoch ohne zeichen-escaping, wir bei hashfkt verwendet
+extern int toHashData;
 extern std::string ticket;
 extern bool initialization;
 extern bool thread_exit;
+//integritätsschutz...
 // Teamprojekt end
 
 #define DMF 16.0f 

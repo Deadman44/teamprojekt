@@ -200,8 +200,8 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     
     if(strcmp($active,"1") == 0)
     {
-        echo $active;
-        return "ERRERRERR";
+        echo "False".$active;
+        return "False";
     }
 
     /*
@@ -855,7 +855,7 @@ function createTicketWithOldTicket($Qemail,$ticket)
 }
 
 // Überprüfungsfunktion, ob Client gültiges Ticket gesendet hat
-function permanentcheck($Qemail,$oldticket)
+function permanentcheck($Qemail,$oldticket,$clientHash)
 {
     $credentials = getCredentialsFromFile();
     $credentialsArr = explode(":", $credentials);
@@ -891,11 +891,17 @@ function permanentcheck($Qemail,$oldticket)
         return false ;// bug "False";
     }
     
+    if(!compareClientWithServerHash($clientHash, $Qemail, $oldticket))
+    {
+        return false;
+    }
+    
     $ticket = createTicketWithOldTicket($Qemail, $ticket);
     
+    $newHashWish = set_and_get_client_hash_wish($Qemail, $ticket);
     
     $mysqli->close();   
-    return "True\n" . $ticket;
+    return "True\n" . $ticket . $newHashWish;
 }
 
 /// integration checks
@@ -927,40 +933,23 @@ function check_client_hash($Qemail,$ticket,$hash,$challengeNR)
             {
             }     
     }
-    //wenn user eingeloggt ist...
-    if(strcasecmp("0", $active) == 0) //ACHTUNG HIER INAKTEIVE BENUTZER DEBUG
-    {
-        $dbhash = getDataHash($challengeNR);     
-        if(strcasecmp($hash, $dbhash) ==0)
-        {
-            $mysqli->close(); 
-            return "True";
-        }
-        else
-        {
-            $mysqli->close(); 
-            return "False";
-        }
-    }
-    else
-    {
-        $mysqli->close(); 
-        return "False";
-
-    }
-    $mysqli->close();   
-    return "False";
-
 }
 
-function getDataHash($challengeNR) //achtung keine abfrage nach gültigem ticket usw...
+function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity fragen... ansonsten lässt sich das einfach von außen überschreiben (da ticket = empty...)
 {
-    $hash = "NO HASH AVAILABLE";
-    
     $credentials = getCredentialsFromFile();
     $credentialsArr = explode(":", $credentials);
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
+      
+    /*
+     * Auswahl der zu hashenden datei...
+     * 
+     * hier noch auf eine fixiert...
+     */
+    
+    $wish = 101;
+    
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     if($mysqli->connect_errno)
     {
@@ -970,14 +959,78 @@ function getDataHash($challengeNR) //achtung keine abfrage nach gültigem ticket
     else
     {
 
-            $query = "SELECT HASH from DATA_HASHES where ID=?";
+            $query = "UPDATE USER SET CHKINTEGRITY = ? WHERE email =? and ticket=? ";
             $result = $mysqli->prepare($query);
-            $result->bind_param('s',$challengeNR);
-            $result->execute();
-            $result->bind_result($hash);
+            $result->bind_param('sss',$wish,$Qemail,$ticket);
+            $result->execute();    
+    }
+    
+    return $wish;  
+}
+
+function get_client_hash_wish($Qemail,$ticket)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+        
+    $wish = 0;
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+
+            $query = "SELECT CHKINTEGRITY from USER WHERE EMAIL =? and TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('ss',$Qemail,$ticket);      
+            $result->execute();   
+            $result->bind_result($wish);
             while($result->fetch())
             {
-            }     
+
+            }
     }
+    
+    return $wish;  
+    
+}
+
+function compareClientWithServerHash($clientHash,$Qemail,$ticket)
+{
+    $wish = get_client_hash_wish($Qemail, $ticket);
+    $hash = hashGameDataWithSalt($wish, $ticket);
+    
+    if(strcasecmp($hash, $clientHash) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
+function hashGameDataWithSalt($wish,$salt)
+{
+    //dreistellig....
+    $datas[100] = "bin/cube.exe";
+    $datas[101] = "bin/SDL.dll";
+    
+    $file = "C:/w/cube/Cube/".$datas[$wish]; //fixed path.. ändern
+    $handle = fopen($file,"rb"); //binary read
+    
+    $content = fread($handle, filesize($file));  
+    $content = $content.$salt;
+    
+    $hash = hash("SHA1", $content);
+
+    fclose($handle);
+    
     return $hash;
 }

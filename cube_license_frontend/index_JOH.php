@@ -43,11 +43,19 @@
             
 
             */
-            $serial = "FEvHarYVuHI0woMbAPPGBg==:U6+HziZNlhQYaCVo3v2KdVy+MfIjEFuMJgM11ppZ3u/dBlb2UqHPCdQPIYJH4LtuXyEpGyMxuEqCS986QDqFCw==";
-            echo check_license_key("wurst@wurst.de", "fickenficken1", $serial);
+            //$serial = "FEvHarYVuHI0woMbAPPGBg==:U6+HziZNlhQYaCVo3v2KdVy+MfIjEFuMJgM11ppZ3u/dBlb2UqHPCdQPIYJH4LtuXyEpGyMxuEqCS986QDqFCw==";
+            //echo check_license_key("wurst@wurst.de", "fickenficken1", $serial);
             
-            echo check_client_hash("wurst@wurst.de", "empty", "9263CF9DF636AB727C83671CEF313D158693D33A", 2);
+            //echo check_client_hash("wurst@wurst.de", "empty", "9263CF9DF636AB727C83671CEF313D158693D33A", 2);
             
+
+            $ticket = createAndReturnTicket("wurst@wurst.de", "fickenficken1");
+            $srvhash = hashGameDataWithSalt(101, $ticket);
+            echo $srvhash."<br>";
+            set_and_get_client_hash_wish("wurst@wurst.de", $ticket);
+            
+            echo compareClientWithServerHash($srvhash, "wurst@wurst.de", $ticket);
+
 
 
             

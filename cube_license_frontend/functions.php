@@ -1072,9 +1072,12 @@ function createAndStartBat(){
 
 function destroyStartBat(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (is_readable("C:/w/cube/cube/start.bat"))
                 {
 =======
+=======
+>>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
 
 	// Wenn lesbare bat-Datei vorhanden, dann löschen
 	if (is_readable("C:/w/cube/cube/start.bat"){

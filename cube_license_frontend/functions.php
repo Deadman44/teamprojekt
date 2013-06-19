@@ -1072,31 +1072,13 @@ function createAndStartBat(){
 
 function destroyStartBat(){
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	if (is_readable("C:/w/cube/cube/start.bat"))
-                {
-=======
-=======
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
-=======
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
-=======
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
-=======
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
-=======
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
-=======
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
 
 	// Wenn lesbare bat-Datei vorhanden, dann löschen
 	if (is_readable("C:/w/cube/cube/start.bat"){
->>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
+=======
+	if (is_readable("C:/w/cube/cube/start.bat"))
+                {
+>>>>>>> korrekturen + port kann beim server angegeben werden
 		unlink("C:/w/cube/cube/start.bat");
 	} else {
 		echo "Bat-File not destroyed! No such file in directory.";

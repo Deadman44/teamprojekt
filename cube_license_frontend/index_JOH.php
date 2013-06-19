@@ -49,7 +49,7 @@
             //echo check_client_hash("wurst@wurst.de", "empty", "9263CF9DF636AB727C83671CEF313D158693D33A", 2);
             
 
-            $ticket = createAndReturnTicket("wurst@wurst.de", "fickenficken1");
+            $ticket = createAndReturnTicket("wurst@wurst.de", "hallohallo1");
             $srvhash = hashGameDataWithSalt(101, $ticket);
             echo $srvhash."<br>";
             set_and_get_client_hash_wish("wurst@wurst.de", $ticket);

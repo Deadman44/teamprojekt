@@ -58,7 +58,7 @@ extern void setarraypointers();
 
 // client
 extern void localservertoclient(uchar *buf, int len);
-extern void connects(char *servername);
+extern void connects(char *servername, char *port);
 extern void disconnect(int onlyclean = 0, int async = 0);
 extern void toserver(char *text);
 extern void addmsg(int rel, int num, int type, ...);
@@ -195,7 +195,7 @@ extern void rendermodel(char *mdl, int frame, int range, int tex, float rad, flo
 extern mapmodelinfo &getmminfo(int i);
 
 // server
-extern void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl);
+extern void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl, int port);
 extern void cleanupserver();
 extern void localconnect();
 extern void localdisconnect();

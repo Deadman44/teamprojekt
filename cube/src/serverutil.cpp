@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
 {
     int uprate = 0, maxcl = 4;
     char *sdesc = "", *ip = "", *master = NULL, *passwd = "";
-    
+    int port = 28765;
     for(int i = 1; i<argc; i++)
     {
         char *a = &argv[i][2];
@@ -136,12 +136,13 @@ int main(int argc, char* argv[])
             case 'm': master = a; break;
             case 'p': passwd = a; break;
             case 'c': maxcl  = atoi(a); break;
+			case 'q': port = atoi(a); break;
             default: printf("WARNING: unknown commandline option\n");
         };
     };
     
     if(enet_initialize()<0) fatal("Unable to initialise network module");
-    initserver(true, uprate, sdesc, ip, master, passwd, maxcl);
+    initserver(true, uprate, sdesc, ip, master, passwd, maxcl,port);
     return 0;
 };
 #endif

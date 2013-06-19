@@ -117,10 +117,11 @@ int main(int argc, char **argv)
 
     #define log(s) conoutf("init: %s", s)
     log("sdl");
-    
+    int port = 28765;
     for(int i = 1; i<argc; i++)
     {
         char *a = &argv[i][2];
+		
         if(argv[i][0]=='-') switch(argv[i][1])
         {
             case 'd': dedicated = true; break;
@@ -133,6 +134,7 @@ int main(int argc, char **argv)
             case 'm': master = a; break;
             case 'p': passwd = a; break;
             case 'c': maxcl  = atoi(a); break;
+			case 'q': port	=	atoi(a); break;
             default:  conoutf("unknown commandline option");
         }
         else conoutf("unknown commandline argument");
@@ -149,7 +151,7 @@ int main(int argc, char **argv)
     if(enet_initialize()<0) fatal("Unable to initialise network module");
 
     initclient();
-    initserver(dedicated, uprate, sdesc, ip, master, passwd, maxcl);  // never returns if dedicated
+    initserver(dedicated, uprate, sdesc, ip, master, passwd, maxcl, port);  // never returns if dedicated
       
     log("world");
     empty_world(7, true);

@@ -456,7 +456,7 @@ void localconnect()
     send_welcome(&c-&clients[0]); 
 };
 
-void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl)
+void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl, int port)
 {
 	/*
 	dedicated = true wird übergeben fall server.bat gestartet, siehe main.c, dort wird dieses argument abgefangen
@@ -468,7 +468,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
     
     if(isdedicated = dedicated)
     {
-        ENetAddress address = { ENET_HOST_ANY, CUBE_SERVER_PORT };
+        ENetAddress address = { ENET_HOST_ANY, port };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
         serverhost = enet_host_create(&address, MAXCLIENTS, 0, uprate);
         if(!serverhost) fatal("could not create server host\n");

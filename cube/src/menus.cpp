@@ -134,8 +134,9 @@ bool menukey(int code, bool isdown)
     {
         if(code==SDLK_RETURN || code==-2)
         {
+			char *tmpport = "28765";
             char *action = menus[vmenu].items[menusel].action;
-            if(vmenu==1) connects(getservername(menusel));
+            if(vmenu==1) connects(getservername(menusel),tmpport);
             menustack.add(vmenu);
             menuset(-1);
             execute(action, true);

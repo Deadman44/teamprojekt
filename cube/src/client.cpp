@@ -51,7 +51,7 @@ void writeclientinfo(FILE *f)
     fprintf(f, "name \"%s\"\nteam \"%s\"\n", player1->name, player1->team);
 };
 
-void connects(char *servername)
+void connects(char *servername, char *port) //chg +1 param
 {   
 	/*
 	das was bei /t connect ip im spiel passiert...
@@ -60,8 +60,9 @@ void connects(char *servername)
     disconnect(1);  // reset state
     addserver(servername);
 
-    conoutf("attempting to connect to %s", servername);
-    ENetAddress address = { ENET_HOST_ANY, CUBE_SERVER_PORT }; // erstmal leere adresse... cube port ist fest
+	int serverport = atoi(port);
+    conoutf("attempting to connect to %s", servername, serverport);
+    ENetAddress address = { ENET_HOST_ANY, serverport }; // erstmal leere adresse...  // port war SERVER_PoRT
     if(enet_address_set_host(&address, servername) < 0) //versuch der adresszuweisung.
     {
         conoutf("could not resolve server %s", servername);
@@ -142,7 +143,7 @@ void echo(char *text) { conoutf("%s", text); };
 
 COMMAND(echo, ARG_VARI);
 COMMANDN(say, toserver, ARG_VARI);
-COMMANDN(connect, connects, ARG_1STR);
+COMMANDN(connect, connects, ARG_2STR); //von 1str auf 2str
 COMMANDN(disconnect, trydisconnect, ARG_NONE);
 
 // collect c2s messages conveniently

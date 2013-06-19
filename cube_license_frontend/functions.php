@@ -803,6 +803,7 @@ function createAndReturnTicket($Qemail,$Qpass)
     $hashAndSalt = create_hash($Qemail.$Qpass);
     $temporaryticket = returnHashFromAll($hashAndSalt); //Salt implizit, gibt nur Hash aus     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    $chkintegrity = "101";
     if($mysqli->connect_errno)
     {
             echo "FAIL";
@@ -811,9 +812,9 @@ function createAndReturnTicket($Qemail,$Qpass)
     else
     {
 
-            $insert = 'UPDATE USER SET TICKET=? WHERE email =? ';
+            $insert = 'UPDATE USER SET TICKET=?, CHKINTEGRITY=? WHERE email =? ';
             $eintrag = $mysqli->prepare($insert);
-            $eintrag->bind_param('ss',$temporaryticket,$Qemail);
+            $eintrag->bind_param('sss',$temporaryticket,$chkintegrity,$Qemail);
             $eintrag->execute();
     }
 
@@ -962,8 +963,10 @@ function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity frag
             $query = "UPDATE USER SET CHKINTEGRITY = ? WHERE email =? and ticket=? ";
             $result = $mysqli->prepare($query);
             $result->bind_param('sss',$wish,$Qemail,$ticket);
-            $result->execute();    
+            $result->execute(); 
+
     }
+    
     
     return $wish;  
 }
@@ -1023,6 +1026,7 @@ function hashGameDataWithSalt($wish,$salt)
     $datas[101] = "bin/SDL.dll";
     
     $file = "C:/w/cube/Cube/".$datas[$wish]; //fixed path.. ändern
+    //echo "<br> --> DATA".$file."<br>";
     $handle = fopen($file,"rb"); //binary read
     
     $content = fread($handle, filesize($file));  
@@ -1048,7 +1052,8 @@ function createAndStartBat($pwd){
 }
 
 function destroyStartBat(){
-	if (is_readable("C:/w/cube/cube/start.bat"){
+	if (is_readable("C:/w/cube/cube/start.bat"))
+                {
 		unlink("C:/w/cube/cube/start.bat");
 	} else {
 		echo "Bat-File not destroyed! No such file in directory.";

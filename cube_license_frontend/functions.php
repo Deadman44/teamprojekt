@@ -1034,3 +1034,23 @@ function hashGameDataWithSalt($wish,$salt)
     
     return $hash;
 }
+
+function createAndStartBat($pwd){
+	$file=fopen("C:/w/cube/cube/start.bat","w+");
+	if (is_writable($file)) {
+		$string="bin\cube.exe -d -c4 -q -p".$pwd;
+		fwrite($file,$string);
+		fclose();
+		exec("C:/w/cube/cube/start.bat");
+	} else {
+		echo "Bat-File not created!";
+	}
+}
+
+function destroyStartBat(){
+	if (is_readable("C:/w/cube/cube/start.bat"){
+		unlink("C:/w/cube/cube/start.bat");
+	} else {
+		echo "Bat-File not destroyed! No such file in directory.";
+	}
+}

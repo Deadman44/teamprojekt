@@ -1039,10 +1039,29 @@ function hashGameDataWithSalt($wish,$salt)
     return $hash;
 }
 
-function createAndStartBat($pwd){
+function createAndStartBat(){
+	// Server erzeugt bat-Datei für Single-Player Spiel
+	
+	
 	$file=fopen("C:/w/cube/cube/start.bat","w+");
-	if (is_writable($file)) {
-		$string="bin\cube.exe -d -c4 -q -p".$pwd;
+	$pwd=mt_rand(0,1000);
+	$proof=true;
+	$port=0;
+	
+	// Prüfung ob ausgewürfelte Port-Nummer bereits belegt ist
+	while($proof){
+		$port=mt_rand(30000,50000);
+		$fp = fsockopen("localhost", $port);
+		if(!$fp){
+			echo "Error with Portnumber!";
+		} else {
+			$proof=false;
+		}		
+	}
+	
+	// bat-Datei erzeugen und mit Daten/Cube-Parametern befüllen
+	if (is_writable($file) && $port!=0) {
+		$string="bin\cube.exe -d -c1 -p".$pwd."-i127.0.0.1 -q".$port." %*";
 		fwrite($file,$string);
 		fclose();
 		exec("C:/w/cube/cube/start.bat");
@@ -1052,8 +1071,14 @@ function createAndStartBat($pwd){
 }
 
 function destroyStartBat(){
+<<<<<<< HEAD
 	if (is_readable("C:/w/cube/cube/start.bat"))
                 {
+=======
+
+	// Wenn lesbare bat-Datei vorhanden, dann löschen
+	if (is_readable("C:/w/cube/cube/start.bat"){
+>>>>>>> 43197eedf0683235da971b245b29989f046bbbf2
 		unlink("C:/w/cube/cube/start.bat");
 	} else {
 		echo "Bat-File not destroyed! No such file in directory.";

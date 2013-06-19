@@ -473,6 +473,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
         serverhost = enet_host_create(&address, MAXCLIENTS, 0, uprate);
         if(!serverhost) fatal("could not create server host\n");
         loopi(MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
+		std::cout << "LOCAL??";
     };
 
     resetserverifempty();

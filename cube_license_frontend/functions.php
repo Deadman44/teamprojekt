@@ -1073,7 +1073,7 @@ function createAndStartBat(){
 function destroyStartBat(){
 
 	// Wenn lesbare bat-Datei vorhanden, dann löschen
-	if (is_readable("C:/w/cube/cube/start.bat"){
+	if (is_readable("C:/w/cube/cube/start.bat")){
 		unlink("C:/w/cube/cube/start.bat");
 	} else {
 		echo "Bat-File not destroyed! No such file in directory.";

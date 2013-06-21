@@ -109,10 +109,10 @@ std::string start_integrity_check()
 	int fileDecider = toHashData;
 
 	toHashGameData[100] = "bin/cube.exe";
-	toHashGameData[101] = "bin/jpeg.dll";
+	toHashGameData[101] = "bin/SDL.dll";	
 	toHashGameData[102] = "bin/libpng1.dll";
-	toHashGameData[103] = "bin/msvcr71.dll";
-	toHashGameData[104] = "bin/SDL.dll";
+	toHashGameData[103] = "bin/msvcr71.dll";	
+	toHashGameData[104] = "bin/jpeg.dll";
 	toHashGameData[105] = "bin/SDL_image.dll";
 	toHashGameData[106] = "bin/SDL_mixer.dll";
 	toHashGameData[107] = "bin/zlib.dll";

@@ -339,7 +339,7 @@ void resetserverifempty()
 int nonlocalclients = 0;
 int lastconnect = 0;
 
-//TPBEGIN
+//TPBEGIN kopie von originaler spawnsate ggfls modifikationen hier noetig
 void spawnstateForServer(dynent *d)              // reset player state not persistent accross spawns
 {
     resetmovement(d);
@@ -407,10 +407,15 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             sents[i].spawned = true;
             send2(true, -1, SV_ITEMSPAWN, i);
         };
-    };
-    
+    }; 
     lastsec = seconds;
-    
+	loopv(clients)
+	{
+		dynent *tmp = clients[i].representer;
+		std::cout << (*tmp).health; //c-style zugriff auf membervar
+	}
+
+	
     if((mode>1 || (mode==0 && nonlocalclients)) && seconds>mapend-minremain*60) checkintermission();
     if(interm && seconds>interm)
     {

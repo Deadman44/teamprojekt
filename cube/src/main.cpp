@@ -29,6 +29,12 @@ void cleanup(char *msg)         // single program exit point;
         #endif
     };
     SDL_Quit();
+
+	// Teamprojekt begin
+	thread_exit = true;
+	std::cout << thread_exit << std::endl;
+	exit_connection();
+	// Teamprojekt end
     exit(1);
 };
 
@@ -45,6 +51,11 @@ void quit()                     // normal exit
 
 void fatal(char *s, char *o)    // failure exit
 {
+	// Teamprojekt begin
+	thread_exit = true;
+	std::cout << thread_exit << std::endl;
+	exit_connection();
+	// Teamprojekt end
     sprintf_sd(msg)("%s%s (%s)\n", s, o, SDL_GetError());
     cleanup(msg);
 };

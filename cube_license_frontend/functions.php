@@ -1079,3 +1079,4 @@ function destroyStartBat(){
 		echo "Bat-File not destroyed! No such file in directory.";
 	}
 }
+?>

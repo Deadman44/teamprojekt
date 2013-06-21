@@ -371,6 +371,12 @@ void selfdamage(int damage, int actor, dynent *act)
             conoutf("you suicided!");
             addmsg(1, 2, SV_FRAGS, --player1->frags);
         }
+		//TP++
+		else if(actor ==-128)
+		{
+			std::cout << "SERVERSIDE DAMAGE";
+		}
+		//TP ENDE
         else
         {
             dynent *a = getclient(actor);

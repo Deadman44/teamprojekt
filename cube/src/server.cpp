@@ -16,6 +16,7 @@ struct client                   // server side version of "dynent" type
 
 	//TEAMPROJEKT
 	dynent *representer; //spielfigur des clients auf dem server
+	int clientnr;
 };
 
 vector<client> clients;
@@ -195,6 +196,29 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             sender = -1;
             break;
         };
+		
+		//Teamprojekt, kopie von clients2c
+		case SV_DAMAGE: //schaden an interne repräsentanten vergeben           
+        {
+			// *d is der spieler dessen paket angekommen ist, siehe oben,wird bei positionsdaten übertragen und angewandt
+            int target = getint(p);
+            int damage = getint(p);
+            int ls = getint(p);
+			std::cout << "TARGET: " << target << " DAMAGE " << damage << " LIFESEQ " << ls;
+			
+			loopv(clients)
+			{
+				if(clients[i].clientnr == target)
+				{
+					selfdamage(damage,-128,clients[i].representer);
+					std::cout <<" make server damage ";
+				}
+			}
+			
+            break;
+        };
+		//teamprojekt
+		
         
         case SV_ITEMLIST:
         {
@@ -409,11 +433,6 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
         };
     }; 
     lastsec = seconds;
-	loopv(clients)
-	{
-		dynent *tmp = clients[i].representer;
-		std::cout << (*tmp).health; //c-style zugriff auf membervar
-	}
 
 	
     if((mode>1 || (mode==0 && nonlocalclients)) && seconds>mapend-minremain*60) checkintermission();
@@ -438,12 +457,29 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 	hinweis: keine server tick rate??
 	*/
 
+		
 
+	
     if(!isdedicated) return;     // below is network only
 
 	int numplayers = 0;
 	loopv(clients) if(clients[i].type!=ST_EMPTY) ++numplayers;
 	serverms(mode, numplayers, minremain, smapname, seconds, clients.length()>=maxclients);
+
+
+
+	//TEAMPROJEKT
+
+	if(seconds-laststatus>60)
+	{
+		loopv(clients)
+		{
+			dynent *tmp = clients[i].representer;
+			std::cout << (*tmp).health; //c-style zugriff auf membervar
+		}
+	}
+
+	//TP ENDE
 
     if(seconds-laststatus>60)   // display bandwidth stats, useful for server ops
     {
@@ -480,6 +516,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
                 strcpy_s(c.hostname, (enet_address_get_host(&c.peer->address, hn, sizeof(hn))==0) ? hn : "localhost");
                 printf("client connected (%s)\n", c.hostname);
                 send_welcome(lastconnect = &c-&clients[0]);
+				c.clientnr = lastconnect; //TEAMPROJEKT
                 break;
             }
             case ENET_EVENT_TYPE_RECEIVE: //statusabfrage von enet, siehe doku von enet

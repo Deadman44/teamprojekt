@@ -66,7 +66,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
     {
         case SV_INITS2C:                    // welcome messsage from the server
         {
-            cn = getint(p);
+            cn = getint(p); //die client-nummer, die vom server vergeben wird bei welcome_message
             int prot = getint(p);
 			/* hier ebenfalls wichtig für mod client 
 			auskommentieren ermoegtlicth verbindung mit mod client

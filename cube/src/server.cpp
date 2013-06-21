@@ -15,7 +15,7 @@ struct client                   // server side version of "dynent" type
     int modevote;
 
 	//TEAMPROJEKT
-	dynent *representer;
+	dynent *representer; //spielfigur des clients auf dem server
 };
 
 vector<client> clients;
@@ -339,6 +339,64 @@ void resetserverifempty()
 int nonlocalclients = 0;
 int lastconnect = 0;
 
+//TPBEGIN
+void spawnstateForServer(dynent *d)              // reset player state not persistent accross spawns
+{
+    resetmovement(d);
+    d->vel.x = d->vel.y = d->vel.z = 0; 
+    d->onfloor = false;
+    d->timeinair = 0;
+    d->health = 100;
+    d->armour = 50;
+    d->armourtype = A_BLUE;
+    d->quadmillis = 0;
+    d->lastattackgun = d->gunselect = GUN_SG;
+    d->gunwait = 0;
+	d->attacking = false;
+    d->lastaction = 0;
+    loopi(NUMGUNS) d->ammo[i] = 0;
+    d->ammo[GUN_FIST] = 1;
+    if(m_noitems)
+    {
+        d->gunselect = GUN_RIFLE;
+        d->armour = 0;
+        if(m_noitemsrail)
+        {
+            d->health = 1;
+            d->ammo[GUN_RIFLE] = 100;
+        }
+        else
+        {
+            if(gamemode==12) { d->gunselect = GUN_FIST; return; };  // eihrul's secret "instafist" mode
+            d->health = 256;
+            if(m_tarena)
+            {
+                int gun1 = rnd(4)+1;
+                baseammo(d->gunselect = gun1);
+                for(;;)
+                {
+                    int gun2 = rnd(4)+1;
+                    if(gun1!=gun2) { baseammo(gun2); break; };
+                };
+            }
+            else if(m_arena)    // insta arena
+            {
+                d->ammo[GUN_RIFLE] = 100;
+            }
+            else // efficiency
+            {
+                loopi(4) baseammo(i+1);
+                d->gunselect = GUN_CG;
+            };
+            d->ammo[GUN_CG] /= 2;
+        };
+    }
+    else
+    {
+        d->ammo[GUN_SG] = 5;
+    };
+};
+//TP OUT
 void serverslice(int seconds, unsigned int timeout)   // main server update, called from cube main loop in sp, or dedicated server loop
 {
     loopv(sents)        // spawn entities when timer reached
@@ -406,6 +464,13 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
                 c.type = ST_TCPIP;
                 c.peer = event.peer;
                 c.peer->data = (void *)(&c-&clients[0]);
+				//TEAMPROJEKT
+				c.representer=new dynent();
+				spawnstateForServer(c.representer);
+				c.representer->state = CS_ALIVE;
+
+
+				///
                 char hn[1024];
                 strcpy_s(c.hostname, (enet_address_get_host(&c.peer->address, hn, sizeof(hn))==0) ? hn : "localhost");
                 printf("client connected (%s)\n", c.hostname);

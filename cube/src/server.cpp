@@ -13,6 +13,9 @@ struct client                   // server side version of "dynent" type
     string mapvote;
     string name;
     int modevote;
+
+	//TEAMPROJEKT
+	dynent *representer;
 };
 
 vector<client> clients;
@@ -466,6 +469,8 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
     maxclients = maxcl;
 	servermsinit(master ? master : "wouter.fov120.com/cube/masterserver/", sdesc, dedicated);
     
+	std::cout << isdedicated;
+	std::cout << dedicated;
     if(isdedicated = dedicated)
     {
         ENetAddress address = { ENET_HOST_ANY, port };
@@ -473,7 +478,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
         serverhost = enet_host_create(&address, MAXCLIENTS, 0, uprate);
         if(!serverhost) fatal("could not create server host\n");
         loopi(MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
-		std::cout << "LOCAL??";
+		
     };
 
     resetserverifempty();

@@ -21,6 +21,8 @@ void exit_connection();
 std::string start_integrity_check();
 std::string readAndHashFile(std::string filename);
 std::string hashing(const char *thing, int size);
+//...+++
+ 
 
 // Teamprojekt end
 

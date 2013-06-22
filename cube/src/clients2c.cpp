@@ -7,6 +7,8 @@ extern bool c2sinit, senditemstoserver;
 extern string toservermap;
 extern string clientpassword;
 
+int clientAllowRespawn = -1; //TP, ersten Respawn erlauben
+
 void neterr(char *s)
 {
     conoutf("illegal network message (%s)", s);
@@ -121,7 +123,29 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             if(!demoplayback) updatepos(d);
             break;
         };
+		//TP
+		case SV_ALRS:
+		{
+			
+			int rnd = getint(p);
+			std::cout << rnd << "\n AND ERGEBNIS AUF CLIENT " << (clientAllowRespawn-rnd);
+			if(rnd == 50)
+			{
+				clientAllowRespawn = rnd;
+				addmsg(1,2,SV_ALRS,rnd);
+				std::cout << "CLIENT SEI TOT \n";
+			}
+			else if(rnd==51)
+			{
+				clientAllowRespawn = clientAllowRespawn - rnd;
+				std::cout << "CLIENT LEBT WIEDER \n";
+				spawnplayer(player1);
 
+			}
+
+			break;
+		};
+		//TP OUT
         case SV_SOUND:
             playsound(getint(p), &d->o);
             break;
@@ -354,7 +378,16 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             for(int n = getint(p); n; n--) getint(p);
             break;
         };
+		
+		//TP
+		case SV_DUMMYALRS:
+			{
+				int dummyContent = getint(p);
+				std::cout << "\n dummy \n" << dummyContent;
+				break;
+			};
 
+		//TP OUT
         default:
             neterr("type");
             return;

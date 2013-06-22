@@ -17,6 +17,8 @@ struct client                   // server side version of "dynent" type
 	//TEAMPROJEKT
 	dynent *representer; //spielfigur des clients auf dem server
 	int clientnr;
+	int awaitingSpawnSignal; //zeigt an, ob client bereits eine spawnanfrage geschickt hat
+	int allowRespawn; //sollte auf -1 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enhält im zwischenzustand einen zufallswert (rnd -rnd+1 == -1))
 };
 
 vector<client> clients;
@@ -167,6 +169,8 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
     char text[MAXTRANS];
     int cn = -1, type;
 
+
+
     while(p<end) switch(type = getint(p))
     {
         case SV_TEXT:
@@ -197,27 +201,63 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 		
-		//Teamprojekt, kopie von clients2c
+		//Teamprojekt, leicht modifizierte kopie von clients2c
 		case SV_DAMAGE: //schaden an interne repräsentanten vergeben           
         {
-			// *d is der spieler dessen paket angekommen ist, siehe oben,wird bei positionsdaten übertragen und angewandt
-            int target = getint(p);
-            int damage = getint(p);
-            int ls = getint(p);
-			std::cout << "TARGET: " << target << " DAMAGE " << damage << " LIFESEQ " << ls;
+			
+            int target = getint(p); //ziel==clientnummer
+            int damage = getint(p); //damage
+            int ls = getint(p); //lifesequenze.. also welches "leben" aktuell is, durchnummeriert
+			std::cout << "ORIGIN: " << cn << " TARGET: " << target << " DAMAGE " << damage << " LIFESEQ " << ls;
 			
 			loopv(clients)
 			{
 				if(clients[i].clientnr == target)
 				{
-					selfdamage(damage,-128,clients[i].representer);
-					std::cout <<" make server damage ";
+					serverselfdamage(damage,-128,clients[i].representer,i);
+					std::cout <<" \n make server damage \n ";
 				}
 			}
 			
             break;
         };
-		//teamprojekt
+
+		case SV_ALRS:
+		{
+			uchar *tmp = p;
+			tmp--;
+			*tmp = SV_DUMMYALRS;
+			tmp++;
+			std::cout << "LESE ARLS VON PAKET AUF SERVER \n";
+			int rnd = getint(p);
+			*tmp = 7;
+
+			clients[cn].allowRespawn = clients[cn].allowRespawn - rnd;
+			std::cout << "RND: " << rnd << " ERGEBNIS : " << clients[cn].allowRespawn;
+			if(clients[cn].allowRespawn == 0)
+			{
+				std::cout << "KORREKTER RESPAWN \n";
+				send2(1,cn,SV_ALRS,rnd+1);
+				spawnstateForServer(clients[cn].representer);
+				clients[cn].representer->state = CS_ALIVE;
+				clients[cn].representer->lifesequence++;
+				clients[cn].awaitingSpawnSignal = 0;
+				
+			}
+			else
+			{
+				std::cout << " CLIENT HAT FALSCHE NR GESENDET \n";
+			}
+
+			/*
+			wenn das ARLS paket den server durchläuft, wird dieses paket auch wieder an alle anderen clients verteilt
+			das muss verhindert werden! deswegen wird ein dummy-SV_ALRS message code eingeführt, der keinen inhalt besitzt, aber gleiche länge hat
+			*/
+			break;
+		};
+
+
+		//teamprojekt out
 		
         
         case SV_ITEMLIST:
@@ -246,7 +286,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
         case SV_POS:
         {
-            cn = getint(p);
+            cn = getint(p); //hier wird die clientnummer des clients herausgenommen, der dieses paket geschickt hat, kann überall im konstrukt verwendet werden, default = -1
             if(cn<0 || cn>=clients.length() || clients[cn].type==ST_EMPTY)
             {
                 disconnect_client(sender, "client num");
@@ -284,9 +324,46 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         };
     };
 
-    if(p>end) { disconnect_client(sender, "end of packet"); return; };
+    if(p>end) { disconnect_client(sender, "end of packet"); return; }; 
+
     multicast(packet, sender);
 };
+
+//TP
+void serverselfdamage(int damage, int actor, dynent *act,int clientnr)
+{
+	if(act->state == CS_DEAD) return;
+
+    int ad = damage*(act->armourtype+1)*20/100;     // let armour absorb when possible
+    if(ad>act->armour) ad = act->armour;
+    act->armour -= ad;
+    damage -= ad;
+	if((act->health -= damage)<=0)
+    {
+		std::cout << " \n PLAYER should die now with ... \n" << act->health;
+		act->state = CS_DEAD;
+		
+
+		if ( clients[clientnr].awaitingSpawnSignal == 1) //hat das überhaupt eine auswirkung?
+		{
+			return;
+		}
+		uchar rnd = 50; //wuerfel zufallszahl zw 20 und 120, schicke diese zum client
+		// client muss diese bestätigen mit rnd+1, damit soll dann der allowRespawn zurückgesetzt werden, ist das passiert
+		//schickt der server sein OK (rnd+2) an den client, der dann weiterspielen darf
+		clients[clientnr].allowRespawn = rnd;
+		clients[clientnr].awaitingSpawnSignal = 1;
+		send2(true,clientnr,SV_ALRS,rnd); //
+		
+		std::cout << " \n ZUFALLSWERT " << rnd << " \n";
+		
+	}
+	
+
+};
+//TP OUT
+
+
 
 void send_welcome(int n)
 {
@@ -421,6 +498,8 @@ void spawnstateForServer(dynent *d)              // reset player state not persi
     };
 };
 //TP OUT
+
+
 void serverslice(int seconds, unsigned int timeout)   // main server update, called from cube main loop in sp, or dedicated server loop
 {
     loopv(sents)        // spawn entities when timer reached
@@ -509,9 +588,11 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				c.representer=new dynent();
 				spawnstateForServer(c.representer);
 				c.representer->state = CS_ALIVE;
+				c.allowRespawn = -1;
+				c.allowRespawn = 0;
 
 
-				///
+				/// TP OUT
                 char hn[1024];
                 strcpy_s(c.hostname, (enet_address_get_host(&c.peer->address, hn, sizeof(hn))==0) ? hn : "localhost");
                 printf("client connected (%s)\n", c.hostname);

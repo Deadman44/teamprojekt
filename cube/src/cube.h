@@ -24,6 +24,7 @@ std::string hashing(const char *thing, int size);
 //...+++
  
 
+
 // Teamprojekt end
 
 
@@ -176,7 +177,8 @@ enum
     SV_PING, SV_PONG, SV_CLIENTPING, SV_GAMEMODE,
     SV_EDITH, SV_EDITT, SV_EDITS, SV_EDITD, SV_EDITE,
     SV_SENDMAP, SV_RECVMAP, SV_SERVMSG, SV_ITEMLIST,
-    SV_EXT,
+    SV_EXT, 
+	SV_ALRS, SV_DUMMYALRS,//TP
 };     
 
 enum { CS_ALIVE = 0, CS_DEAD, CS_LAGGED, CS_EDITING };
@@ -239,7 +241,8 @@ extern int toHashData;
 extern std::string ticket;
 extern bool initialization;
 extern bool thread_exit;
-//integritätsschutz...
+//stats-tracking
+extern int clientAllowRespawn;
 // Teamprojekt end
 
 #define DMF 16.0f 

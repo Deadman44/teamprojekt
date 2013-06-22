@@ -36,8 +36,11 @@ void resetmovement(dynent *d)
     d->move = 0;
 };
 
+
 void spawnstate(dynent *d)              // reset player state not persistent accross spawns
 {
+
+
     resetmovement(d);
     d->vel.x = d->vel.y = d->vel.z = 0; 
     d->onfloor = false;
@@ -243,7 +246,7 @@ void updateworld(int millis)        // main game update loop
 					player1->move = player1->strafe = 0;
 					moveplayer(player1, 10, false);
 				}
-                else if(!m_arena && !m_sp && lastmillis-player1->lastaction>10000) respawn();
+                else if(!m_arena && !m_sp && lastmillis-player1->lastaction>10000) respawn(); //autorespawn in 10 sekunden?
             }
             else if(!intermission)
             {
@@ -278,6 +281,8 @@ int fixspawn = 2;
 
 void spawnplayer(dynent *d)   // place at random spawn. also used by monsters!
 {
+	if(clientAllowRespawn != -1) return; //TP bricht ab wenn spieler keine erlaubnis für respawn hat
+
     int r = fixspawn-->0 ? 4 : rnd(10)+1;
     loopi(r) spawncycle = findentity(PLAYERSTART, spawncycle+1);
     if(spawncycle!=-1)
@@ -370,13 +375,8 @@ void selfdamage(int damage, int actor, dynent *act)
             actor = getclientnum();
             conoutf("you suicided!");
             addmsg(1, 2, SV_FRAGS, --player1->frags);
+
         }
-		//TP++
-		else if(actor ==-128)
-		{
-			std::cout << "SERVERSIDE DAMAGE";
-		}
-		//TP ENDE
         else
         {
             dynent *a = getclient(actor);
@@ -393,13 +393,15 @@ void selfdamage(int damage, int actor, dynent *act)
             };
         };
         showscores(true);
-        addmsg(1, 2, SV_DIED, actor);
+        addmsg(1, 2, SV_DIED, actor); //man teilt mit, durch wen man gestorben ist (unsicher)
         player1->lifesequence++;
         player1->attacking = false;
         player1->state = CS_DEAD;
         player1->pitch = 0;
         player1->roll = 60;
         playsound(S_DIE1+rnd(2));
+
+
         spawnstate(player1);
         player1->lastaction = lastmillis;
     }
@@ -444,6 +446,8 @@ void initclient()
 
 void startmap(char *name)   // called just after a map load
 {
+	clientAllowRespawn = -1; //TP
+
     if(netmapstart() && m_sp) { gamemode = 0; conoutf("coop sp not supported yet"); };
     sleepwait = 0;
     monsterclear();

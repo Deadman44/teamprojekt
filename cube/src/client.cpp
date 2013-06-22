@@ -9,6 +9,9 @@ int disconnecting = 0;
 int clientnum = -1;         // our client id in the game
 bool c2sinit = false;       // whether we need to tell the other clients our stats
 
+
+
+
 int getclientnum() { return clientnum; };
 
 bool multiplayer()

@@ -82,6 +82,7 @@ extern void changemap(char *name);
 extern void initclient();
 extern void spawnplayer(dynent *d);
 extern void selfdamage(int damage, int actor, dynent *act);
+
 extern dynent *newdynent();
 extern char *getclientmap();
 extern const char *modestr(int n);
@@ -247,3 +248,7 @@ extern void baseammo(int gun);
 // rndmap
 extern void perlinarea(block &b, int scale, int seed, int psize);
 
+//TEAMPROJEKT
+extern void serverselfdamage(int damage, int actor, dynent *act, int clientnr);
+extern void spawnstate(dynent *d); //auf clientseite!
+extern void spawnstateForServer(dynent *d); //auf dem client

@@ -132,7 +132,12 @@ void newprojectile(vec &from, vec &to, float speed, bool local, dynent *owner, i
 void hit(int target, int damage, dynent *d, dynent *at)
 {
 
-    if(d==player1) selfdamage(damage, at==player1 ? -1 : -2, at);
+    if(d==player1)
+	{
+		selfdamage(damage, at==player1 ? -1 : -2, at); //selbst schaden hinzufügen	
+		extern int clientnum; //TP
+		addmsg(1,4,SV_DAMAGE,clientnum,damage,player1->lifesequence); //TP, damit auch selbst zugefügter schaden am server registriert wird
+	}
     else if(d->monsterstate) monsterpain(d, damage, at);
 	//die untere zeile fuegt eine msg einem vector hinzu, dieser vector beinhaltet die nachrichten die an den
 	//server geschickt werden, hier: der schaden den andere spieler bekommen!

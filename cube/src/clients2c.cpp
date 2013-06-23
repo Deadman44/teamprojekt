@@ -161,11 +161,22 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             mapchanged = true;
             break;
         
-        case SV_ITEMLIST:
+        case SV_ITEMLIST: //FORMAT NEU: INR,ITYPE,INR,ITYPE.....ENDEKENNUNG(-1)
         {
             int n;
             if(mapchanged) { senditemstoserver = false; resetspawns(); };
-            while((n = getint(p))!=-1) if(mapchanged) setspawn(n, true);
+            while((n = getint(p))!=-1)
+			{
+				if(mapchanged)
+					{
+						setspawn(n, true);
+						int tmp = getint(p); // weil zweiter uchar im paket jetzt auch immer typ ist, der hier nicht gebraucht wird
+						if(tmp == -1) //sicherheitsabfrage ob endekennung erreicht ist
+						{
+							return;
+						}
+					}
+			}
             break;
         };
 

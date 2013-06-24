@@ -245,14 +245,14 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
         case SV_DIED:
         {
             int actor = getint(p);
-            if(actor==cn)
+            if(actor==cn) //cn wird bei jedem SV_POS geändert, hier: wenn der actor von sv_died == cn von sv_pos dann suizid von diesem Spieler
             {
                 conoutf("%s suicided", d->name);
             }
-            else if(actor==clientnum)
+            else if(actor==clientnum) //wenn der aktor identisch mit uns is (clientnum== die nr die der server uns gibt)
             {
                 int frags;
-                if(isteam(player1->team, d->team))
+                if(isteam(player1->team, d->team)) //d wird bei sv_pos genommen == dynent von cn!
                 {
                     frags = -1;
                     conoutf("you fragged a teammate (%s)", d->name);

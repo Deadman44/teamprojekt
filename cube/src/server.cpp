@@ -227,29 +227,6 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			
             break;
         };
-		
-		/*
-		case SV_SHOT: // server sammelt hier die schuss-events, also immer wenn geschossen wird
-        {
-			if(isdedicated)
-			{
-
-				int gun = getint(p);
-				for(int i = 0; i < 6;i++)
-				{
-					int test = getint(p); //weil es hier 6 weitere hier unnötige parameter gibt in der message
-				}
-				clients[cn].representer->ammo[gun]--;
-				std::cout << "\n MUNITION FUER WAFFE " << clients[cn].representer->ammo[gun];
-				if(clients[cn].representer->ammo[gun] < 0)
-				{
-					disconnect_client(cn,"Cheat entdeckt: Munition");
-				}
-
-			}
-            break;
-        };
-		*/
 
 		case SV_MUN:
 		{

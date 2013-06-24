@@ -820,7 +820,8 @@ function createAndReturnTicket($Qemail,$Qpass)
 
     $mysqli->close();
     
-    setUserActive($Qemail, $temporaryticket);  
+    setUserActive($Qemail, $temporaryticket);
+	setTimeStampToDB($Qemail, $temporaryticket);
     return $temporaryticket;
 }
 
@@ -850,7 +851,8 @@ function createTicketWithOldTicket($Qemail,$ticket)
             $eintrag->execute();
     }
 
-    $mysqli->close();   
+    $mysqli->close();
+	setTimeStampToDB($Qemail,$ticket);
     return $temporaryticket;
     
 }
@@ -1079,4 +1081,98 @@ function destroyStartBat(){
 		echo "Bat-File not destroyed! No such file in directory.";
 	}
 }
+
+function setTimeStampToDB($Qemail,$ticket){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+    
+	$active = "ERROR NOT FOUND";
+	$newTimeStamp = new DateTime();
+	$newTimeStamp = $newTimeStamp->getTimestamp();
+    
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (setTimeStampToDB_function)";
+	} else {
+        $query = "UPDATE USER set TIMESTAMP=? where EMAIL=? AND TICKET=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('sss',$newTimeStamp,$Qemail,$ticket);
+        $result->execute();
+   
+	}
+	$mysqli->close();	
+}
+
+function getTimeStampFromDB($Qemail,$ticket){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	
+	$timestamp = "null";
+    
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (getTimeStampFromDB_function)";
+	} else {
+        $query = "SELECT TIMESTAMP from USER where EMAIL=? AND TICKET=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('ss',$Qemail,$ticket);
+        $result->execute();
+   		$result->bind_result($timestamp);
+		while($result->fetch())
+		{
+			
+		}  
+	}
+	$mysqli->close();
+	return $timestamp;
+}
+
+function readFileData(){
+	$datei = implode("<br>",file("gameData.txt"));
+	//echo $datei;
+}
+
+function dropActive($Qemail,$ticket){
+	while(true){
+		if(getTimeStampDifference($Qemail,$ticket)>300){
+			$credentials = getCredentialsFromFile();
+			$credentialsArr = explode(":", $credentials);
+			$user = $credentialsArr[0];
+			$pwd = $credentialsArr[1];
+			$active = "ERROR NOT FOUND";
+    
+			$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+			if($mysqli->connect_errno){
+				echo "FAIL";
+				return "SERVER_ERROR (dropActive_function)";
+			} else {
+				$query = "UPDATE USER set ACTIVE=0 where EMAIL=? AND TICKET=?";
+				$result = $mysqli->prepare($query);
+				$result->bind_param('ss',$Qemail,$ticket);
+				$result->execute();  
+			}
+			$mysqli->close();   
+		}
+		sleep(60*1);	// Minütliche Prüfung
+	}
+}
+
+function getTimeStampDifference($Qemail,$ticket){
+	
+	$oldTimeStamp = getTimeStampFromDB($Qemail,$ticket);
+	
+	$newTimeStamp = new DateTime();
+	$newTimeStamp = $newTimeStamp->getTimestamp();
+	
+	$difference = $newTimeStamp - $oldTimeStamp;
+	
+	return $difference;
+}
+
 ?>

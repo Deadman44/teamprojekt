@@ -28,8 +28,11 @@ string smapname;
 
 struct server_entity            // server side version of "entity" type
 {
-    bool spawned;
-    int spawnsecs;
+    bool spawned; //item liegt auf boden == gespawned
+    int spawnsecs; //wie lange braucht das item zu spawnen?, wird vom client beim pickup übertragen (additem methode..)
+
+	//TP -- man benötigt noch den typ, um festzustellen was aufgesammelt wurde (wichtig: armour, ammo, hp sollte auf server+clients identisch sein)
+	uchar type; 
 };
 
 vector<server_entity> sents;
@@ -126,6 +129,9 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
         sents[i].spawned = false;
         sents[i].spawnsecs = sec;
         send2(true, sender, SV_ITEMACC, i);
+		
+		serverrealpickup(i,clients[sender].representer); //die nummer des items, und das dynent object dass das item bekommen soll
+
     };
 };
 
@@ -222,15 +228,35 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 
+		case SV_MUN:
+		{
+			int gun = getint(p);
+			if(isdedicated)
+			{
+				clients[cn].representer->ammo[gun]--;		
+				if(clients[cn].representer->ammo[gun] < 0)
+				{
+					disconnect_client(cn,"CHEAT DETECTED");
+				}
+			}
+			else
+			{
+				std::cout << " Sending simple Shot Request (SV_MUN)";
+			}
+			break;
+
+		}
+		
+
 		case SV_ALRS:
 		{
 			uchar *tmp = p;
 			tmp--;
-			*tmp = SV_DUMMYALRS;
+			*tmp = SV_DUMMYALRS; //dummykodierung um ALRS bei anderen clients zu verschleiern
 			tmp++;
 			std::cout << "LESE ARLS VON PAKET AUF SERVER \n";
 			int rnd = getint(p);
-			*tmp = 7;
+			*tmp = 7; //Dummywert
 
 			clients[cn].allowRespawn = clients[cn].allowRespawn - rnd;
 			std::cout << "RND: " << rnd << " ERGEBNIS : " << clients[cn].allowRespawn;
@@ -263,11 +289,13 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         case SV_ITEMLIST:
         {
             int n;
-            while((n = getint(p))!=-1) if(notgotitems)
+            while((n = getint(p))!=-1) if(notgotitems) //der erste verbundene client sendet die itemlist, ab dem zweiten ist hier schluss
             {
                 server_entity se = { false, 0 };
                 while(sents.length()<=n) sents.add(se);
-                sents[n].spawned = true;
+                sents[n].spawned = true; //am anfang sollen alle items "gespawned" sein
+				sents[n].type = getint(p); //TP TEST
+				std::cout << " \n\n INR: " << n << " << TYPE: " << (int)sents[n].type << "\n\n";
             };
             notgotitems = false;
             break;
@@ -276,7 +304,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         case SV_ITEMPICKUP:
         {
             int n = getint(p);
-            pickup(n, getint(p), sender);
+            pickup(n, getint(p), sender); //ist sender == cn??
             break;
         };
 
@@ -286,6 +314,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
         case SV_POS:
         {
+			//SV_POS steht am anfang jedes pakets!
             cn = getint(p); //hier wird die clientnummer des clients herausgenommen, der dieses paket geschickt hat, kann überall im konstrukt verwendet werden, default = -1
             if(cn<0 || cn>=clients.length() || clients[cn].type==ST_EMPTY)
             {
@@ -497,6 +526,62 @@ void spawnstateForServer(dynent *d)              // reset player state not persi
         d->ammo[GUN_SG] = 5;
     };
 };
+
+//kopie von entities.cpp
+struct serveritemstat { int add, max, sound; } serveritemstats[] =
+{
+     10,    50, S_ITEMAMMO,
+     20,   100, S_ITEMAMMO,
+      5,    25, S_ITEMAMMO,
+      5,    25, S_ITEMAMMO,
+     25,   100, S_ITEMHEALTH,
+     50,   200, S_ITEMHEALTH,
+    100,   100, S_ITEMARMOUR,
+    150,   150, S_ITEMARMOUR,
+  20000, 30000, S_ITEMPUP,
+};
+
+//modifizierte kopie von etitites.cpp ((ACHTUNG! unterschied ents zu sents (serverentities sind kleiner! werden hier aber gebraucht)
+void serverradditem(int i, int &v)
+{
+	std::cout << " --- ITEM ADDED TO ENTITY " ;
+    serveritemstat &is = serveritemstats[sents[i].type-I_SHELLS];
+    v += is.add;
+    if(v>is.max) v = is.max;
+};
+//kopie von entities.cpp
+void serverrealpickup(int n, dynent *d)
+{
+	if(!isdedicated) return; //weglassen verursacht einen absturz beim client bei lokalen spielen! höchstwahrscheinlich weil sents nicht initialisiert wurde
+	//code wird aber ohnehin im SP nicht benötigt
+
+	std::cout <<" --- PICKING UP ITEM " << n;
+    switch(sents[n].type)
+    {
+        case I_SHELLS:  serverradditem(n, d->ammo[1]); break;
+        case I_BULLETS: serverradditem(n, d->ammo[2]); break;
+        case I_ROCKETS: serverradditem(n, d->ammo[3]); break;
+        case I_ROUNDS:  serverradditem(n, d->ammo[4]); break;
+        case I_HEALTH:  serverradditem(n, d->health);  break;
+        case I_BOOST:   serverradditem(n, d->health);  break;
+
+        case I_GREENARMOUR:
+            serverradditem(n, d->armour);
+            d->armourtype = A_GREEN;
+            break;
+
+        case I_YELLOWARMOUR:
+            serverradditem(n, d->armour);
+            d->armourtype = A_YELLOW;
+            break;
+
+        case I_QUAD:
+            //serverradditem(n, d->quadmillis); //vorerst deaktiviert
+            break;
+    };
+};
+
+
 //TP OUT
 
 
@@ -506,7 +591,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
     {
         if(sents[i].spawnsecs && (sents[i].spawnsecs -= seconds-lastsec)<=0)
         {
-            sents[i].spawnsecs = 0;
+            sents[i].spawnsecs = 0; //setzt spawnzeit zurück, da item wieder verfügbar ist
             sents[i].spawned = true;
             send2(true, -1, SV_ITEMSPAWN, i);
         };
@@ -554,7 +639,8 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 		loopv(clients)
 		{
 			dynent *tmp = clients[i].representer;
-			std::cout << (*tmp).health; //c-style zugriff auf membervar
+			std::cout << "\n HP--> " << (*tmp).health<< "ARMOUR --> " << tmp->armour << " TYPE--> "  << tmp->armourtype; //c-style zugriff auf membervar
+
 		}
 	}
 
@@ -657,9 +743,8 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
     maxclients = maxcl;
 	servermsinit(master ? master : "wouter.fov120.com/cube/masterserver/", sdesc, dedicated);
     
-	std::cout << isdedicated;
-	std::cout << dedicated;
-    if(isdedicated = dedicated)
+
+    if(isdedicated = dedicated) //das hier ist eine zuweisung! achtung!
     {
         ENetAddress address = { ENET_HOST_ANY, port };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
@@ -668,7 +753,6 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
         loopi(MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
 		
     };
-
     resetserverifempty();
 
 	/*

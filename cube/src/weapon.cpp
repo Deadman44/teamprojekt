@@ -132,7 +132,12 @@ void newprojectile(vec &from, vec &to, float speed, bool local, dynent *owner, i
 void hit(int target, int damage, dynent *d, dynent *at)
 {
 
-    if(d==player1) selfdamage(damage, at==player1 ? -1 : -2, at);
+    if(d==player1)
+	{
+		selfdamage(damage, at==player1 ? -1 : -2, at); //selbst schaden hinzufügen	
+		extern int clientnum; //TP
+		addmsg(1,4,SV_DAMAGE,clientnum,damage,player1->lifesequence); //TP, damit auch selbst zugefügter schaden am server registriert wird
+	}
     else if(d->monsterstate) monsterpain(d, damage, at);
 	//die untere zeile fuegt eine msg einem vector hinzu, dieser vector beinhaltet die nachrichten die an den
 	//server geschickt werden, hier: der schaden den andere spieler bekommen!
@@ -309,7 +314,7 @@ void shoot(dynent *d, vec &targ)
     d->lastaction = lastmillis;
     d->lastattackgun = d->gunselect;
     if(!d->ammo[d->gunselect]) { playsoundc(S_NOAMMO); d->gunwait = 250; d->lastattackgun = -1; return; };
-    if(d->gunselect) d->ammo[d->gunselect]--;
+    if(d->gunselect) d->ammo[d->gunselect]--; //dekrementiert munition um einen schuss
     vec from = d->o;
     vec to = targ;
     from.z -= 0.2f;    // below eye
@@ -332,7 +337,12 @@ void shoot(dynent *d, vec &targ)
 
     if(d->quadmillis && attacktime>200) playsoundc(S_ITEMPUP);
     shootv(d->gunselect, from, to, d, true);
-    if(!d->monsterstate) addmsg(1, 8, SV_SHOT, d->gunselect, (int)(from.x*DMF), (int)(from.y*DMF), (int)(from.z*DMF), (int)(to.x*DMF), (int)(to.y*DMF), (int)(to.z*DMF));
+	// sendet schussnachricht an server (nur falls der verursacher kein monster ist)
+    if(!d->monsterstate)
+	{
+		addmsg(1, 8, SV_SHOT, d->gunselect, (int)(from.x*DMF), (int)(from.y*DMF), (int)(from.z*DMF), (int)(to.x*DMF), (int)(to.y*DMF), (int)(to.z*DMF));
+		addmsg(1,2,SV_MUN,d->gunselect); //nur waffe mit der geschossen wurde verschicken
+	}
     d->gunwait = guns[d->gunselect].attackdelay;
 
     if(guns[d->gunselect].projspeed) return;

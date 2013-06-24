@@ -252,3 +252,5 @@ extern void perlinarea(block &b, int scale, int seed, int psize);
 extern void serverselfdamage(int damage, int actor, dynent *act, int clientnr);
 extern void spawnstate(dynent *d); //auf clientseite!
 extern void spawnstateForServer(dynent *d); //auf dem client
+extern void serverrealpickup(int n, dynent *d);
+void serverradditem(int i, int &v);

@@ -248,8 +248,8 @@ void c2sinfo(dynent *d)                     // send update to the server
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
             putint(p, SV_ITEMLIST);
-            if(!m_noitems) putitems(p);
-            putint(p, -1);
+            if(!m_noitems) putitems(p); //hier items zufügen
+            putint(p, -1); //endekennung, wird später gebraucht
             senditemstoserver = false;
             serveriteminitdone = true;
         };

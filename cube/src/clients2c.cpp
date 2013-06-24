@@ -161,11 +161,22 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             mapchanged = true;
             break;
         
-        case SV_ITEMLIST:
+        case SV_ITEMLIST: //FORMAT NEU: INR,ITYPE,INR,ITYPE.....ENDEKENNUNG(-1)
         {
             int n;
             if(mapchanged) { senditemstoserver = false; resetspawns(); };
-            while((n = getint(p))!=-1) if(mapchanged) setspawn(n, true);
+            while((n = getint(p))!=-1)
+			{
+				if(mapchanged)
+					{
+						setspawn(n, true);
+						int tmp = getint(p); // weil zweiter uchar im paket jetzt auch immer typ ist, der hier nicht gebraucht wird
+						if(tmp == -1) //sicherheitsabfrage ob endekennung erreicht ist
+						{
+							return;
+						}
+					}
+			}
             break;
         };
 
@@ -234,14 +245,14 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
         case SV_DIED:
         {
             int actor = getint(p);
-            if(actor==cn)
+            if(actor==cn) //cn wird bei jedem SV_POS geändert, hier: wenn der actor von sv_died == cn von sv_pos dann suizid von diesem Spieler
             {
                 conoutf("%s suicided", d->name);
             }
-            else if(actor==clientnum)
+            else if(actor==clientnum) //wenn der aktor identisch mit uns is (clientnum== die nr die der server uns gibt)
             {
                 int frags;
-                if(isteam(player1->team, d->team))
+                if(isteam(player1->team, d->team)) //d wird bei sv_pos genommen == dynent von cn!
                 {
                     frags = -1;
                     conoutf("you fragged a teammate (%s)", d->name);
@@ -387,6 +398,12 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 				break;
 			};
 
+
+		case SV_MUN:
+		{
+			int dummyContent = getint(p);
+			break;
+		}
 		//TP OUT
         default:
             neterr("type");

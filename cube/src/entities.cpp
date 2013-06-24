@@ -231,10 +231,21 @@ void checkquad(int time)
 
 void putitems(uchar *&p)            // puts items in network stream and also spawns them locally
 {
-    loopv(ents) if((ents[i].type>=I_SHELLS && ents[i].type<=I_QUAD) || ents[i].type==CARROT)
+    loopv(ents) if((ents[i].type>=I_SHELLS && ents[i].type<=I_QUAD) || ents[i].type==CARROT) //entities ist enum, teilweise nicht in einer sinnvollen reihenfolge, daher die >= und <= beziehungen
     {
         putint(p, i);
         ents[i].spawned = true;
+
+		//TP TEST: nach jeder itemnr ansich wird auch der typ übertragen:
+		putint(p,ents[i].type);
+
+	/* hier alle verwendeten items
+		I_SHELLS, I_BULLETS, I_ROCKETS, I_ROUNDS,
+		I_HEALTH, I_BOOST,
+		I_GREENARMOUR, I_YELLOWARMOUR,
+		I_QUAD,
+		CARROT,
+	*/
     };
 };
 

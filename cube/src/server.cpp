@@ -227,16 +227,59 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			
             break;
         };
+		
+		/*
+		case SV_SHOT: // server sammelt hier die schuss-events, also immer wenn geschossen wird
+        {
+			if(isdedicated)
+			{
+
+				int gun = getint(p);
+				for(int i = 0; i < 6;i++)
+				{
+					int test = getint(p); //weil es hier 6 weitere hier unnötige parameter gibt in der message
+				}
+				clients[cn].representer->ammo[gun]--;
+				std::cout << "\n MUNITION FUER WAFFE " << clients[cn].representer->ammo[gun];
+				if(clients[cn].representer->ammo[gun] < 0)
+				{
+					disconnect_client(cn,"Cheat entdeckt: Munition");
+				}
+
+			}
+            break;
+        };
+		*/
+
+		case SV_MUN:
+		{
+			int gun = getint(p);
+			if(isdedicated)
+			{
+				clients[cn].representer->ammo[gun]--;		
+				if(clients[cn].representer->ammo[gun] < 0)
+				{
+					disconnect_client(cn,"CHEAT DETECTED");
+				}
+			}
+			else
+			{
+				std::cout << " Sending simple Shot Request (SV_MUN)";
+			}
+			break;
+
+		}
+		
 
 		case SV_ALRS:
 		{
 			uchar *tmp = p;
 			tmp--;
-			*tmp = SV_DUMMYALRS;
+			*tmp = SV_DUMMYALRS; //dummykodierung um ALRS bei anderen clients zu verschleiern
 			tmp++;
 			std::cout << "LESE ARLS VON PAKET AUF SERVER \n";
 			int rnd = getint(p);
-			*tmp = 7;
+			*tmp = 7; //Dummywert
 
 			clients[cn].allowRespawn = clients[cn].allowRespawn - rnd;
 			std::cout << "RND: " << rnd << " ERGEBNIS : " << clients[cn].allowRespawn;
@@ -294,6 +337,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
         case SV_POS:
         {
+			//SV_POS steht am anfang jedes pakets!
             cn = getint(p); //hier wird die clientnummer des clients herausgenommen, der dieses paket geschickt hat, kann überall im konstrukt verwendet werden, default = -1
             if(cn<0 || cn>=clients.length() || clients[cn].type==ST_EMPTY)
             {

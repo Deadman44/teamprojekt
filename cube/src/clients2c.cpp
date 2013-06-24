@@ -398,6 +398,12 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 				break;
 			};
 
+
+		case SV_MUN:
+		{
+			int dummyContent = getint(p);
+			break;
+		}
 		//TP OUT
         default:
             neterr("type");

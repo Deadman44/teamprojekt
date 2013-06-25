@@ -71,7 +71,7 @@ char msgsizesl[] =               // size inclusive message token, 0 for variable
     SV_PING, 2, SV_PONG, 2, SV_CLIENTPING, 2, SV_GAMEMODE, 2,
     SV_TIMEUP, 2, SV_EDITENT, 10, SV_MAPRELOAD, 2, SV_ITEMACC, 2,
     SV_SENDMAP, 0, SV_RECVMAP, 1, SV_SERVMSG, 0, SV_ITEMLIST, 0,
-    SV_EXT, 0, SV_ALRS, 2, SV_DUMMYALRS, 2, SV_MUN,2,//TP
+    SV_EXT, 0, SV_ALRS, 2, SV_DUMMYALRS, 2, SV_MUN,2, SV_FORCEDIE,2,//TP
     -1
 };
 

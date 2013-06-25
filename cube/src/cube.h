@@ -178,7 +178,7 @@ enum
     SV_EDITH, SV_EDITT, SV_EDITS, SV_EDITD, SV_EDITE,
     SV_SENDMAP, SV_RECVMAP, SV_SERVMSG, SV_ITEMLIST,
     SV_EXT, SV_MUN,
-	SV_ALRS, SV_DUMMYALRS,//TP
+	SV_ALRS, SV_DUMMYALRS, SV_FORCEDIE,//TP
 };     
 
 enum { CS_ALIVE = 0, CS_DEAD, CS_LAGGED, CS_EDITING };
@@ -236,7 +236,7 @@ extern int allowconnect;
 extern std::string user;
 extern std::string user_password;
 extern std::string license;
-extern std::string hashticket; //identisch mit ticket, jedoch ohne zeichen-escaping, wir bei hashfkt verwendet
+extern std::string hashticket; //identisch mit ticket, jedoch ohne zeichen-escaping, wird bei hashfkt verwendet
 extern int toHashData;
 extern std::string ticket;
 extern bool initialization;

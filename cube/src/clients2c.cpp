@@ -139,7 +139,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 			{
 				clientAllowRespawn = clientAllowRespawn - rnd;
 				std::cout << "CLIENT LEBT WIEDER \n";
-				spawnplayer(player1);
+				//spawnplayer(player1); //hier war autorespawn, etwas ungünstig manchmal (bugs etc..)
 
 			}
 
@@ -398,12 +398,22 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 				break;
 			};
 
-
 		case SV_MUN:
 		{
 			int dummyContent = getint(p);
 			break;
 		}
+
+		case SV_FORCEDIE: //message, die einen client zum sterben zwingt
+		{
+			int causeOfDeath = getint(p);
+			std::cout << " SPIELER " << causeOfDeath << " HAT MEINEN TOT VERURSACHT \n";
+			dynent *dtmp = getclient(causeOfDeath);
+			player1->health = 0;
+			selfdamage(1,causeOfDeath,dtmp); 
+			addmsg(1, 2, SV_DIED, causeOfDeath); //schicke an server die nachricht, wer mich umgebracht hat
+			break;
+		};
 		//TP OUT
         default:
             neterr("type");

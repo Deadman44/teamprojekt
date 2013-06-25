@@ -393,7 +393,8 @@ void selfdamage(int damage, int actor, dynent *act)
             };
         };
         showscores(true);
-        addmsg(1, 2, SV_DIED, actor); //man teilt mit, durch wen man gestorben ist (unsicher)
+        //addmsg(1, 2, SV_DIED, actor); //man teilt mit, durch wen man gestorben ist
+		// auskommentiert, da diese methode nun in forcedie aufgerufen wird
         player1->lifesequence++;
         player1->attacking = false;
         player1->state = CS_DEAD;

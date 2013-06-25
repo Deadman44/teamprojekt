@@ -820,7 +820,8 @@ function createAndReturnTicket($Qemail,$Qpass)
 
     $mysqli->close();
     
-    setUserActive($Qemail, $temporaryticket);  
+    setUserActive($Qemail, $temporaryticket);
+	setTimeStampToDB($Qemail, $temporaryticket);
     return $temporaryticket;
 }
 
@@ -850,7 +851,9 @@ function createTicketWithOldTicket($Qemail,$ticket)
             $eintrag->execute();
     }
 
-    $mysqli->close();   
+    $mysqli->close();
+	setTimeStampToDB($Qemail,$ticket);
+	dropActive();
     return $temporaryticket;
     
 }
@@ -1079,4 +1082,161 @@ function destroyStartBat(){
 		echo "Bat-File not destroyed! No such file in directory.";
 	}
 }
+
+function setTimeStampToDB($Qemail,$ticket){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+    
+	$active = "ERROR NOT FOUND";
+	$newTimeStamp = new DateTime();
+	$newTimeStamp = $newTimeStamp->getTimestamp();
+    
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (setTimeStampToDB_function)";
+	} else {
+        $query = "UPDATE USER set TIMESTAMP=? where EMAIL=? AND TICKET=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('sss',$newTimeStamp,$Qemail,$ticket);
+        $result->execute();
+   
+	}
+	$mysqli->close();	
+}
+
+function getTimeStampFromDB($Qemail){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	
+	$timestamp = "null";
+    
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (getTimeStampFromDB_function)";
+	} else {
+        $query = "SELECT TIMESTAMP from USER where EMAIL=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('s',$Qemail);
+        $result->execute();
+   		$result->bind_result($timestamp);
+		while($result->fetch())
+		{
+		}  
+	}
+	//$mysqli->close();
+	return $timestamp;
+}
+
+function readFileData(){
+	$datei = implode("<br>",file("gameData.txt"));
+	//echo $datei;
+}
+
+function dropActive(){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	
+	$Qemail = "null";
+	
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (dropActive_function)";
+	} else {
+		$query = "SELECT EMAIL from USER where ACTIVE=1";
+		$result = $mysqli->prepare($query);
+		$result->execute();
+		$result->bind_result($Qemail);
+		while($result->fetch()){
+			$mysqli2 = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+			if($mysqli2->connect_errno){
+				echo "FAIL";
+				return "SERVER_ERROR (dropActive_function)";
+			} else {
+				if(getTimeStampDifference($Qemail)>300){
+					$query2 = "UPDATE USER set ACTIVE=0 where EMAIL=?";
+					$result2 = $mysqli2->prepare($query2);
+					$result2->bind_param('s',$Qemail);
+					$result2->execute();
+				} 
+			}
+			$mysqli2->close(); 
+		}
+	}
+	$mysqli->close(); 
+}
+
+function getTimeStampDifference($Qemail){
+	
+	$oldTimeStamp = getTimeStampFromDB($Qemail);
+	$newTimeStamp = new DateTime();
+	$newTimeStamp = $newTimeStamp->getTimestamp();
+	
+	$difference = $newTimeStamp - $oldTimeStamp;
+	return $difference;
+}
+
+// Bei Verstößen wird eine in den ToS definierte Menge an suspectPoints vergeben
+// ab gewisser Menge erfolgt der Bann (Löschung HSERIAL und SKEY) auf dem Server
+function incrementSuspects($Qemail,$ticket,$suspectPoints){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	$active = "ERROR NOT FOUND";
+
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (dropActive_function)";
+	} else {
+		$query = "UPDATE USER set SUSPECT=SUSPECT+? where EMAIL=? AND TICKET=?";
+		$result = $mysqli->prepare($query);
+		$result->bind_param('iss',$suspectPoints,$Qemail,$ticket);
+		$result->execute();
+	}
+	$mysqli->close();
+	proofUserBan($Qemail,$ticket);
+}
+
+function proofUserBan($Qemail,$ticket){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	
+	$suspectPoints = "null";
+    
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (getTimeStampFromDB_function)";
+	} else {
+        $query = "SELECT SUSPECT from USER where EMAIL=? AND TICKET=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('ss',$Qemail,$ticket);
+        $result->execute();
+   		$result->bind_result($suspectPoints);
+		while($result->fetch())
+		{
+		}  
+		if($suspectPoints >= 10){
+			$ban = "banned";
+			$query = "UPDATE USER set HSERIAL=?, SKEY=? where EMAIL=? AND TICKET=?";
+			$result = $mysqli->prepare($query);
+			$result->bind_param('ssss',$ban,$ban,$Qemail,$ticket);
+			$result->execute();
+		}
+	}
+	$mysqli->close();
+}
+
 ?>

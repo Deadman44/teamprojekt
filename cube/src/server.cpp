@@ -211,9 +211,9 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 		case SV_DAMAGE: //schaden an interne repräsentanten vergeben           
         {
 
-				int target = getint(p); //ziel==clientnummer
-				int damage = getint(p); //damage
-				int ls = getint(p); //lifesequenze.. also welches "leben" aktuell is, durchnummeriert
+			int target = getint(p); //ziel==clientnummer
+			int damage = getint(p); //damage
+			int ls = getint(p); //lifesequenze.. also welches "leben" aktuell is, durchnummeriert
 			if(isdedicated)
 			{
 				std::cout << "ORIGIN: " << cn << " TARGET: " << target << " DAMAGE " << damage << " LIFESEQ " << ls;
@@ -312,6 +312,19 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         {
             int n = getint(p);
             pickup(n, getint(p), sender); //ist sender == cn??
+
+			/* TP
+			Cheatschutz: verhindert, dass ein Spieler der serverseitig tot ist
+			dennoch Items aufsammelt (=z.B. indem er das "kill-signal" des Server ignoriert
+			und einfach weiterspielt
+
+			*/
+
+			if(isdedicated && clients[cn].representer->state) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
+			{
+				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite");
+			}
+
             break;
         };
 

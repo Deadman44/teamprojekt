@@ -12,6 +12,9 @@
 #include <fstream>
 #include <string>
 
+#include "base64.h"
+
+
 int check_license(std::string u, std::string p, std::string l);
 std::string license_datei();
 void permanent_check();
@@ -177,7 +180,7 @@ enum
     SV_PING, SV_PONG, SV_CLIENTPING, SV_GAMEMODE,
     SV_EDITH, SV_EDITT, SV_EDITS, SV_EDITD, SV_EDITE,
     SV_SENDMAP, SV_RECVMAP, SV_SERVMSG, SV_ITEMLIST,
-    SV_EXT, SV_MUN,
+    SV_EXT, SV_MUN, SV_TICKET,
 	SV_ALRS, SV_DUMMYALRS, SV_FORCEDIE,//TP
 };     
 

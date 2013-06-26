@@ -2,12 +2,16 @@
 
 #include "cube.h"
 
+
+
+
 ENetHost *clienthost = NULL;
 int connecting = 0;
 int connattempts = 0;
 int disconnecting = 0;
 int clientnum = -1;         // our client id in the game
 bool c2sinit = false;       // whether we need to tell the other clients our stats
+bool ticketAuth = false;
 
 
 
@@ -211,7 +215,14 @@ void c2sinfo(dynent *d)                     // send update to the server
 	wenn das updateinvervall größer ist, heißt das nicht unbedingt, dass die pakete größer werden
 	nur die information, die per addmsg noch dazukommen machen die pakete größer, dazu gehören NICHT positionsupdates
 	*/
-
+	if(ticketAuth) //HIER WEITERARBEITEN
+	{
+		std::string tmp = base64_decode(ticket);
+		const char *tt = tmp.c_str();
+		std::cout << strlen(tt) << "\n";
+		std::cout << atoi(tt) << " BASE64 ENCODE FROM TICKET \n";
+		ticketAuth = false;
+	}
     ENetPacket *packet = enet_packet_create (NULL, MAXTRANS, 0); //erstellt hier ein packet..... mit größe von MAXTRANS
     uchar *start = packet->data; //start ist zeiger aufs erste datenbyte
     uchar *p = start+2;
@@ -285,6 +296,7 @@ void c2sinfo(dynent *d)                     // send update to the server
             putint(p, lastmillis);
             lastping = lastmillis;
         };
+
     };
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start); //paket so klein wie möglich machen
@@ -319,6 +331,7 @@ void gets2c()           // get updates from the server
             conoutf("connected to server");
             connecting = 0;
             throttle();
+			ticketAuth = true; //TP TEST
             break;
          
         case ENET_EVENT_TYPE_RECEIVE: //hier "normales" paket, der paketinhalt wird dann die methode localservetoclient weitergereicht

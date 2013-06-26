@@ -7,7 +7,7 @@ extern bool c2sinit, senditemstoserver;
 extern string toservermap;
 extern string clientpassword;
 
-int clientAllowRespawn = -1; //TP, ersten Respawn erlauben
+int clientAllowRespawn = 0; //TP, ersten Respawn erlauben
 
 void neterr(char *s)
 {

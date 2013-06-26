@@ -50,9 +50,10 @@
             
 
             $ticket = createAndReturnTicket("wurst@wurst.de", "hallohallo1");
-            $hash = hashGameDataWithSalt(112, $ticket);
+            echo urlencode($ticket)."<br>";
+            $email = getEmailByTicket($ticket);
             
-            echo $hash;
+            echo $email;
 
 
 

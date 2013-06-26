@@ -1188,21 +1188,21 @@ function getTimeStampDifference($Qemail){
 
 // Bei Verstößen wird eine in den ToS definierte Menge an suspectPoints vergeben
 // ab gewisser Menge erfolgt der Bann (Löschung HSERIAL und SKEY) auf dem Server
-function incrementSuspects($Qemail,$ticket,$suspectPoints){
+function incrementSuspects($Qemail,$suspectPoints){ 
 	$credentials = getCredentialsFromFile();
 	$credentialsArr = explode(":", $credentials);
 	$user = $credentialsArr[0];
 	$pwd = $credentialsArr[1];
-	$active = "ERROR NOT FOUND";
+
 
 	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
 	if($mysqli->connect_errno){
 		echo "FAIL";
 		return "SERVER_ERROR (dropActive_function)";
 	} else {
-		$query = "UPDATE USER set SUSPECT=SUSPECT+? where EMAIL=? AND TICKET=?";
+		$query = "UPDATE USER set SUSPECT=SUSPECT+? where EMAIL=?";
 		$result = $mysqli->prepare($query);
-		$result->bind_param('iss',$suspectPoints,$Qemail,$ticket);
+		$result->bind_param('is',$suspectPoints,$Qemail);
 		$result->execute();
 	}
 	$mysqli->close();
@@ -1220,7 +1220,7 @@ function proofUserBan($Qemail,$ticket){
 	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
 	if($mysqli->connect_errno){
 		echo "FAIL";
-		return "SERVER_ERROR (getTimeStampFromDB_function)";
+		return "SERVER_ERROR ";
 	} else {
         $query = "SELECT SUSPECT from USER where EMAIL=? AND TICKET=?";
         $result = $mysqli->prepare($query);

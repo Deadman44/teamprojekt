@@ -23,7 +23,7 @@ Periodische Lizenzüberprüfung mittels Threads und Fehlerbehandlung
 void permanent_check()
 {
 	boost::thread workerThread(worker);
-
+	
 }
 
 void worker()

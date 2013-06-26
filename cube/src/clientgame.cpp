@@ -355,6 +355,7 @@ void mousemove(int dx, int dy)
 
 void selfdamage(int damage, int actor, dynent *act)
 {
+	//conoutf("Gesundheit: %p", &(*player1).health);
     if(player1->state!=CS_ALIVE || editmode || intermission) return;
     damageblend(damage);
 	demoblend(damage);

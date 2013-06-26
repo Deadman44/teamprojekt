@@ -50,11 +50,10 @@
             
 
             $ticket = createAndReturnTicket("wurst@wurst.de", "hallohallo1");
-            $srvhash = hashGameDataWithSalt(101, $ticket);
-            echo $srvhash."<br>";
-            set_and_get_client_hash_wish("wurst@wurst.de", $ticket);
+            $hash = hashGameDataWithSalt(112, $ticket);
             
-            echo compareClientWithServerHash($srvhash, "wurst@wurst.de", $ticket);
+            echo $hash;
+
 
 
 

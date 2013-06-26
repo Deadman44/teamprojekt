@@ -241,6 +241,7 @@ extern int toHashData;
 extern std::string ticket;
 extern bool initialization;
 extern bool thread_exit;
+extern std::string toHashGameData[1000];
 //stats-tracking
 extern int clientAllowRespawn;
 // Teamprojekt end

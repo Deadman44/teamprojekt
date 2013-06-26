@@ -946,13 +946,8 @@ function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity frag
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
       
-    /*
-     * Auswahl der zu hashenden datei...
-     * 
-     * hier noch auf eine fixiert...
-     */
     
-    $wish = 101;
+    $wish = rand(100,124);
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     if($mysqli->connect_errno)
@@ -1024,12 +1019,13 @@ function compareClientWithServerHash($clientHash,$Qemail,$ticket)
 
 function hashGameDataWithSalt($wish,$salt)
 {
-    //dreistellig....
-    $datas[100] = "bin/cube.exe";
-    $datas[101] = "bin/SDL.dll";
+    //dreistellig.... alte konstante version, zum funktionieren muss noch rand(100,124) entfernt werden
+    //$datas[100] = "bin/cube.exe";
+    //$datas[101] = "bin/SDL.dll";
     
-    $file = "C:/w/cube/Cube/".$datas[$wish]; //fixed path.. ändern
-    //echo "<br> --> DATA".$file."<br>";
+    $datas = readFileData();
+    $file = "C:/w/cube/Cube/".$datas[$wish-100]; //fixed path.. ändern
+    
     $handle = fopen($file,"rb"); //binary read
     
     $content = fread($handle, filesize($file));  
@@ -1038,7 +1034,6 @@ function hashGameDataWithSalt($wish,$salt)
     $hash = hash("SHA1", $content);
 
     fclose($handle);
-    
     return $hash;
 }
 
@@ -1089,7 +1084,6 @@ function setTimeStampToDB($Qemail,$ticket){
 	$user = $credentialsArr[0];
 	$pwd = $credentialsArr[1];
     
-	$active = "ERROR NOT FOUND";
 	$newTimeStamp = new DateTime();
 	$newTimeStamp = $newTimeStamp->getTimestamp();
     
@@ -1098,10 +1092,10 @@ function setTimeStampToDB($Qemail,$ticket){
 		echo "FAIL";
 		return "SERVER_ERROR (setTimeStampToDB_function)";
 	} else {
-        $query = "UPDATE USER set TIMESTAMP=? where EMAIL=? AND TICKET=?";
-        $result = $mysqli->prepare($query);
-        $result->bind_param('sss',$newTimeStamp,$Qemail,$ticket);
-        $result->execute();
+            $query = "UPDATE USER set TIMESTAMP=? where EMAIL=? AND TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('sss',$newTimeStamp,$Qemail,$ticket);
+            $result->execute();
    
 	}
 	$mysqli->close();	
@@ -1134,8 +1128,16 @@ function getTimeStampFromDB($Qemail){
 }
 
 function readFileData(){
-	$datei = implode("<br>",file("gameData.txt"));
-	//echo $datei;
+	//$datei = implode("\n",file("gameData.txt"));
+        //$arr = explode(" ",$datei);
+        $dat = file("gameData.txt");
+        
+        for($i = 0; $i < count($dat);$i++)
+        {
+            $dat[$i] = trim($dat[$i]);
+            
+        }
+	return $dat;
 }
 
 function dropActive(){
@@ -1262,7 +1264,7 @@ function getEmailByTicket($ticket){
 		} 
 	}
 	$mysqli->close();
-	return $email
+	return $email;
 }
 
 ?>

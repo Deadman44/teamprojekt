@@ -8,6 +8,7 @@ std::string license;
 bool initialization;
 std::string ticket;
 std::string hashticket; //definition der globalen var...
+std::string toHashGameData[1000]; //array fuer dateipfade zur integritaet
 int toHashData;
 bool  thread_exit;
 
@@ -120,6 +121,7 @@ int main(int argc, char **argv)
 	// Lizenzschluessel auslesen
 	license = license_datei();
 	int allowconnect = 200; // MOD
+
 	// Teamprojekt end
     bool dedicated = false;
     int fs = SDL_FULLSCREEN, par = 0, uprate = 0, maxcl = 4;

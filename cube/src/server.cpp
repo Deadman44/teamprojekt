@@ -227,6 +227,18 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 					}
 				}
 			}
+
+						/* TP
+			Cheatschutz: verhindert, dass ein Spieler der serverseitig tot ist
+			dennoch Items aufsammelt (=z.B. indem er das "kill-signal" des Server ignoriert
+			und einfach weiterspielt
+
+			*/
+
+			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
+			{
+				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite");
+			}
             break;
         };
 
@@ -320,7 +332,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			*/
 
-			if(isdedicated && clients[cn].representer->state) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
+			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
 				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite");
 			}

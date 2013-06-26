@@ -1239,4 +1239,30 @@ function proofUserBan($Qemail,$ticket){
 	$mysqli->close();
 }
 
+function getEmailByTicket($ticket){
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	
+	$email = "null";
+    
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR (getTimeStampFromDB_function)";
+	} else {
+        $query = "SELECT EMAIL from USER where TICKET=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('s',$ticket);
+        $result->execute();
+   		$result->bind_result($email);
+		while($result->fetch())
+		{
+		} 
+	}
+	$mysqli->close();
+	return $email
+}
+
 ?>

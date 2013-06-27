@@ -1,16 +1,31 @@
 // main.cpp: initialisation & main loop
 
 #include "cube.h"
-
+//globals....
 std::string user;
 std::string user_password;
 std::string license;
 bool initialization;
 std::string ticket;
-std::string hashticket; //definition der globalen var...
+std::string hashticket; 
+std::string sat;
 std::string toHashGameData[1000]; //array fuer dateipfade zur integritaet
 int toHashData;
-bool  thread_exit;
+bool thread_exit;
+bool satSent;
+
+//TP Hilfsfunktion, wandelt str in uchar-arr, achtung new! muss später gelöscht werden!
+uchar *strToUchar(std::string str)
+{
+	uchar *tmparr = new uchar[str.length()];
+	for(int i = 0; i < str.length();i++)
+	{
+		tmparr[i] = str.at(i);
+	}
+	return tmparr;
+}
+
+//TP OUT
 
 void cleanup(char *msg)         // single program exit point;
 {
@@ -113,7 +128,9 @@ int framesinmap = 0;
 int main(int argc, char **argv)
 {   // Teamprojekt begin
 	initialization=true;
+	satSent = false;
 	ticket = "";	// Initialisierung ticket
+	sat = ""; //init von Server-Access-Ticket, wird vor server-join neu gesetzt/bezogen
 	std::cout << "Bitte Benutzernamen eingeben: ";
 	std::cin >> user;
 	std::cout << "Bitte Passwort eingeben: ";

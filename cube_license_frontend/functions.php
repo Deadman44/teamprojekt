@@ -1252,7 +1252,7 @@ function getEmailByTicket($ticket){
 	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
 	if($mysqli->connect_errno){
 		echo "FAIL";
-		return "SERVER_ERROR (getTimeStampFromDB_function)";
+		return "SERVER_ERROR ";
 	} else {
         $query = "SELECT EMAIL from USER where TICKET=?";
         $result = $mysqli->prepare($query);
@@ -1265,6 +1265,68 @@ function getEmailByTicket($ticket){
 	}
 	$mysqli->close();
 	return $email;
+}
+
+function setAndReturnServerAccessTicket($Qemail,$ticket) //client ruft diese ftk auf
+                {
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+     
+        $sat = rand(128000,512000); // fix 6-stellig und damit filterbar in c-code
+        
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR";
+	} else {
+            $query = "UPDATE USER set SAT=? where EMAIL=? AND TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('sss',$sat,$Qemail,$ticket);
+            $result->execute();
+   
+	}
+	$mysqli->close();
+        return $sat;
+        
+        /*
+         * Zu beachten: sat wird auf jeden fall berechnet und zurückgegeben
+         * ggfls aber nicht in db geschrieben wenn parameter nicht stimmen! (ticket, email)
+         */
+}
+
+function checkServerAccessTicket($sat, $Qemail) //server ruft diese ftk auf
+        {
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+	
+        $active = 0;
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR";
+	} else {
+        $query = "SELECT ACTIVE from USER where SAT=? AND EMAIL=?";
+        $result = $mysqli->prepare($query);
+        $result->bind_param('ss',$sat,$Qemail);
+        $result->execute();
+        $result->bind_result($active);
+            while($result->fetch())
+            {
+            } 
+	}
+	$mysqli->close();
+        if(strcmp($active, "1" == 0))
+        {
+            return "True";
+        }
+        else
+        {
+            return "False";
+        }
 }
 
 ?>

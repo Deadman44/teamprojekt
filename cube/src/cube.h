@@ -18,6 +18,7 @@
 int check_license(std::string u, std::string p, std::string l);
 std::string license_datei();
 void permanent_check();
+void acquire_SAT();
 void worker();
 void quit();					// Cube Funktion
 void exit_connection();
@@ -26,7 +27,7 @@ std::string readAndHashFile(std::string filename);
 std::string hashing(const char *thing, int size);
 //...+++
  
-
+int get_SAT();
 
 // Teamprojekt end
 
@@ -180,8 +181,8 @@ enum
     SV_PING, SV_PONG, SV_CLIENTPING, SV_GAMEMODE,
     SV_EDITH, SV_EDITT, SV_EDITS, SV_EDITD, SV_EDITE,
     SV_SENDMAP, SV_RECVMAP, SV_SERVMSG, SV_ITEMLIST,
-    SV_EXT, SV_MUN, SV_TICKET,
-	SV_ALRS, SV_DUMMYALRS, SV_FORCEDIE,//TP
+    SV_EXT, SV_MUN, 
+	SV_ALRS, SV_DUMMYALRS, SV_FORCEDIE, SV_SAT,//TP
 };     
 
 enum { CS_ALIVE = 0, CS_DEAD, CS_LAGGED, CS_EDITING };
@@ -241,9 +242,11 @@ extern std::string user_password;
 extern std::string license;
 extern std::string hashticket; //identisch mit ticket, jedoch ohne zeichen-escaping, wird bei hashfkt verwendet
 extern int toHashData;
+extern std::string sat;
 extern std::string ticket;
 extern bool initialization;
 extern bool thread_exit;
+extern bool satSent;
 extern std::string toHashGameData[1000];
 //stats-tracking
 extern int clientAllowRespawn;

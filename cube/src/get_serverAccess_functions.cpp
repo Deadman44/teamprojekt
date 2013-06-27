@@ -16,7 +16,9 @@ Lizenzierungstechnike am Beispiel von Cube
 Feilen Markus,Wilde Hermann,Hoor Johannes,Schneider Florian
 
 Beschreibung.:
-Baut die SSL Verbindung zum Lizenzserver auf und managed die Tickets
+Forder vom Lizenzserver ein Server-Access-Ticket (SAT) ein.
+SAT dient dazu, einem Spielserver im Mehrspielermodus beizutreten, dadurch
+hat der Spielserver die Möglichkeit, den Client eindeutig im Lizenzierungssystem zu identifizieren.
 ************************************************************************************/
 #include "cube.h"
 #include <sstream>
@@ -24,26 +26,24 @@ Baut die SSL Verbindung zum Lizenzserver auf und managed die Tickets
 
 enum { max_length = 1024};
 
-class license_checker
+class sat_acquire
 {
 public:
     std::stringstream ss;	// Hier wird die vollstaendige Antwort des Servers gespeichert
-    std::string response;	// Hier wird der HTTP Body der Antwort gespeichert
-	std::string user;		
-	std::string password;
+    std::string response;	// Hier wird der HTTP Body der Antwort gespeichert		
 	
 	
-	license_checker(boost::asio::io_service& io_service,
+	sat_acquire(boost::asio::io_service& io_service,
       boost::asio::ssl::context& context,
       boost::asio::ip::tcp::resolver::iterator endpoint_iterator)
     : socket_(io_service, context)
   {
     socket_.set_verify_mode(boost::asio::ssl::verify_peer);
     socket_.set_verify_callback(
-        boost::bind(&license_checker::verify_certificate, this, _1, _2));
+        boost::bind(&sat_acquire::verify_certificate, this, _1, _2));
 
     boost::asio::async_connect(socket_.lowest_layer(), endpoint_iterator,
-        boost::bind(&license_checker::handle_connect, this,
+        boost::bind(&sat_acquire::handle_connect, this,
           boost::asio::placeholders::error));
   }
   // Zertifikat 
@@ -71,7 +71,7 @@ public:
     if (!error)
     {
       socket_.async_handshake(boost::asio::ssl::stream_base::client,
-          boost::bind(&license_checker::handle_handshake, this,
+          boost::bind(&sat_acquire::handle_handshake, this,
             boost::asio::placeholders::error));
     }
     else
@@ -85,27 +85,13 @@ public:
     if (!error)
     {
 	  size_t request_length = strlen(request_);
-	  // Bei der Erstverbindung werden die Benutzerdaten mitgesendet
-	  if(initialization) {
 		  boost::asio::async_write(socket_,
-			  boost::asio::buffer("GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
-			  boost::bind(&license_checker::handle_write, this,
+			  boost::asio::buffer("GET /cGet_SAT.php?email=" + user + "&ticket=" + ticket + " HTTP/1.1\r\nHost: localhost\r\n\r\n"),
+			  boost::bind(&sat_acquire::handle_write, this,
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred));
-		  initialization = false;
-		  std::cout << "URL: " << "GET /cCheck_License_Key_ADV.php?email=" + user + "&pass=" + password + "&license=" + license + " HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
-	  } else {
-	  // Bei weiteren Verbindungen wird nur noch der Nutzername und das Ticket gesendet
-		  std::string hash = start_integrity_check();
-
-		  boost::asio::async_write(socket_,
-			  boost::asio::buffer("GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + "&hash="+ hash +" HTTP/1.1\r\nHost: localhost\r\n\r\n"),
-			  boost::bind(&license_checker::handle_write, this,
-				boost::asio::placeholders::error,
-				boost::asio::placeholders::bytes_transferred));
-		  std::cout << "Lizenz mit Ticket:" << ticket << std::endl;
-		  std::cout << "GET /cCheck_License_Key_permanent_check.php?email=" + user + "&ticket=" + ticket + "&hash="+ hash +" HTTP/1.1\r\nHost: localhost\r\n\r\n" << std::endl;
-	  }
+		  std::cout << "Getting SAT from Server... \n";
+	  
     }
     else
     {
@@ -118,7 +104,7 @@ public:
   {
     if (!error)
     {
-		socket_.async_read_some(boost::asio::buffer(reply_, bytes_transferred),boost::bind(&license_checker::handle_read, this,
+		socket_.async_read_some(boost::asio::buffer(reply_, bytes_transferred),boost::bind(&sat_acquire::handle_read, this,
                boost::asio::placeholders::error,
                boost::asio::placeholders::bytes_transferred));
     }
@@ -135,7 +121,7 @@ public:
     {
 		ss << std::string(reply_, bytes_transferred);
       socket_.async_read_some(boost::asio::buffer(reply_, max_length),
-          boost::bind(&license_checker::handle_read, this,
+          boost::bind(&sat_acquire::handle_read, this,
           boost::asio::placeholders::error,
           boost::asio::placeholders::bytes_transferred));
     }
@@ -145,9 +131,6 @@ public:
 	       }
   }
 
-  void setLicense(std::string l) {
-	  license = urlencode(l);
-  }
 
 std::string urlencode(const std::string &c)
 {
@@ -197,7 +180,7 @@ private:
   
 };
 
-int check_license(std::string u, std::string p, std::string l)
+int get_SAT()
 {
   try
   {
@@ -211,10 +194,7 @@ int check_license(std::string u, std::string p, std::string l)
 	// SSL Kontext wird erzeugt
     boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
 	ctx.load_verify_file("server.crt");
-    license_checker c(io_service, ctx, iterator);
-	c.user = u;
-	c.password = p;
-	c.setLicense(l);
+    sat_acquire c(io_service, ctx, iterator);
 	// Blockierender Aufruf, der bis zum Erhalt aller Daten vom Server wartet
     io_service.run();
 	// HTTP Parser, der den HTTP Header vom HTTP Body trennt und den Body in c.repsonse speichert
@@ -229,31 +209,8 @@ int check_license(std::string u, std::string p, std::string l)
 		if(item.compare("Content-Type: text/html\r")==0)
 			headerEnd = true;
 	}
-	// Falls die Authentifizierung erfolgreich war, sendet der Server "True" konkateniert mit dem Ticket zurück
-	if(c.response.substr(0,4).compare("True")==0) {
-		std::cout << "Lizenzpruefung erfolgreich" << std::endl;
-		std::cout << "HTTP Body Response: " << c.response << std::endl;
-		// Ticket aus der Antwort extrahieren
-		std::string responseTicket = c.response.substr(4,88); //test 88 als länge des ticket
-		hashticket = responseTicket; //zuweisung zu globaler var.. ticket im originalformat
-
-		//welche datei ist zu hashen? Umwandlung string in int
-		toHashData = atoi(c.response.substr(92).c_str());
-
-		ticket = c.urlencode(responseTicket);
-		std::cout << "Ticket: " << ticket << std::endl;
-		// Prüfung erfolgreich, es wird Statuscode 200 zurückgegeben
-		return 200;
-	} else if(c.response.substr(0,5).compare("False")==0) {
-		conoutf("Lizenzpruefung fehlgeschlagen");
-		// Wartezeit, damit Nutzer Die Nachricht zur Kenntnis nehmne kann
-		return 403;
-	} else {
-		// Verbindungsfehler
-		conoutf("Falsche HTTP Antwort");
-		std::cout << c.response << std::endl;
-		return 500;
-	}
+	
+	sat = c.response.substr(0,6); //da SAT 6-stellig..
   }
   catch (std::exception& e)
   {
@@ -261,26 +218,4 @@ int check_license(std::string u, std::string p, std::string l)
   }
 
   return 0;
-}
-
-std::string license_datei() {
-	// Lizenzdatei von Festplatte auslesen
-	std::ifstream licence_key_datei;
-	licence_key_datei.open("Lizenzschluessel.txt");
-    if (!licence_key_datei)	// muss existieren
-    {
-        conoutf("Lizenzschluessel.txt kann nicht geoeffnet werden!");
-		conoutf("Bitte legen Sie die Datei Lizenzschluessel.txt an und speichern Sie in dieser den Lizenzschlüssel");
-		boost::posix_time::seconds waiting(10);
-		boost::this_thread::sleep(waiting);
-		quit();
-    }
-	char c;
-	std::string licencenumber;
-	while (licence_key_datei.get(c))
-	{
-		licencenumber += c;
-	}
-	licence_key_datei.close();
-	return licencenumber;
 }

@@ -414,6 +414,13 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 			addmsg(1, 2, SV_DIED, causeOfDeath); //schicke an server die nachricht, wer mich umgebracht hat
 			break;
 		};
+
+		case SV_SAT: //??????
+		{
+			int len = getint(p);
+			for(int u = 0; u < len; u++) getint(p);
+            break;
+		};
 		//TP OUT
         default:
             neterr("type");

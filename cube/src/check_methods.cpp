@@ -16,7 +16,7 @@ Lizenzierungstechnike am Beispiel von Cube
 Feilen Markus,Wilde Hermann,Hoor Johannes,Schneider Florian
 
 Beschreibung.:
-Periodische Lizenzüberprüfung mittels Threads und Fehlerbehandlung
+Hilfsklasse zum Starten der SSL-Verbindungen in separaten Threads
 ************************************************************************************/
 #include "cube.h"
 
@@ -24,6 +24,13 @@ void permanent_check()
 {
 	boost::thread workerThread(worker);
 	
+	
+}
+
+void acquire_SAT()
+{
+	boost::thread workerThread(get_SAT);
+	workerThread.join(); //besser an dieser stelle auf response warten
 }
 
 void worker()

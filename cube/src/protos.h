@@ -254,3 +254,4 @@ extern void spawnstate(dynent *d); //auf clientseite!
 extern void spawnstateForServer(dynent *d); //auf dem client
 extern void serverrealpickup(int n, dynent *d);
 void serverradditem(int i, int &v);
+extern uchar *strToUchar(std::string str);

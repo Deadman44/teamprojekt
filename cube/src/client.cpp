@@ -11,7 +11,7 @@ int connattempts = 0;
 int disconnecting = 0;
 int clientnum = -1;         // our client id in the game
 bool c2sinit = false;       // whether we need to tell the other clients our stats
-bool ticketAuth = false;
+
 
 
 
@@ -67,6 +67,8 @@ void connects(char *servername, char *port) //chg +1 param
     disconnect(1);  // reset state
     addserver(servername);
 
+	acquire_SAT(); //fordere SAT vom Lizenzserver an
+
 	int serverport = atoi(port);
     conoutf("attempting to connect to %s", servername, serverport);
     ENetAddress address = { ENET_HOST_ANY, serverport }; // erstmal leere adresse...  // port war SERVER_PoRT
@@ -92,6 +94,7 @@ void connects(char *servername, char *port) //chg +1 param
         conoutf("could not connect to server");
         disconnect();
     };
+	std::cout << " SAT??? -> " << sat << " \n";
 };
 
 void disconnect(int onlyclean, int async)
@@ -124,6 +127,8 @@ void disconnect(int onlyclean, int async)
     
     localdisconnect();
 
+	satSent = true; //warten bis connection zum server vollständig etabliert ist, dann auf false setzen
+
     if(!onlyclean) { stop(); localconnect(); };
 };
 
@@ -150,7 +155,7 @@ void echo(char *text) { conoutf("%s", text); };
 
 COMMAND(echo, ARG_VARI);
 COMMANDN(say, toserver, ARG_VARI);
-COMMANDN(connect, connects, ARG_2STR); //von 1str auf 2str
+COMMANDN(connect, connects, ARG_2STR); //von 1str auf 2str wegen portangabe
 COMMANDN(disconnect, trydisconnect, ARG_NONE);
 
 // collect c2s messages conveniently
@@ -215,14 +220,6 @@ void c2sinfo(dynent *d)                     // send update to the server
 	wenn das updateinvervall größer ist, heißt das nicht unbedingt, dass die pakete größer werden
 	nur die information, die per addmsg noch dazukommen machen die pakete größer, dazu gehören NICHT positionsupdates
 	*/
-	if(ticketAuth) //HIER WEITERARBEITEN
-	{
-		std::string tmp = base64_decode(ticket);
-		const char *tt = tmp.c_str();
-		std::cout << strlen(tt) << "\n";
-		std::cout << atoi(tt) << " BASE64 ENCODE FROM TICKET \n";
-		ticketAuth = false;
-	}
     ENetPacket *packet = enet_packet_create (NULL, MAXTRANS, 0); //erstellt hier ein packet..... mit größe von MAXTRANS
     uchar *start = packet->data; //start ist zeiger aufs erste datenbyte
     uchar *p = start+2;
@@ -289,6 +286,20 @@ void c2sinfo(dynent *d)                     // send update to the server
             if(msg[1]) packet->flags = ENET_PACKET_FLAG_RELIABLE;
             loopi(msg[0]) putint(p, msg[i+2]);
         };
+		if(!satSent) //
+		{
+			std::cout << " \n SATENT ... \n ";
+			putint(p,SV_SAT);
+			putint(p,user.length());
+			uchar *tmp =strToUchar(user);
+			for(int q = 0; q < user.length(); q++)
+			{
+				putint(p,*tmp); //implizit cast
+				tmp++;
+			}
+			satSent = true;
+			//delete[] tmp; //gibt einen absturz, warum?
+		}
         messages.setsize(0);
         if(lastmillis-lastping>250)
         {
@@ -331,7 +342,7 @@ void gets2c()           // get updates from the server
             conoutf("connected to server");
             connecting = 0;
             throttle();
-			ticketAuth = true; //TP TEST
+			satSent = false; //TP, wird sind an dieser Stelle mit Server verbunden..
             break;
          
         case ENET_EVENT_TYPE_RECEIVE: //hier "normales" paket, der paketinhalt wird dann die methode localservetoclient weitergereicht

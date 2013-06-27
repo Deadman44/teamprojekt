@@ -50,8 +50,12 @@
             
 
             $ticket = createAndReturnTicket("wurst@wurst.de", "hallohallo1");
-            echo urlencode($ticket)."<br>";
-            $email = getEmailByTicket($ticket);
+            
+            $sat = setAndReturnServerAccessTicket("wurst@wurst.de", $ticket);
+            echo $sat."<br>";
+            
+            $email = checkServerAccessTicket($sat,"wurst@wurst.de");
+
             
             echo $email;
 

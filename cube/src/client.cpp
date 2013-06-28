@@ -286,14 +286,30 @@ void c2sinfo(dynent *d)                     // send update to the server
             if(msg[1]) packet->flags = ENET_PACKET_FLAG_RELIABLE;
             loopi(msg[0]) putint(p, msg[i+2]);
         };
+
 		if(!satSent) //
 		{
-			std::cout << " \n SATENT ... \n ";
+			std::cout << " \n Sende USER+SAT an Server \n ";
 			putint(p,SV_SAT);
-			putint(p,user.length());
+			putint(p,user.length()+6); //wegen laenge-6-SAT
 			uchar *beginptr;
 			uchar *tmp =strToUchar(user);
 			beginptr = tmp;
+
+
+			std::cout << sat << "\n";
+			//SAT ins Paket packen
+			const char *satc = sat.c_str();
+
+			for(int k = 0; k < 6;k++)
+			{
+				//putint(p, sat.at(k));
+				//putint(p,109);
+				putint(p,satc[k]);
+	
+			}		
+
+			//Email (==USER) ins Paket packen
 			for(int q = 0; q < user.length(); q++)
 			{
 				putint(p,*tmp); //implizit cast
@@ -302,6 +318,7 @@ void c2sinfo(dynent *d)                     // send update to the server
 			satSent = true;
 			delete[] beginptr; //delete muss kopie von ptr geschehen, da tmp am ende der schleife auf eine speicherstelle außerhalb des angeforderten bereichs zeigt --> absturz
 		}
+
         messages.setsize(0);
         if(lastmillis-lastping>250)
         {

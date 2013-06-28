@@ -415,7 +415,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 			break;
 		};
 
-		case SV_SAT: //??????
+		case SV_SAT: // die vom Server weitergereichten Pakete annehmen, besser: am server verwerfen 
 		{
 			int len = getint(p);
 			for(int u = 0; u < len; u++) getint(p);

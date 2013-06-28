@@ -18,7 +18,9 @@ struct client                   // server side version of "dynent" type
 	dynent *representer; //spielfigur des clients auf dem server
 	int clientnr;
 	int awaitingSpawnSignal; //zeigt an, ob client bereits eine spawnanfrage geschickt hat
-	int allowRespawn; //sollte auf 0 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enhält im zwischenzustand einen zufallswert (rnd -rnd+1 == -1))
+	int allowRespawn; //sollte auf 0 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enhält im zwischenzustand einen zufallswert)
+	std::string clientSAT;
+	std::string clientName;
 };
 
 vector<client> clients;
@@ -301,21 +303,34 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			break;
 		};
 
-		case SV_SAT: //username==email herausfiltern
+		case SV_SAT: //SAT +username==email herausfiltern
 		{
 			int len = getint(p);
-			char *chars = new char[len];
-
-			for(int u = 0; u < len; u++)
+			std::cout << len << "<--- SAT_LEN";
+			char *username = new char[len-6];
+			char *cSAT = new char[6];
+			//SAT aus paket nehmen
+			
+			for(int z = 0; z < 6; z++)
 			{
-				chars[u] = getint(p); 
+				cSAT[z] = getint(p);
+			}
+			
+			//username aus paket nehmen
+			for(int u = 0; u < len-6; u++) // -SAT LEN
+			{
+				username[u] = getint(p); 
 			}
 
-			if(isdedicated)
+			if(isdedicated) //standardproblem: auch im lokalen spiel greift client auf server-fkts zu
 			{
-				std::cout << " DER EMPFANGENE STRING LAUTET " << chars << "\n";
+				std::cout << " DER EMPFANGENE STRING LAUTET " << username << " und der SAT " << cSAT << "\n";
+				clients[cn].clientName = std::string(username); //konstruktor
+				clients[cn].clientSAT = std::string(cSAT);
 			}
-			delete[] chars;
+
+			delete[] username;
+			delete[] cSAT;
             break;
 		};
 
@@ -332,7 +347,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
                 while(sents.length()<=n) sents.add(se);
                 sents[n].spawned = true; //am anfang sollen alle items "gespawned" sein
 				sents[n].type = getint(p); //TP TEST
-				std::cout << " \n\n INR: " << n << " << TYPE: " << (int)sents[n].type << "\n\n";
+				//std::cout << " \n\n INR: " << n << " << TYPE: " << (int)sents[n].type << "\n\n";
             };
             notgotitems = false;
             break;

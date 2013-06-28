@@ -8,7 +8,7 @@ std::string license;
 bool initialization;
 std::string ticket;
 std::string hashticket; 
-std::string sat;
+std::string sat ="000000";
 std::string toHashGameData[1000]; //array fuer dateipfade zur integritaet
 int toHashData;
 bool thread_exit;

@@ -291,14 +291,16 @@ void c2sinfo(dynent *d)                     // send update to the server
 			std::cout << " \n SATENT ... \n ";
 			putint(p,SV_SAT);
 			putint(p,user.length());
+			uchar *beginptr;
 			uchar *tmp =strToUchar(user);
+			beginptr = tmp;
 			for(int q = 0; q < user.length(); q++)
 			{
 				putint(p,*tmp); //implizit cast
 				tmp++;
 			}
 			satSent = true;
-			//delete[] tmp; //gibt einen absturz, warum?
+			delete[] beginptr; //delete muss kopie von ptr geschehen, da tmp am ende der schleife auf eine speicherstelle außerhalb des angeforderten bereichs zeigt --> absturz
 		}
         messages.setsize(0);
         if(lastmillis-lastping>250)

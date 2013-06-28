@@ -22,16 +22,16 @@ Hilfsklasse zum Starten der SSL-Verbindungen in separaten Threads
 
 void permanent_check()
 {
-	boost::thread workerThread(worker);
-	
-	
+	boost::thread workerThread(worker);	
 }
+
 
 void acquire_SAT()
 {
 	boost::thread workerThread(get_SAT);
 	workerThread.join(); //besser an dieser stelle auf response warten
 }
+
 
 void worker()
 {

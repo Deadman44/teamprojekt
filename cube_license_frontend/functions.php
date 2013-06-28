@@ -853,7 +853,7 @@ function createTicketWithOldTicket($Qemail,$ticket)
 
     $mysqli->close();
 	setTimeStampToDB($Qemail,$ticket);
-	dropActive();
+	//dropActive(); << noch buggy wegen blockierenden ssl-aufrufen wegen SAT
     return $temporaryticket;
     
 }
@@ -1296,6 +1296,35 @@ function setAndReturnServerAccessTicket($Qemail,$ticket) //client ruft diese ftk
          */
 }
 
+function resetServerAccessTicket($Qemail,$sat) //nach beitritt des servers soll ticket zurückgesetzt werden
+        //verhindert wiederverwertung nach entzug lizenz o.ä.
+                {
+	$credentials = getCredentialsFromFile();
+	$credentialsArr = explode(":", $credentials);
+	$user = $credentialsArr[0];
+	$pwd = $credentialsArr[1];
+     
+        $newSat = 000000;
+	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+	if($mysqli->connect_errno){
+		echo "FAIL";
+		return "SERVER_ERROR";
+	} else {
+            $query = "UPDATE USER set SAT=? where EMAIL=? AND SAT=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('sss',$newSat,$Qemail,$sat);
+            $result->execute();
+   
+	}
+	$mysqli->close();
+        return $sat;
+        
+        /*
+         * Zu beachten: sat wird auf jeden fall berechnet und zurückgegeben
+         * ggfls aber nicht in db geschrieben wenn parameter nicht stimmen! (ticket, email)
+         */
+}
+
 function checkServerAccessTicket($sat, $Qemail) //server ruft diese ftk auf
         {
 	$credentials = getCredentialsFromFile();
@@ -1321,6 +1350,7 @@ function checkServerAccessTicket($sat, $Qemail) //server ruft diese ftk auf
 	$mysqli->close();
         if(strcmp($active, "1" == 0))
         {
+            //resetServerAccessTicket($Qemail, $sat); // noch buggy! setzt falsche db einträge, player disconnected
             return "True";
         }
         else

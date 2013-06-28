@@ -28,6 +28,7 @@ std::string hashing(const char *thing, int size);
 //...+++
  
 int get_SAT();
+int check_SAT(int clientnr, std::string usr, std::string usrSat);
 
 // Teamprojekt end
 

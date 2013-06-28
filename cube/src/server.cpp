@@ -21,6 +21,7 @@ struct client                   // server side version of "dynent" type
 	int allowRespawn; //sollte auf 0 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enhält im zwischenzustand einen zufallswert)
 	std::string clientSAT;
 	std::string clientName;
+	int allowconnect;
 };
 
 vector<client> clients;
@@ -327,10 +328,19 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				std::cout << " DER EMPFANGENE STRING LAUTET " << username << " und der SAT " << cSAT << "\n";
 				clients[cn].clientName = std::string(username); //konstruktor
 				clients[cn].clientSAT = std::string(cSAT);
+
+				std::cout << " Überprüfe SAT... ";
+
+				boost::thread checkworker(check_SAT,cn,clients[cn].clientName,
+				clients[cn].clientSAT);	
 			}
 
 			delete[] username;
 			delete[] cSAT;
+
+
+
+
             break;
 		};
 
@@ -705,9 +715,10 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 		loopv(clients)
 		{
 			dynent *tmp = clients[i].representer;
-			std::cout << "\n HP--> " << (*tmp).health<< "ARMOUR --> " << tmp->armour << " TYPE--> "  << tmp->armourtype << "\n"; //c-style zugriff auf membervar
+			std::cout << " \n NAME: " << clients[i].clientName << "  HP--> " << (*tmp).health<< "ARMOUR --> " << tmp->armour << " ARMORTYPE--> "  << tmp->armourtype;
 
 		}
+		std::cout << " \n";
 	}
 
 	//TP ENDE

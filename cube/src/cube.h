@@ -12,7 +12,7 @@
 #include <fstream>
 #include <string>
 
-#include "base64.h"
+
 
 
 int check_license(std::string u, std::string p, std::string l);

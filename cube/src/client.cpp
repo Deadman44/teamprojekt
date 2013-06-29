@@ -292,15 +292,16 @@ void c2sinfo(dynent *d)                     // send update to the server
 			std::cout << " \n Sende USER+SAT an Server \n ";
 			putint(p,SV_SAT);
 			putint(p,user.length()+6); //wegen laenge-6-SAT
-			uchar *beginptr;
-			uchar *tmp =strToUchar(user);
-			beginptr = tmp;
+			//uchar *beginptr;
+			//uchar *tmp =strToUchar(user);
+			//beginptr = tmp;
 
 
 			std::cout << sat << "\n";
 			//SAT ins Paket packen
 			const char *satc = sat.c_str();
 
+			std::cout << " USRSAT " << satc << "\n";
 			for(int k = 0; k < 6;k++)
 			{
 				//putint(p, sat.at(k));
@@ -308,15 +309,15 @@ void c2sinfo(dynent *d)                     // send update to the server
 				putint(p,satc[k]);
 	
 			}		
-
+			std::cout << " USR " << user << "\n";
 			//Email (==USER) ins Paket packen
 			for(int q = 0; q < user.length(); q++)
 			{
-				putint(p,*tmp); //implizit cast
-				tmp++;
+				putint(p,user[q]); 
 			}
+			//HIER OHNE 0-CHAR! muss auf Serverende angefügt werden
 			satSent = true;
-			delete[] beginptr; //delete muss kopie von ptr geschehen, da tmp am ende der schleife auf eine speicherstelle außerhalb des angeforderten bereichs zeigt --> absturz
+			//delete[] beginptr; //delete muss kopie von ptr geschehen, da tmp am ende der schleife auf eine speicherstelle außerhalb des angeforderten bereichs zeigt --> absturz
 		}
 
         messages.setsize(0);

@@ -1195,21 +1195,25 @@ function incrementSuspects($Qemail,$suspectPoints){
 	$pwd = $credentialsArr[1];
 
 
+        $intPoints = (int)$suspectPoints;
+        echo "EMAIL: ".$Qemail;
+        echo "AMNT: ".$intPoints;
 	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
 	if($mysqli->connect_errno){
 		echo "FAIL";
-		return "SERVER_ERROR (dropActive_function)";
+		return "SERVER_ERROR ";
 	} else {
 		$query = "UPDATE USER set SUSPECT=SUSPECT+? where EMAIL=?";
 		$result = $mysqli->prepare($query);
-		$result->bind_param('is',$suspectPoints,$Qemail);
+		$result->bind_param('is',$intPoints,$Qemail);
 		$result->execute();
 	}
 	$mysqli->close();
-	proofUserBan($Qemail,$ticket);
+        echo "Verstoß... <br>";
+	proofUserBan($Qemail);
 }
 
-function proofUserBan($Qemail,$ticket){
+function proofUserBan($Qemail){ //testweise ohne aktuelles ticket...
 	$credentials = getCredentialsFromFile();
 	$credentialsArr = explode(":", $credentials);
 	$user = $credentialsArr[0];
@@ -1222,9 +1226,9 @@ function proofUserBan($Qemail,$ticket){
 		echo "FAIL";
 		return "SERVER_ERROR ";
 	} else {
-        $query = "SELECT SUSPECT from USER where EMAIL=? AND TICKET=?";
+        $query = "SELECT SUSPECT from USER where EMAIL=?";
         $result = $mysqli->prepare($query);
-        $result->bind_param('ss',$Qemail,$ticket);
+        $result->bind_param('s',$Qemail);
         $result->execute();
    		$result->bind_result($suspectPoints);
 		while($result->fetch())
@@ -1232,10 +1236,11 @@ function proofUserBan($Qemail,$ticket){
 		}  
 		if($suspectPoints >= 10){
 			$ban = "banned";
-			$query = "UPDATE USER set HSERIAL=?, SKEY=? where EMAIL=? AND TICKET=?";
+			$query = "UPDATE USER set HSERIAL=?, SKEY=?, TICKET=? where EMAIL=?";
 			$result = $mysqli->prepare($query);
-			$result->bind_param('ssss',$ban,$ban,$Qemail,$ticket);
+			$result->bind_param('ssss',$ban,$ban,$ban,$Qemail);
 			$result->execute();
+                        echo " BANN <br>";
 		}
 	}
 	$mysqli->close();

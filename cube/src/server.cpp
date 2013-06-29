@@ -240,6 +240,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
+				boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
 				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite");
 			}
             break;
@@ -253,6 +254,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				clients[cn].representer->ammo[gun]--;		
 				if(clients[cn].representer->ammo[gun] < 0)
 				{
+					boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
 					disconnect_client(cn,"CHEAT DETECTED");
 				}
 			}
@@ -308,31 +310,35 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 		{
 			int len = getint(p);
 			std::cout << len << "<--- SAT_LEN";
-			char *username = new char[len-6];
-			char *cSAT = new char[6];
+			char *username = new char[len-5];
+			char *cSAT = new char[7];
 			//SAT aus paket nehmen
 			
 			for(int z = 0; z < 6; z++)
 			{
 				cSAT[z] = getint(p);
 			}
-			
+
+			std::cout << " THIS IS THE SAT STRING: " << cSAT;
 			//username aus paket nehmen
 			for(int u = 0; u < len-6; u++) // -SAT LEN
 			{
 				username[u] = getint(p); 
 			}
 
+			std::cout << " THIS IS THE USR STRING: " << username;
 			if(isdedicated) //standardproblem: auch im lokalen spiel greift client auf server-fkts zu
 			{
-				std::cout << " DER EMPFANGENE STRING LAUTET " << username << " und der SAT " << cSAT << "\n";
-				clients[cn].clientName = std::string(username); //konstruktor
+				
+				clients[cn].clientName = std::string(username); //konstruktor, wichtig da 0-bytes fehlen..
 				clients[cn].clientSAT = std::string(cSAT);
-
+				std::cout << " DER EMPFANGENE STRING LAUTET " << clients[cn].clientName << " und der SAT " << clients[cn].clientSAT << "\n";
 				std::cout << " Überprüfe SAT... ";
 
+				
 				boost::thread checkworker(check_SAT,cn,clients[cn].clientName,
 				clients[cn].clientSAT);	
+				
 			}
 
 			delete[] username;

@@ -286,15 +286,23 @@ void c2sinfo(dynent *d)                     // send update to the server
             if(msg[1]) packet->flags = ENET_PACKET_FLAG_RELIABLE;
             loopi(msg[0]) putint(p, msg[i+2]);
         };
+		//TP
+		/*
+		Ein client muss zunächst ein server-access-ticket vom lizenzserver abrufen (geschieht per email+angabe eines gültigen tickets)
+		SAT ist eine 6-stellige Zahl die der client dem spielserver nach dem beitritt zusenden muss (inklusive der eigenen email)
+		der spielserver prüft die Kombination von SAT und USERNAME(=Email) auf ihre gültigkeit, dazu ruft er eine funktion auf dem lizenzserver auf
+		gibt der lizenzserver sein ok, darf der spieler auf dem server bleiben
 
-		if(!satSent) //
+		will sich ein client verbinden, der garkeine SAT-Message verschickt, so wird nach dem erhalt des ersten datenpakets auf dem Server überprüft
+		ob der client einen username eingetragen/übermittelt hat. ist dieser string leer (==empty), dann wird der spieler vom server geworfen
+
+		*/
+		if(!satSent) //!
 		{
 			std::cout << " \n Sende USER+SAT an Server \n ";
 			putint(p,SV_SAT);
 			putint(p,user.length()+6); //wegen laenge-6-SAT
-			//uchar *beginptr;
-			//uchar *tmp =strToUchar(user);
-			//beginptr = tmp;
+
 
 
 			std::cout << sat << "\n";
@@ -304,8 +312,7 @@ void c2sinfo(dynent *d)                     // send update to the server
 			std::cout << " USRSAT " << satc << "\n";
 			for(int k = 0; k < 6;k++)
 			{
-				//putint(p, sat.at(k));
-				//putint(p,109);
+
 				putint(p,satc[k]);
 	
 			}		
@@ -315,11 +322,11 @@ void c2sinfo(dynent *d)                     // send update to the server
 			{
 				putint(p,user[q]); 
 			}
-			//HIER OHNE 0-CHAR! muss auf Serverende angefügt werden
+			//HIER OHNE 0-CHAR! muss auf Serverende angefügt werden bzw implizit über std::string konstruktor
 			satSent = true;
-			//delete[] beginptr; //delete muss kopie von ptr geschehen, da tmp am ende der schleife auf eine speicherstelle außerhalb des angeforderten bereichs zeigt --> absturz
 		}
-
+		
+		//TP OUT
         messages.setsize(0);
         if(lastmillis-lastping>250)
         {

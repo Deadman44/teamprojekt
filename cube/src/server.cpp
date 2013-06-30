@@ -19,9 +19,11 @@ struct client                   // server side version of "dynent" type
 	int clientnr;
 	int awaitingSpawnSignal; //zeigt an, ob client bereits eine spawnanfrage geschickt hat
 	int allowRespawn; //sollte auf 0 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enhält im zwischenzustand einen zufallswert)
-	std::string clientSAT;
-	std::string clientName;
-	int allowconnect;
+	std::string clientSAT; //sat des users
+	std::string clientName; //clientname, also email
+	int allowconnect; //? noch benötigt?
+	int firstPacketsArrived; //zeigt mit 1 an, ob bereits eine SV_POS Message an dne Server gesendet wurde. wird benötigt, damit server clients vom server werfen kann, die 
+	//die nicht über den SAT-Mechanismus verfügen, also überhaupt keine SAT-Messages verschicken
 };
 
 vector<client> clients;
@@ -405,6 +407,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             int size = msgsizelookup(type);
             assert(size!=-1);
             loopi(size-2) getint(p);
+			clients[cn].firstPacketsArrived = 1; //TP, erstes "richtige" paket vom client empfangen
             break;
         };
 
@@ -759,7 +762,8 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				c.representer->state = CS_ALIVE;
 				//c.allowRespawn = -1; //alte fassung
 				c.allowRespawn = 0;
-
+				c.clientName ="EMPTY";
+				c.firstPacketsArrived = 0;
 
 				/// TP OUT
                 char hn[1024];
@@ -777,6 +781,16 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				*/
 
                 if(event.packet->referenceCount==0) enet_packet_destroy(event.packet);
+
+				//TP
+				for(int p = 0; p < clients.length();p++)
+				{
+					if(clients[p].firstPacketsArrived == 1 && (clients[p].clientName.compare("EMPTY") == 0))
+					{
+						disconnect_client(p, "NO PERMISSION TO JOIN: UNKNOWN CLIENT");
+					}
+				}
+				//TP OUT
                 break;
 
             case ENET_EVENT_TYPE_DISCONNECT: 

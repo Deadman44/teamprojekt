@@ -131,10 +131,8 @@ int main(int argc, char **argv)
 	satSent = false;
 	ticket = "";	// Initialisierung ticket
 	sat = ""; //init von Server-Access-Ticket, wird vor server-join neu gesetzt/bezogen
-	std::cout << "Bitte Benutzernamen eingeben: ";
-	std::cin >> user;
-	std::cout << "Bitte Passwort eingeben: ";
-	std::cin >> user_password;
+
+
 	// Lizenzschluessel auslesen
 	license = license_datei();
 	int allowconnect = 200; // MOD
@@ -164,12 +162,29 @@ int main(int argc, char **argv)
             case 'm': master = a; break;
             case 'p': passwd = a; break;
             case 'c': maxcl  = atoi(a); break;
+				//TEAMPROJEKT
 			case 'q': port	=	atoi(a); break;
+			case 'b': user = a; break;
+			case 'y': user_password = a; break;
+				//TP OUT
             default:  conoutf("unknown commandline option");
         }
         else conoutf("unknown commandline argument");
     };
-    
+
+	//TP
+	if(user.compare("")==0)
+	{
+		std::cout << "Bitte Benutzernamen eingeben: ";
+		std::cin >> user;
+	}
+	if(user_password.compare("")==0)
+	{
+		std::cout << "Bitte Passwort eingeben: ";
+		std::cin >> user_password;
+	}
+
+	//TP OUT
     #ifdef _DEBUG
     par = SDL_INIT_NOPARACHUTE;
     fs = 0;

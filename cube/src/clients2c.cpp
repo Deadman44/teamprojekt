@@ -139,7 +139,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 			{
 				clientAllowRespawn = clientAllowRespawn - rnd;
 				std::cout << "CLIENT LEBT WIEDER \n";
-				//spawnplayer(player1); //hier war autorespawn, etwas ungünstig manchmal (bugs etc..)
+				
 
 			}
 
@@ -407,7 +407,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 		case SV_FORCEDIE: //message, die einen client zum sterben zwingt
 		{
 			int causeOfDeath = getint(p);
-			std::cout << " SPIELER " << causeOfDeath << " HAT MEINEN TOT VERURSACHT \n";
+			std::cout << " SPIELER " << causeOfDeath << " hat kill erzwungen \n";
 			dynent *dtmp = getclient(causeOfDeath);
 			player1->health = 0;
 			selfdamage(1,causeOfDeath,dtmp); 

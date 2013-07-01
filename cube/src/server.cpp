@@ -24,7 +24,13 @@ struct client                   // server side version of "dynent" type
 	int allowconnect; //? noch benötigt?
 	int firstPacketsArrived; //zeigt mit 1 an, ob bereits eine SV_POS Message an dne Server gesendet wurde. wird benötigt, damit server clients vom server werfen kann, die 
 	//die nicht über den SAT-Mechanismus verfügen, also überhaupt keine SAT-Messages verschicken
+	int temporaryPacketCounter; //zählt die datenpakete des clients in einem zeitraum von 5 sekunden
+	int currentPacketCheckTime; //die zeit, an der zuletzt die zahl der pakete von 0 hochgezählt wurden
 };
+
+//TP
+
+
 
 vector<client> clients;
 
@@ -164,9 +170,41 @@ bool vote(char *map, int reqmode, int sender)
     return true;    
 };
 
+
+//TP
+
+/*
+Diese Methode wird bei jedem Empfang einer SV_POS Message eines Spielers aufgerufen. SV_POS ist zwignend für jedes Datenpaket. 
+Sollte der Spieler einen Speedhack benutzen (beispielsweise der in der CheatEngine eingebaute) so werden vom Client unnatürlich viele 
+Datenpakete verschickt. Ein normaler Client versendet etwa 140-150 alle 5 Sekunden. Hier wurde ein Toleranzfaktor von 1.2 benutzt, damit nicht bei
+plötzlich auftretendem Packetloss in einer Zeitspanne von 5 Sekunden zu viele Pakete ankommen und fälschlicherweise gekickt wird.
+
+*/
+void incrementPacketCounter(int clientnr, int millis)
+{
+	if(millis-clients[clientnr].currentPacketCheckTime >5)
+	{
+		//std::cout << "Renew PacketCheckTime @ " << clients[clientnr].temporaryPacketCounter << " PACKETS \n";
+		clients[clientnr].currentPacketCheckTime = time(NULL);
+		clients[clientnr].temporaryPacketCounter = 0;
+
+	}
+	clients[clientnr].temporaryPacketCounter++;
+
+	if(clients[clientnr].temporaryPacketCounter > 170) //standardwert sollte zwischen 140 und 150 innerhalb von 5 sekudnen liegen, leichte toleranz wegen packetloss usw
+	{
+		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! \n";
+		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+		disconnect_client(clientnr,"SPEEDHACK OR PACKETLOSS TO HIGH");
+
+	}
+}
+
+//TP OUT
+
+
 // server side processing of updates: does very little and most state is tracked client only
 // could be extended to move more gameplay to server (at expense of lag)
-
 void process(ENetPacket * packet, int sender)   // sender may be -1
 {
     if(ENET_NET_TO_HOST_16(*(ushort *)packet->data)!=packet->dataLength)
@@ -407,7 +445,22 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             int size = msgsizelookup(type);
             assert(size!=-1);
             loopi(size-2) getint(p);
-			clients[cn].firstPacketsArrived = 1; //TP, erstes "richtige" paket vom client empfangen
+
+			//TP
+			if(isdedicated)
+			{
+				if(clients[cn].firstPacketsArrived == 0)
+				{
+					clients[cn].firstPacketsArrived = 1; //TP, erstes "richtige" paket vom client empfangen
+					clients[cn].currentPacketCheckTime = time(NULL);
+				}
+				else
+				{
+					int currTime = time(NULL);
+					incrementPacketCounter(cn,currTime);
+				}
+			}
+			//TPOUT
             break;
         };
 

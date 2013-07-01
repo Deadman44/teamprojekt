@@ -39,7 +39,7 @@ std::string hashing(const char *thing, int size) //übergibt ptr auf bytearray un
 		thing++; //um eins verschieben
 
 	}
-	EVP_DigestUpdate(mdctx,mySaltFromTicket,88); //
+	EVP_DigestUpdate(mdctx,mySaltFromTicket,88); // zusätzlich Ticket bzw. Salt hashen --> SHA1(DATEI.TICKET) ist das resultat!
 	EVP_DigestFinal_ex(mdctx, md_value, &md_len); //schreibt in mdvalue, anzahl zeichen in md_len
 	EVP_MD_CTX_destroy(mdctx); // zerstört mdctx obj
 

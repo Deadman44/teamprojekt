@@ -910,7 +910,7 @@ function permanentcheck($Qemail,$oldticket,$clientHash)
 
 /// integration checks
 
-function check_client_hash($Qemail,$ticket,$hash,$challengeNR)
+function check_client_hash($Qemail,$ticket,$hash,$challengeNR) //DEPRECATED...
 {
     $credentials = getCredentialsFromFile();
     $credentialsArr = explode(":", $credentials);

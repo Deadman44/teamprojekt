@@ -9,7 +9,7 @@ $license_key = $_GET['license'];
 if(check_license_key($Qemail, $Qpass, $license_key)) {
     echo "True"."\n";
     echo createAndReturnTicket($Qemail, $Qpass);
-    echo 101; //erster zu hashender wert.. hier sdl.dll..
+    echo 100; //erster zu hashender wert.. hier cube.exe
 } else {
 	echo "False";
 }

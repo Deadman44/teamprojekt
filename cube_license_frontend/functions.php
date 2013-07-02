@@ -947,7 +947,7 @@ function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity frag
     $pwd = $credentialsArr[1];
       
     
-    $wish = rand(100,124);
+    $wish = rand(101,124);
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     if($mysqli->connect_errno)

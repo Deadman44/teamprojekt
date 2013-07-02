@@ -27,18 +27,18 @@
 		if($new_password==$new_password_copy)
 		{
 			if(change_Password($user, $password, $new_password)){
-				echo '<h3>Passwort wurde geändert!</h3>';
+				echo "<h3 class=\"meldung\">Passwort wurde geändert!</h3>";
 				echo '<meta http-equiv="refresh" content="2; URL=https://localhost/userIndex.php">';
 			}
 			else
 			{
-				echo '<h3>Fehlerhafte Eingabe, bitte erneut versuchen!</h3>';
+				echo "<h3 class=\"meldung\">Fehlerhafte Eingabe, bitte erneut versuchen!</h3>";
 				echo '<meta http-equiv="refresh" content="2; URL=https://localhost/userData.php">';
 			}
 		}
 		else
 		{
-			echo '<h3>Die neuen Passwörter sind ungleich, bitte erneut versuchen!</h3>';
+			echo "<h3 class=\"meldung\">Die neuen Passwörter sind ungleich, bitte erneut versuchen!</h3>";
 			echo '<meta http-equiv="refresh" content="2; URL=https://localhost/userData.php">';
 		}
 	}

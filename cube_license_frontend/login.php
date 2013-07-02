@@ -24,8 +24,8 @@
 			exit();
 		} else {
 			$_SESSION['validLogin'] = false;
-			echo '<h3>Falsche Login-Daten!</h3>';
-			echo '<meta http-equiv="refresh" content="2; URL=https://localhost/index.php">';
+			echo "<h3 class=\"meldung\">Falsche Login-Daten!</h3>";
+			echo '<meta http-equiv="refresh" content="4; URL=https://localhost/index.php">';
 		}
     }
 ?>

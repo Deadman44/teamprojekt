@@ -391,19 +391,19 @@ function addNewUserToDB($nname, $vname, $email, $pass)
     
     if(!check_email($email))
     {
-       echo "<h3> EMAIL im falschen Format </h3>";
+       echo "<h3 class=\"meldung\"> EMAIL im falschen Format </h3>";
        return false; 
     }
     
     if(!check_EmailUnique($email))
     {
-        echo "<h3> EMAIL existiert bereits </h3>";
+        echo "<h3 class=\"meldung\"> EMAIL existiert bereits </h3>";
        return false; 
     }
 	
     if(!check_password($pass))
     {
-        echo "<h3> Passwort entspricht nicht den Richtlinien </h3>";
+        echo "<h3 class=\"meldung\"> Passwort entspricht nicht den Richtlinien </h3>";
         return false;
     }
     
@@ -430,11 +430,11 @@ function addNewUserToDB($nname, $vname, $email, $pass)
 		
 		if ($eintrag->affected_rows == 1)
         {
-            echo '<h3>Der neue Eintrage wurde hinzugef&uuml;gt.</h3> <br />';
+            echo "<h3 class=\"ok\">Der neue Eintrage wurde hinzugef&uuml;gt.</h3> <br />";
         }
         else
         {
-            echo '<h3>Der Eintrag konnte nicht hinzugef&uuml;gt werden.</h3>';
+            echo "<h3 class=\"meldung\">Der Eintrag konnte nicht hinzugef&uuml;gt werden.</h3>";
         }	
 	}
 	
@@ -576,7 +576,7 @@ function check_password_length($password)
 	}
 	else
 	{
-		echo '<h3> Passwortlänge zu kurz, bitte erneut registrieren. </h3>';
+		echo "<h3 class=\"meldung\"> Passwortlänge zu kurz, bitte erneut registrieren. </h3>";
 		return false;
 	}
 }
@@ -589,7 +589,7 @@ function check_password_number_included($password)
 	}
 	else
 	{
-		echo '<h3>Keine Zahlen enthalten, bitte erneut registrieren.</h3>';
+		echo "<h3 class=\"meldung\">Keine Zahlen enthalten, bitte erneut registrieren.</h3>";
 		return false;
 	}
 }
@@ -599,12 +599,12 @@ function change_Password($Qemail,$oldpass, $pass)
 {
     if(!checkUserLogin($Qemail, $oldpass))
     {
-        echo "<h3> Aktuelles Passwort nicht korrekt </h3>";
+        echo "<h3 class=\"meldung\"> Aktuelles Passwort nicht korrekt </h3>";
         return false;
     }
     if(!check_password($pass))
     {
-        echo "<h3>Bitte anderes Passwort eingeben</h3>";
+        echo "<h3 class=\"meldung\">Bitte anderes Passwort eingeben</h3>";
     }
     
     $securePass = create_hash($pass);

@@ -9,9 +9,12 @@ p.anmeldung, p.anmeld {list-style-type:none; font-family:sans-serif;
 
 li.menue{line-height:40px; }
 
+h1{color:#f2f2f2; }
+
 h2{color:#f2f2f2; font-family: arial; font-style:normal;}
 
-h3{color:#fafad2; }
+h3.meldung{color:#ff6921; text-align:center;}
+h3.ok{color:#16C61A ; text-align:center;}
 
 a{color:#f2f2f2; text-decoration:none; }
 a:hover { color:#3b3b3b; }
@@ -19,6 +22,8 @@ a:hover { color:#3b3b3b; }
 p,p.vote {color:#f2f2f2; }
 
 img.user { border:white 2px solid; }
+
+td {color:#f2f2f2; font-weight: bold;}
 
 td.tos {border-width:2px; border-style:solid; border-color:#EFEFEF; color:#f2f2f2; font-weight: bold;}
 

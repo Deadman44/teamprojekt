@@ -141,6 +141,7 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
         sents[i].spawnsecs = sec;
         send2(true, sender, SV_ITEMACC, i);
 		
+		//TEAMPROJEKT
 		serverrealpickup(i,clients[sender].representer); //die nummer des items, und das dynent object dass das item bekommen soll
 
     };

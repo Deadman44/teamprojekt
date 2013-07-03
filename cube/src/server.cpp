@@ -127,6 +127,7 @@ void disconnect_client(int n, char *reason)
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
     clients[n].type = ST_EMPTY;
+	clients[n].temporaryPacketCounter = 0;
     send2(true, -1, SV_CDIS, n);
 };
 

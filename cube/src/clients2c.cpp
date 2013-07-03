@@ -7,7 +7,7 @@ extern bool c2sinit, senditemstoserver;
 extern string toservermap;
 extern string clientpassword;
 
-int clientAllowRespawn = 0; //TP, ersten Respawn erlauben
+int clientAllowRespawn = -1; //TP, ersten Respawn erlauben
 
 void neterr(char *s)
 {
@@ -128,19 +128,18 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 		{
 			
 			int rnd = getint(p);
-			std::cout << rnd << "\n AND ERGEBNIS AUF CLIENT " << (clientAllowRespawn-rnd);
-			if(rnd == 50)
+			std::cout << "\n"<<rnd << " RANDOM AND ERGEBNIS AUF CLIENT " << (clientAllowRespawn-rnd);
+			if(clientAllowRespawn == -1 && (clientAllowRespawn-rnd) != -1)
 			{
 				clientAllowRespawn = rnd;
 				addmsg(1,2,SV_ALRS,rnd);
 				std::cout << "CLIENT SEI TOT \n";
 			}
-			else if(rnd==51)
+			else if ((clientAllowRespawn-rnd) == -1)
 			{
 				clientAllowRespawn = clientAllowRespawn - rnd;
 				std::cout << "CLIENT LEBT WIEDER \n";
 				
-
 			}
 
 			break;

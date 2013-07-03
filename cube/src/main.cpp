@@ -5,14 +5,14 @@
 std::string user;
 std::string user_password;
 std::string license;
-bool initialization;
-std::string ticket;
-std::string hashticket; 
+bool initialization; //erste verbindungsaufnahme?
+std::string ticket; //ticket mit url-encoding
+std::string hashticket; //ticket ohne url encoding (beim hashen gebraucht)
 std::string sat ="000000";
 std::string toHashGameData[1000]; //array fuer dateipfade zur integritaet
-int toHashData;
+int toHashData; //die nächste zu hashende datei
 bool thread_exit;
-bool satSent;
+bool satSent; //wurde sat schon gesendet?
 
 //TP Hilfsfunktion, wandelt str in uchar-arr, achtung new! muss später gelöscht werden!
 uchar *strToUchar(std::string str)

@@ -58,8 +58,8 @@ void worker()
 			boost::this_thread::sleep(waiting);
 			quit();
 		}
-		// Pruefungsintervall 20s	
-		boost::posix_time::seconds waiting(200); //auf 200 erhöht.. testweise
+		// Pruefungsintervall 30s	
+		boost::posix_time::seconds waiting(30);
 		boost::this_thread::sleep(waiting);
 	}
 

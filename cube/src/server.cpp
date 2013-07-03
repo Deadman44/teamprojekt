@@ -16,13 +16,13 @@ struct client                   // server side version of "dynent" type
 
 	//TEAMPROJEKT
 	dynent *representer; //spielfigur des clients auf dem server
-	int clientnr;
+	int clientnr; //interne clientnummer
 	int awaitingSpawnSignal; //zeigt an, ob client bereits eine spawnanfrage geschickt hat
-	int allowRespawn; //sollte auf 0 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enhält im zwischenzustand einen zufallswert)
-	std::string clientSAT; //sat des users
+	int allowRespawn; //sollte auf 0 stehen wenn respawn erlaubt is bzw der client neue pakete senden darf, enthält im zwischenzustand einen zufallswert)
+	std::string clientSAT; //aktuelles server-access-ticket des clients
 	std::string clientName; //clientname, also email
-	int allowconnect; //? noch benötigt?
-	int firstPacketsArrived; //zeigt mit 1 an, ob bereits eine SV_POS Message an dne Server gesendet wurde. wird benötigt, damit server clients vom server werfen kann, die 
+	int allowconnect; // deprecated
+	int firstPacketsArrived; //zeigt mit 1 an, ob bereits eine SV_POS Message an den Server gesendet wurde. wird benötigt, damit server clients vom server werfen kann, die 
 	//die nicht über den SAT-Mechanismus verfügen, also überhaupt keine SAT-Messages verschicken
 	int temporaryPacketCounter; //zählt die datenpakete des clients in einem zeitraum von 5 sekunden
 	int currentPacketCheckTime; //die zeit, an der zuletzt die zahl der pakete von 0 hochgezählt wurden
@@ -141,6 +141,7 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
         sents[i].spawnsecs = sec;
         send2(true, sender, SV_ITEMACC, i);
 		
+		//TEAMPROJEKT
 		serverrealpickup(i,clients[sender].representer); //die nummer des items, und das dynent object dass das item bekommen soll
 
     };
@@ -176,13 +177,13 @@ bool vote(char *map, int reqmode, int sender)
 /*
 Diese Methode wird bei jedem Empfang einer SV_POS Message eines Spielers aufgerufen. SV_POS ist zwignend für jedes Datenpaket. 
 Sollte der Spieler einen Speedhack benutzen (beispielsweise der in der CheatEngine eingebaute) so werden vom Client unnatürlich viele 
-Datenpakete verschickt. Ein normaler Client versendet etwa 140-150 alle 5 Sekunden. Hier wurde ein Toleranzfaktor von 1.2 benutzt, damit nicht bei
+Datenpakete verschickt. Ein normaler Client versendet etwa 300-350 alle 10 Sekunden. Hier wurde ein Toleranzfaktor von 1.2 benutzt, damit nicht bei
 plötzlich auftretendem Packetloss in einer Zeitspanne von 5 Sekunden zu viele Pakete ankommen und fälschlicherweise gekickt wird.
 
 */
 void incrementPacketCounter(int clientnr, int millis)
 {
-	if(millis-clients[clientnr].currentPacketCheckTime >5)
+	if(millis-clients[clientnr].currentPacketCheckTime >10)
 	{
 		//std::cout << "Renew PacketCheckTime @ " << clients[clientnr].temporaryPacketCounter << " PACKETS \n";
 		clients[clientnr].currentPacketCheckTime = time(NULL);
@@ -191,7 +192,7 @@ void incrementPacketCounter(int clientnr, int millis)
 	}
 	clients[clientnr].temporaryPacketCounter++;
 
-	if(clients[clientnr].temporaryPacketCounter > 170) //standardwert sollte zwischen 140 und 150 innerhalb von 5 sekudnen liegen, leichte toleranz wegen packetloss usw
+	if(clients[clientnr].temporaryPacketCounter > 400) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
 	{
 		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! \n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
@@ -263,7 +264,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			
 				loopv(clients)
 				{
-					if(clients[i].clientnr == target)
+					if(clients[i].clientnr == target ) //&& clients[i].representer->lifesequence == ls //temporär raus, wegen bugs bei suizid
 					{
 						serverselfdamage(damage,cn,clients[i].representer,i); //schaden, von wem, an wen(dynent),an wen(nr) 
 						std::cout <<" \n make server damage \n ";
@@ -278,10 +279,10 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			*/
 
-			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
+			if(isdedicated && clients[cn].representer->state == CS_DEAD && target != clients[cn].clientnr) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
 				boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
-				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite");
+				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE");
 			}
             break;
         };
@@ -298,7 +299,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 					disconnect_client(cn,"CHEAT DETECTED");
 				}
 			}
-			else
+			else //dieser Teil wird auf dem Client ausgegeben
 			{
 				std::cout << " Sending simple Shot Request (SV_MUN)";
 			}
@@ -322,7 +323,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 				clients[cn].allowRespawn = clients[cn].allowRespawn - rnd;
 				std::cout << "RND: " << rnd << " ERGEBNIS : " << clients[cn].allowRespawn;
-				if(clients[cn].allowRespawn == 0)
+				if(clients[cn].allowRespawn == 0) // Client muss gleiche RND zurücksenden
 				{
 					std::cout << "KORREKTER RESPAWN \n";
 					send2(1,cn,SV_ALRS,rnd+1);
@@ -335,6 +336,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				else
 				{
 					std::cout << " CLIENT HAT FALSCHE NR GESENDET \n";
+					disconnect_client(cn,"HP CHEAT VERSUCH");
 				}
 			}
 			
@@ -423,7 +425,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
-				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite");
+				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //PICKUP");
 			}
 
             break;
@@ -509,14 +511,15 @@ void serverselfdamage(int damage, int actor, dynent *act,int clientnr)
 		std::cout << " \n PLAYER should die now with ... \n" << act->health;
 		act->state = CS_DEAD;
 		
+		
 
 		if ( clients[clientnr].awaitingSpawnSignal == 1) //hat das überhaupt eine auswirkung? sicherheitsabfrage falls methode 2x aufgerufen wird (client 2x serverseitig gestorben)
 		{
 			return;
 		}
-		uchar rnd = 50; //wuerfel zufallszahl zw 20 und 120, schicke diese zum client
-		// client muss diese bestätigen mit rnd+1, damit soll dann der allowRespawn zurückgesetzt werden, ist das passiert
-		//schickt der server sein OK (rnd+2) an den client, der dann weiterspielen darf
+		uchar rnd = rand() % 100 + 1; //wuerfel zufallszahl zw 1 und 100, schicke diese zum client
+		// client muss diese bestätigen mit rnd, damit soll dann der allowRespawn zurückgesetzt werden, ist das passiert
+		//schickt der server sein OK (rnd+1) an den client, der dann weiterspielen darf
 		clients[clientnr].allowRespawn = rnd;
 		clients[clientnr].awaitingSpawnSignal = 1;
 		send2(true,clientnr,SV_FORCEDIE,actor); //zwinge client zum sterben
@@ -607,7 +610,7 @@ void resetserverifempty()
 int nonlocalclients = 0;
 int lastconnect = 0;
 
-//TPBEGIN kopie von originaler spawnsate ggfls modifikationen hier noetig
+//TPBEGIN kopie von originaler spawnsate ggfls modifikationen hier noetig <-- gamemode wird noch nicht korrekt erkannt (02.07)
 void spawnstateForServer(dynent *d)              // reset player state not persistent accross spawns
 {
     resetmovement(d);
@@ -817,6 +820,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				c.allowRespawn = 0;
 				c.clientName ="EMPTY";
 				c.firstPacketsArrived = 0;
+				c.representer->lifesequence = 0;
 
 				/// TP OUT
                 char hn[1024];

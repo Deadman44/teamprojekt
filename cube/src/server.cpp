@@ -192,7 +192,7 @@ void incrementPacketCounter(int clientnr, int millis)
 	}
 	clients[clientnr].temporaryPacketCounter++;
 
-	if(clients[clientnr].temporaryPacketCounter > 400) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
+	if(clients[clientnr].temporaryPacketCounter > 300) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
 	{
 		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! \n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
@@ -257,7 +257,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			int target = getint(p); //ziel==clientnummer
 			int damage = getint(p); //damage
-			int ls = getint(p); //lifesequenze.. also welches "leben" aktuell is, durchnummeriert
+			int ls = getint(p); //lifesequenz.. also welches "leben" aktuell is, durchnummeriert
 			if(isdedicated)
 			{
 				std::cout << "ORIGIN: " << cn << " TARGET: " << target << " DAMAGE " << damage << " LIFESEQ " << ls;
@@ -351,7 +351,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 		case SV_SAT: //SAT +username==email herausfiltern
 		{
 			int len = getint(p);
-			std::cout << len << "<--- SAT_LEN";
+			std::cout << len << " <--- SAT_LEN \n";
 			char *username = new char[len-5];
 			char *cSAT = new char[7];
 			//SAT aus paket nehmen
@@ -359,14 +359,19 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			for(int z = 0; z < 6; z++)
 			{
 				cSAT[z] = getint(p);
+
 			}
+			cSAT[6] = '\0';
+
 
 			std::cout << " THIS IS THE SAT STRING: " << cSAT;
 			//username aus paket nehmen
 			for(int u = 0; u < len-6; u++) // -SAT LEN
 			{
 				username[u] = getint(p); 
+				
 			}
+			username[len-6] = '\0';
 
 			std::cout << " THIS IS THE USR STRING: " << username;
 			if(isdedicated) //standardproblem: auch im lokalen spiel greift client auf server-fkts zu
@@ -374,6 +379,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				
 				clients[cn].clientName = std::string(username); //konstruktor, wichtig da 0-bytes fehlen..
 				clients[cn].clientSAT = std::string(cSAT);
+
 				std::cout << " DER EMPFANGENE STRING LAUTET " << clients[cn].clientName << " und der SAT " << clients[cn].clientSAT << "\n";
 				std::cout << " Überprüfe SAT... ";
 
@@ -383,8 +389,8 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				
 			}
 
-			delete[] username;
-			delete[] cSAT;
+			//delete[] username;
+			//delete[] cSAT;
 
 
 
@@ -451,10 +457,10 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			//TP
 			if(isdedicated)
 			{
-				if(clients[cn].firstPacketsArrived == 0)
+				if(clients[cn].firstPacketsArrived == 0) //wird sowohl bei speedhack als auch SAT benötigt
 				{
 					clients[cn].firstPacketsArrived = 1; //TP, erstes "richtige" paket vom client empfangen
-					clients[cn].currentPacketCheckTime = time(NULL);
+					clients[cn].currentPacketCheckTime = time(NULL); //erstes setzen der "uhr"
 				}
 				else
 				{
@@ -779,8 +785,13 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 	{
 		loopv(clients)
 		{
-			dynent *tmp = clients[i].representer;
-			std::cout << " \n NAME: " << clients[i].clientName << "  HP--> " << (*tmp).health<< "ARMOUR --> " << tmp->armour << " ARMORTYPE--> "  << tmp->armourtype;
+			if(clients[i].type != ST_EMPTY)
+			{
+				dynent *tmp = clients[i].representer;
+				std::cout << " \n NAME: " << clients[i].clientName << "  HP--> " << (*tmp).health<< "ARMOUR --> " << tmp->armour << " ARMORTYPE--> "  << tmp->armourtype;
+
+			}
+			
 
 		}
 		std::cout << " \n";
@@ -830,7 +841,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				c.clientnr = lastconnect; //TEAMPROJEKT
                 break;
             }
-            case ENET_EVENT_TYPE_RECEIVE: //statusabfrage von enet, siehe doku von enet
+            case ENET_EVENT_TYPE_RECEIVE: //Empfange normales Paket...
                 brec += event.packet->dataLength;
                 process(event.packet, (int)event.peer->data); //processing methode, versenden der daten an weitere clients)
 				/* man muss hier unterscheiden zwischen event.packet (enthält die daten) und
@@ -842,7 +853,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				//TP
 				for(int p = 0; p < clients.length();p++)
 				{
-					if(clients[p].firstPacketsArrived == 1 && (clients[p].clientName.compare("EMPTY") == 0))
+					if(clients[p].firstPacketsArrived ==1 && (clients[p].clientName.compare("EMPTY") == 0))
 					{
 						disconnect_client(p, "NO PERMISSION TO JOIN: UNKNOWN CLIENT");
 					}

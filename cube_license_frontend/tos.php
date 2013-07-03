@@ -34,36 +34,61 @@
 </form>
 
 </div>
-<div class="main"><br /><h2>Unsere allgemeinen Terms of Service</h2><br />
+<div class="main"><br /><h2>Unsere allgemeinen Terms of Service</h2>
+
+<p>
+Damit unseren Spielern der Spaß aufgrund einiger weniger Cheater nicht vergeht, gelten für alle die nachfolgenden Terms of Service.
+Überschreitet ein Benutzer die Maximalgrenze von 20 Punkten, wird ihm seine Lizenz entzogen und gegebenenfalls sein Account gesperrt.
+</p>
 
 <table>
+	<colgroup>
+		<col width="500">
+		<col width="100">
+	</colgroup>
 	<tr>
 		<td class="tos">Verstoß</td>
 		<td class="tos">Ahndung</td>
 	</tr>
 	<tr>
-		<td class="tosnormal">Verwendung von bereits aktiviertem Lizenz-schlüssel (eines anderen Spielers)</td>
-		<td class="tosnormal">Keine weitere Aktivierung möglich</td>
+		<td class="tosnormal">Verwendung von bereits aktiviertem Lizenzschlüssel (eines anderen Spielers)</td>
+		<td class="tosnormal">10 Punkte</td>
 	</tr>
 	<tr>
-		<td class="tosnormal">Mehrfache Versuche bereits aktivierte Lizenz-schlüssel zu verwenden</td>
-		<td class="tosnormal">Daten des Anwenders werden protokolliert und Möglichkeit für rechtliche Schritte wird sich vorbehalten</td>
+		<td class="tosnormal">Verwendung von ungültigem Lizenzschlüssel (Bsp. mögliche Falscheingabe)</td>
+		<td class="tosnormal">1 Punkt</td>
 	</tr>
 	<tr>
-		<td class="tosnormal">Verwendung von Cheat-Software (Aimbot, Wallhack, etc.)</td>
-		<td class="tosnormal">Temporärer Ban (1 Stunde), ab 2. Erkennung Enzug des Lizenzschlüssels</td>
+		<td class="tosnormal">Verwendung von Cheat für gesteigerte Geschwindigkeit (Speedhack)</td>
+		<td class="tosnormal">5 Punkte</td>
 	</tr>
 	<tr>
-		<td class="tosnormal">Ausnutzen von Bugs / Exploits</td>
-		<td class="tosnormal">Temporärer Ban (1 Stunde), ab 2. Erkennung Enzug des Lizenzschlüssels</td>
+		<td class="tosnormal">Verwendung von Cheat für transparente Wände (Wallhack)</td>
+		<td class="tosnormal">5 Punkte</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Verwendung von Cheat für automatisches Zielen (Aim-Bot)</td>
+		<td class="tosnormal">5 Punkte</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Verwendung von Cheat für mehr Lebenspunkte</td>
+		<td class="tosnormal">5 Punkte</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Verwendung von Cheat für mehr Munition</td>
+		<td class="tosnormal">3 Punkte</td>
+	</tr>
+	<tr>
+		<td class="tosnormal">Verwendung von Cheat für Notwendigkeit des Nachlade-Mechanismus zu umgehen</td>
+		<td class="tosnormal">2 Punkte</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Beleidigung / Diskriminierung anderer Spieler</td>
-		<td class="tosnormal">Temporärer Ban (1 Tag)</td>
+		<td class="tosnormal">1 Punkt</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Werbung im Chat</td>
-		<td class="tosnormal">Temporärer Ban (1 Tag)</td>
+		<td class="tosnormal">1 Punkt</td>
 	</tr>
 </table>
 

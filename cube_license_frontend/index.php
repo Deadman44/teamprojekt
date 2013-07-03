@@ -34,8 +34,9 @@
 </form>
 
 </div>
-<div class="main"><br /><h2>Alles was dein Gamerherz höher schlagen lässt..</h2><br />
-<p></p>
+<div class="main">
+<a href="images/Cube_game_icon.png"><img src="images/Cube_game_icon.png" width="160" height="120" border=0 alt="click to enlarge" align="left"></a>
+<h2>Cube lässt dein Gamerherz höher schlagen..</h2>
 </div>
 </div>
 </div>

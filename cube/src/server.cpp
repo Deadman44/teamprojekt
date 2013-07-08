@@ -294,10 +294,10 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			if(isdedicated)
 			{
 				clients[cn].representer->ammo[gun]--;		
-				if(clients[cn].representer->ammo[gun] < 0)
+				if(clients[cn].representer->ammo[gun] < 0 && gun != 0 )
 				{
 					boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
-					disconnect_client(cn,"CHEAT DETECTED");
+					disconnect_client(cn,"CHEAT DETECTED //MUNITION");
 				}
 			}
 			else //dieser Teil wird auf dem Client ausgegeben

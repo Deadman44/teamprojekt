@@ -29,7 +29,12 @@ void permanent_check()
 void acquire_SAT()
 {
 	boost::thread workerThread(get_SAT);
-	workerThread.join(); //besser an dieser stelle auf response warten
+	workerThread.join(); //besser an dieser stelle auf response warten, da auf ticket gewartet werden muss
+	if(satSent == 1)
+	{
+
+	satSent = 2; //zustand: zweites acquire bevorstehend
+	}
 }
 
 

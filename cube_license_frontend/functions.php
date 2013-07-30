@@ -1279,7 +1279,7 @@ function setAndReturnServerAccessTicket($Qemail,$ticket) //client ruft diese ftk
 	$user = $credentialsArr[0];
 	$pwd = $credentialsArr[1];
      
-        $sat = rand(128000,512000); // fix 6-stellig und damit filterbar in c-code
+        $sat = rand(000100,999999); // fix 6-stellig und damit filterbar in c-code
         
 	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
 	if($mysqli->connect_errno){
@@ -1315,9 +1315,9 @@ function resetServerAccessTicket($Qemail,$sat) //nach beitritt des servers soll 
 		echo "FAIL";
 		return "SERVER_ERROR";
 	} else {
-            $query = "UPDATE USER set SAT=? where EMAIL=? AND SAT=?";
+            $query = "UPDATE USER set SAT=? where EMAIL=?";
             $result = $mysqli->prepare($query);
-            $result->bind_param('sss',$newSat,$Qemail,$sat);
+            $result->bind_param('ss',$newSat,$Qemail);
             $result->execute();
    
 	}
@@ -1336,7 +1336,10 @@ function checkServerAccessTicket($sat, $Qemail) //server ruft diese ftk auf
 	$credentialsArr = explode(":", $credentials);
 	$user = $credentialsArr[0];
 	$pwd = $credentialsArr[1];
-	
+	if(strcmp($sat, 000000) == 0)
+        {
+           return "False" ;
+        }
         $active = 0;
 	$mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
 	if($mysqli->connect_errno){
@@ -1355,7 +1358,7 @@ function checkServerAccessTicket($sat, $Qemail) //server ruft diese ftk auf
 	$mysqli->close();
         if(strcmp($active, "1" == 0))
         {
-            //resetServerAccessTicket($Qemail, $sat); // noch buggy! setzt falsche db einträge, player disconnected
+            resetServerAccessTicket($Qemail, $sat); 
             return "True";
         }
         else

@@ -184,7 +184,7 @@ enum
     SV_EDITH, SV_EDITT, SV_EDITS, SV_EDITD, SV_EDITE,
     SV_SENDMAP, SV_RECVMAP, SV_SERVMSG, SV_ITEMLIST,
     SV_EXT, SV_MUN, 
-	SV_ALRS, SV_DUMMYALRS, SV_FORCEDIE, SV_SAT,//TP
+	SV_ALRS, SV_DUMMYALRS, SV_FORCEDIE, SV_SAT,SV_SATREPEAT,//TP
 };     
 
 enum { CS_ALIVE = 0, CS_DEAD, CS_LAGGED, CS_EDITING };
@@ -248,7 +248,7 @@ extern std::string sat;
 extern std::string ticket;
 extern bool initialization;
 extern bool thread_exit;
-extern bool satSent;
+extern int satSent;
 extern std::string toHashGameData[1000];
 //stats-tracking
 extern int clientAllowRespawn;

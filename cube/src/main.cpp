@@ -12,7 +12,7 @@ std::string sat ="000000";
 std::string toHashGameData[1000]; //array fuer dateipfade zur integritaet
 int toHashData; //die nächste zu hashende datei
 bool thread_exit;
-bool satSent; //wurde sat schon gesendet?
+int satSent; //wie oft wurde sat versendet? 2 mal sollte sein (initial, und nach verbindungsaufbau)
 
 //TP Hilfsfunktion, wandelt str in uchar-arr, achtung new! muss später gelöscht werden!
 uchar *strToUchar(std::string str)
@@ -128,7 +128,7 @@ int framesinmap = 0;
 int main(int argc, char **argv)
 {   // Teamprojekt begin
 	initialization=true;
-	satSent = false;
+	satSent = 0;
 	ticket = "";	// Initialisierung ticket
 	sat = ""; //init von Server-Access-Ticket, wird vor server-join neu gesetzt/bezogen
 

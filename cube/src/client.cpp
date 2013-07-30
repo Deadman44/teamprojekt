@@ -78,7 +78,7 @@ void connects(char *servername, char *port) //chg +1 param
         return;
     };
 
-    clienthost = enet_host_create(NULL, 1, rate, rate); //total dämliche bezeichnung für den server, also: server = clienthost...
+    clienthost = enet_host_create(NULL, 1, rate, rate); // server = clienthost...
 
     if(clienthost)
     {
@@ -94,7 +94,7 @@ void connects(char *servername, char *port) //chg +1 param
         conoutf("could not connect to server");
         disconnect();
     };
-	std::cout << " SAT??? -> " << sat << " \n";
+	std::cout << "Empfangenes SAT -> " << sat << " \n";
 };
 
 void disconnect(int onlyclean, int async)
@@ -127,7 +127,7 @@ void disconnect(int onlyclean, int async)
     
     localdisconnect();
 
-	satSent = true; //warten bis connection zum server vollständig etabliert ist, dann auf false setzen
+	satSent = 1; //warten bis connection zum server vollständig etabliert ist, dann auf 0 setzen /siehe ENET_CONNECT
 
     if(!onlyclean) { stop(); localconnect(); };
 };
@@ -297,7 +297,7 @@ void c2sinfo(dynent *d)                     // send update to the server
 		ob der client einen username eingetragen/übermittelt hat. ist dieser string leer (==empty), dann wird der spieler vom server geworfen
 
 		*/
-		if(!satSent) //!
+		if(satSent == 0 ||satSent == 2) //!
 		{
 			std::cout << " \n Sende USER+SAT an Server \n ";
 			putint(p,SV_SAT);
@@ -323,7 +323,15 @@ void c2sinfo(dynent *d)                     // send update to the server
 				putint(p,user[q]); 
 			}
 			//HIER OHNE 0-CHAR! muss auf Serverende angefügt werden bzw implizit über std::string konstruktor
-			satSent = true;
+			if(satSent == 0)
+			{
+
+			satSent = 1; //erster Durchlauf
+			}
+			else if(satSent == 2)
+			{
+				satSent=3; //zweiter Durchlauf komplett
+			}
 		}
 		
 		//TP OUT
@@ -369,7 +377,7 @@ void gets2c()           // get updates from the server
             conoutf("connected to server");
             connecting = 0;
             throttle();
-			satSent = false; //TP, wird sind an dieser Stelle mit Server verbunden..
+			satSent = 0; //TP, wir sind an dieser Stelle mit Server verbunden..
             break;
          
         case ENET_EVENT_TYPE_RECEIVE: //hier "normales" paket, der paketinhalt wird dann die methode localservetoclient weitergereicht

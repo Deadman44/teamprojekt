@@ -195,7 +195,7 @@ void incrementPacketCounter(int clientnr, int millis)
 
 	if(clients[clientnr].temporaryPacketCounter > 300) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
 	{
-		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! \n";
+		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
 		disconnect_client(clientnr,"SPEEDHACK OR PACKETLOSS TO HIGH");
 
@@ -249,6 +249,17 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             strcpy_s(smapname, text);
             resetitems();
             sender = -1;
+			//TP, sorgt dafür, dass auch nach kartenwechsel//modiwechsel die korrekten states der spieler existieren
+			if(isdedicated)
+			{
+
+				for(int uu = 0; uu < clients.length(); uu++)
+				{
+					spawnstateForServer(clients[uu].representer);
+				}
+
+			}
+			
             break;
         };
 		
@@ -351,7 +362,12 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 		case SV_SAT: //SAT +username==email herausfiltern
 		{
+
+
 			int len = getint(p);
+			
+			uchar *tmp = p;
+
 			std::cout << len << " <--- SAT_LEN \n";
 			char *username = new char[len-5];
 			char *cSAT = new char[7];
@@ -360,16 +376,23 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			for(int z = 0; z < 6; z++)
 			{
 				cSAT[z] = getint(p);
+				*tmp = 0;
+				tmp++;
+
 
 			}
 			cSAT[6] = '\0';
+
+
 
 
 			std::cout << " THIS IS THE SAT STRING: " << cSAT;
 			//username aus paket nehmen
 			for(int u = 0; u < len-6; u++) // -SAT LEN
 			{
-				username[u] = getint(p); 
+				username[u] = getint(p);
+				*tmp = 0;
+				tmp++;
 				
 			}
 			username[len-6] = '\0';
@@ -386,12 +409,13 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 				
 				boost::thread checkworker(check_SAT,cn,clients[cn].clientName,
-				clients[cn].clientSAT);	
+				clients[cn].clientSAT);
+				
 				
 			}
 
-			//delete[] username;
-			//delete[] cSAT;
+			delete[] username;
+			delete[] cSAT;
 
 
 
@@ -617,9 +641,11 @@ void resetserverifempty()
 int nonlocalclients = 0;
 int lastconnect = 0;
 
-//TPBEGIN kopie von originaler spawnsate ggfls modifikationen hier noetig <-- gamemode wird noch nicht korrekt erkannt (02.07)
+//TPBEGIN kopie von originaler spawnsate 
+//modifiziert: gamemode erkennung (andere variable)
 void spawnstateForServer(dynent *d)              // reset player state not persistent accross spawns
 {
+
     resetmovement(d);
     d->vel.x = d->vel.y = d->vel.z = 0; 
     d->onfloor = false;
@@ -634,20 +660,20 @@ void spawnstateForServer(dynent *d)              // reset player state not persi
     d->lastaction = 0;
     loopi(NUMGUNS) d->ammo[i] = 0;
     d->ammo[GUN_FIST] = 1;
-    if(m_noitems)
+    if(mode >=4)
     {
         d->gunselect = GUN_RIFLE;
         d->armour = 0;
-        if(m_noitemsrail)
+        if(mode <=5)
         {
             d->health = 1;
             d->ammo[GUN_RIFLE] = 100;
         }
         else
         {
-            if(gamemode==12) { d->gunselect = GUN_FIST; return; };  // eihrul's secret "instafist" mode
+            if(mode==12) { d->gunselect = GUN_FIST; return; };  // eihrul's secret "instafist" mode
             d->health = 256;
-            if(m_tarena)
+            if(mode >=10)
             {
                 int gun1 = rnd(4)+1;
                 baseammo(d->gunselect = gun1);
@@ -657,7 +683,7 @@ void spawnstateForServer(dynent *d)              // reset player state not persi
                     if(gun1!=gun2) { baseammo(gun2); break; };
                 };
             }
-            else if(m_arena)    // insta arena
+            else if(mode >=8)    // insta arena
             {
                 d->ammo[GUN_RIFLE] = 100;
             }
@@ -824,11 +850,11 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
                 c.type = ST_TCPIP;
                 c.peer = event.peer;
                 c.peer->data = (void *)(&c-&clients[0]);
+
 				//TEAMPROJEKT
 				c.representer=new dynent();
 				spawnstateForServer(c.representer);
 				c.representer->state = CS_ALIVE;
-				//c.allowRespawn = -1; //alte fassung
 				c.allowRespawn = 0;
 				c.clientName ="EMPTY";
 				c.firstPacketsArrived = 0;
@@ -851,7 +877,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 
                 if(event.packet->referenceCount==0) enet_packet_destroy(event.packet);
 
-				//TP
+				//TP der spieler sollte spätestens beim zweiten Paket ein gültiges SAT geschickt haben
 				for(int p = 0; p < clients.length();p++)
 				{
 					if(clients[p].firstPacketsArrived ==1 && (clients[p].clientName.compare("EMPTY") == 0))

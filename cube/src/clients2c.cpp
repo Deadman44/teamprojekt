@@ -414,12 +414,57 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 			break;
 		};
 
-		case SV_SAT: // die vom Server weitergereichten Pakete annehmen, besser: am server verwerfen 
+		case SV_SAT: //SAT +username==email herausfiltern
 		{
+			/*
+
+			int len = getint(p);			
+
+			std::cout << len << " <--- SAT_LEN \n";
+			char *username = new char[len-5];
+			char *cSAT = new char[7];
+			//SAT aus paket nehmen
+			
+			for(int z = 0; z < 6; z++)
+			{
+				cSAT[z] = getint(p);
+
+
+			}
+			cSAT[6] = '\0';
+			//username aus paket nehmen
+			for(int u = 0; u < len-6; u++) // -SAT LEN
+			{
+				username[u] = getint(p);				
+			}
+			username[len-6] = '\0';
+				
+			delete[] username;
+			delete[] cSAT;
+
+			std::cout << "NAME: " << username << " SAT " << cSAT << "\n";
+
+
+			*/
+
 			int len = getint(p);
-			for(int u = 0; u < len; u++) getint(p);
+
+			for(int i = 0; i < len; i++)
+			{
+				getint(p);
+			}
             break;
 		};
+
+		case SV_SATREPEAT:
+			{
+				int nr = getint(p);
+				std::cout << " REACQUIRE SAT " << "\n";
+				acquire_SAT();
+			}
+			break;
+
+
 		//TP OUT
         default:
             neterr("type");

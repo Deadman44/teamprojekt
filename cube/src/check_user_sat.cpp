@@ -217,7 +217,8 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
 
 	if(c.response.substr(0,4).compare("True")==0)
 	{
-		std::cout << " LOGIN SUCCESSFUL ";
+		std::cout << " LOGIN SUCCESSFUL \n .... \n";
+		send2(1,clientnr,SV_SATREPEAT,1); //neuer sat anforden, wegen MITM
 		
 	}
 	else
@@ -226,6 +227,8 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
 		disconnect_client(clientnr," NO LICENSE...");
 		//setzt attribut in client-klasse auf -1... (unsauber, aber return nicht einfach in threads)
 	}
+
+
   }
   catch (std::exception& e)
   {

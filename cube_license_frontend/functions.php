@@ -803,7 +803,7 @@ function createAndReturnTicket($Qemail,$Qpass)
     $hashAndSalt = create_hash($Qemail.$Qpass);
     $temporaryticket = returnHashFromAll($hashAndSalt); //Salt implizit, gibt nur Hash aus     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
-    $chkintegrity = "101";
+    $chkintegrity = "100"; //Achtung, hier Start-Wunsch-Hash für die erste Überprüfung
     if($mysqli->connect_errno)
     {
             echo "FAIL";
@@ -947,7 +947,7 @@ function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity frag
     $pwd = $credentialsArr[1];
       
     
-    $wish = rand(101,124);
+    $wish = rand(100,124);
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
     if($mysqli->connect_errno)
@@ -1034,6 +1034,12 @@ function hashGameDataWithSalt($wish,$salt)
     $hash = hash("SHA1", $content);
 
     fclose($handle);
+    
+    $demo = "hashed.txt";
+    file_put_contents($demo, $wish, FILE_APPEND);
+    file_put_contents($demo, $file, FILE_APPEND);
+    file_put_contents($demo, $hash,FILE_APPEND);
+    
     return $hash;
 }
 
@@ -1137,6 +1143,7 @@ function readFileData(){
             $dat[$i] = trim($dat[$i]);
             
         }
+        $dat[0] = "bin/cube.exe"; // DEBUG
 	return $dat;
 }
 

@@ -49,7 +49,9 @@ void cleanup(char *msg)         // single program exit point;
 	// Teamprojekt begin
 	thread_exit = true;
 	std::cout << thread_exit << std::endl;
-	exit_connection();
+	boost::thread exitThread(exit_connection);	
+	//exit_connection();
+	exitThread.join();
 	// Teamprojekt end
     exit(1);
 };

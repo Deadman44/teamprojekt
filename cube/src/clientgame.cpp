@@ -105,7 +105,7 @@ dynent *newdynent()                 // create a new blank player or monster
     d->yaw = 270;
     d->pitch = 0;
     d->roll = 0;
-    d->maxspeed = 22;
+    d->maxspeed = 22; //Wichtig für Speedhack: default:22
     d->outsidemap = false;
     d->inwater = false;
     d->radius = 1.1f;

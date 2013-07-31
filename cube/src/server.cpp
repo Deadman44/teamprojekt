@@ -26,6 +26,11 @@ struct client                   // server side version of "dynent" type
 	//die nicht über den SAT-Mechanismus verfügen, also überhaupt keine SAT-Messages verschicken
 	int temporaryPacketCounter; //zählt die datenpakete des clients in einem zeitraum von 5 sekunden
 	int currentPacketCheckTime; //die zeit, an der zuletzt die zahl der pakete von 0 hochgezählt wurden
+	unsigned int lastx;
+	unsigned int lasty;
+	unsigned int currx;
+	unsigned int curry;
+	int posViolations;
 };
 
 //TP
@@ -181,6 +186,16 @@ Sollte der Spieler einen Speedhack benutzen (beispielsweise der in der CheatEngi
 Datenpakete verschickt. Ein normaler Client versendet etwa 300-350 alle 10 Sekunden. Hier wurde ein Toleranzfaktor von 1.2 benutzt, damit nicht bei
 plötzlich auftretendem Packetloss in einer Zeitspanne von 5 Sekunden zu viele Pakete ankommen und fälschlicherweise gekickt wird.
 
+
+zweite Speedhackerkennung:
+Ein Spieler hat eine maximale Geschwindigkeit von 22 "Cubes" pro Sekunde. Daher lässt sich grob vorhersagen wie "schnell" sich
+ein Spieler bewegen kann. Jede ankommende SV_POS Message enthält die x,y und z Koordinaten eines Spieler auf der Karte.
+Durch experimentelles Vorgehen konnten die maximalen Unterschiede ermittelt werden, die die x und y Koordinaten zwischen zwei SV_POS Messages
+annehmen können. Es werden daher die Koordinaten aus der letzten Nachrichten mit den Koordinaten aus der aktuellen Nachricht miteinander verglichen.
+ALle Verstöße dieser Obergrenze werden vermerkt. Übersteigen diese Verstöße innerhalb von 10 Sekunden einen bestimmten Schwellwert, wird der Spieler
+vom Server geworfen und verwarnt.
+Der Schwellwert wurde experimentell herausgefunden. Zu beachten ist, dass es Teleporter und änhliche Einrichtungen auf vielen Karten gibt, die die Geschwindigkeit des Spielers
+künstlich erhöhen.
 */
 void incrementPacketCounter(int clientnr, int millis)
 {
@@ -190,15 +205,42 @@ void incrementPacketCounter(int clientnr, int millis)
 		clients[clientnr].currentPacketCheckTime = time(NULL);
 		clients[clientnr].temporaryPacketCounter = 0;
 
+		std::cout << "LAST X " << clients[clientnr].lastx << "\n";
+		std::cout << "CURR X " << clients[clientnr].currx << "\n";
+		std::cout << "LAST y " << clients[clientnr].lasty << "\n";
+		std::cout << "CURR y " << clients[clientnr].curry << "\n";
+		std::cout << " VIOLATIONS " << clients[clientnr].posViolations << "\n";
+		clients[clientnr].posViolations = 0;
 	}
-	clients[clientnr].temporaryPacketCounter++;
 
+	int xdiff = clients[clientnr].lastx - clients[clientnr].currx;
+	int ydiff = clients[clientnr].lasty - clients[clientnr].curry;
+
+	if( abs(xdiff) > 22)
+	{
+		clients[clientnr].posViolations++;
+		std::cout << " X VIO \n";
+	}
+	if( abs(ydiff) > 22)
+	{
+		clients[clientnr].posViolations++;
+		std::cout << " Y VIO \n";
+	}
+
+	clients[clientnr].temporaryPacketCounter++;
 	if(clients[clientnr].temporaryPacketCounter > 300) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
 	{
-		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
+		std::cout << " POSSIBLE SPEEDHACK//Packetloss--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
 		disconnect_client(clientnr,"SPEEDHACK OR PACKETLOSS TO HIGH");
 
+	}
+
+	if(clients[clientnr].posViolations > 40)
+	{
+		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].posViolations << "\n";
+		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+		disconnect_client(clientnr,"SPEEDHACK");
 	}
 }
 
@@ -477,11 +519,28 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             };
             int size = msgsizelookup(type);
             assert(size!=-1);
-            loopi(size-2) getint(p);
+            //loopi(size-2) getint(p);
+
+            unsigned int xco   = getint(p);
+            unsigned int yco   = getint(p);
+            int zco   = getint(p);
+            int yawco   = getint(p)/DAF;
+            int pitchco = getint(p)/DAF;
+            int rollco  = getint(p)/DAF;
+            int velx = getint(p)/DAF;
+            int vely = getint(p)/DVF;
+            int velz = getint(p)/DVF;
+			int f = getint(p);
 
 			//TP
 			if(isdedicated)
 			{
+				clients[cn].lastx = clients[cn].currx;
+				clients[cn].lasty = clients[cn].curry;
+				clients[cn].currx = xco;
+				clients[cn].curry = yco;
+
+
 				if(clients[cn].firstPacketsArrived == 0) //wird sowohl bei speedhack als auch SAT benötigt
 				{
 					clients[cn].firstPacketsArrived = 1; //TP, erstes "richtige" paket vom client empfangen

@@ -26,11 +26,19 @@ struct client                   // server side version of "dynent" type
 	//die nicht über den SAT-Mechanismus verfügen, also überhaupt keine SAT-Messages verschicken
 	int temporaryPacketCounter; //zählt die datenpakete des clients in einem zeitraum von 5 sekunden
 	int currentPacketCheckTime; //die zeit, an der zuletzt die zahl der pakete von 0 hochgezählt wurden
+
+	//speedhack erkennung 2: modifikation der geschwindigkeitsvariabler erkennen
 	unsigned int lastx;
 	unsigned int lasty;
 	unsigned int currx;
 	unsigned int curry;
 	int posViolations;
+
+	//waffen-kadenz-cheat
+	int weaponsfired[5];
+
+
+
 };
 
 //TP
@@ -199,6 +207,46 @@ künstlich erhöhen.
 */
 void incrementPacketCounter(int clientnr, int millis)
 {
+	bool violation = false;
+	if(millis-clients[clientnr].currentPacketCheckTime > 1)
+	{
+		if(clients[clientnr].weaponsfired[0] > 6)
+		{
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[1] > 2)
+		{
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[2] >13)
+		{
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[3] > 3)
+		{
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[4] > 2)
+		{
+			violation = true;
+		}
+
+		if(violation)
+		{
+			std::cout << " Feuerraten-Cheat erkannt " << "\n";
+			disconnect_client(clientnr,"FireRate to high, CHEAT DETECTED");
+		}
+		else
+		{
+			for(int u = 0; u < 5; u++)
+			{
+				clients[clientnr].weaponsfired[u] = 0;
+			}
+		}		
+	}
+
+
+
 	if(millis-clients[clientnr].currentPacketCheckTime >10)
 	{
 		//std::cout << "Renew PacketCheckTime @ " << clients[clientnr].temporaryPacketCounter << " PACKETS \n";
@@ -211,6 +259,14 @@ void incrementPacketCounter(int clientnr, int millis)
 		std::cout << "CURR y " << clients[clientnr].curry << "\n";
 		std::cout << " VIOLATIONS " << clients[clientnr].posViolations << "\n";
 		clients[clientnr].posViolations = 0;
+
+
+		//KADENZ CHEAT
+
+		for(int u = 0; u  < 5; u++)
+		{
+			std::cout << " Waffe " << u << " --- Schuss: " << clients[clientnr].weaponsfired[u] << "\n";
+		}
 	}
 
 	int xdiff = clients[clientnr].lastx - clients[clientnr].currx;
@@ -352,6 +408,29 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 					boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
 					disconnect_client(cn,"CHEAT DETECTED //MUNITION");
 				}
+
+				if(gun == GUN_FIST)
+				{
+					clients[cn].weaponsfired[0]++;
+				}
+				else if(gun == GUN_SG)
+				{
+					clients[cn].weaponsfired[1]++;
+				}
+				else if(gun == GUN_CG)
+				{
+					clients[cn].weaponsfired[2]++;
+				}
+				else if(gun == GUN_RL)
+				{
+					clients[cn].weaponsfired[3]++;
+				}
+				else if(gun == GUN_RIFLE)
+				{
+					clients[cn].weaponsfired[4]++;
+				}
+
+
 			}
 			else //dieser Teil wird auf dem Client ausgegeben
 			{

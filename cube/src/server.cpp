@@ -149,13 +149,57 @@ void disconnect_client(int n, char *reason)
 
 void resetitems() { sents.setsize(0); notgotitems = true; };
 
+
+int countPlayers()
+{
+	int i = 0;
+	for(int u = 0; u < clients.length();u++)
+	{
+		if(clients[u].type = ST_TCPIP)i++;
+	}
+	std::cout << " PLAYERS : " << i  << " \n";
+	return i;
+}
+
 void pickup(uint i, int sec, int sender)         // server side item pickup, acknowledge first client that gets it
 {
     if(i>=(uint)sents.length()) return;
     if(sents[i].spawned)
     {
         sents[i].spawned = false;
-        sents[i].spawnsecs = sec;
+		{
+			int players = countPlayers();
+			players++;
+
+			players = players<3 ? 4 : (players>4 ? 2 : 3);         // spawn times are dependent on number of players
+			int ammo = players*2;
+
+			if(sents[i].type >=3 && sents[i].type <= 6)
+			{
+				 sents[i].spawnsecs = ammo;
+			}
+			else if(sents[i].type == I_HEALTH)
+			{
+				sents[i].spawnsecs = players*5;
+			}
+			else if(sents[i].type == I_BOOST)
+			{
+				sents[i].spawnsecs = 60;
+			}
+			else if(sents[i].type == I_GREENARMOUR || sents[i].type == I_YELLOWARMOUR)
+			{
+				sents[i].spawnsecs = 20;
+			}
+			else if(sents[i].type == I_QUAD)
+			{
+				sents[i].spawnsecs = 60;
+			}
+
+
+
+		}
+
+
         send2(true, sender, SV_ITEMACC, i);
 		
 		//TEAMPROJEKT
@@ -617,7 +661,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
                 server_entity se = { false, 0 };
                 while(sents.length()<=n) sents.add(se);
                 sents[n].spawned = true; //am anfang sollen alle items "gespawned" sein
-				sents[n].type = getint(p); //TP TEST
+				sents[n].type = getint(p); //TP 
 				//std::cout << " \n\n INR: " << n << " << TYPE: " << (int)sents[n].type << "\n\n";
             };
             notgotitems = false;

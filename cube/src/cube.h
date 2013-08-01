@@ -19,6 +19,7 @@ int check_license(std::string u, std::string p, std::string l);
 std::string license_datei();
 void permanent_check();
 void acquire_SAT();
+void reacquire_SAT();
 void worker();
 void quit();					// Cube Funktion
 void exit_connection();
@@ -241,14 +242,15 @@ extern int allowconnect;
 // Eigene globale Variablen für Lizenzpruefung
 extern std::string user;
 extern std::string user_password;
-extern std::string license;
+extern std::string license; //der key
 extern std::string hashticket; //identisch mit ticket, jedoch ohne zeichen-escaping, wird bei hashfkt verwendet
-extern int toHashData;
-extern std::string sat;
-extern std::string ticket;
+extern int toHashData; // die zu hashende datei (index)
+extern std::string sat; //aktuelles sat
+extern bool secondSATrequired; //muss ein zweites sat zur bestätigung geschickt werden?
+extern std::string ticket; //das aktuelle ticket, base64
 extern bool initialization;
 extern bool thread_exit;
-extern int satSent;
+extern int satSent; //zustandsvariable für die abfolge der SATs
 extern std::string toHashGameData[1000];
 //stats-tracking
 extern int clientAllowRespawn;

@@ -30,11 +30,14 @@ void acquire_SAT()
 {
 	boost::thread workerThread(get_SAT);
 	workerThread.join(); //besser an dieser stelle auf response warten, da auf ticket gewartet werden muss
-	if(satSent == 1)
-	{
 
-	satSent = 2; //zustand: zweites acquire bevorstehend
-	}
+}
+
+void reacquire_SAT()
+{
+	boost::thread workerThread(get_SAT);
+	secondSATrequired = true;
+	//hier kein join, das würde das spiel zusätzlich unnötig blockieren, da mam bereits auf dem spielfeld ist
 }
 
 

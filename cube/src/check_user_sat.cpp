@@ -218,14 +218,24 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
 	if(c.response.substr(0,4).compare("True")==0)
 	{
 		std::cout << " LOGIN SUCCESSFUL \n .... \n";
-		send2(1,clientnr,SV_SATREPEAT,1); //neuer sat anforden, wegen MITM
-		
+		setSATacks(clientnr); //auf jeden fall aktuelles SAT akzeptieren
+		if(getSATacks(clientnr) == 1) //prüfe ob bereits ein SAT erfolgreich akzeptiert wurde
+		{
+			std::cout << "sende SATREPEAT an client \n";
+			send2(1,clientnr,SV_SATREPEAT,1); //neues sat anforden, wegen MITM
+		}
+		else if(getSATacks(clientnr) == 2) //wenn zweites SAT ok, dann setze die Wartezeit wieder auf 0 == kein weiteres SAT nötig
+		{
+			std::cout << "akzeptiere zweites SAT, Spieler authentifiziert \n";
+			setClientSATWaitTime(clientnr);
+		}
+	
 	}
 	else
 	{
 		std::cout << " LOGIN FAILED... SAT WRONG OR USERNAME WRONG";
 		disconnect_client(clientnr," NO LICENSE...");
-		//setzt attribut in client-klasse auf -1... (unsauber, aber return nicht einfach in threads)
+
 	}
 
 

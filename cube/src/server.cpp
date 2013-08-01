@@ -26,6 +26,9 @@ struct client                   // server side version of "dynent" type
 	//die nicht über den SAT-Mechanismus verfügen, also überhaupt keine SAT-Messages verschicken
 	int temporaryPacketCounter; //zählt die datenpakete des clients in einem zeitraum von 5 sekunden
 	int currentPacketCheckTime; //die zeit, an der zuletzt die zahl der pakete von 0 hochgezählt wurden
+	int currentWeaponFiredTime; // Zähler wie oben, jedoch für den Einsatz bei der schussfrequenz bestimmt
+	int secondSATwaitTime;
+	int SATacks; //wie häufig für den spieler ein SAT akzeptiert wurde (hier: max 2x)
 
 	//speedhack erkennung 2: modifikation der geschwindigkeitsvariabler erkennen
 	unsigned int lastx;
@@ -188,6 +191,102 @@ bool vote(char *map, int reqmode, int sender)
 
 //TP
 
+void setSATacks(int clientnr)
+{
+	clients[clientnr].SATacks++;
+}
+
+int getSATacks(int clientnr)
+{
+	return clients[clientnr].SATacks;
+}
+
+void setClientSATWaitTime(int clientnr)
+{
+
+	clients[clientnr].secondSATwaitTime =0;
+}
+
+
+void checkSecondSATTime(int clientnr, int millis)
+{
+	int waittime = clients[clientnr].secondSATwaitTime;
+	if(waittime != 0)
+	{
+		int diff = millis - waittime;
+		if(millis - waittime > 20)
+		{
+			clients[clientnr].secondSATwaitTime = 0; //reset, ggfls wichtig wenn spieler erneut joinen will
+			disconnect_client(clientnr,"NO VALID SECOND SAT in 20 SECONDS");
+		}
+
+	}
+
+}
+
+
+
+
+/*
+
+diese Methode prüft, wie häufig eine Waffe innerhalb eines 1-Sekunden Intervalls abgefeuert wurde.
+Die Schussfrequenz ist fest eingebaut im Spiel und lässt sich nur durch Hacks künstlich erhöhen.
+Dies wird hier erkannt.
+
+*/
+
+
+void checkWeaponFireRate(int clientnr, int millis)
+{
+	bool violation = false;
+	if(millis-clients[clientnr].currentWeaponFiredTime > 1)
+	{		
+			for(int u = 0; u  < 5; u++)
+			{
+				std::cout << " Waffe " << u << " --- Schuss: " << clients[clientnr].weaponsfired[u] << "\n";
+			}
+			for(int u = 0; u < 5; u++)
+			{
+				clients[clientnr].weaponsfired[u] = 0;
+			}
+			clients[clientnr].currentWeaponFiredTime = time(NULL); //zurücksetzen der uhr
+	}
+
+	if(clients[clientnr].weaponsfired[0] > 9)
+		{
+			std::cout << " VIO FIST " << clients[clientnr].weaponsfired[0] << "\n";
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[1] > 3)
+		{
+			std::cout << " VIO sg " << clients[clientnr].weaponsfired[1] << "\n";
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[2] >19)
+		{
+			std::cout << " VIO mini " << clients[clientnr].weaponsfired[2] << "\n";
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[3] > 4)
+		{
+			std::cout << " VIO rl " << clients[clientnr].weaponsfired[3] << "\n";
+			violation = true;
+		}
+		else if(clients[clientnr].weaponsfired[4] > 3)
+		{
+			std::cout << " VIO rifle " << clients[clientnr].weaponsfired[4] << "\n";
+			violation = true;
+		}
+
+		if(violation)
+		{
+			std::cout << " Feuerraten-Cheat erkannt " << "\n";
+			boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+			disconnect_client(clientnr,"FireRate to high, CHEAT DETECTED");
+		}
+
+}
+
 /*
 Diese Methode wird bei jedem Empfang einer SV_POS Message eines Spielers aufgerufen. SV_POS ist zwignend für jedes Datenpaket. 
 Sollte der Spieler einen Speedhack benutzen (beispielsweise der in der CheatEngine eingebaute) so werden vom Client unnatürlich viele 
@@ -207,43 +306,7 @@ künstlich erhöhen.
 */
 void incrementPacketCounter(int clientnr, int millis)
 {
-	bool violation = false;
-	if(millis-clients[clientnr].currentPacketCheckTime > 1)
-	{
-		if(clients[clientnr].weaponsfired[0] > 6)
-		{
-			violation = true;
-		}
-		else if(clients[clientnr].weaponsfired[1] > 2)
-		{
-			violation = true;
-		}
-		else if(clients[clientnr].weaponsfired[2] >13)
-		{
-			violation = true;
-		}
-		else if(clients[clientnr].weaponsfired[3] > 3)
-		{
-			violation = true;
-		}
-		else if(clients[clientnr].weaponsfired[4] > 2)
-		{
-			violation = true;
-		}
-
-		if(violation)
-		{
-			std::cout << " Feuerraten-Cheat erkannt " << "\n";
-			disconnect_client(clientnr,"FireRate to high, CHEAT DETECTED");
-		}
-		else
-		{
-			for(int u = 0; u < 5; u++)
-			{
-				clients[clientnr].weaponsfired[u] = 0;
-			}
-		}		
-	}
+	
 
 
 
@@ -252,26 +315,14 @@ void incrementPacketCounter(int clientnr, int millis)
 		//std::cout << "Renew PacketCheckTime @ " << clients[clientnr].temporaryPacketCounter << " PACKETS \n";
 		clients[clientnr].currentPacketCheckTime = time(NULL);
 		clients[clientnr].temporaryPacketCounter = 0;
+		clients[clientnr].posViolations = 0; //setzt die Anzahl der "Positionsverletzungen" 
 
-		std::cout << "LAST X " << clients[clientnr].lastx << "\n";
-		std::cout << "CURR X " << clients[clientnr].currx << "\n";
-		std::cout << "LAST y " << clients[clientnr].lasty << "\n";
-		std::cout << "CURR y " << clients[clientnr].curry << "\n";
-		std::cout << " VIOLATIONS " << clients[clientnr].posViolations << "\n";
-		clients[clientnr].posViolations = 0;
-
-
-		//KADENZ CHEAT
-
-		for(int u = 0; u  < 5; u++)
-		{
-			std::cout << " Waffe " << u << " --- Schuss: " << clients[clientnr].weaponsfired[u] << "\n";
-		}
 	}
 
 	int xdiff = clients[clientnr].lastx - clients[clientnr].currx;
 	int ydiff = clients[clientnr].lasty - clients[clientnr].curry;
 
+	//Positionsverletzungen melden, getrennt für x und y-Achse. Z-Achse ignoriert, da nicht primär wichtig
 	if( abs(xdiff) > 22)
 	{
 		clients[clientnr].posViolations++;
@@ -292,6 +343,7 @@ void incrementPacketCounter(int clientnr, int millis)
 
 	}
 
+	//Bei zu vielen Verletzungen der Positionen Spieler vom Server werfen und Verstoß an Lizenzserver melden
 	if(clients[clientnr].posViolations > 40)
 	{
 		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].posViolations << "\n";
@@ -522,7 +574,12 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			if(isdedicated) //standardproblem: auch im lokalen spiel greift client auf server-fkts zu
 			{
 				
-				clients[cn].clientName = std::string(username); //konstruktor, wichtig da 0-bytes fehlen..
+				if(clients[cn].secondSATwaitTime ==0) //Username String nur dann neu setzen, wenn erstes SAT angekommen ist
+					//verhindert einen exploit, wennn ein angreifert 2 sats von 2 verschiedenen usern nimmt
+				{
+					clients[cn].clientName = std::string(username); //konstruktor, wichtig da 0-bytes fehlen..
+				}
+
 				clients[cn].clientSAT = std::string(cSAT);
 
 				std::cout << " DER EMPFANGENE STRING LAUTET " << clients[cn].clientName << " und der SAT " << clients[cn].clientSAT << "\n";
@@ -538,7 +595,11 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			delete[] username;
 			delete[] cSAT;
 
-
+			if(clients[cn].secondSATwaitTime == 0)
+			{
+				clients[cn].secondSATwaitTime = time(NULL); //Zeitpunkt festlegen, ab dem auf das zweite SAT gewartet wird.
+			}
+			
 
 
             break;
@@ -624,11 +685,13 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				{
 					clients[cn].firstPacketsArrived = 1; //TP, erstes "richtige" paket vom client empfangen
 					clients[cn].currentPacketCheckTime = time(NULL); //erstes setzen der "uhr"
+					clients[cn].currentWeaponFiredTime = time(NULL); //setzen der Uhr für die Überprüfung der Feuerrate
 				}
 				else
 				{
 					int currTime = time(NULL);
 					incrementPacketCounter(cn,currTime);
+					checkWeaponFireRate(cn,currTime);
 				}
 			}
 			//TPOUT
@@ -997,6 +1060,8 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				c.clientName ="EMPTY";
 				c.firstPacketsArrived = 0;
 				c.representer->lifesequence = 0;
+				c.secondSATwaitTime = 0;
+				
 
 				/// TP OUT
                 char hn[1024];
@@ -1015,13 +1080,17 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 
                 if(event.packet->referenceCount==0) enet_packet_destroy(event.packet);
 
-				//TP der spieler sollte spätestens beim zweiten Paket ein gültiges SAT geschickt haben
+				//TP der spieler sollte spätestens beim zweiten Paket ein (=das erste) gültiges SAT geschickt haben
 				for(int p = 0; p < clients.length();p++)
 				{
 					if(clients[p].firstPacketsArrived ==1 && (clients[p].clientName.compare("EMPTY") == 0))
 					{
 						disconnect_client(p, "NO PERMISSION TO JOIN: UNKNOWN CLIENT");
 					}
+
+					checkSecondSATTime(p, time(NULL)); //überprüft, ob im bestimmten Zeitintervall das zweite SAT angekommen ist 
+
+
 				}
 				//TP OUT
                 break;

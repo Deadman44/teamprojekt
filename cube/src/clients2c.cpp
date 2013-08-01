@@ -460,7 +460,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 			{
 				int nr = getint(p);
 				std::cout << " REACQUIRE SAT " << "\n";
-				acquire_SAT();
+				reacquire_SAT();
 			}
 			break;
 

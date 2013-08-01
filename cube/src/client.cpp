@@ -12,6 +12,9 @@ int disconnecting = 0;
 int clientnum = -1;         // our client id in the game
 bool c2sinit = false;       // whether we need to tell the other clients our stats
 
+//TP
+bool secondSATrequired = false;
+
 
 
 
@@ -323,17 +326,33 @@ void c2sinfo(dynent *d)                     // send update to the server
 				putint(p,user[q]); 
 			}
 			//HIER OHNE 0-CHAR! muss auf Serverende angefügt werden bzw implizit über std::string konstruktor
+
+
 			if(satSent == 0)
 			{
-
-			satSent = 1; //erster Durchlauf
+				std::cout << "erstes SAT an Server gesendet \n";
+				satSent = 1; //erster Durchlauf komplett
+				sat = "000000"; //erstes sat löschen;
+				
 			}
 			else if(satSent == 2)
 			{
+				std::cout << "zweites SAT an Server gesendet \n";
 				satSent=3; //zweiter Durchlauf komplett
 			}
 		}
 		
+		if(secondSATrequired)
+		{
+			if(sat.compare("000000")!=0)
+			{
+				satSent = 2; //denn wenn der aktuelle sat NICHT 000000 ist, ist er gültig und kann verschickt werden
+				//findet hier anwendung zum verschicken des zweiten sat, der asynchron zum spielfluss angefordert wird
+				//damit er das spiel nicht blockiert
+				secondSATrequired = false;
+			}
+		}
+
 		//TP OUT
         messages.setsize(0);
         if(lastmillis-lastping>250)

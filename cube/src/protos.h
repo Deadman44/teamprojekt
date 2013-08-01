@@ -257,3 +257,6 @@ void serverradditem(int i, int &v);
 extern uchar *strToUchar(std::string str);
 extern void disconnect_client(int n, char *reason);
 extern void send2(bool rel, int cn, int a, int b);
+void setSATacks(int clientnr);
+int getSATacks(int clientnr);
+void setClientSATWaitTime(int clientnr);

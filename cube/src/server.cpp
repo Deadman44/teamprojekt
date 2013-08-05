@@ -167,7 +167,7 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
     if(sents[i].spawned)
     {
         sents[i].spawned = false;
-		{
+		{ //Teamprojekt: Serverseitige Einstellung der Spawntimer für jeden Gegenstand
 			int players = countPlayers();
 			players++;
 
@@ -194,7 +194,7 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
 			{
 				sents[i].spawnsecs = 60;
 			}
-
+			//TP OUT
 
 
 		}

@@ -168,7 +168,7 @@ function check_license_key($Qemail,$Qpass,$license_key) //mit password für user
     
     $lkeyArr = explode(":", $license_key);
     $random = $lkeyArr[0]; //die vom user gegeben random zahl
-    $hashed_random = $lkeyArr[1]; //test... //die hmac, also random und salt;; 
+    $hashed_random = $lkeyArr[1]; //test... //die mac, also random und salt;; 
        
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
@@ -268,6 +268,7 @@ function get_hserial($Qemail)
     
 }
 
+//existiert zu diesem Benutzer eine Lizenz?
 function license_exists($Qemail)
 {
 
@@ -336,7 +337,7 @@ function create_license_key($Qemail,$forgotten_license)
     }
 
 
-    //return $license_key . "ERRRRRRRRR"; //temporär
+
     $mysqli->close();
     
 
@@ -366,7 +367,7 @@ function reconstructAll($saltBig,$hash)
 }
 
 //Zugangsinformationen der Datenbank liegen in diesem Ordner und werden ausgelesen
-//Die Zugangsdaten sollten nie direkt im QUellcode stehen
+//Die Zugangsdaten sollten nie direkt im Quellcode stehen
 function getCredentialsFromFile()
 {
     $handle = fopen("C:/w/cube_license_frontend/credentials/database.txt","r");
@@ -724,7 +725,7 @@ function setUserActive($Qemail,$ticket)
     $mysqli->close();   
 }
 
-// Setzt Active-Feld auf 0(erfolgreiche Beendigung des SPiels Vorbedingung)
+// Setzt Active-Feld auf 0(erfolgreiche Beendigung des Spiels Vorbedingung)
 function setUserInActive($Qemail,$ticket)
 {
     $credentials = getCredentialsFromFile();
@@ -788,6 +789,7 @@ function getUserActive($Qemail,$ticket)
 }
 
 // Erstellt erstes Authentisierungsticket und speichert es in Datenbank
+// schlägt zudem die erste zu hashende Datei vor (in diesem Fall: die cube.Exe)
 function createAndReturnTicket($Qemail,$Qpass)
 {
     $credentials = getCredentialsFromFile();
@@ -910,6 +912,7 @@ function permanentcheck($Qemail,$oldticket,$clientHash)
 
 /// integration checks
 
+//debug-Funktion, nicht verwendet
 function check_client_hash($Qemail,$ticket,$hash,$challengeNR) //DEPRECATED...
 {
     $credentials = getCredentialsFromFile();
@@ -939,6 +942,7 @@ function check_client_hash($Qemail,$ticket,$hash,$challengeNR) //DEPRECATED...
     }
 }
 
+//setzt die nächste zu hashende Date fest, und liefert den Hashwunsch als Zahl zurück
 function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity fragen... ansonsten lässt sich das einfach von außen überschreiben (da ticket = empty...)
 {
     $credentials = getCredentialsFromFile();
@@ -969,6 +973,7 @@ function set_and_get_client_hash_wish($Qemail,$ticket) //ggfls auf activity frag
     return $wish;  
 }
 
+//gibt den Hash-Wunsch zurück
 function get_client_hash_wish($Qemail,$ticket)
 {
     $credentials = getCredentialsFromFile();
@@ -1001,6 +1006,7 @@ function get_client_hash_wish($Qemail,$ticket)
     
 }
 
+//vergleicht den vom Client gesendeten Hashwert mit dem vom Server
 function compareClientWithServerHash($clientHash,$Qemail,$ticket)
 {
     $wish = get_client_hash_wish($Qemail, $ticket);
@@ -1017,6 +1023,7 @@ function compareClientWithServerHash($clientHash,$Qemail,$ticket)
 }
 
 
+//Anwendung der Hashfunktion inklusive Salt
 function hashGameDataWithSalt($wish,$salt)
 {
     //dreistellig.... alte konstante version, zum funktionieren muss noch rand(100,124) entfernt werden
@@ -1043,6 +1050,7 @@ function hashGameDataWithSalt($wish,$salt)
     return $hash;
 }
 
+//nicht verwendete Funktion
 function createAndStartBat(){
 	// Server erzeugt bat-Datei für Single-Player Spiel
 	
@@ -1073,7 +1081,7 @@ function createAndStartBat(){
 		echo "Bat-File not created!";
 	}
 }
-
+//nicht verwendete Funktion
 function destroyStartBat(){
 
 	// Wenn lesbare bat-Datei vorhanden, dann löschen
@@ -1106,7 +1114,7 @@ function setTimeStampToDB($Qemail,$ticket){
 	}
 	$mysqli->close();	
 }
-
+//nicht verwendete Funktion
 function getTimeStampFromDB($Qemail){
 	$credentials = getCredentialsFromFile();
 	$credentialsArr = explode(":", $credentials);
@@ -1133,6 +1141,8 @@ function getTimeStampFromDB($Qemail){
 	return $timestamp;
 }
 
+//Liest aus der angegeben Datei die zu hashenden SPieldateien als Pfadangabe
+// Wobei Zeilennummer - 100 == Hashwish-Number
 function readFileData(){
 	//$datei = implode("\n",file("gameData.txt"));
         //$arr = explode(" ",$datei);
@@ -1147,6 +1157,8 @@ function readFileData(){
 	return $dat;
 }
 
+//nicht verwendete Funktion
+//Setzt Active-Feld eines Users zurück auf 0, allerdings mit zeitlicher Verzögerung
 function dropActive(){
 	$credentials = getCredentialsFromFile();
 	$credentialsArr = explode(":", $credentials);
@@ -1183,6 +1195,8 @@ function dropActive(){
 	$mysqli->close(); 
 }
 
+//Überprüft zeitlichen Abstand zwischen zwei Timestamps
+// --> //nicht verwendete Funktion
 function getTimeStampDifference($Qemail){
 	
 	$oldTimeStamp = getTimeStampFromDB($Qemail);
@@ -1220,6 +1234,7 @@ function incrementSuspects($Qemail,$suspectPoints){
 	proofUserBan($Qemail);
 }
 
+//Überprüft, ob der User gebannt werden muss
 function proofUserBan($Qemail){ //testweise ohne aktuelles ticket...
 	$credentials = getCredentialsFromFile();
 	$credentialsArr = explode(":", $credentials);
@@ -1253,6 +1268,7 @@ function proofUserBan($Qemail){ //testweise ohne aktuelles ticket...
 	$mysqli->close();
 }
 
+//liefert zu einem Ticket den aktuellen User zurück
 function getEmailByTicket($ticket){
 	$credentials = getCredentialsFromFile();
 	$credentialsArr = explode(":", $credentials);
@@ -1279,6 +1295,7 @@ function getEmailByTicket($ticket){
 	return $email;
 }
 
+//Setzt Server-Access-Ticket und gibt dieses zurück
 function setAndReturnServerAccessTicket($Qemail,$ticket) //client ruft diese ftk auf
                 {
 	$credentials = getCredentialsFromFile();
@@ -1308,6 +1325,7 @@ function setAndReturnServerAccessTicket($Qemail,$ticket) //client ruft diese ftk
          */
 }
 
+//Ticket wird "verbraucht" und auf 000000 zurückgesetzt wenn es eingesetzt wird
 function resetServerAccessTicket($Qemail,$sat) //nach beitritt des servers soll ticket zurückgesetzt werden
         //verhindert wiederverwertung nach entzug lizenz o.ä.
                 {
@@ -1337,6 +1355,7 @@ function resetServerAccessTicket($Qemail,$sat) //nach beitritt des servers soll 
          */
 }
 
+//Überprüft das vom Client übertragene SAT auf Korrektheit
 function checkServerAccessTicket($sat, $Qemail) //server ruft diese ftk auf
         {
 	$credentials = getCredentialsFromFile();

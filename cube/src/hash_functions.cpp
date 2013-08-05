@@ -105,7 +105,7 @@ std::string readAndHashFile(std::string filename)
 
 std::string start_integrity_check()
 {
-	//std::string toHashGameData[1000]; //besser externalisieren
+
 	
 	int fileDecider = toHashData;
 

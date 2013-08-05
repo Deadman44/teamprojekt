@@ -910,6 +910,54 @@ function permanentcheck($Qemail,$oldticket,$clientHash)
     return "True\n" . $ticket . $newHashWish;
 }
 
+//wie oben, jedoch wird KEIN neues Ticket erzeugt
+function permanentcheck_with_old_ticket($Qemail,$oldticket,$clientHash)
+{
+    $credentials = getCredentialsFromFile();
+    $credentialsArr = explode(":", $credentials);
+    $user = $credentialsArr[0];
+    $pwd = $credentialsArr[1];
+    
+    $active = "ERROR NOT FOUND";
+    
+    $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
+    if($mysqli->connect_errno)
+    {
+            echo "FAIL";
+            return "SERVER_ERROR";
+    }
+    else
+    {
+            $query = "SELECT ACTIVE,TICKET from USER where EMAIL = ? AND TICKET=?";
+            $result = $mysqli->prepare($query);
+            $result->bind_param('ss',$Qemail,$oldticket);
+            $result->execute();
+            $result->bind_result($active,$ticket);
+            while($result->fetch())
+            {
+            }     
+    }
+    
+    if(!$active)
+    {
+        return false ; //bug..."False"
+    }
+    if(strcmp($oldticket, $ticket) != 0)
+    {
+        return false ;// bug "False";
+    }
+    
+    if(!compareClientWithServerHash($clientHash, $Qemail, $oldticket))
+    {
+        return false;
+    }
+    
+    
+    $newHashWish = set_and_get_client_hash_wish($Qemail, $ticket);
+    
+    $mysqli->close();   
+    return "True\n" . $oldticket . $newHashWish;
+}
 /// integration checks
 
 //debug-Funktion, nicht verwendet

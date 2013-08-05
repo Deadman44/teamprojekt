@@ -222,7 +222,7 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
 		if(getSATacks(clientnr) == 1) //prüfe ob bereits ein SAT erfolgreich akzeptiert wurde
 		{
 			std::cout << "sende SATREPEAT an client \n";
-			send2(1,clientnr,SV_SATREPEAT,1); //neues sat anforden, wegen MITM
+			send2(1,clientnr,SV_SATREPEAT,1); //neues sat anforden, wegen sniffing
 		}
 		else if(getSATacks(clientnr) == 2) //wenn zweites SAT ok, dann setze die Wartezeit wieder auf 0 == kein weiteres SAT nötig
 		{

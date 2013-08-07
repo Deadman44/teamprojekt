@@ -2,6 +2,7 @@
 
 #include "cube.h"
 //globals....
+Logger *messageLogger;
 std::string user;
 std::string user_password;
 std::string license;
@@ -135,6 +136,7 @@ int main(int argc, char **argv)
 	sat = ""; //init von Server-Access-Ticket, wird vor server-join neu gesetzt/bezogen
 
 
+	
 	// Lizenzschluessel auslesen
 	license = license_datei();
 	int allowconnect = 200; // MOD

@@ -11,6 +11,9 @@
 #include <boost/lexical_cast.hpp>
 #include <fstream>
 #include <string>
+#include <Logger.h>
+
+
 
 
 
@@ -252,8 +255,10 @@ extern bool initialization;
 extern bool thread_exit;
 extern int satSent; //zustandsvariable für die abfolge der SATs
 extern std::string toHashGameData[1000];
-//stats-tracking
+
 extern int clientAllowRespawn;
+
+extern Logger *messageLogger;
 // Teamprojekt end
 
 #define DMF 16.0f 

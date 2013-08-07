@@ -227,6 +227,7 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
 		else if(getSATacks(clientnr) == 2) //wenn zweites SAT ok, dann setze die Wartezeit wieder auf 0 == kein weiteres SAT nötig
 		{
 			std::cout << "akzeptiere zweites SAT, Spieler authentifiziert \n";
+			messageLogger->writeToLog("Spieler authentifiziert: " + usr); //TP
 			setClientSATWaitTime(clientnr);
 		}
 	

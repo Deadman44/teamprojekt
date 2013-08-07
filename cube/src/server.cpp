@@ -140,6 +140,7 @@ void sendservmsg(char *msg)
 
 void disconnect_client(int n, char *reason)
 {
+	//messageLogger->writeToLog(std::strncat("Spieler vom Server geworfen... :",clients[n].name,100)); //TP
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
     clients[n].type = ST_EMPTY;
@@ -261,6 +262,7 @@ void checkSecondSATTime(int clientnr, int millis)
 		if(millis - waittime > 20)
 		{
 			clients[clientnr].secondSATwaitTime = 0; //reset, ggfls wichtig wenn spieler erneut joinen will
+			//messageLogger->writeToLog(std::strncat("Neuer Spieler abgelehnt... Grund: zweites SAT ungültig",clients[clientnr].name,100));
 			disconnect_client(clientnr,"NO VALID SECOND SAT in 20 SECONDS");
 		}
 
@@ -326,6 +328,7 @@ void checkWeaponFireRate(int clientnr, int millis)
 		{
 			std::cout << " Feuerraten-Cheat erkannt " << "\n";
 			boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+			//messageLogger->writeToLog(std::strncat("Feuerraten-Cheat erkannt ",clients[clientnr].name,100));
 			disconnect_client(clientnr,"FireRate to high, CHEAT DETECTED");
 		}
 
@@ -383,7 +386,8 @@ void incrementPacketCounter(int clientnr, int millis)
 	{
 		std::cout << " POSSIBLE SPEEDHACK//Packetloss--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
-		disconnect_client(clientnr,"SPEEDHACK OR PACKETLOSS TO HIGH");
+		//messageLogger->writeToLog(std::strncat("SPEEDHACK (TIMER) ERKANNT ",clients[clientnr].name,100));
+		disconnect_client(clientnr,"SPEEDHACK -- TIMER");
 
 	}
 
@@ -392,6 +396,7 @@ void incrementPacketCounter(int clientnr, int millis)
 	{
 		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].posViolations << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+		//messageLogger->writeToLog(std::strncat("SPEEDHACK ERKANNT ",clients[clientnr].name,100));
 		disconnect_client(clientnr,"SPEEDHACK");
 	}
 }
@@ -488,6 +493,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			if(isdedicated && clients[cn].representer->state == CS_DEAD && target != clients[cn].clientnr) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
 				boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
+				//messageLogger->writeToLog(std::strncat("CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE",clients[cn].name,100));
 				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE");
 			}
             break;
@@ -502,6 +508,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				if(clients[cn].representer->ammo[gun] < 0 && gun != 0 )
 				{
 					boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
+					//messageLogger->writeToLog(std::strncat("MUNITION CHEAT VERSUCH",clients[cn].name,100));
 					disconnect_client(cn,"CHEAT DETECTED //MUNITION");
 				}
 
@@ -556,6 +563,8 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				{
 					std::cout << "KORREKTER RESPAWN \n";
 					send2(1,cn,SV_ALRS,rnd+1);
+					std::string clientname = clients[cn].clientName;
+					messageLogger->writeToLog("Spieler respawn... " + clientname);
 					spawnstateForServer(clients[cn].representer);
 					clients[cn].representer->state = CS_ALIVE;
 					clients[cn].representer->lifesequence++;
@@ -565,6 +574,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				else
 				{
 					std::cout << " CLIENT HAT FALSCHE NR GESENDET \n";
+					//messageLogger->writeToLog(std::strncat("HP CHEAT VERSUCH",clients[cn].name,100));
 					disconnect_client(cn,"HP CHEAT VERSUCH");
 				}
 			}
@@ -682,6 +692,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
+				//messageLogger->writeToLog(std::strncat("CHEAT erkannt: falscher Zustand auf Clientseite //PICKUP ",clients[cn].name,100));
 				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //PICKUP");
 			}
 
@@ -813,6 +824,7 @@ void serverselfdamage(int damage, int actor, dynent *act,int clientnr)
 
 void send_welcome(int n)
 {
+	//if(isdedicated) messageLogger->writeToLog("Sende Willkommensnachricht an neuen Spieler..."); //TP
     ENetPacket * packet = enet_packet_create (NULL, MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
@@ -871,6 +883,7 @@ void startintermission() { minremain = 0; checkintermission(); };
 
 void resetserverifempty()
 {
+	//if(isdedicated)messageLogger->writeToLog("Starte Server mit neuer Karte");
     loopv(clients) if(clients[i].type!=ST_EMPTY) return;
     clients.setsize(0);
     smapname[0] = 0;
@@ -890,6 +903,7 @@ int lastconnect = 0;
 //modifiziert: gamemode erkennung (andere variable)
 void spawnstateForServer(dynent *d)              // reset player state not persistent accross spawns
 {
+
 
     resetmovement(d);
     d->vel.x = d->vel.y = d->vel.z = 0; 
@@ -1106,7 +1120,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				c.representer->lifesequence = 0;
 				c.secondSATwaitTime = 0;
 				
-
+				messageLogger->writeToLog("Neuer Spieler verbindet sich..");
 				/// TP OUT
                 char hn[1024];
                 strcpy_s(c.hostname, (enet_address_get_host(&c.peer->address, hn, sizeof(hn))==0) ? hn : "localhost");
@@ -1129,6 +1143,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				{
 					if(clients[p].firstPacketsArrived ==1 && (clients[p].clientName.compare("EMPTY") == 0))
 					{
+						//messageLogger->writeToLog("Spieler abgewiesen, falsche Client-Version");
 						disconnect_client(p, "NO PERMISSION TO JOIN: UNKNOWN CLIENT");
 					}
 
@@ -1141,6 +1156,10 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 
             case ENET_EVENT_TYPE_DISCONNECT: 
                 if((int)event.peer->data<0) break;
+				//TP
+				std::string cname = clients[(int)event.peer->data].name;
+				messageLogger->writeToLog("Spieler verlässt den Server: " + cname);
+				//TP OUT
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
                 clients[(int)event.peer->data].type = ST_EMPTY;
                 send2(true, -1, SV_CDIS, (int)event.peer->data);
@@ -1184,7 +1203,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
 
     serverpassword = passwd;
     maxclients = maxcl;
-	servermsinit(master ? master : "wouter.fov120.com/cube/masterserver/", sdesc, dedicated);
+	//servermsinit(master ? master : "wouter.fov120.com/cube/masterserver/", sdesc, dedicated); TP, auskommentiert
     
 
     if(isdedicated = dedicated) //das hier ist eine zuweisung! achtung!
@@ -1209,9 +1228,16 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
         SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
         #endif
         printf("dedicated server started, waiting for clients...\nCtrl-C to exit\n\n");
+		//TP
+		messageLogger = new Logger();
+		messageLogger->startLog();
+		messageLogger->writeToConsole("Log gestartet...");
+		messageLogger->writeToLog("LOG STARTED");
+		//TP OUT
         atexit(cleanupserver);
         atexit(enet_deinitialize);
         for(;;) serverslice(/*enet_time_get_sec()*/time(NULL), 5);
+		messageLogger->endLog();
     };
 };
 

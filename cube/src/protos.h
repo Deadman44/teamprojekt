@@ -251,7 +251,7 @@ extern void perlinarea(block &b, int scale, int seed, int psize);
 //TEAMPROJEKT
 extern void serverselfdamage(int damage, int actor, dynent *act, int clientnr);
 extern void spawnstate(dynent *d); //auf clientseite!
-extern void spawnstateForServer(dynent *d); //auf dem client
+extern void spawnstateForServer(dynent *d); //auf dem server
 extern void serverrealpickup(int n, dynent *d);
 void serverradditem(int i, int &v);
 extern uchar *strToUchar(std::string str);
@@ -260,3 +260,4 @@ extern void send2(bool rel, int cn, int a, int b);
 void setSATacks(int clientnr);
 int getSATacks(int clientnr);
 void setClientSATWaitTime(int clientnr);
+void setAuthName(int clientnr, std::string authname);

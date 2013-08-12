@@ -12,9 +12,11 @@ struct client                   // server side version of "dynent" type
     string hostname;
     string mapvote;
     string name;
+	
     int modevote;
 
 	//TEAMPROJEKT
+	std::string authname; //"echter" name des Spieler, also der auf dem Lizenzserver in Form der Email
 	dynent *representer; //spielfigur des clients auf dem server
 	int clientnr; //interne clientnummer
 	int awaitingSpawnSignal; //zeigt an, ob client bereits eine spawnanfrage geschickt hat
@@ -140,7 +142,12 @@ void sendservmsg(char *msg)
 
 void disconnect_client(int n, char *reason)
 {
-	//messageLogger->writeToLog(std::strncat("Spieler vom Server geworfen... :",clients[n].name,100)); //TP
+
+	//std::stringstream sstm;
+	//sstm << "Spieler vom Server geworfen .... " << clients[n].authname;
+	//messageLogger->writeToLog(sstm.str());
+
+
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
     clients[n].type = ST_EMPTY;
@@ -252,6 +259,12 @@ void setClientSATWaitTime(int clientnr)
 	clients[clientnr].secondSATwaitTime =0;
 }
 
+// setzt den "echten" Namen des Spielers auf die Email des registrierten Benutzers
+void setAuthName(int clientnr, std::string authname)
+{
+	clients[clientnr].authname = authname;
+}
+
 
 void checkSecondSATTime(int clientnr, int millis)
 {
@@ -259,11 +272,13 @@ void checkSecondSATTime(int clientnr, int millis)
 	if(waittime != 0)
 	{
 		int diff = millis - waittime;
-		if(millis - waittime > 20)
+		if(millis - waittime > 30)
 		{
 			clients[clientnr].secondSATwaitTime = 0; //reset, ggfls wichtig wenn spieler erneut joinen will
-			//messageLogger->writeToLog(std::strncat("Neuer Spieler abgelehnt... Grund: zweites SAT ungültig",clients[clientnr].name,100));
-			disconnect_client(clientnr,"NO VALID SECOND SAT in 20 SECONDS");
+			std::stringstream sstm;
+			sstm << "Spieler abgelehnt: Fehler bei authentifizierung, ungültiges zweites SAT" << clients[clientnr].authname;
+			messageLogger->writeToLog(sstm.str());
+			disconnect_client(clientnr,"NO VALID SECOND SAT in 30 SECONDS");
 		}
 
 	}
@@ -328,7 +343,10 @@ void checkWeaponFireRate(int clientnr, int millis)
 		{
 			std::cout << " Feuerraten-Cheat erkannt " << "\n";
 			boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
-			//messageLogger->writeToLog(std::strncat("Feuerraten-Cheat erkannt ",clients[clientnr].name,100));
+			std::stringstream sstm;
+			sstm << "Feuerraten-Cheat erkannt " << clients[clientnr].authname;
+			messageLogger->writeToLog(sstm.str());
+			
 			disconnect_client(clientnr,"FireRate to high, CHEAT DETECTED");
 		}
 
@@ -386,17 +404,21 @@ void incrementPacketCounter(int clientnr, int millis)
 	{
 		std::cout << " POSSIBLE SPEEDHACK//Packetloss--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
-		//messageLogger->writeToLog(std::strncat("SPEEDHACK (TIMER) ERKANNT ",clients[clientnr].name,100));
+		std::stringstream sstm;
+		sstm << "SPEEDHACK ERKANNT (TIMER) " << clients[clientnr].authname;
+		messageLogger->writeToLog(sstm.str());
 		disconnect_client(clientnr,"SPEEDHACK -- TIMER");
 
 	}
 
 	//Bei zu vielen Verletzungen der Positionen Spieler vom Server werfen und Verstoß an Lizenzserver melden
-	if(clients[clientnr].posViolations > 40)
+	if(clients[clientnr].posViolations > 50)
 	{
 		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].posViolations << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
-		//messageLogger->writeToLog(std::strncat("SPEEDHACK ERKANNT ",clients[clientnr].name,100));
+		std::stringstream sstm;
+		sstm << "SPEEDHACK ERKANNT " << clients[clientnr].authname;
+		messageLogger->writeToLog(sstm.str());
 		disconnect_client(clientnr,"SPEEDHACK");
 	}
 }
@@ -493,7 +515,9 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			if(isdedicated && clients[cn].representer->state == CS_DEAD && target != clients[cn].clientnr) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
 				boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
-				//messageLogger->writeToLog(std::strncat("CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE",clients[cn].name,100));
+				std::stringstream sstm;
+				sstm << "CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE" << clients[cn].authname;
+				messageLogger->writeToLog(sstm.str());
 				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE");
 			}
             break;
@@ -508,7 +532,10 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				if(clients[cn].representer->ammo[gun] < 0 && gun != 0 )
 				{
 					boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
-					//messageLogger->writeToLog(std::strncat("MUNITION CHEAT VERSUCH",clients[cn].name,100));
+
+					std::stringstream sstm;
+					sstm << "Munition Cheat-Versuch " << clients[cn].authname;
+					messageLogger->writeToLog(sstm.str());
 					disconnect_client(cn,"CHEAT DETECTED //MUNITION");
 				}
 
@@ -563,7 +590,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				{
 					std::cout << "KORREKTER RESPAWN \n";
 					send2(1,cn,SV_ALRS,rnd+1);
-					std::string clientname = clients[cn].clientName;
+					std::string clientname = clients[cn].authname;
 					messageLogger->writeToLog("Spieler respawn... " + clientname);
 					spawnstateForServer(clients[cn].representer);
 					clients[cn].representer->state = CS_ALIVE;
@@ -574,7 +601,10 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				else
 				{
 					std::cout << " CLIENT HAT FALSCHE NR GESENDET \n";
-					//messageLogger->writeToLog(std::strncat("HP CHEAT VERSUCH",clients[cn].name,100));
+				
+					std::stringstream sstm;
+					sstm << "HP Cheat-Versuch " << clients[cn].authname;
+					messageLogger->writeToLog(sstm.str());
 					disconnect_client(cn,"HP CHEAT VERSUCH");
 				}
 			}
@@ -692,7 +722,10 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 			if(isdedicated && clients[cn].representer->state == CS_DEAD) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
-				//messageLogger->writeToLog(std::strncat("CHEAT erkannt: falscher Zustand auf Clientseite //PICKUP ",clients[cn].name,100));
+				
+				std::stringstream sstm;
+				sstm << "CHEAT erkannt: falscher Zustand auf Clientseite //PICKUP " << clients[cn].authname;
+				messageLogger->writeToLog(sstm.str());
 				disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //PICKUP");
 			}
 
@@ -824,7 +857,7 @@ void serverselfdamage(int damage, int actor, dynent *act,int clientnr)
 
 void send_welcome(int n)
 {
-	//if(isdedicated) messageLogger->writeToLog("Sende Willkommensnachricht an neuen Spieler..."); //TP
+	if(isdedicated) messageLogger->writeToLog("Sende Willkommensnachricht an neuen Spieler..."); //TP
     ENetPacket * packet = enet_packet_create (NULL, MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
@@ -1143,7 +1176,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
 				{
 					if(clients[p].firstPacketsArrived ==1 && (clients[p].clientName.compare("EMPTY") == 0))
 					{
-						//messageLogger->writeToLog("Spieler abgewiesen, falsche Client-Version");
+						messageLogger->writeToLog("Spieler abgewiesen, falsche Client-Version");
 						disconnect_client(p, "NO PERMISSION TO JOIN: UNKNOWN CLIENT");
 					}
 
@@ -1157,8 +1190,8 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_DISCONNECT: 
                 if((int)event.peer->data<0) break;
 				//TP
-				std::string cname = clients[(int)event.peer->data].name;
-				messageLogger->writeToLog("Spieler verlässt den Server: " + cname);
+				std::string cname = clients[(int)event.peer->data].authname;
+				messageLogger->writeToLog("Spieler verlässt den Server... " + cname);
 				//TP OUT
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
                 clients[(int)event.peer->data].type = ST_EMPTY;

@@ -228,6 +228,7 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
 		{
 			std::cout << "akzeptiere zweites SAT, Spieler authentifiziert \n";
 			messageLogger->writeToLog("Spieler authentifiziert: " + usr); //TP
+			setAuthName(clientnr,usr);
 			setClientSATWaitTime(clientnr);
 		}
 	

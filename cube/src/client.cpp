@@ -130,7 +130,7 @@ void disconnect(int onlyclean, int async)
     
     localdisconnect();
 
-	satSent = 1; //warten bis connection zum server vollständig etabliert ist, dann auf 0 setzen /siehe ENET_CONNECT
+	satSent = true; //warten bis connection zum server vollständig etabliert ist, dann auf 0 setzen /siehe ENET_CONNECT
 
     if(!onlyclean) { stop(); localconnect(); };
 };
@@ -300,7 +300,7 @@ void c2sinfo(dynent *d)                     // send update to the server
 		ob der client einen username eingetragen/übermittelt hat. ist dieser string leer (==empty), dann wird der spieler vom server geworfen
 
 		*/
-		if(satSent == 0 ||satSent == 2) //!
+		if(!satSent) //!
 		{
 			std::cout << " \n Sende USER+SAT an Server \n ";
 			putint(p,SV_SAT);
@@ -328,30 +328,10 @@ void c2sinfo(dynent *d)                     // send update to the server
 			//HIER OHNE 0-CHAR! muss auf Serverende angefügt werden bzw implizit über std::string konstruktor
 
 
-			if(satSent == 0)
-			{
-				std::cout << "erstes SAT an Server gesendet \n";
-				satSent = 1; //erster Durchlauf komplett
-				sat = "000000"; //erstes sat löschen;
-				
-			}
-			else if(satSent == 2)
-			{
-				std::cout << "zweites SAT an Server gesendet \n";
-				satSent=3; //zweiter Durchlauf komplett
-			}
+			satSent = true;
 		}
 		
-		if(secondSATrequired)
-		{
-			if(sat.compare("000000")!=0)
-			{
-				satSent = 2; //denn wenn der aktuelle sat NICHT 000000 ist, ist er gültig und kann verschickt werden
-				//findet hier anwendung zum verschicken des zweiten sat, der asynchron zum spielfluss angefordert wird
-				//damit er das spiel nicht blockiert
-				secondSATrequired = false;
-			}
-		}
+
 
 		//TP OUT
         messages.setsize(0);
@@ -396,7 +376,7 @@ void gets2c()           // get updates from the server
             conoutf("connected to server");
             connecting = 0;
             throttle();
-			satSent = 0; //TP, wir sind an dieser Stelle mit Server verbunden..
+			satSent = false; //TP, wir sind an dieser Stelle mit Server verbunden..
             break;
          
         case ENET_EVENT_TYPE_RECEIVE: //hier "normales" paket, der paketinhalt wird dann die methode localservetoclient weitergereicht

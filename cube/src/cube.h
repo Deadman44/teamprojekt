@@ -253,7 +253,7 @@ extern bool secondSATrequired; //muss ein zweites sat zur bestätigung geschickt 
 extern std::string ticket; //das aktuelle ticket, base64
 extern bool initialization;
 extern bool thread_exit;
-extern int satSent; //zustandsvariable für die abfolge der SATs
+extern bool satSent; //zustandsvariable für die abfolge der SATs
 extern std::string toHashGameData[1000];
 
 extern int clientAllowRespawn;

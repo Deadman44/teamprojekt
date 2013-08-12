@@ -20,7 +20,8 @@
 		// Benutzername und Passwort werden überprüft
 		if(checkUserLogin($user, $password)) {
 			$_SESSION['validLogin'] = true;
-			echo '<meta http-equiv="refresh" content="0; URL=https://localhost/userIndex.php">';
+			//echo '<meta http-equiv="refresh" content="0; URL=https://localhost/userIndex.php">';
+                        echo '<meta http-equiv="refresh" content="0; URL=https://25.102.49.21/userIndex.php">';
 			exit();
 		} else {
 			$_SESSION['validLogin'] = false;

@@ -260,4 +260,4 @@ extern void send2(bool rel, int cn, int a, int b);
 void setSATacks(int clientnr);
 int getSATacks(int clientnr);
 void setClientSATWaitTime(int clientnr);
-void setAuthName(int clientnr, std::string authname);
+extern void setClientName(int clientnr, std::string authname);

@@ -13,7 +13,7 @@ std::string sat ="000000";
 std::string toHashGameData[1000]; //array fuer dateipfade zur integritaet
 int toHashData; //die nächste zu hashende datei
 bool thread_exit;
-int satSent; //wie oft wurde sat versendet? 2 mal sollte sein (initial, und nach verbindungsaufbau)
+bool satSent; //wurde ein SAT gesendet?
 
 //TP Hilfsfunktion, wandelt str in uchar-arr, achtung new! muss später gelöscht werden!
 uchar *strToUchar(std::string str)

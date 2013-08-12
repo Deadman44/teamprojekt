@@ -424,9 +424,9 @@ function addNewUserToDB($nname, $vname, $email, $pass)
 	else
 	{
 		
-		$insert = 'INSERT INTO USER(NNAME, VNAME, EMAIL, PASS, PSALT) VALUES(?,?,?,?,?)';
+		$insert = 'INSERT INTO USER(NNAME, VNAME, EMAIL, PASS, PSALT,SUSPECT) VALUES(?,?,?,?,?,?)';
 		$eintrag = $mysqli->prepare($insert);
-		$eintrag->bind_param('sssss',$nname, $vname,$email,$secureHash,$secureSalt);
+		$eintrag->bind_param('sssssi',$nname, $vname,$email,$secureHash,$secureSalt,0);
 		$eintrag->execute();
 		
 		if ($eintrag->affected_rows == 1)
@@ -1278,7 +1278,7 @@ function incrementSuspects($Qemail,$suspectPoints){
 		$result->execute();
 	}
 	$mysqli->close();
-        echo "Verstoß... <br>";
+        echo "Verstoss... ";
 	proofUserBan($Qemail);
 }
 

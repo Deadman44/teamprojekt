@@ -24,12 +24,14 @@
 		{
 			// Neuen Benutzer anlegen
 			addNewUserToDB($name, $firstname, $email, $password);
-			echo '<meta http-equiv="refresh" content="4; URL=https://localhost/index.php">';
+			//echo '<meta http-equiv="refresh" content="4; URL=https://localhost/index.php">';
+                        echo '<meta http-equiv="refresh" content="4; URL=https://25.102.49.21/index.php">';
 		}
 		else
 		{
 			echo "<h3 class=\"meldung\">Passwörter sind ungleich!</h3>";
-			echo '<meta http-equiv="refresh" content="4; URL=https://localhost/index.php">';
+			//echo '<meta http-equiv="refresh" content="4; URL=https://localhost/index.php">';
+                        echo '<meta http-equiv="refresh" content="4; URL=https://25.102.49.21/index.php">';
 		}
     }
 ?>

@@ -151,10 +151,13 @@ void disconnect_client(int n, char *reason)
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
     clients[n].type = ST_EMPTY;
-	//clients[n].type = 99; //test, siehe addClient() für bedeutung dieser ändeurng
+	//TP
+	//setze wichtige Variablen zurück, benötigt wegen Recycling der Vectorposition möglich
 	clients[n].temporaryPacketCounter = 0;
-	std::cout << " SPIELER " << clients[n].clientName << " exit... InternalPID: " << n << "\n";
-
+	clients[n].posViolations = 0;
+	clients[n].firstPacketsArrived = 0;
+	std::cout << " SPIELER " << clients[n].clientName << " exit... InternalPID: " << std::string(""+n) << "\n";
+	//TP OUT
     send2(true, -1, SV_CDIS, n);
 };
 
@@ -179,36 +182,38 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
     {
         sents[i].spawned = false;
 		{ //Teamprojekt: Serverseitige Einstellung der Spawntimer für jeden Gegenstand
+			
 			if(isdedicated)
 			{
 
-			int players = countPlayers();
-			players++; //wird auch im clientcode so gemacht....
+				int players = countPlayers();
+				players++; //wird auch im clientcode so gemacht....
 
-			players = players<3 ? 4 : (players>4 ? 2 : 3);         // spawn times are dependent on number of players
-			int ammo = players*2;
+				players = players<3 ? 4 : (players>4 ? 2 : 3);         // spawn times are dependent on number of players
+				int ammo = players*2;
 
-			if(sents[i].type >=3 && sents[i].type <= 6)
-			{
-				 sents[i].spawnsecs = ammo;
+				if(sents[i].type >=3 && sents[i].type <= 6)
+				{
+					 sents[i].spawnsecs = ammo;
+				}
+				else if(sents[i].type == I_HEALTH)
+				{
+					sents[i].spawnsecs = players*5;
+				}
+				else if(sents[i].type == I_BOOST)
+				{
+					sents[i].spawnsecs = 60;
+				}
+				else if(sents[i].type == I_GREENARMOUR || sents[i].type == I_YELLOWARMOUR)
+				{
+					sents[i].spawnsecs = 20;
+				}
+				else if(sents[i].type == I_QUAD)
+				{
+					sents[i].spawnsecs = 60;
+				}
 			}
-			else if(sents[i].type == I_HEALTH)
-			{
-				sents[i].spawnsecs = players*5;
-			}
-			else if(sents[i].type == I_BOOST)
-			{
-				sents[i].spawnsecs = 60;
-			}
-			else if(sents[i].type == I_GREENARMOUR || sents[i].type == I_YELLOWARMOUR)
-			{
-				sents[i].spawnsecs = 20;
-			}
-			else if(sents[i].type == I_QUAD)
-			{
-				sents[i].spawnsecs = 60;
-			}
-			}
+			
 			//TP OUT
 
 
@@ -388,15 +393,17 @@ void incrementPacketCounter(int clientnr, int millis)
 	}
 
 	clients[clientnr].temporaryPacketCounter++;
-	if(clients[clientnr].temporaryPacketCounter > 375) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
+	if(clients[clientnr].temporaryPacketCounter > 385) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
 	{
 		std::cout << " POSSIBLE SPEEDHACK//Packetloss--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
 		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
 		std::stringstream sstm;
 		sstm << "SPEEDHACK ERKANNT (TIMER) " << clients[clientnr].clientName;
 		messageLogger->writeToLog(sstm.str());
-		//disconnect_client(clientnr,"SPEEDHACK -- TIMER"); test
+		disconnect_client(clientnr,"SPEEDHACK -- TIMER"); 
 		std::cout << clients[clientnr].temporaryPacketCounter << clients[clientnr].clientName ;
+		clients[clientnr].temporaryPacketCounter = 0;
+
 
 	}
 
@@ -409,6 +416,7 @@ void incrementPacketCounter(int clientnr, int millis)
 		sstm << "SPEEDHACK ERKANNT " << clients[clientnr].clientName;
 		messageLogger->writeToLog(sstm.str());
 		disconnect_client(clientnr,"SPEEDHACK");
+		clients[clientnr].posViolations = 0;
 	}
 }
 
@@ -480,7 +488,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			int target = getint(p); //ziel==clientnummer
 			int damage = getint(p); //damage
 			int ls = getint(p); //lifesequenz.. also welches "leben" aktuell is, durchnummeriert
-			bool legitattack = true;
+			bool legitattack = true; //ist der Angriff "legal", d.h. ist dieser potentiell gültig?
 			if(isdedicated && clients[cn].representer->state == CS_DEAD && target != clients[cn].clientnr) //unbedingt zuerst auf isdedicated fragen, zugriff auf clients[cn] im sp nicht möglich!
 			{
 				//boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT, vorerst deaktiviert wegen late-damage-problematik
@@ -489,7 +497,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 				sstm << "Cheatversuch oder lateDamage //DAMAGE" << clients[cn].clientName;
 				messageLogger->writeToLog(sstm.str());
 				//disconnect_client(cn,"CHEAT erkannt: falscher Zustand auf Clientseite //DAMAGE"); // deaktiviert, begründung siehe oben
-				legitattack = false;
+				legitattack = false; //angriff ist nicht gültig, wenn der Spieler auf Serverseite tot ist
 			}
 
 
@@ -820,7 +828,7 @@ void serverselfdamage(int damage, int actor, dynent *act,int clientnr)
     damage -= ad;
 	if((act->health -= damage)<=0)
     {
-		std::cout << " \n PLAYER should die now with ... \n" << act->health;
+		std::cout << " \n PLAYER " << clients[clientnr].clientName << " should die now with ... \n" << act->health;
 		act->state = CS_DEAD;
 		
 		
@@ -1008,7 +1016,7 @@ struct serveritemstat { int add, max, sound; } serveritemstats[] =
 //modifizierte kopie von etitites.cpp ((ACHTUNG! unterschied ents zu sents (serverentities sind kleiner! werden hier aber gebraucht)
 void serverradditem(int i, int &v)
 {
-	std::cout << " --- ITEM ADDED TO ENTITY " ;
+	std::cout << " --- ITEM ADDED TO Player \n" ;
     serveritemstat &is = serveritemstats[sents[i].type-I_SHELLS];
     v += is.add;
     if(v>is.max) v = is.max;
@@ -1196,7 +1204,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
 				//TP
 				std::cout << clients[(int)event.peer->data].clientName << "\n";
-				std::cout << clients[(int)event.peer->data].clientnr << "\n";
+				std::cout << "PLAYER ID: "<<clients[(int)event.peer->data].clientnr << "\n";
 				//TP OUT
                 clients[(int)event.peer->data].type = ST_EMPTY; //achtung! siehe addclient()
 				//clients[(int)event.peer->data].type = 99; //TP DEBUG

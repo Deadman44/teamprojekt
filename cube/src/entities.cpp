@@ -236,7 +236,7 @@ void putitems(uchar *&p)            // puts items in network stream and also spa
         putint(p, i);
         ents[i].spawned = true;
 
-		//TP TEST: nach jeder itemnr ansich wird auch der typ übertragen:
+		//TP TEST: nach jeder itemnr wird auch der typ übertragen:
 		putint(p,ents[i].type);
 
 	/* hier alle verwendeten items

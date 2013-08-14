@@ -287,7 +287,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             players[cn]->frags = getint(p);
             break;
 
-        case SV_ITEMPICKUP: //gegenstände aufnehmen
+        case SV_ITEMPICKUP: //gegenstände aufnehmen (andere spieler)
             setspawn(getint(p), false);
             getint(p);
             break;
@@ -393,7 +393,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 		case SV_DUMMYALRS:
 			{
 				int dummyContent = getint(p);
-				std::cout << "\n dummy \n" << dummyContent;
+				//std::cout << "\n dummy \n" << dummyContent;
 				break;
 			};
 

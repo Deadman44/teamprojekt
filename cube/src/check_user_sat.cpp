@@ -189,8 +189,8 @@ int check_SAT(int clientnr, std::string usr, std::string usrSat)
     boost::asio::ip::tcp::resolver resolver(io_service);
     // Definiere ein Query mit Host (DNS Namen erlaubt) und Port
 
-	//boost::asio::ip::tcp::resolver::query query("127.0.0.1","443");
-	boost::asio::ip::tcp::resolver::query query("25.102.49.21","443");
+	boost::asio::ip::tcp::resolver::query query("127.0.0.1","443");
+	//boost::asio::ip::tcp::resolver::query query("25.102.49.21","443");
 
 	// Löse DNS Namen in IP-Adresse auf
     boost::asio::ip::tcp::resolver::iterator iterator = resolver.resolve(query);

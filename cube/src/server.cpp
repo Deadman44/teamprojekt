@@ -42,11 +42,12 @@ struct client                   // server side version of "dynent" type
 	//waffen-kadenz-cheat
 	int weaponsfired[5];
 
+	// TP OUT
 
 
 };
 
-//TP
+
 
 
 
@@ -260,13 +261,14 @@ void setSATacks(int clientnr)
 	clients[clientnr].SATacks++;
 }
 
+//TP
 int getSATacks(int clientnr)
 {
 	return clients[clientnr].SATacks;
 }
 
 
-
+//TP
 // setzt den "echten" Namen des Spielers auf die Email des registrierten Benutzers
 void setClientName(int clientnr, std::string authname)
 {
@@ -287,7 +289,7 @@ Dies wird hier erkannt.
 
 */
 
-
+//TP
 void checkWeaponFireRate(int clientnr, int millis)
 {
 	bool violation = false;
@@ -335,7 +337,7 @@ void checkWeaponFireRate(int clientnr, int millis)
 		if(violation)
 		{
 			std::cout << " Feuerraten-Cheat erkannt " << "\n";
-			boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+			boost::thread checkworker(increment_suspect_status,2,clients[clientnr].clientName);	//ANTICHEAT
 			std::stringstream sstm;
 			sstm << "Feuerraten-Cheat erkannt " << clients[clientnr].clientName;
 			messageLogger->writeToLog(sstm.str());
@@ -361,6 +363,8 @@ ALle Verstöße dieser Obergrenze werden vermerkt. Übersteigen diese Verstöße inne
 vom Server geworfen und verwarnt.
 Der Schwellwert wurde experimentell herausgefunden. Zu beachten ist, dass es Teleporter und änhliche Einrichtungen auf vielen Karten gibt, die die Geschwindigkeit des Spielers
 künstlich erhöhen.
+
+TP
 */
 void incrementPacketCounter(int clientnr, int millis)
 {
@@ -381,12 +385,12 @@ void incrementPacketCounter(int clientnr, int millis)
 	int ydiff = clients[clientnr].lasty - clients[clientnr].curry;
 
 	//Positionsverletzungen melden, getrennt für x und y-Achse. Z-Achse ignoriert, da nicht primär wichtig
-	if( abs(xdiff) > 24)
+	if( abs(xdiff) > 26)
 	{
 		clients[clientnr].posViolations++;
 		//std::cout << " X VIO \n";
 	}
-	if( abs(ydiff) > 24)
+	if( abs(ydiff) > 26)
 	{
 		clients[clientnr].posViolations++;
 		//std::cout << " Y VIO \n";
@@ -395,8 +399,8 @@ void incrementPacketCounter(int clientnr, int millis)
 	clients[clientnr].temporaryPacketCounter++;
 	if(clients[clientnr].temporaryPacketCounter > 385) //standardwert sollte zwischen 25 und 35 innerhalb von 1 sekunde liegen, leichte toleranz wegen packetloss usw
 	{
-		std::cout << " POSSIBLE SPEEDHACK//Packetloss--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
-		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+		std::cout << " POSSIBLE SPEEDHACK---> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].temporaryPacketCounter << "\n";
+		boost::thread checkworker(increment_suspect_status,3,clients[clientnr].clientName);	//ANTICHEAT
 		std::stringstream sstm;
 		sstm << "SPEEDHACK ERKANNT (TIMER) " << clients[clientnr].clientName;
 		messageLogger->writeToLog(sstm.str());
@@ -411,7 +415,7 @@ void incrementPacketCounter(int clientnr, int millis)
 	if(clients[clientnr].posViolations > 60)
 	{
 		std::cout << " POSSIBLE SPEEDHACK--> PLAYER " << clients[clientnr].clientName << "  KICK! " << clients[clientnr].posViolations << "\n";
-		boost::thread checkworker(increment_suspect_status,5,clients[clientnr].clientName);	//ANTICHEAT
+		boost::thread checkworker(increment_suspect_status,3,clients[clientnr].clientName);	//ANTICHEAT
 		std::stringstream sstm;
 		sstm << "SPEEDHACK ERKANNT " << clients[clientnr].clientName;
 		messageLogger->writeToLog(sstm.str());
@@ -527,15 +531,16 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 
+		//TP.. Munition verbrauchen
 		case SV_MUN:
 		{
 			int gun = getint(p);
 			if(isdedicated)
 			{
 				clients[cn].representer->ammo[gun]--;		
-				if(clients[cn].representer->ammo[gun] < 0 && gun != 0 )
+				if(clients[cn].representer->ammo[gun] < 0 && gun != 0 ) //alternative: auf < -1 testen, Netzwerksensibel!
 				{
-					boost::thread checkworker(increment_suspect_status,5,clients[cn].clientName);	//ANTICHEAT
+					boost::thread checkworker(increment_suspect_status,3,clients[cn].clientName);	//ANTICHEAT
 
 					std::stringstream sstm;
 					sstm << "Munition Cheat-Versuch " << clients[cn].clientName;
@@ -568,13 +573,13 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			}
 			else //dieser Teil wird auf dem Client ausgegeben
 			{
-				std::cout << " Sending simple Shot Request (SV_MUN)";
+				//std::cout << " Sending simple Shot Request (SV_MUN)";
 			}
 			break;
 
 		}
 		
-
+		//TP
 		case SV_ALRS:
 		{
 			uchar *tmp = p; //temporäre zeigerkopie auf das paket
@@ -621,6 +626,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 			break;
 		};
 
+		//TP
 		case SV_SAT: //SAT +username==email herausfiltern
 		{
 

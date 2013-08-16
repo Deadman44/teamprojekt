@@ -38,7 +38,7 @@
 
 <p>
 Damit unseren Spielern der Spaß aufgrund einiger weniger Cheater nicht vergeht, gelten für alle die nachfolgenden Terms of Service.
-Überschreitet ein Benutzer die Maximalgrenze von 20 Punkten, wird ihm seine Lizenz entzogen und gegebenenfalls sein Account gesperrt.
+Überschreitet ein Benutzer die Maximalgrenze von 10 Punkten, wird ihm seine Lizenz entzogen und gegebenenfalls sein Account gesperrt.
 </p>
 
 <table>
@@ -49,46 +49,57 @@ Damit unseren Spielern der Spaß aufgrund einiger weniger Cheater nicht vergeht,
 	<tr>
 		<td class="tos">Verstoß</td>
 		<td class="tos">Ahndung</td>
+                <td class="tos">Auto-Protection</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von bereits aktiviertem Lizenzschlüssel (eines anderen Spielers)</td>
 		<td class="tosnormal">10 Punkte</td>
+                <td class="tosnormal">Nein</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von ungültigem Lizenzschlüssel (Bsp. mögliche Falscheingabe)</td>
 		<td class="tosnormal">1 Punkt</td>
+                <td class="tosnormal">Nein</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat für gesteigerte Geschwindigkeit (Speedhack)</td>
-		<td class="tosnormal">5 Punkte</td>
+		<td class="tosnormal">3 Punkte</td>
+                <td class="tosnormal">Ja</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat für transparente Wände (Wallhack)</td>
 		<td class="tosnormal">5 Punkte</td>
+                <td class="tosnormal">Nein</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat für automatisches Zielen (Aim-Bot)</td>
 		<td class="tosnormal">5 Punkte</td>
+                <td class="tosnormal">Nein</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat für mehr Lebenspunkte</td>
 		<td class="tosnormal">5 Punkte</td>
+                <td class="tosnormal">Ja</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat für mehr Munition</td>
 		<td class="tosnormal">3 Punkte</td>
+                <td class="tosnormal">Ja</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Verwendung von Cheat für Notwendigkeit des Nachlade-Mechanismus zu umgehen</td>
 		<td class="tosnormal">2 Punkte</td>
+                <td class="tosnormal">Ja</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Beleidigung / Diskriminierung anderer Spieler</td>
 		<td class="tosnormal">1 Punkt</td>
+                <td class="tosnormal">Nein</td>
 	</tr>
 	<tr>
 		<td class="tosnormal">Werbung im Chat</td>
 		<td class="tosnormal">1 Punkt</td>
+                <td class="tosnormal">Nein</td>
 	</tr>
 </table>
 

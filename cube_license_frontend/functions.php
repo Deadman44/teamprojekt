@@ -413,7 +413,7 @@ function addNewUserToDB($nname, $vname, $email, $pass)
     $credentialsArr = explode(":", $credentials);
     $user = $credentialsArr[0];
     $pwd = $credentialsArr[1];
-    
+    $zero = 0; //suspect status auf 0 setzen
 
     
     $mysqli = @new mysqli("127.0.0.1",$user,$pwd,"cube_license");
@@ -426,7 +426,7 @@ function addNewUserToDB($nname, $vname, $email, $pass)
 		
 		$insert = 'INSERT INTO USER(NNAME, VNAME, EMAIL, PASS, PSALT,SUSPECT) VALUES(?,?,?,?,?,?)';
 		$eintrag = $mysqli->prepare($insert);
-		$eintrag->bind_param('sssssi',$nname, $vname,$email,$secureHash,$secureSalt,0);
+		$eintrag->bind_param('sssssi',$nname, $vname,$email,$secureHash,$secureSalt,$zero);
 		$eintrag->execute();
 		
 		if ($eintrag->affected_rows == 1)
